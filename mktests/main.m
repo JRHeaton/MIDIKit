@@ -19,9 +19,11 @@ int main(int argc, const char * argv[]){
 
         LPDev *dev = [LPDev firstLaunchpadMiniWithClient:client];
         [dev sendPadMessageToX:2 y:4 red:3 green:0 copy:0 clear:1];
-    }
+        [client connectSourceToInputPort:dev.rootSource];
 
-    CFRunLoopRun();
+        CFRunLoopRun();
+
+    }
 
     return 0;
 }

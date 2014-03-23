@@ -27,7 +27,8 @@
 - (id)objectAtIndexedSubscript:(NSUInteger)index;
 
 - (MKEntity *)firstEntity;
-- (MKEndpoint *)rootEndpoint;
+- (MKEndpoint *)rootDestination;
+- (MKEndpoint *)rootSource;
 
 // Please try to use numberOfEntities rather than entities.count
 // for performance reasons

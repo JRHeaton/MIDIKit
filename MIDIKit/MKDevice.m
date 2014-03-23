@@ -23,8 +23,12 @@
     }
 }
 
-- (MKEndpoint *)rootEndpoint {
-    return self[0][0];
+- (MKEndpoint *)rootDestination {
+    return [self[0] destinationAtIndex:0];
+}
+
+- (MKEndpoint *)rootSource {
+    return [self[0] sourceAtIndex:0];
 }
 
 - (MKEntity *)entityAtIndex:(NSUInteger)index {

@@ -40,6 +40,9 @@
 // Therefore, this syntax can be used: @[ @0x90, @0xaa, @127 ]
 - (void)sendDataArray:(NSArray *)array toEndpoint:(MKEndpoint *)endpoint;
 
+// Starts listening for input data from the given source endpoint.
+- (void)connectSourceToInputPort:(MKEndpoint *)source;
+
 // Handy dynamic enumeration properties
 // NOTE: These are SYNCHRONOUS, and when they're called
 // for the first time in a new process, the MIDI server

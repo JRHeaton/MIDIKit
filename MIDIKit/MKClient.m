@@ -8,6 +8,16 @@
 
 #import "MKClient.h"
 
+@interface MKClient ()
+
+@end
+
+static void MKClientInputCB(const MIDIPacketList *pktlist, void *readProcRefCon, void *srcConnRefCon) {
+    MKClient *self = (__bridge MKClient *)(readProcRefCon);
+
+    NSLog(@"input");
+}
+
 @implementation MKClient
 
 + (instancetype)clientWithName:(NSString *)name {
@@ -26,7 +36,7 @@
 
         MIDIOutputPortCreate(self.MIDIRef, cfName, &val);
         self->_outputPort = [MKObject objectWithMIDIRef:val];
-        MIDIInputPortCreate(self.MIDIRef, cfName, NULL, NULL, &val);
+        MIDIInputPortCreate(self.MIDIRef, cfName, MKClientInputCB, (__bridge void *)(self), &val);
         self->_inputPort = [MKObject objectWithMIDIRef:val];
     }
 
@@ -35,6 +45,10 @@
 
 - (instancetype)init {
     return [self initWithName:[NSString stringWithFormat:@"%s-client", getprogname()]];
+}
+
+- (void)connectSourceToInputPort:(MKEndpoint *)source {
+    MIDIPortConnectSource(_inputPort.MIDIRef, source.MIDIRef, NULL);
 }
 
 - (void)enumerateDevicesUsingBlock:(void (^)(MKDevice *device))block {

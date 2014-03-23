@@ -23,11 +23,11 @@
 }
 
 - (void)reset {
-    [self sendDataArray:@[ @0xb0, @0x00, @0x00 ] toEndpoint:self.rootEndpoint];
+    [self sendDataArray:@[ @0xb0, @0x00, @0x00 ] toEndpoint:self.rootDestination];
 }
 
 - (void)testLEDs {
-    [self sendDataArray:@[ @0xb0, @0x00, @0x7f ] toEndpoint:self.rootEndpoint];
+    [self sendDataArray:@[ @0xb0, @0x00, @0x7f ] toEndpoint:self.rootDestination];
 }
 
 - (void)sendPadMessageToX:(NSInteger)x y:(NSInteger)y red:(NSInteger)red green:(NSInteger)green copy:(BOOL)copy clear:(BOOL)clear {
@@ -58,7 +58,7 @@
     buf[1] = static_cast<u8>(((0x10 * y) + x));
     buf[2] = msg.vel;
 
-    [self sendData:[NSData dataWithBytes:buf length:3] toEndpoint:self.rootEndpoint];
+    [self sendData:[NSData dataWithBytes:buf length:3] toEndpoint:self.rootDestination];
 }
 
 @end
