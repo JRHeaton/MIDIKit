@@ -10,6 +10,10 @@
 
 @implementation MKEntity
 
++ (instancetype)objectWithMIDIRef:(MIDIObjectRef)ref {
+    return [super objectWithMIDIRef:ref];
+}
+
 - (MKEndpoint *)destinationAtIndex:(NSUInteger)index {
     return [MKEndpoint objectWithMIDIRef:MIDIEntityGetDestination(self.MIDIRef, index)];
 }

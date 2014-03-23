@@ -10,10 +10,40 @@
 
 @implementation MKObject
 
+static NSMutableDictionary *classMap = nil;
+
++ (void)registerClass:(Class)cls forCriteria:(BOOL (^)(MKObject *obj))block {
+    if(!classMap) {
+        classMap = [NSMutableDictionary dictionaryWithCapacity:0];
+    }
+
+    if([cls isSubclassOfClass:[self class]]) {
+        classMap[NSStringFromClass(cls)] = block;
+    }
+}
+
+- (id)initWithMIDIRef:(MIDIObjectRef)ref {
+    MKObject *orig = [[self class] new];
+    orig.MIDIRef = ref;
+
+    for(NSString *key in classMap) {
+        BOOL (^blk)(MKObject *obj) = classMap[key];
+
+        Class candidiate = NSClassFromString(key);
+        if([candidiate isSubclassOfClass:[self class]]) {
+            if(blk(orig)) {
+                MKObject *repl = [NSClassFromString(key) new];
+                repl.MIDIRef = ref;
+                return repl;
+            }
+        }
+    }
+
+    return orig;
+}
+
 + (instancetype)objectWithMIDIRef:(MIDIObjectRef)ref {
-    MKObject *ret = [self new];
-    ret.MIDIRef = ref;
-    return ret;
+    return [[self alloc] initWithMIDIRef:ref];
 }
 
 + (instancetype)objectWithUniqueID:(MIDIUniqueID)uniqueID objectType:(MIDIObjectType *)objectType; {

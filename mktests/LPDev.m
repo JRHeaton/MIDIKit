@@ -14,4 +14,8 @@
     [self sendDataArray:@[ @0xb0, @0x00, @0x00 ] toEndpoint:self.rootEndpoint];
 }
 
+- (void)testLEDs {
+    [self sendDataArray:@[ @0xb0, @0x00, @0x7f ] toEndpoint:self.rootEndpoint];
+}
+
 @end

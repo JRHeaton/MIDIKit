@@ -20,10 +20,13 @@ int main(int argc, const char * argv[]){
         [client enumerateDevicesUsingBlock:^(MKDevice *device) {
             if(device.online && [device isKindOfClass:[LPDev class]]) {
                 LPDev *d = (LPDev *)device;
+                NSLog(@"%@", d);
                 [d reset];
             }
         }];
     }
+
+    CFRunLoopRun();
 
     return 0;
 }

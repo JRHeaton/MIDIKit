@@ -11,5 +11,6 @@
 @interface LPDev : MKDevice
 
 - (void)reset;
+- (void)testLEDs;
 
 @end

@@ -11,33 +11,6 @@
 
 @implementation MKDevice
 
-static NSMutableDictionary *classMap = nil;
-
-+ (void)registerClass:(Class)cls forCriteria:(BOOL (^)(MKObject *obj))block {
-    if(!classMap) {
-        classMap = [NSMutableDictionary dictionaryWithCapacity:0];
-    }
-
-    if([cls isSubclassOfClass:[self class]]) {
-        classMap[NSStringFromClass(cls)] = block;
-    }
-}
-
-+ (instancetype)objectWithMIDIRef:(MIDIObjectRef)ref {
-    MKObject *orig = [super objectWithMIDIRef:ref];
-    for(NSString *key in classMap) {
-        BOOL (^blk)(MKObject *obj) = classMap[key];
-
-        if(blk(orig)) {
-            MKObject *repl = [NSClassFromString(key) new];
-            repl.MIDIRef = ref;
-            return (MKDevice *)repl;
-        }
-    }
-
-    return (MKDevice *)orig;
-}
-
 - (void)sendData:(NSData *)data toEndpoint:(MKEndpoint *)endpoint {
     if(self.client) {
         [self.client sendData:data toEndpoint:endpoint];
@@ -51,7 +24,9 @@ static NSMutableDictionary *classMap = nil;
 }
 
 - (MKEndpoint *)rootEndpoint {
-    return self[0][0];
+    MKEntity *entity = self[0];
+
+    return entity[0];
 }
 
 - (MKEntity *)entityAtIndex:(NSUInteger)index {
@@ -64,6 +39,19 @@ static NSMutableDictionary *classMap = nil;
 
 - (MKEntity *)firstEntity {
     return [self entityAtIndex:0];
+}
+
+- (NSUInteger)numberOfEntities {
+    return MIDIDeviceGetNumberOfEntities(self.MIDIRef);
+}
+
+- (NSArray *)entities {
+    NSUInteger num = self.numberOfEntities;
+    NSMutableArray *ret = [NSMutableArray arrayWithCapacity:num];
+    for(NSUInteger i=0;i<num;++i) {
+        [ret addObject:[self entityAtIndex:i]];
+    }
+    return ret.copy;
 }
 
 @end

@@ -29,6 +29,9 @@
 - (MKEntity *)firstEntity;
 - (MKEndpoint *)rootEndpoint;
 
+// Please try to use numberOfEntities rather than entities.count
+// for performance reasons
+@property (nonatomic, readonly) NSUInteger numberOfEntities;
 @property (nonatomic, readonly) NSArray *entities;
 
 @end

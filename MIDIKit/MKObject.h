@@ -30,6 +30,8 @@
 // classes at the LOWEST possible ancestor of this class.
 + (void)registerClass:(Class)cls forCriteria:(BOOL (^)(MKObject *obj))block;
 
+- (id)initWithMIDIRef:(MIDIObjectRef)ref;
+
 // Factory methods for this class that bridge from bare CoreMIDI types
 + (instancetype)objectWithMIDIRef:(MIDIObjectRef)ref;
 + (instancetype)objectWithUniqueID:(MIDIUniqueID)uniqueID objectType:(MIDIObjectType *)objectType;
