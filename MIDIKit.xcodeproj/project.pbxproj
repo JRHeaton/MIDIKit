@@ -22,7 +22,7 @@
 		5273C73C18DEADB800A8CFD4 /* MKEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73A18DEADB800A8CFD4 /* MKEntity.m */; };
 		5273C73F18DEADEE00A8CFD4 /* MKEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C73D18DEADEE00A8CFD4 /* MKEndpoint.h */; };
 		5273C74018DEADEE00A8CFD4 /* MKEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */; };
-		5273C74318DEB2FF00A8CFD4 /* LPDev.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C74218DEB2FF00A8CFD4 /* LPDev.m */; };
+		5273C74318DEB2FF00A8CFD4 /* LPDev.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5273C74218DEB2FF00A8CFD4 /* LPDev.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,7 +73,7 @@
 		5273C73D18DEADEE00A8CFD4 /* MKEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKEndpoint.h; sourceTree = "<group>"; };
 		5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKEndpoint.m; sourceTree = "<group>"; };
 		5273C74118DEB2FF00A8CFD4 /* LPDev.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDev.h; sourceTree = "<group>"; };
-		5273C74218DEB2FF00A8CFD4 /* LPDev.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDev.m; sourceTree = "<group>"; };
+		5273C74218DEB2FF00A8CFD4 /* LPDev.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LPDev.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,7 +171,7 @@
 			children = (
 				5273C72518DEA17B00A8CFD4 /* main.m */,
 				5273C74118DEB2FF00A8CFD4 /* LPDev.h */,
-				5273C74218DEB2FF00A8CFD4 /* LPDev.m */,
+				5273C74218DEB2FF00A8CFD4 /* LPDev.mm */,
 				5273C72718DEA17B00A8CFD4 /* Supporting Files */,
 			);
 			path = mktests;
@@ -295,7 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5273C72618DEA17B00A8CFD4 /* main.m in Sources */,
-				5273C74318DEB2FF00A8CFD4 /* LPDev.m in Sources */,
+				5273C74318DEB2FF00A8CFD4 /* LPDev.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

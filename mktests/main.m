@@ -17,13 +17,8 @@ int main(int argc, const char * argv[]){
             return [obj.name isEqualToString:@"Launchpad Mini 4"];
         }];
 
-        [client enumerateDevicesUsingBlock:^(MKDevice *device) {
-            if(device.online && [device isKindOfClass:[LPDev class]]) {
-                LPDev *d = (LPDev *)device;
-                NSLog(@"%@", d);
-                [d reset];
-            }
-        }];
+        LPDev *dev = [LPDev firstLaunchpadMiniWithClient:client];
+        [dev sendPadMessageToX:2 y:4 red:3 green:0 copy:0 clear:1];
     }
 
     CFRunLoopRun();
