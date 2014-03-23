@@ -9,16 +9,24 @@
 /* Begin PBXBuildFile section */
 		5273C6D818DE96A200A8CFD4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D718DE96A200A8CFD4 /* Cocoa.framework */; };
 		5273C6E218DE96A200A8CFD4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5273C6E018DE96A200A8CFD4 /* InfoPlist.strings */; };
-		5273C6E618DE96A200A8CFD4 /* MIDIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C6E518DE96A200A8CFD4 /* MIDIKit.m */; };
-		5273C6ED18DE96A200A8CFD4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6EC18DE96A200A8CFD4 /* XCTest.framework */; };
-		5273C6EE18DE96A200A8CFD4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D718DE96A200A8CFD4 /* Cocoa.framework */; };
-		5273C6F118DE96A200A8CFD4 /* MIDIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D418DE96A200A8CFD4 /* MIDIKit.framework */; };
-		5273C6F718DE96A200A8CFD4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5273C6F518DE96A200A8CFD4 /* InfoPlist.strings */; };
-		5273C6F918DE96A200A8CFD4 /* MIDIKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C6F818DE96A200A8CFD4 /* MIDIKitTests.m */; };
+		5273C70418DE9A9800A8CFD4 /* MKObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C70218DE9A9800A8CFD4 /* MKObject.h */; };
+		5273C70518DE9A9800A8CFD4 /* MKObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C70318DE9A9800A8CFD4 /* MKObject.m */; };
+		5273C70818DE9E2500A8CFD4 /* MKClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C70618DE9E2500A8CFD4 /* MKClient.h */; };
+		5273C70918DE9E2500A8CFD4 /* MKClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C70718DE9E2500A8CFD4 /* MKClient.m */; };
+		5273C72318DEA17B00A8CFD4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C70F18DEA14E00A8CFD4 /* Foundation.framework */; };
+		5273C72618DEA17B00A8CFD4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C72518DEA17B00A8CFD4 /* main.m */; };
+		5273C73018DEA18000A8CFD4 /* MIDIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D418DE96A200A8CFD4 /* MIDIKit.framework */; };
+		5273C73718DEAD5700A8CFD4 /* MKDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C73518DEAD5700A8CFD4 /* MKDevice.h */; };
+		5273C73818DEAD5700A8CFD4 /* MKDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73618DEAD5700A8CFD4 /* MKDevice.m */; };
+		5273C73B18DEADB800A8CFD4 /* MKEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C73918DEADB800A8CFD4 /* MKEntity.h */; };
+		5273C73C18DEADB800A8CFD4 /* MKEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73A18DEADB800A8CFD4 /* MKEntity.m */; };
+		5273C73F18DEADEE00A8CFD4 /* MKEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C73D18DEADEE00A8CFD4 /* MKEndpoint.h */; };
+		5273C74018DEADEE00A8CFD4 /* MKEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */; };
+		5273C74318DEB2FF00A8CFD4 /* LPDev.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C74218DEB2FF00A8CFD4 /* LPDev.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5273C6EF18DE96A200A8CFD4 /* PBXContainerItemProxy */ = {
+		5273C72E18DEA17F00A8CFD4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5273C6CB18DE96A200A8CFD4 /* Project object */;
 			proxyType = 1;
@@ -26,6 +34,18 @@
 			remoteInfo = MIDIKit;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5273C72018DEA17B00A8CFD4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5273C6D418DE96A200A8CFD4 /* MIDIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MIDIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,12 +57,23 @@
 		5273C6E118DE96A200A8CFD4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5273C6E318DE96A200A8CFD4 /* MIDIKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MIDIKit-Prefix.pch"; sourceTree = "<group>"; };
 		5273C6E418DE96A200A8CFD4 /* MIDIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MIDIKit.h; sourceTree = "<group>"; };
-		5273C6E518DE96A200A8CFD4 /* MIDIKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MIDIKit.m; sourceTree = "<group>"; };
-		5273C6EB18DE96A200A8CFD4 /* MIDIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MIDIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5273C6EC18DE96A200A8CFD4 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		5273C6F418DE96A200A8CFD4 /* MIDIKitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MIDIKitTests-Info.plist"; sourceTree = "<group>"; };
-		5273C6F618DE96A200A8CFD4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		5273C6F818DE96A200A8CFD4 /* MIDIKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MIDIKitTests.m; sourceTree = "<group>"; };
+		5273C70218DE9A9800A8CFD4 /* MKObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKObject.h; sourceTree = "<group>"; };
+		5273C70318DE9A9800A8CFD4 /* MKObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKObject.m; sourceTree = "<group>"; };
+		5273C70618DE9E2500A8CFD4 /* MKClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKClient.h; sourceTree = "<group>"; };
+		5273C70718DE9E2500A8CFD4 /* MKClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKClient.m; sourceTree = "<group>"; };
+		5273C70F18DEA14E00A8CFD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5273C72218DEA17B00A8CFD4 /* mktests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = mktests; sourceTree = BUILT_PRODUCTS_DIR; };
+		5273C72518DEA17B00A8CFD4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5273C72818DEA17B00A8CFD4 /* mktests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mktests-Prefix.pch"; sourceTree = "<group>"; };
+		5273C73518DEAD5700A8CFD4 /* MKDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKDevice.h; sourceTree = "<group>"; };
+		5273C73618DEAD5700A8CFD4 /* MKDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKDevice.m; sourceTree = "<group>"; };
+		5273C73918DEADB800A8CFD4 /* MKEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKEntity.h; sourceTree = "<group>"; };
+		5273C73A18DEADB800A8CFD4 /* MKEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKEntity.m; sourceTree = "<group>"; };
+		5273C73D18DEADEE00A8CFD4 /* MKEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKEndpoint.h; sourceTree = "<group>"; };
+		5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKEndpoint.m; sourceTree = "<group>"; };
+		5273C74118DEB2FF00A8CFD4 /* LPDev.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDev.h; sourceTree = "<group>"; };
+		5273C74218DEB2FF00A8CFD4 /* LPDev.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDev.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,13 +85,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5273C6E818DE96A200A8CFD4 /* Frameworks */ = {
+		5273C71F18DEA17B00A8CFD4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5273C6EE18DE96A200A8CFD4 /* Cocoa.framework in Frameworks */,
-				5273C6F118DE96A200A8CFD4 /* MIDIKit.framework in Frameworks */,
-				5273C6ED18DE96A200A8CFD4 /* XCTest.framework in Frameworks */,
+				5273C72318DEA17B00A8CFD4 /* Foundation.framework in Frameworks */,
+				5273C73018DEA18000A8CFD4 /* MIDIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,7 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				5273C6DD18DE96A200A8CFD4 /* MIDIKit */,
-				5273C6F218DE96A200A8CFD4 /* MIDIKitTests */,
+				5273C72418DEA17B00A8CFD4 /* mktests */,
 				5273C6D618DE96A200A8CFD4 /* Frameworks */,
 				5273C6D518DE96A200A8CFD4 /* Products */,
 			);
@@ -81,7 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				5273C6D418DE96A200A8CFD4 /* MIDIKit.framework */,
-				5273C6EB18DE96A200A8CFD4 /* MIDIKitTests.xctest */,
+				5273C72218DEA17B00A8CFD4 /* mktests */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -91,6 +121,7 @@
 			children = (
 				5273C6D718DE96A200A8CFD4 /* Cocoa.framework */,
 				5273C6EC18DE96A200A8CFD4 /* XCTest.framework */,
+				5273C70F18DEA14E00A8CFD4 /* Foundation.framework */,
 				5273C6D918DE96A200A8CFD4 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -110,7 +141,16 @@
 			isa = PBXGroup;
 			children = (
 				5273C6E418DE96A200A8CFD4 /* MIDIKit.h */,
-				5273C6E518DE96A200A8CFD4 /* MIDIKit.m */,
+				5273C70218DE9A9800A8CFD4 /* MKObject.h */,
+				5273C70318DE9A9800A8CFD4 /* MKObject.m */,
+				5273C70618DE9E2500A8CFD4 /* MKClient.h */,
+				5273C70718DE9E2500A8CFD4 /* MKClient.m */,
+				5273C73518DEAD5700A8CFD4 /* MKDevice.h */,
+				5273C73618DEAD5700A8CFD4 /* MKDevice.m */,
+				5273C73918DEADB800A8CFD4 /* MKEntity.h */,
+				5273C73A18DEADB800A8CFD4 /* MKEntity.m */,
+				5273C73D18DEADEE00A8CFD4 /* MKEndpoint.h */,
+				5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */,
 				5273C6DE18DE96A200A8CFD4 /* Supporting Files */,
 			);
 			path = MIDIKit;
@@ -126,20 +166,21 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		5273C6F218DE96A200A8CFD4 /* MIDIKitTests */ = {
+		5273C72418DEA17B00A8CFD4 /* mktests */ = {
 			isa = PBXGroup;
 			children = (
-				5273C6F818DE96A200A8CFD4 /* MIDIKitTests.m */,
-				5273C6F318DE96A200A8CFD4 /* Supporting Files */,
+				5273C72518DEA17B00A8CFD4 /* main.m */,
+				5273C74118DEB2FF00A8CFD4 /* LPDev.h */,
+				5273C74218DEB2FF00A8CFD4 /* LPDev.m */,
+				5273C72718DEA17B00A8CFD4 /* Supporting Files */,
 			);
-			path = MIDIKitTests;
+			path = mktests;
 			sourceTree = "<group>";
 		};
-		5273C6F318DE96A200A8CFD4 /* Supporting Files */ = {
+		5273C72718DEA17B00A8CFD4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				5273C6F418DE96A200A8CFD4 /* MIDIKitTests-Info.plist */,
-				5273C6F518DE96A200A8CFD4 /* InfoPlist.strings */,
+				5273C72818DEA17B00A8CFD4 /* mktests-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -151,6 +192,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5273C73718DEAD5700A8CFD4 /* MKDevice.h in Headers */,
+				5273C73F18DEADEE00A8CFD4 /* MKEndpoint.h in Headers */,
+				5273C73B18DEADB800A8CFD4 /* MKEntity.h in Headers */,
+				5273C70418DE9A9800A8CFD4 /* MKObject.h in Headers */,
+				5273C70818DE9E2500A8CFD4 /* MKClient.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,23 +221,23 @@
 			productReference = 5273C6D418DE96A200A8CFD4 /* MIDIKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		5273C6EA18DE96A200A8CFD4 /* MIDIKitTests */ = {
+		5273C72118DEA17B00A8CFD4 /* mktests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5273C6FF18DE96A200A8CFD4 /* Build configuration list for PBXNativeTarget "MIDIKitTests" */;
+			buildConfigurationList = 5273C72B18DEA17B00A8CFD4 /* Build configuration list for PBXNativeTarget "mktests" */;
 			buildPhases = (
-				5273C6E718DE96A200A8CFD4 /* Sources */,
-				5273C6E818DE96A200A8CFD4 /* Frameworks */,
-				5273C6E918DE96A200A8CFD4 /* Resources */,
+				5273C71E18DEA17B00A8CFD4 /* Sources */,
+				5273C71F18DEA17B00A8CFD4 /* Frameworks */,
+				5273C72018DEA17B00A8CFD4 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				5273C6F018DE96A200A8CFD4 /* PBXTargetDependency */,
+				5273C72F18DEA17F00A8CFD4 /* PBXTargetDependency */,
 			);
-			name = MIDIKitTests;
-			productName = MIDIKitTests;
-			productReference = 5273C6EB18DE96A200A8CFD4 /* MIDIKitTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
+			name = mktests;
+			productName = mktests;
+			productReference = 5273C72218DEA17B00A8CFD4 /* mktests */;
+			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
@@ -201,11 +247,6 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "John Heaton";
-				TargetAttributes = {
-					5273C6EA18DE96A200A8CFD4 = {
-						TestTargetID = 5273C6D318DE96A200A8CFD4;
-					};
-				};
 			};
 			buildConfigurationList = 5273C6CE18DE96A200A8CFD4 /* Build configuration list for PBXProject "MIDIKit" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -220,7 +261,7 @@
 			projectRoot = "";
 			targets = (
 				5273C6D318DE96A200A8CFD4 /* MIDIKit */,
-				5273C6EA18DE96A200A8CFD4 /* MIDIKitTests */,
+				5273C72118DEA17B00A8CFD4 /* mktests */,
 			);
 		};
 /* End PBXProject section */
@@ -234,14 +275,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5273C6E918DE96A200A8CFD4 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5273C6F718DE96A200A8CFD4 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -249,25 +282,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5273C6E618DE96A200A8CFD4 /* MIDIKit.m in Sources */,
+				5273C70918DE9E2500A8CFD4 /* MKClient.m in Sources */,
+				5273C74018DEADEE00A8CFD4 /* MKEndpoint.m in Sources */,
+				5273C73818DEAD5700A8CFD4 /* MKDevice.m in Sources */,
+				5273C73C18DEADB800A8CFD4 /* MKEntity.m in Sources */,
+				5273C70518DE9A9800A8CFD4 /* MKObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5273C6E718DE96A200A8CFD4 /* Sources */ = {
+		5273C71E18DEA17B00A8CFD4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5273C6F918DE96A200A8CFD4 /* MIDIKitTests.m in Sources */,
+				5273C72618DEA17B00A8CFD4 /* main.m in Sources */,
+				5273C74318DEB2FF00A8CFD4 /* LPDev.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		5273C6F018DE96A200A8CFD4 /* PBXTargetDependency */ = {
+		5273C72F18DEA17F00A8CFD4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5273C6D318DE96A200A8CFD4 /* MIDIKit */;
-			targetProxy = 5273C6EF18DE96A200A8CFD4 /* PBXContainerItemProxy */;
+			targetProxy = 5273C72E18DEA17F00A8CFD4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -276,14 +314,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				5273C6E118DE96A200A8CFD4 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		5273C6F518DE96A200A8CFD4 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5273C6F618DE96A200A8CFD4 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -391,43 +421,25 @@
 			};
 			name = Release;
 		};
-		5273C70018DE96A200A8CFD4 /* Debug */ = {
+		5273C72C18DEA17B00A8CFD4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MIDIKit.framework/Versions/A/MIDIKit";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MIDIKit/MIDIKit-Prefix.pch";
+				GCC_PREFIX_HEADER = "mktests/mktests-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "MIDIKitTests/MIDIKitTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
 		};
-		5273C70118DE96A200A8CFD4 /* Release */ = {
+		5273C72D18DEA17B00A8CFD4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MIDIKit.framework/Versions/A/MIDIKit";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MIDIKit/MIDIKit-Prefix.pch";
-				INFOPLIST_FILE = "MIDIKitTests/MIDIKitTests-Info.plist";
+				GCC_PREFIX_HEADER = "mktests/mktests-Prefix.pch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -451,11 +463,11 @@
 			);
 			defaultConfigurationIsVisible = 0;
 		};
-		5273C6FF18DE96A200A8CFD4 /* Build configuration list for PBXNativeTarget "MIDIKitTests" */ = {
+		5273C72B18DEA17B00A8CFD4 /* Build configuration list for PBXNativeTarget "mktests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5273C70018DE96A200A8CFD4 /* Debug */,
-				5273C70118DE96A200A8CFD4 /* Release */,
+				5273C72C18DEA17B00A8CFD4 /* Debug */,
+				5273C72D18DEA17B00A8CFD4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

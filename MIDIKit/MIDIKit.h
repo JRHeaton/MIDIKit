@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 John Heaton. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
-@interface MIDIKit : NSObject
-
-@end
+#import "MKObject.h"
+#import "MKClient.h"
+#import "MKDevice.h"
+#import "MKEndpoint.h"
+#import "MKEntity.h"
