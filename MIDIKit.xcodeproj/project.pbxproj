@@ -1,0 +1,465 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5273C6D818DE96A200A8CFD4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D718DE96A200A8CFD4 /* Cocoa.framework */; };
+		5273C6E218DE96A200A8CFD4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5273C6E018DE96A200A8CFD4 /* InfoPlist.strings */; };
+		5273C6E618DE96A200A8CFD4 /* MIDIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C6E518DE96A200A8CFD4 /* MIDIKit.m */; };
+		5273C6ED18DE96A200A8CFD4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6EC18DE96A200A8CFD4 /* XCTest.framework */; };
+		5273C6EE18DE96A200A8CFD4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D718DE96A200A8CFD4 /* Cocoa.framework */; };
+		5273C6F118DE96A200A8CFD4 /* MIDIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D418DE96A200A8CFD4 /* MIDIKit.framework */; };
+		5273C6F718DE96A200A8CFD4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5273C6F518DE96A200A8CFD4 /* InfoPlist.strings */; };
+		5273C6F918DE96A200A8CFD4 /* MIDIKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C6F818DE96A200A8CFD4 /* MIDIKitTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5273C6EF18DE96A200A8CFD4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5273C6CB18DE96A200A8CFD4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5273C6D318DE96A200A8CFD4;
+			remoteInfo = MIDIKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5273C6D418DE96A200A8CFD4 /* MIDIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MIDIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5273C6D718DE96A200A8CFD4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		5273C6DA18DE96A200A8CFD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5273C6DB18DE96A200A8CFD4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		5273C6DC18DE96A200A8CFD4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		5273C6DF18DE96A200A8CFD4 /* MIDIKit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MIDIKit-Info.plist"; sourceTree = "<group>"; };
+		5273C6E118DE96A200A8CFD4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5273C6E318DE96A200A8CFD4 /* MIDIKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MIDIKit-Prefix.pch"; sourceTree = "<group>"; };
+		5273C6E418DE96A200A8CFD4 /* MIDIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MIDIKit.h; sourceTree = "<group>"; };
+		5273C6E518DE96A200A8CFD4 /* MIDIKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MIDIKit.m; sourceTree = "<group>"; };
+		5273C6EB18DE96A200A8CFD4 /* MIDIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MIDIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5273C6EC18DE96A200A8CFD4 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		5273C6F418DE96A200A8CFD4 /* MIDIKitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MIDIKitTests-Info.plist"; sourceTree = "<group>"; };
+		5273C6F618DE96A200A8CFD4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5273C6F818DE96A200A8CFD4 /* MIDIKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MIDIKitTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5273C6D018DE96A200A8CFD4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5273C6D818DE96A200A8CFD4 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5273C6E818DE96A200A8CFD4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5273C6EE18DE96A200A8CFD4 /* Cocoa.framework in Frameworks */,
+				5273C6F118DE96A200A8CFD4 /* MIDIKit.framework in Frameworks */,
+				5273C6ED18DE96A200A8CFD4 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5273C6CA18DE96A200A8CFD4 = {
+			isa = PBXGroup;
+			children = (
+				5273C6DD18DE96A200A8CFD4 /* MIDIKit */,
+				5273C6F218DE96A200A8CFD4 /* MIDIKitTests */,
+				5273C6D618DE96A200A8CFD4 /* Frameworks */,
+				5273C6D518DE96A200A8CFD4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5273C6D518DE96A200A8CFD4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5273C6D418DE96A200A8CFD4 /* MIDIKit.framework */,
+				5273C6EB18DE96A200A8CFD4 /* MIDIKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5273C6D618DE96A200A8CFD4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5273C6D718DE96A200A8CFD4 /* Cocoa.framework */,
+				5273C6EC18DE96A200A8CFD4 /* XCTest.framework */,
+				5273C6D918DE96A200A8CFD4 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5273C6D918DE96A200A8CFD4 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5273C6DA18DE96A200A8CFD4 /* Foundation.framework */,
+				5273C6DB18DE96A200A8CFD4 /* CoreData.framework */,
+				5273C6DC18DE96A200A8CFD4 /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		5273C6DD18DE96A200A8CFD4 /* MIDIKit */ = {
+			isa = PBXGroup;
+			children = (
+				5273C6E418DE96A200A8CFD4 /* MIDIKit.h */,
+				5273C6E518DE96A200A8CFD4 /* MIDIKit.m */,
+				5273C6DE18DE96A200A8CFD4 /* Supporting Files */,
+			);
+			path = MIDIKit;
+			sourceTree = "<group>";
+		};
+		5273C6DE18DE96A200A8CFD4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5273C6DF18DE96A200A8CFD4 /* MIDIKit-Info.plist */,
+				5273C6E018DE96A200A8CFD4 /* InfoPlist.strings */,
+				5273C6E318DE96A200A8CFD4 /* MIDIKit-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5273C6F218DE96A200A8CFD4 /* MIDIKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				5273C6F818DE96A200A8CFD4 /* MIDIKitTests.m */,
+				5273C6F318DE96A200A8CFD4 /* Supporting Files */,
+			);
+			path = MIDIKitTests;
+			sourceTree = "<group>";
+		};
+		5273C6F318DE96A200A8CFD4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5273C6F418DE96A200A8CFD4 /* MIDIKitTests-Info.plist */,
+				5273C6F518DE96A200A8CFD4 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		5273C6D118DE96A200A8CFD4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		5273C6D318DE96A200A8CFD4 /* MIDIKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5273C6FC18DE96A200A8CFD4 /* Build configuration list for PBXNativeTarget "MIDIKit" */;
+			buildPhases = (
+				5273C6CF18DE96A200A8CFD4 /* Sources */,
+				5273C6D018DE96A200A8CFD4 /* Frameworks */,
+				5273C6D118DE96A200A8CFD4 /* Headers */,
+				5273C6D218DE96A200A8CFD4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MIDIKit;
+			productName = MIDIKit;
+			productReference = 5273C6D418DE96A200A8CFD4 /* MIDIKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		5273C6EA18DE96A200A8CFD4 /* MIDIKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5273C6FF18DE96A200A8CFD4 /* Build configuration list for PBXNativeTarget "MIDIKitTests" */;
+			buildPhases = (
+				5273C6E718DE96A200A8CFD4 /* Sources */,
+				5273C6E818DE96A200A8CFD4 /* Frameworks */,
+				5273C6E918DE96A200A8CFD4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5273C6F018DE96A200A8CFD4 /* PBXTargetDependency */,
+			);
+			name = MIDIKitTests;
+			productName = MIDIKitTests;
+			productReference = 5273C6EB18DE96A200A8CFD4 /* MIDIKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5273C6CB18DE96A200A8CFD4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "John Heaton";
+				TargetAttributes = {
+					5273C6EA18DE96A200A8CFD4 = {
+						TestTargetID = 5273C6D318DE96A200A8CFD4;
+					};
+				};
+			};
+			buildConfigurationList = 5273C6CE18DE96A200A8CFD4 /* Build configuration list for PBXProject "MIDIKit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 5273C6CA18DE96A200A8CFD4;
+			productRefGroup = 5273C6D518DE96A200A8CFD4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5273C6D318DE96A200A8CFD4 /* MIDIKit */,
+				5273C6EA18DE96A200A8CFD4 /* MIDIKitTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5273C6D218DE96A200A8CFD4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5273C6E218DE96A200A8CFD4 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5273C6E918DE96A200A8CFD4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5273C6F718DE96A200A8CFD4 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5273C6CF18DE96A200A8CFD4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5273C6E618DE96A200A8CFD4 /* MIDIKit.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5273C6E718DE96A200A8CFD4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5273C6F918DE96A200A8CFD4 /* MIDIKitTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5273C6F018DE96A200A8CFD4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5273C6D318DE96A200A8CFD4 /* MIDIKit */;
+			targetProxy = 5273C6EF18DE96A200A8CFD4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5273C6E018DE96A200A8CFD4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5273C6E118DE96A200A8CFD4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5273C6F518DE96A200A8CFD4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5273C6F618DE96A200A8CFD4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5273C6FA18DE96A200A8CFD4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		5273C6FB18DE96A200A8CFD4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		5273C6FD18DE96A200A8CFD4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MIDIKit/MIDIKit-Prefix.pch";
+				INFOPLIST_FILE = "MIDIKit/MIDIKit-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		5273C6FE18DE96A200A8CFD4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MIDIKit/MIDIKit-Prefix.pch";
+				INFOPLIST_FILE = "MIDIKit/MIDIKit-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		5273C70018DE96A200A8CFD4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MIDIKit.framework/Versions/A/MIDIKit";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MIDIKit/MIDIKit-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "MIDIKitTests/MIDIKitTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		5273C70118DE96A200A8CFD4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MIDIKit.framework/Versions/A/MIDIKit";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MIDIKit/MIDIKit-Prefix.pch";
+				INFOPLIST_FILE = "MIDIKitTests/MIDIKitTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5273C6CE18DE96A200A8CFD4 /* Build configuration list for PBXProject "MIDIKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5273C6FA18DE96A200A8CFD4 /* Debug */,
+				5273C6FB18DE96A200A8CFD4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5273C6FC18DE96A200A8CFD4 /* Build configuration list for PBXNativeTarget "MIDIKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5273C6FD18DE96A200A8CFD4 /* Debug */,
+				5273C6FE18DE96A200A8CFD4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		5273C6FF18DE96A200A8CFD4 /* Build configuration list for PBXNativeTarget "MIDIKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5273C70018DE96A200A8CFD4 /* Debug */,
+				5273C70118DE96A200A8CFD4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5273C6CB18DE96A200A8CFD4 /* Project object */;
+}
