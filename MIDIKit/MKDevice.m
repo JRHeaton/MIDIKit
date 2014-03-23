@@ -24,9 +24,7 @@
 }
 
 - (MKEndpoint *)rootEndpoint {
-    MKEntity *entity = self[0];
-
-    return entity[0];
+    return self[0][0];
 }
 
 - (MKEntity *)entityAtIndex:(NSUInteger)index {

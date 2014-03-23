@@ -34,13 +34,7 @@
 }
 
 - (instancetype)init {
-    if((self = [super init])) {
-        MIDIObjectRef val;
-        MIDIClientCreate((__bridge CFStringRef)([NSString stringWithFormat:@"%s-client", getprogname()]), NULL, NULL, &val);
-        self.MIDIRef = val;
-    }
-
-    return self;
+    return [self initWithName:[NSString stringWithFormat:@"%s-client", getprogname()]];
 }
 
 - (void)enumerateDevicesUsingBlock:(void (^)(MKDevice *device))block {
