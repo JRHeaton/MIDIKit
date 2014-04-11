@@ -8,6 +8,7 @@
 
 #import "MKObject.h"
 #import "MKDevice.h"
+#import "MKInputPort.h"
 
 // The client object is essentially your root interface
 // to the MIDI server. In this context, it also encapsulates
@@ -17,6 +18,7 @@
 // which allows for them to delegate some behavior back to
 // that client for convenience. (For example, sending data)
 
+@protocol MKClientNotificationDelegate;
 @interface MKClient : MKObject
 
 // Creates a new device with the given name
@@ -27,7 +29,8 @@
 // particular way
 + (instancetype)clientWithName:(NSString *)name;
 
-- (void)enumerateDevicesUsingBlock:(void (^)(MKDevice *device))block;
+- (void)enumerateDevicesUsingBlock:(void (^)(MKDevice *device))enumerationBlock
+                  constructorBlock:(MKDevice *(^)(MIDIDeviceRef dev))constructorBlock;
 - (MKDevice *)deviceAtIndex:(NSUInteger)index;
 
 // Send a chunk of data to a given endpoint as a standard MIDI message
@@ -40,9 +43,8 @@
 // Therefore, this syntax can be used: @[ @0x90, @0xaa, @127 ]
 - (void)sendDataArray:(NSArray *)array toEndpoint:(MKEndpoint *)endpoint;
 
-// Starts listening for input data from the given source endpoint.
-- (void)connectSource:(MKEndpoint *)source;
-- (void)disconnectSource:(MKEndpoint *)source;
+- (void)addNotificationDelegate:(id<MKClientNotificationDelegate>)delegate;
+- (void)removeNotificationDelegate:(id<MKClientNotificationDelegate>)delegate;
 
 // Handy dynamic enumeration properties
 // NOTE: These are SYNCHRONOUS, and when they're called
@@ -56,6 +58,6 @@
 // These are wrapper objects for the auto-created input and output ports
 // of this client.
 @property (nonatomic, readonly) MKObject *outputPort;
-@property (nonatomic, readonly) MKObject *inputPort;
+@property (nonatomic, readonly) MKInputPort *inputPort;
 
 @end

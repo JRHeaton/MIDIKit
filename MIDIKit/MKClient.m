@@ -10,6 +10,8 @@
 
 @interface MKClient ()
 
+@property (nonatomic, strong) NSMutableSet *notificationDelegates;
+
 @end
 
 static void MKClientInputCB(const MIDIPacketList *pktlist, void *readProcRefCon, void *srcConnRefCon) {
@@ -19,6 +21,23 @@ static void MKClientInputCB(const MIDIPacketList *pktlist, void *readProcRefCon,
 }
 
 @implementation MKClient
+
+static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCon) {
+    MKClient *self = (__bridge MKClient *)(refCon);
+
+    switch((SInt32)message->messageID) {
+        case kMIDIMsgSetupChanged: break;
+        case kMIDIMsgObjectAdded:
+        case kMIDIMsgObjectRemoved: {
+            MIDIObjectAddRemoveNotification *notif = (MIDIObjectAddRemoveNotification *)message;
+            
+        } break;
+        case kMIDIMsgPropertyChanged: break;
+        case kMIDIMsgThruConnectionsChanged: break;
+        case kMIDIMsgSerialPortOwnerChanged: break;
+        case kMIDIMsgIOError: break;
+    }
+}
 
 + (instancetype)clientWithName:(NSString *)name {
     return [[self alloc] initWithName:name];
@@ -30,14 +49,16 @@ static void MKClientInputCB(const MIDIPacketList *pktlist, void *readProcRefCon,
     if((self = [super init])) {
         CFStringRef cfName = (__bridge CFStringRef)(name);
         MIDIObjectRef val;
+        
+        self.notificationDelegates = [NSMutableSet setWithCapacity:0];
 
-        MIDIClientCreate(cfName, NULL, NULL, &val);
+        MIDIClientCreate(cfName, _MKClientMIDINotifyProc, (__bridge void *)(self), &val);
         self.MIDIRef = val;
 
         MIDIOutputPortCreate(self.MIDIRef, cfName, &val);
         self->_outputPort = [[MKObject alloc] initWithMIDIRef:val];
         MIDIInputPortCreate(self.MIDIRef, cfName, MKClientInputCB, (__bridge void *)(self), &val);
-        self->_inputPort = [[MKObject alloc] initWithMIDIRef:val];
+        self->_inputPort = [[MKInputPort alloc] initWithMIDIRef:val];
     }
 
     return self;
@@ -47,18 +68,17 @@ static void MKClientInputCB(const MIDIPacketList *pktlist, void *readProcRefCon,
     return [self initWithName:[NSString stringWithFormat:@"%s-client", getprogname()]];
 }
 
-- (void)connectSource:(MKEndpoint *)source {
-    MIDIPortConnectSource(_inputPort.MIDIRef, source.MIDIRef, NULL);
+- (void)dealloc {
+    MIDIPortDispose(self.inputPort.MIDIRef);
+    MIDIPortDispose(self.outputPort.MIDIRef);
+    MIDIClientDispose(self.MIDIRef);
 }
 
-- (void)disconnectSource:(MKEndpoint *)source {
-    MIDIPortDisconnectSource(_inputPort.MIDIRef, source.MIDIRef);
-}
-
-- (void)enumerateDevicesUsingBlock:(void (^)(MKDevice *device))block {
+- (void)enumerateDevicesUsingBlock:(void (^)(MKDevice *device))enumerationBlock
+                  constructorBlock:(MKDevice *(^)(MIDIDeviceRef dev))constructorBlock {
+    
     for(NSUInteger i=0;i<self.numberOfDevices;++i) {
-        MKDevice *dev = [self deviceAtIndex:i];
-        block(dev);
+        enumerationBlock(!constructorBlock ? [self deviceAtIndex:i] : (constructorBlock(MIDIGetDevice(i)) ?: [self deviceAtIndex:i]));
     }
 }
 
@@ -106,6 +126,16 @@ static void MKClientInputCB(const MIDIPacketList *pktlist, void *readProcRefCon,
         [data appendBytes:&val length:1];
     }
     [self sendData:data toEndpoint:endpoint];
+}
+
+- (void)addNotificationDelegate:(id<MKClientNotificationDelegate>)delegate {
+    if(![self.notificationDelegates containsObject:delegate])
+        [self.notificationDelegates addObject:delegate];
+}
+
+- (void)removeNotificationDelegate:(id<MKClientNotificationDelegate>)delegate {
+    if([self.notificationDelegates containsObject:delegate])
+        [self.notificationDelegates removeObject:delegate];
 }
 
 @end

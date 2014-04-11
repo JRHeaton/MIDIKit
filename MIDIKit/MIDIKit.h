@@ -11,3 +11,4 @@
 #import "MKDevice.h"
 #import "MKEndpoint.h"
 #import "MKEntity.h"
+#import "MKInputPort.h"

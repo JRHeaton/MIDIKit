@@ -22,7 +22,8 @@
 		5273C73C18DEADB800A8CFD4 /* MKEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73A18DEADB800A8CFD4 /* MKEntity.m */; };
 		5273C73F18DEADEE00A8CFD4 /* MKEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C73D18DEADEE00A8CFD4 /* MKEndpoint.h */; };
 		5273C74018DEADEE00A8CFD4 /* MKEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */; };
-		5273C74318DEB2FF00A8CFD4 /* LPDev.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5273C74218DEB2FF00A8CFD4 /* LPDev.mm */; };
+		52B22EEC18F7A0EF00A5A5D3 /* MKInputPort.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EEA18F7A0EF00A5A5D3 /* MKInputPort.h */; };
+		52B22EED18F7A0EF00A5A5D3 /* MKInputPort.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EEB18F7A0EF00A5A5D3 /* MKInputPort.m */; };
 		52B2C12118E7928D00E82760 /* NSString+JRExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B2C11F18E7928D00E82760 /* NSString+JRExtensions.h */; };
 		52B2C12218E7928D00E82760 /* NSString+JRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2C12018E7928D00E82760 /* NSString+JRExtensions.m */; };
 /* End PBXBuildFile section */
@@ -75,7 +76,8 @@
 		5273C73D18DEADEE00A8CFD4 /* MKEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKEndpoint.h; sourceTree = "<group>"; };
 		5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKEndpoint.m; sourceTree = "<group>"; };
 		5273C74118DEB2FF00A8CFD4 /* LPDev.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDev.h; sourceTree = "<group>"; };
-		5273C74218DEB2FF00A8CFD4 /* LPDev.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LPDev.mm; sourceTree = "<group>"; };
+		52B22EEA18F7A0EF00A5A5D3 /* MKInputPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKInputPort.h; sourceTree = "<group>"; };
+		52B22EEB18F7A0EF00A5A5D3 /* MKInputPort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKInputPort.m; sourceTree = "<group>"; };
 		52B2C11F18E7928D00E82760 /* NSString+JRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+JRExtensions.h"; sourceTree = "<group>"; };
 		52B2C12018E7928D00E82760 /* NSString+JRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JRExtensions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -150,6 +152,8 @@
 				5273C70318DE9A9800A8CFD4 /* MKObject.m */,
 				5273C70618DE9E2500A8CFD4 /* MKClient.h */,
 				5273C70718DE9E2500A8CFD4 /* MKClient.m */,
+				52B22EEA18F7A0EF00A5A5D3 /* MKInputPort.h */,
+				52B22EEB18F7A0EF00A5A5D3 /* MKInputPort.m */,
 				5273C73518DEAD5700A8CFD4 /* MKDevice.h */,
 				5273C73618DEAD5700A8CFD4 /* MKDevice.m */,
 				5273C73918DEADB800A8CFD4 /* MKEntity.h */,
@@ -176,7 +180,6 @@
 			children = (
 				5273C72518DEA17B00A8CFD4 /* main.m */,
 				5273C74118DEB2FF00A8CFD4 /* LPDev.h */,
-				5273C74218DEB2FF00A8CFD4 /* LPDev.mm */,
 				5273C72718DEA17B00A8CFD4 /* Supporting Files */,
 			);
 			path = mktests;
@@ -210,6 +213,7 @@
 				5273C73718DEAD5700A8CFD4 /* MKDevice.h in Headers */,
 				5273C73F18DEADEE00A8CFD4 /* MKEndpoint.h in Headers */,
 				52B2C12118E7928D00E82760 /* NSString+JRExtensions.h in Headers */,
+				52B22EEC18F7A0EF00A5A5D3 /* MKInputPort.h in Headers */,
 				5273C73B18DEADB800A8CFD4 /* MKEntity.h in Headers */,
 				5273C70418DE9A9800A8CFD4 /* MKObject.h in Headers */,
 				5273C70818DE9E2500A8CFD4 /* MKClient.h in Headers */,
@@ -302,6 +306,7 @@
 				5273C74018DEADEE00A8CFD4 /* MKEndpoint.m in Sources */,
 				5273C73818DEAD5700A8CFD4 /* MKDevice.m in Sources */,
 				5273C73C18DEADB800A8CFD4 /* MKEntity.m in Sources */,
+				52B22EED18F7A0EF00A5A5D3 /* MKInputPort.m in Sources */,
 				5273C70518DE9A9800A8CFD4 /* MKObject.m in Sources */,
 				52B2C12218E7928D00E82760 /* NSString+JRExtensions.m in Sources */,
 			);
@@ -312,7 +317,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5273C72618DEA17B00A8CFD4 /* main.m in Sources */,
-				5273C74318DEB2FF00A8CFD4 /* LPDev.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

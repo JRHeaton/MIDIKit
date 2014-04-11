@@ -19,10 +19,6 @@
 
 @interface MKDevice : MKObject
 
-// only valid if 'client' is set
-- (void)sendData:(NSData *)data toEndpoint:(MKEndpoint *)endpoint;
-- (void)sendDataArray:(NSArray *)array toEndpoint:(MKEndpoint *)endpoint;
-
 - (MKEntity *)entityAtIndex:(NSUInteger)index;
 - (id)objectAtIndexedSubscript:(NSUInteger)index;
 
