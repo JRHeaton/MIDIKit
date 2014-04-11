@@ -14,6 +14,8 @@
 
 @interface MKDevice : MKObject
 
++ (NSUInteger)numberOfDevices;
+
 // Convenient enumeration
 + (instancetype)firstDeviceMeetingCriteria:(BOOL (^)(MKDevice *candidate))block;
 + (instancetype)firstOnlineDeviceNamed:(NSString *)name;

@@ -16,10 +16,11 @@
 
 @interface MKVirtualSource : MKEndpoint <MKClientDependentInstaniation>
 
+// Creates a new virtual source and adds it to the MIDI server
 + (instancetype)virtualSourceWithName:(NSString *)name client:(MKClient *)client;
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
 
-// Virtually sends data to this source.
+// Virtually sends data from this source.
 - (void)receivedData:(NSData *)data;
 
 @end

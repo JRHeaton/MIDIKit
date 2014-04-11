@@ -20,18 +20,6 @@
 
 + (instancetype)clientWithName:(NSString *)name;
 
-/*
- This will enumerate through all devices, filter out ones you don't want,
- and even allow you to hook in and instantiated a custom subclass of MKDevice
- to pass to the enumeration block.
- */
-- (void)enumerateDevicesUsingBlock:(void (^)(MKDevice *device))enumerationBlock
-                  constructorBlock:(MKDevice *(^)(MKDevice *rootDev))constructorBlock
-              restrictWithCriteria:(BOOL (^)(MKDevice *rootDev))criteriaBlock;
-
-// Wrapper for device at index
-- (MKDevice *)deviceAtIndex:(NSUInteger)index;
-
 // Not sure yet...
 - (void)addNotificationDelegate:(id<MKClientNotificationDelegate>)delegate;
 - (void)removeNotificationDelegate:(id<MKClientNotificationDelegate>)delegate;
@@ -53,11 +41,6 @@
 // These create and insert virtual endpoints and return them
 - (MKVirtualSource *)createVirtualSourceNamed:(NSString *)name;
 - (MKVirtualDestination *)createVirtualDestinationNamed:(NSString *)name;
-
-// These are dynamic getters that reflect the current state of the MIDI server
-@property (nonatomic, readonly) NSUInteger numberOfDevices;
-@property (nonatomic, readonly) NSUInteger numberOfDestinations;
-@property (nonatomic, readonly) NSUInteger numberOfSources;
 
 // If the convenience methods for instantiation of ports and endpoints
 // on this class is used, they are inserted automatically into these

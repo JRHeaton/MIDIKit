@@ -92,34 +92,6 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
     return [self initWithName:[NSString stringWithFormat:@"%@-%d-Client", [NSProcessInfo processInfo].processName, [NSProcessInfo processInfo].processIdentifier]];
 }
 
-- (void)enumerateDevicesUsingBlock:(void (^)(MKDevice *device))enumerationBlock
-                  constructorBlock:(MKDevice *(^)(MKDevice *rootDev))constructorBlock
-              restrictWithCriteria:(BOOL (^)(MKDevice *rootDev))criteriaBlock {
-    
-    for(NSUInteger i=0;i<self.numberOfDevices;++i) {
-        MKDevice *rootDev = [[MKDevice alloc] initWithMIDIRef:MIDIGetDevice(i)];
-        if((criteriaBlock && criteriaBlock(rootDev)) || !criteriaBlock) {
-            enumerationBlock(!constructorBlock ? rootDev : (constructorBlock(rootDev) ?: rootDev));
-        }
-    }
-}
-
-- (MKDevice *)deviceAtIndex:(NSUInteger)index {
-    return [[MKDevice alloc] initWithMIDIRef:MIDIGetDevice(index)];
-}
-
-- (NSUInteger)numberOfDestinations {
-    return MIDIGetNumberOfDestinations();
-}
-
-- (NSUInteger)numberOfDevices {
-    return  MIDIGetNumberOfDevices();
-}
-
-- (NSUInteger)numberOfSources {
-    return MIDIGetNumberOfSources();
-}
-
 - (void)dispose {
     MIDIClientDispose(self.MIDIRef);
     self.MIDIRef = 0;

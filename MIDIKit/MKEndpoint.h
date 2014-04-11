@@ -14,6 +14,9 @@
 @class MKEntity;
 @interface MKEndpoint : MKObject
 
++ (NSUInteger)numberOfSources;
++ (NSUInteger)numberOfDestinations;
+
 + (instancetype)firstDestinationMeetingCriteria:(BOOL (^)(MKEndpoint *candidate))block;
 + (instancetype)firstSourceMeetingCriteria:(BOOL (^)(MKEndpoint *candidate))block;
 + (instancetype)firstOnlineDestinationNamed:(NSString *)name;

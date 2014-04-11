@@ -11,6 +11,14 @@
 
 @implementation MKEndpoint
 
++ (NSUInteger)numberOfSources {
+    return MIDIGetNumberOfSources();
+}
+
++ (NSUInteger)numberOfDestinations {
+    return MIDIGetNumberOfDestinations();
+}
+
 + (instancetype)firstDestinationMeetingCriteria:(BOOL (^)(MKEndpoint *candidate))block {
     for(NSInteger i=0;i<MIDIGetNumberOfDestinations();++i) {
         MKEndpoint *candidate = [[MKEndpoint alloc] initWithMIDIRef:MIDIGetDestination(i)];

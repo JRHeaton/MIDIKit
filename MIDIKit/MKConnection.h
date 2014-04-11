@@ -51,4 +51,6 @@
 // Async helper
 - (instancetype)performBlock:(void (^)(MKConnection *c))block afterDelay:(NSTimeInterval)delay;
 
+@property (nonatomic, weak) MKClient *client;
+
 @end

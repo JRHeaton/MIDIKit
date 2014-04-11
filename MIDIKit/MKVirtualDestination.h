@@ -15,9 +15,11 @@
 @protocol MKVirtualDestinationDelegate;
 @interface MKVirtualDestination : MKEndpoint <MKClientDependentInstaniation>
 
+// Creates a new virtual destination and adds it to the MIDI server
 + (instancetype)virtualDestinationWithName:(NSString *)name client:(MKClient *)client;
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
 
+// Adds a new delegate to be notified when data is received
 - (void)addDelegate:(id<MKVirtualDestinationDelegate>)delegate;
 - (void)removeDelegate:(id<MKVirtualDestinationDelegate>)delegate;
 

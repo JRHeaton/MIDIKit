@@ -15,6 +15,15 @@ typedef NS_ENUM(UInt8, MKMessageType) {
     kMKMessageTypeControlChange = 0xB0
 };
 
+// MKMessage is a data wrapper class which implements some basic MIDI
+// message protocol logic.
+//
+// It is mainly meant to be extended for generating messages
+// that correspond to specific sets of functions for specific
+// types of devices. For instance, you could subclass this
+// for generating messages that correspond to light commands
+// on a pad device.
+
 @interface MKMessage : NSObject
 
 + (instancetype)controlChangeMessageWithController:(UInt8)controller value:(UInt8)value;

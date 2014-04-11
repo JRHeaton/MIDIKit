@@ -36,7 +36,9 @@
 }
 
 - (instancetype)initWithClient:(MKClient *)client {
-    return [self initWithInputPort:client.firstInputPort outputPort:client.firstOutputPort];
+    self = [self initWithInputPort:client.firstInputPort outputPort:client.firstOutputPort];
+    self.client = client;
+    return self;
 }
 
 - (void)addDestination:(MKEndpoint *)destination {

@@ -11,6 +11,10 @@
 
 @implementation MKDevice
 
++ (NSUInteger)numberOfDevices {
+    return MIDIGetNumberOfDevices();
+}
+
 + (instancetype)firstDeviceMeetingCriteria:(BOOL (^)(MKDevice *candidate))block {
     for(NSInteger i=0;i<MIDIGetNumberOfDevices();++i) {
         MKDevice *candidate = [[MKDevice alloc] initWithMIDIRef:MIDIGetDevice(i)];

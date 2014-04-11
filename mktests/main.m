@@ -14,10 +14,13 @@
 
 #define LP_ID 0xf0b43c3a
 
+void test_javascript() {
+    
+}
+
 int main(int argc, const char * argv[]){
     @autoreleasepool {
-        MKConnection *connection = [MKConnection connectionWithNewClient];
-        [connection addDestination:[MKEndpoint objectForUniqueID:LP_ID]];
+        test_javascript();
         
         CFRunLoopRun();
     }
