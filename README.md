@@ -3,13 +3,26 @@ MIDIKit
 
 This framework aims to be a convenience/wrapper framework around CoreMIDI, a lower-level C API for MIDI I/O on Mac OS X. This framework provides a lightweight and convenient way to wrap CoreMIDI objects, but can also be used with little to no knowledge of CoreMIDI itself.
 
+##To Do
+Name| Status
+----|-------
+MIDI system state notifications| Set up, switch needs done
+Virtual destination input callbacks| Set up, just needs block property or delegate collection
+
+##What works
+- Enumerating devices, sources, destinations, and entities.
+- Creating and disposing wrappers for all CoreMIDI object types
+- Input/Output to MIDI devices via ports
+- Creating and using virtual endpoints
+
+
 #Concepts
-####`Object(MKObject.h)` - The main, base wrapper class around CoreMIDI types.
-####`Client(MKClient.h)` - The important one. You *must* create a client to use this framework.
-####`Endpoint(MKEndpoint.h)` - A unidirectional endpoint, either source or destination.
-####`Entity(MKEntity.h)` - Contains a set of endpoints
-####`Device(MKDevice.h)` - A device, which contains a set of entities.
-####`Port(MK{Input/Output}Port.h)` - A client-owned port through which you communicate with a source or destination.
+#####`Object(MKObject.h)` - The main, base wrapper class around CoreMIDI types.
+#####`Client(MKClient.h)` - The important one. You *must* create a client to use this framework.
+#####`Endpoint(MKEndpoint.h)` - A unidirectional endpoint, either source or destination.
+#####`Entity(MKEntity.h)` - Contains a set of endpoints
+#####`Device(MKDevice.h)` - A device, which contains a set of entities.
+#####`Port(MK{Input/Output}Port.h)` - A client-owned port through which you communicate with a source or destination.
 
 Before we get technical, let's dive into a quick example.
 ```objc
