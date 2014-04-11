@@ -68,10 +68,12 @@
     block(self);
 }
 
-- (void)after:(NSTimeInterval)delay do:(void (^)(MKConnection *connection))block {
-    if(!block) return;
+- (instancetype)performBlock:(void (^)(MKConnection *c))block afterDelay:(NSTimeInterval)delay {
+    if(block) {
+        [self performSelector:@selector(performBlock:) withObject:[block copy] afterDelay:delay];
+    }
     
-    [self performSelector:@selector(performBlock:) withObject:[block copy] afterDelay:delay];
+    return self;
 }
 
 @end

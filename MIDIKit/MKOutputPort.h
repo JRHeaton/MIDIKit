@@ -22,4 +22,8 @@
 - (void)sendData:(NSData *)data toDestination:(MKEndpoint *)endpoint;
 - (void)sendMessage:(MKMessage *)msg toDestination:(MKEndpoint *)endpoint;
 
+// This queue can be manipulated for various reasons.
+// Example: [myOutputPort.sendQueue setMaxConcurrentOperationCount:1]
+@property (nonatomic, readonly, strong) NSOperationQueue *sendQueue;
+
 @end

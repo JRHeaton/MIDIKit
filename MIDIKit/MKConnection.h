@@ -46,6 +46,6 @@
 - (void)sendMessages:(MKMessage *)message, ... NS_REQUIRES_NIL_TERMINATION;
 
 // Async helper
-- (void)after:(NSTimeInterval)delay do:(void (^)(MKConnection *connection))block;
+- (instancetype)performBlock:(void (^)(MKConnection *c))block afterDelay:(NSTimeInterval)delay;
 
 @end

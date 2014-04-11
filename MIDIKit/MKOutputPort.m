@@ -20,8 +20,29 @@
     
     self.client = client;
     [self.client.outputPorts addObject:self];
+    [self commonInit];
     
     return self;
+}
+
+- (instancetype)initWithMIDIRef:(MIDIObjectRef)MIDIRef {
+    if(!(self = [super initWithMIDIRef:MIDIRef])) return nil;
+    
+    [self commonInit];
+
+    return self;
+}
+
+- (instancetype)initWithUniqueID:(MIDIUniqueID)uniqueID {
+    if(!(self = [super initWithUniqueID:uniqueID])) return nil;
+    
+    [self commonInit];
+    
+    return self;
+}
+
+- (void)commonInit {
+    _sendQueue = [NSOperationQueue new];
 }
 
 - (void)dispose {
@@ -30,16 +51,18 @@
 }
 
 - (void)sendData:(NSData *)data toDestination:(MKEndpoint *)endpoint {
-    if(data.length <= 256) {
-        MIDIPacketList list;
-        list.numPackets = 1;
-        list.packet[0].length = data.length;
-        list.packet[0].timeStamp = 0;
-        memcpy(list.packet[0].data, data.bytes, data.length);
-        MIDISend(self.MIDIRef, endpoint.MIDIRef, &list);
-    } else {
-        [NSException raise:@"Data is too large" format:@"I am lazy and need to implement this."];
-    }
+    [self.sendQueue addOperationWithBlock:^{
+        if(data.length <= 256) {
+            MIDIPacketList list;
+            list.numPackets = 1;
+            list.packet[0].length = data.length;
+            list.packet[0].timeStamp = 0;
+            memcpy(list.packet[0].data, data.bytes, data.length);
+            MIDISend(self.MIDIRef, endpoint.MIDIRef, &list);
+        } else {
+            [NSException raise:@"Data is too large" format:@"I am lazy and need to implement this."];
+        }
+    }];
 }
 
 - (void)sendMessage:(MKMessage *)msg toDestination:(MKEndpoint *)endpoint {

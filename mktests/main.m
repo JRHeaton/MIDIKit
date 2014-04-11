@@ -45,26 +45,18 @@ int main(int argc, const char * argv[]){
         uint8 buf[3] = { 0xb0  , 0, 0 };
         
         MKClient *client = [MKClient clientWithName:@"Johns Client"];
-        MKDevice *dev = [MKDevice firstDeviceMeetingCriteria:^BOOL(MKDevice *candidate) {
-            return candidate.online && [candidate.name containsString:@"Launchpad"];
-        }];
-        test *t = [test new];
-        [client.firstInputPort addInputDelegate:t];
-        
-        [client.firstInputPort connectSource:dev.rootSource];
-        conn = [MKConnection connectionWithClient:client];
-        [conn addDestination:dev.rootDestination];
-    
-        [conn sendMessage:LPMessage.reset];
+        MKConnection *connection = [MKConnection connectionWithClient:client];
+        [connection addDestination:[MKEndpoint firstDestinationMeetingCriteria:^BOOL(MKEndpoint *candidate) {
+            return candidate.online && [candidate.name containsString:@"Launchpad Mini"];
+        }]];
         
         [LPMessage enumerateGrid:^(UInt8 x, UInt8 y) {
-            [conn sendMessage:[LPMessage greenFullAtX:x Y:y]];
+            [connection sendMessage:[LPMessage redFullAtX:x Y:y]];
         }];
         
-        [conn after:2 do:^(MKConnection *connection) {
-            NSLog(@"csjlkdf");
-            [conn sendMessage:[LPMessage setSecondBuffers]];
-        }];
+        [connection performBlock:^(MKConnection *c) {
+            [connection sendMessage:[LPMessage reset]];
+        } afterDelay:2];
         
         CFRunLoopRun();
 }

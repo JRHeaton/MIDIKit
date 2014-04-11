@@ -37,8 +37,8 @@ typedef NS_ENUM(UInt8, LPColorBrightness) {
              greenBrightness:(LPColorBrightness)greenBrightness;
 + (instancetype)redFullAtX:(NSUInteger)x Y:(NSUInteger)y;
 + (instancetype)greenFullAtX:(NSUInteger)x Y:(NSUInteger)y;
-+ (instancetype)greenAtX:(NSUInteger)x Y:(NSUInteger)y brightness:(LPColorBrightness)brightness;
-+ (instancetype)redAtX:(NSUInteger)x Y:(NSUInteger)y brightness:(LPColorBrightness)brightness;
++ (instancetype)greenAtX:(NSUInteger)x Y:(NSUInteger)y brightness:(LPColorBrightness)brightness clear:(BOOL)clear;
++ (instancetype)redAtX:(NSUInteger)x Y:(NSUInteger)y brightness:(LPColorBrightness)brightness clear:(BOOL)clear;
 
 // Helper
 + (void)enumerateGrid:(void (^)(UInt8 x, UInt8 y))block;

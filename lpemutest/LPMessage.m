@@ -92,19 +92,19 @@ static const UInt8 LPMsg[6][3] = {
 }
 
 + (instancetype)redFullAtX:(NSUInteger)x Y:(NSUInteger)y {
-    return [self padMessageOn:YES atColumn:x row:y clearOtherBufferPad:YES copyToOtherBuffer:NO redBrightness:kLPColorMax greenBrightness:kLPColorOff];
+    return [self padMessageOn:YES atColumn:x row:y clearOtherBufferPad:NO copyToOtherBuffer:NO redBrightness:kLPColorMax greenBrightness:kLPColorOff];
 }
 
 + (instancetype)greenFullAtX:(NSUInteger)x Y:(NSUInteger)y {
-    return [self padMessageOn:YES atColumn:x row:y clearOtherBufferPad:YES copyToOtherBuffer:NO redBrightness:kLPColorOff greenBrightness:kLPColorMax];
+    return [self padMessageOn:YES atColumn:x row:y clearOtherBufferPad:NO copyToOtherBuffer:NO redBrightness:kLPColorOff greenBrightness:kLPColorMax];
 }
 
-+ (instancetype)greenAtX:(NSUInteger)x Y:(NSUInteger)y brightness:(LPColorBrightness)brightness {
-    return [self padMessageOn:YES atColumn:x row:y clearOtherBufferPad:YES copyToOtherBuffer:NO redBrightness:kLPColorOff greenBrightness:brightness];
++ (instancetype)greenAtX:(NSUInteger)x Y:(NSUInteger)y brightness:(LPColorBrightness)brightness clear:(BOOL)clear {
+    return [self padMessageOn:YES atColumn:x row:y clearOtherBufferPad:clear copyToOtherBuffer:NO redBrightness:kLPColorOff greenBrightness:brightness];
 }
 
-+ (instancetype)redAtX:(NSUInteger)x Y:(NSUInteger)y brightness:(LPColorBrightness)brightness {
-    return [self padMessageOn:YES atColumn:x row:y clearOtherBufferPad:YES copyToOtherBuffer:NO redBrightness:brightness greenBrightness:kLPColorOff];
++ (instancetype)redAtX:(NSUInteger)x Y:(NSUInteger)y brightness:(LPColorBrightness)brightness clear:(BOOL)clear {
+    return [self padMessageOn:YES atColumn:x row:y clearOtherBufferPad:clear copyToOtherBuffer:NO redBrightness:brightness greenBrightness:kLPColorOff];
 }
 
 // Helper
