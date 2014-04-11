@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>868F7F82-16D8-40E0-961A-4A79ED6D5C90</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MIDIKit</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>4EC4FA01-0360-4399-A609-9775699A1801</key>
+		<string>https://github.com/JRHeaton/MIDIKit.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>MIDIKit.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>4EC4FA01-0360-4399-A609-9775699A1801</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/JRHeaton/MIDIKit.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>4EC4FA01-0360-4399-A609-9775699A1801</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>4EC4FA01-0360-4399-A609-9775699A1801</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MIDIKit</string>
+		</dict>
+	</array>
+</dict>
+</plist>
