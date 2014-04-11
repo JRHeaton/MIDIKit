@@ -7,7 +7,6 @@ This framework aims to be a convenience/wrapper framework around CoreMIDI, a low
 Name| Status
 ----|-------
 MIDI system state notifications| Set up, switch needs done
-Virtual destination input callbacks| Set up, just needs block property or delegate collection
 
 ##What works
 - Enumerating devices, sources, destinations, and entities.
@@ -23,6 +22,8 @@ Virtual destination input callbacks| Set up, just needs block property or delega
 #####`Entity(MKEntity.h)` - Contains a set of endpoints
 #####`Device(MKDevice.h)` - A device, which contains a set of entities.
 #####`Port(MK{Input/Output}Port.h)` - A client-owned port through which you communicate with a source or destination.
+#####`Message(MKMessage.h)` - Essentially a data wrapper class that implements logic for MIDI messages. Subclass this for specific devices.
+####`Connection(MKConnection.h)` - A high level convenience class for I/O to multiple sources/destinations.
 
 Before we get technical, let's dive into a quick example.
 ```objc
@@ -73,6 +74,20 @@ MKInputPort *inputPort = ...;
 And now in the console, as I press buttons...
 ```
 Got data of length 3 on port MyMIDIClient-Input-0 from source Launchpad Mini 4
+```
+
+#Alternative Method (MKConnection)
+`MKConnection` is a great high level class that will make your life easy when it comes to communicating with MIDI endpoints.
+
+You can create a connection like so; it will make sure ports are set up for input/output. You give it some destination(s), and you can send data!
+```objc
+MKClient *client = [MKClient clientWithName:@"MyMIDIClient"];
+MKConnection *conn = [MKConnection connectionWithClient:client];
+[conn addDestination:[MKEndpoint firstDestinationMeetingCriteria:^BOOL(MKEndpoint *candidate) {
+    return candidate.online && [candidate.name isEqualToString:@"Launchpad Mini"];
+}]];
+
+[conn sendData:myData];
 ```
 
 ![LED Test](https://i.cloudup.com/VKYR25uWJb.jpeg)
