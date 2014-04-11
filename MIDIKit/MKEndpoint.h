@@ -8,12 +8,16 @@
 
 #import "MKObject.h"
 
+// Endpoints are either sources or destinations,
+// which may be communicated to/from on input/output ports
+
 @class MKEntity;
 @interface MKEndpoint : MKObject
 
 + (instancetype)firstDestinationMeetingCriteria:(BOOL (^)(MKEndpoint *candidate))block;
 + (instancetype)firstSourceMeetingCriteria:(BOOL (^)(MKEndpoint *candidate))block;
 
+// Parent entity
 - (MKEntity *)entity;
 
 @end

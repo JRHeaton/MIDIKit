@@ -13,6 +13,7 @@
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
 
+// Virtually sends data to this source.
 - (void)receivedData:(NSData *)data;
 
 @end

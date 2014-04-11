@@ -89,6 +89,7 @@
 - (NSDictionary *)allProperties {
     CFPropertyListRef ret;
     MIDIObjectGetProperties(self.MIDIRef, &ret, true);
+    if(ret) _propertyCache = [NSMutableDictionary dictionaryWithDictionary:(__bridge NSDictionary *)(ret)];
     return (__bridge_transfer NSDictionary *)ret;
 }
 
