@@ -16,6 +16,7 @@
 
 @interface MKVirtualSource : MKEndpoint <MKClientDependentInstaniation>
 
++ (instancetype)virtualSourceWithName:(NSString *)name client:(MKClient *)client;
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
 
 // Virtually sends data to this source.

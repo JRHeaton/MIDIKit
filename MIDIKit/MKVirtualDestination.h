@@ -15,6 +15,7 @@
 @protocol MKVirtualDestinationDelegate;
 @interface MKVirtualDestination : MKEndpoint <MKClientDependentInstaniation>
 
++ (instancetype)virtualDestinationWithName:(NSString *)name client:(MKClient *)client;
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
 
 - (void)addDelegate:(id<MKVirtualDestinationDelegate>)delegate;

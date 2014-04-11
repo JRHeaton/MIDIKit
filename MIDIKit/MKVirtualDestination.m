@@ -24,6 +24,10 @@ static void _MKVirtualDestinationReadProc(const MIDIPacketList *pktlist, void *r
     }
 }
 
++ (instancetype)virtualDestinationWithName:(NSString *)name client:(MKClient *)client {
+    return [[self alloc] initWithName:name client:client];
+}
+
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client {
     if(!client.valid || !(self = [super init])) return nil;
     

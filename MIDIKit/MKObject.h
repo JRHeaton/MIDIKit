@@ -27,6 +27,7 @@
 }
 
 // Instantiation
++ (instancetype)objectForMIDIRef:(MIDIObjectRef)MIDIRef;
 - (instancetype)initWithMIDIRef:(MIDIObjectRef)MIDIRef;
 - (instancetype)initWithUniqueID:(MIDIUniqueID)uniqueID;
 

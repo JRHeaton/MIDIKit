@@ -27,6 +27,10 @@
     return self;
 }
 
++ (instancetype)connectionWithInputPort:(MKInputPort *)inputPort outputPort:(MKOutputPort *)outputPort {
+    return [[self alloc] initWithInputPort:inputPort outputPort:outputPort];
+}
+
 - (instancetype)initWithClient:(MKClient *)client {
     return [self initWithInputPort:client.firstInputPort outputPort:client.firstOutputPort];
 }
@@ -58,6 +62,16 @@
         [self sendMessage:msg];
     }
     va_end(args);
+}
+
+- (void)performBlock:(void (^)(MKConnection *connection))block {
+    block(self);
+}
+
+- (void)after:(NSTimeInterval)delay do:(void (^)(MKConnection *connection))block {
+    if(!block) return;
+    
+    [self performSelector:@selector(performBlock:) withObject:[block copy] afterDelay:delay];
 }
 
 @end

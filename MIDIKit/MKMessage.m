@@ -22,6 +22,14 @@
     return [[self alloc] initWithData:[NSData dataWithBytes:buf length:3]];
 }
 
++ (instancetype)messageWithData:(NSData *)data {
+    return [[self alloc] initWithData:data];
+}
+
++ (instancetype)messageWithPacket:(MIDIPacket *)packet {
+    return [[self alloc] initWithPacket:packet];
+}
+
 - (instancetype)initWithData:(NSData *)data {
     if(!(self = [super init])) return nil;
     _mutableData = data.mutableCopy ?: [NSMutableData dataWithCapacity:0];

@@ -52,10 +52,10 @@ static const UInt8 LPMsg[6][3] = {
                       copyNewDisplayToUpdating:(BOOL)copyToUpdating {
     static UInt8 buf[3] = { 0xb0, 0x00, 0x20 };
     
-    buf[1]  = 0x20;
-    buf[1] |= (displayBuffer & 0xff);
-    buf[1] |= (updatingBuffer & 0xff) << 2;
-    buf[1] |= copyToUpdating << 4;
+    buf[2]  = 0x20;
+    buf[2] |= (displayBuffer & 0xff);
+    buf[2] |= (updatingBuffer & 0xff) << 2;
+    buf[2] |= copyToUpdating << 4;
     
     return [[self alloc] initWithData:[NSData dataWithBytes:buf length:3]];
 }
@@ -89,6 +89,33 @@ static const UInt8 LPMsg[6][3] = {
     }
     
     return [[self alloc] initWithData:[NSData dataWithBytes:buf length:3]];
+}
+
++ (instancetype)redFullAtX:(NSUInteger)x Y:(NSUInteger)y {
+    return [self padMessageOn:YES atColumn:x row:y clearOtherBufferPad:YES copyToOtherBuffer:NO redBrightness:kLPColorMax greenBrightness:kLPColorOff];
+}
+
++ (instancetype)greenFullAtX:(NSUInteger)x Y:(NSUInteger)y {
+    return [self padMessageOn:YES atColumn:x row:y clearOtherBufferPad:YES copyToOtherBuffer:NO redBrightness:kLPColorOff greenBrightness:kLPColorMax];
+}
+
++ (instancetype)greenAtX:(NSUInteger)x Y:(NSUInteger)y brightness:(LPColorBrightness)brightness {
+    return [self padMessageOn:YES atColumn:x row:y clearOtherBufferPad:YES copyToOtherBuffer:NO redBrightness:kLPColorOff greenBrightness:brightness];
+}
+
++ (instancetype)redAtX:(NSUInteger)x Y:(NSUInteger)y brightness:(LPColorBrightness)brightness {
+    return [self padMessageOn:YES atColumn:x row:y clearOtherBufferPad:YES copyToOtherBuffer:NO redBrightness:brightness greenBrightness:kLPColorOff];
+}
+
+// Helper
++ (void)enumerateGrid:(void (^)(UInt8 x, UInt8 y))block {
+    if(!block) return;
+    
+    for(UInt8 x=0;x<8;++x) {
+        for(UInt8 y=0;y<8;++y) {
+            block(x, y);
+        }
+    }
 }
 
 @end

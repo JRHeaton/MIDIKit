@@ -12,6 +12,10 @@
 
 @dynamic valid;
 
++ (instancetype)objectForMIDIRef:(MIDIObjectRef)MIDIRef {
+    return [[self alloc] initWithMIDIRef:MIDIRef];
+}
+
 - (instancetype)initWithMIDIRef:(MIDIObjectRef)MIDIRef {
     if(!(self = [super init])) return nil;
     

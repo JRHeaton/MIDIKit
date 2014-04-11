@@ -55,8 +55,17 @@ int main(int argc, const char * argv[]){
         conn = [MKConnection connectionWithClient:client];
         [conn addDestination:dev.rootDestination];
     
-        [conn sendMessages:LPMessage.reset, [LPMessage padMessageOn:YES atColumn:1 row:3 clearOtherBufferPad:YES copyToOtherBuffer:NO redBrightness:kLPColorMax greenBrightness:kLPColorOff], nil];
-                
+        [conn sendMessage:LPMessage.reset];
+        
+        [LPMessage enumerateGrid:^(UInt8 x, UInt8 y) {
+            [conn sendMessage:[LPMessage greenFullAtX:x Y:y]];
+        }];
+        
+        [conn after:2 do:^(MKConnection *connection) {
+            NSLog(@"csjlkdf");
+            [conn sendMessage:[LPMessage setSecondBuffers]];
+        }];
+        
         CFRunLoopRun();
 }
 

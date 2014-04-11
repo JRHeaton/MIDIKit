@@ -30,6 +30,7 @@
 + (instancetype)connectionWithClient:(MKClient *)client;
 - (instancetype)initWithClient:(MKClient *)client;
 
++ (instancetype)connectionWithInputPort:(MKInputPort *)inputPort outputPort:(MKOutputPort *)outputPort;
 - (instancetype)initWithInputPort:(MKInputPort *)inputPort outputPort:(MKOutputPort *)outputPort;
 
 - (void)addDestination:(MKEndpoint *)destination;
@@ -43,5 +44,8 @@
 - (void)sendData:(NSData *)data;
 - (void)sendMessage:(MKMessage *)message;
 - (void)sendMessages:(MKMessage *)message, ... NS_REQUIRES_NIL_TERMINATION;
+
+// Async helper
+- (void)after:(NSTimeInterval)delay do:(void (^)(MKConnection *connection))block;
 
 @end

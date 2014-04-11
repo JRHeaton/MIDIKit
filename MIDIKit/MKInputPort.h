@@ -18,6 +18,7 @@
     NSMutableSet *_inputDelegates;
 }
 
++ (instancetype)inputPortWithName:(NSString *)name client:(MKClient *)client;
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
 
 // Calling this method will begin input from the given source
