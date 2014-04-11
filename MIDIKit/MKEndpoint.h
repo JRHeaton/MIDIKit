@@ -12,6 +12,7 @@
 @interface MKEndpoint : MKObject
 
 + (instancetype)firstDestinationMeetingCriteria:(BOOL (^)(MKEndpoint *candidate))block;
++ (instancetype)firstSourceMeetingCriteria:(BOOL (^)(MKEndpoint *candidate))block;
 
 - (MKEntity *)entity;
 

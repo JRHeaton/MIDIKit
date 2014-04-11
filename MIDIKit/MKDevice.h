@@ -11,6 +11,8 @@
 
 @interface MKDevice : MKObject
 
++ (MKDevice *)firstDeviceMeetingCriteria:(BOOL (^)(MKDevice *candidate))block;
+
 - (MKEntity *)entityAtIndex:(NSUInteger)index;
 - (id)objectAtIndexedSubscript:(NSUInteger)index;
 

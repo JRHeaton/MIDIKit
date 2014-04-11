@@ -10,7 +10,10 @@
 #import "MKEntity.h"
 #import "MKClient.h"
 
-@interface MKInputPort : MKObject <MKClientDependentInstaniation>
+@protocol MKInputPortDelegate;
+@interface MKInputPort : MKObject <MKClientDependentInstaniation> {
+    NSMutableSet *_inputDelegates;
+}
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
 
@@ -19,6 +22,15 @@
 
 - (void)dispose;
 
-@property (nonatomic, strong) void (^inputHandler)(MKEndpoint *source, NSData *data);
+- (void)addInputDelegate:(id<MKInputPortDelegate>)delegate;
+- (void)removeInputDelegate:(id<MKInputPortDelegate>)delegate;
+
+@end
+
+@protocol MKInputPortDelegate <NSObject>
+
+- (void)inputPort:(MKInputPort *)inputPort
+     receivedData:(NSData *)data
+       fromSource:(MKEndpoint *)source;
 
 @end

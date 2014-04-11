@@ -11,6 +11,16 @@
 
 @implementation MKDevice
 
++ (MKDevice *)firstDeviceMeetingCriteria:(BOOL (^)(MKDevice *candidate))block {
+    for(NSInteger i=0;i<MIDIGetNumberOfDevices();++i) {
+        MKDevice *candidate = [[MKDevice alloc] initWithMIDIRef:MIDIGetDevice(i)];
+        if(block(candidate))
+            return candidate;
+    }
+    
+    return nil;
+}
+
 - (MKEndpoint *)rootDestination {
     return [[self entityAtIndex:0] destinationAtIndex:0];
 }

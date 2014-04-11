@@ -14,19 +14,35 @@
 #import <JavaScriptCore/JavaScriptCore.h>
 #import "NSString+JRExtensions.h"
 
+@interface test : NSObject <MKInputPortDelegate>
+
+
+
+@end
+
+@implementation test
+
+- (void)inputPort:(MKInputPort *)inputPort receivedData:(NSData *)data fromSource:(MKEndpoint *)source {
+    NSLog(@"Got data of length %lu on port %@ from source %@", data.length, inputPort.name, source.name);
+}
+
+@end
+
 int main(int argc, const char * argv[]){
     @autoreleasepool {
 
-        uint8 buf[3] = { 0x90, 0x44, 31 };
+        uint8 buf[3] = { 0xb0  , 0, 0 };
         
         MKClient *client = [MKClient clientWithName:@"Johns Client"];
-        MKEndpoint *lp = [MKEndpoint firstDestinationMeetingCriteria:^BOOL(MKEndpoint *candidate) {
+        MKDevice *dev = [MKDevice firstDeviceMeetingCriteria:^BOOL(MKDevice *candidate) {
             return candidate.online && [candidate.name containsString:@"Launchpad"];
         }];
-        UInt8 msg[3] = { 0xb0, 0x00, 0x7f };
-        MKOutputPort *outputPort = client.createOutputPort;
-        [outputPort sendData:[NSData dataWithBytes:msg length:3] toDestination:lp];
+        test *t = [test new];
+        [client.firstInputPort connectSource:dev.rootSource];
+        [client.firstInputPort addInputDelegate:t];
 
+        [client.firstOutputPort sendData:[NSData dataWithBytes:buf length:3] toDestination:dev.rootDestination];
+        
         CFRunLoopRun();
 }
 

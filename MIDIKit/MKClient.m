@@ -102,6 +102,14 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
     self.MIDIRef = 0;
 }
 
+- (MKInputPort *)firstInputPort {
+    return !self.inputPorts.count ? self.createInputPort : self.inputPorts[0];
+}
+
+- (MKInputPort *)firstOutputPort {
+    return !self.outputPorts.count ? self.createOutputPort : self.outputPorts[0];
+}
+
 - (MKInputPort *)createInputPort {
     return [[MKInputPort alloc] initWithName:[NSString stringWithFormat:@"%@-Input-%lu", self.name, (unsigned long)self.inputPorts.count] client:self];
 }

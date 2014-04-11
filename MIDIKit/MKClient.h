@@ -25,6 +25,8 @@
 
 - (void)dispose;
 
+- (MKInputPort *)firstInputPort;
+- (MKOutputPort *)firstOutputPort;
 - (MKInputPort *)createInputPort;
 - (MKOutputPort *)createOutputPort;
 - (MKVirtualSource *)createVirtualSourceNamed:(NSString *)name;

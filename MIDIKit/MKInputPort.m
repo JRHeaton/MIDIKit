@@ -9,6 +9,10 @@
 #import "MKInputPort.h"
 #import "MKClient.h"
 
+@interface MKInputPort ()
+@property (nonatomic, strong) NSMutableSet *inputDelegates;
+@end
+
 @implementation MKInputPort
 
 @synthesize client=_client;
@@ -17,8 +21,10 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
     MKInputPort *self = (__bridge MKInputPort *)(readProcRefCon);
     MKEndpoint *source = (__bridge MKEndpoint *)(srcConnRefCon);
     
-    if(self.inputHandler) {
-        self.inputHandler(source, [NSData dataWithBytes:pktlist->packet[0].data length:pktlist->packet[0].length]);
+    for(id<MKInputPortDelegate> delegate in self.inputDelegates) {
+        if([delegate respondsToSelector:@selector(inputPort:receivedData:fromSource:)]) {
+            [delegate inputPort:self receivedData:[NSData dataWithBytes:pktlist->packet[0].data length:pktlist->packet[0].length] fromSource:source];
+        }
     }
 }
 
@@ -30,6 +36,8 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
     
     self.client = client;
     [self.client.inputPorts addObject:self];
+    
+    self.inputDelegates = [NSMutableSet setWithCapacity:0];
     
     return self;
 }
@@ -45,6 +53,16 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
 - (void)dispose {
     MIDIPortDispose(self.MIDIRef);
     self.MIDIRef = 0;
+}
+
+- (void)addInputDelegate:(id<MKInputPortDelegate>)delegate {
+    if(![_inputDelegates containsObject:delegate])
+        [_inputDelegates addObject:delegate];
+}
+
+- (void)removeInputDelegate:(id<MKInputPortDelegate>)delegate {
+    if([_inputDelegates containsObject:delegate])
+        [_inputDelegates removeObject:delegate];
 }
 
 @end

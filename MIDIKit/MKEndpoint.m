@@ -21,6 +21,16 @@
     return nil;
 }
 
++ (instancetype)firstSourceMeetingCriteria:(BOOL (^)(MKEndpoint *candidate))block {
+    for(NSInteger i=0;i<MIDIGetNumberOfSources();++i) {
+        MKEndpoint *candidate = [[MKEndpoint alloc] initWithMIDIRef:MIDIGetSource(i)];
+        if(block(candidate))
+            return candidate;
+    }
+    
+    return nil;
+}
+
 - (MKEntity *)entity {
     MIDIEntityRef ret;
     if(!MIDIEndpointGetEntity(self.MIDIRef, &ret))
