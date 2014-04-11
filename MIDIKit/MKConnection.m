@@ -39,7 +39,7 @@
 
 - (void)sendData:(NSData *)data {
     for(MKEndpoint *dst in self.destinations) {
-        [self.outputPort sendData:data toEndpoint:dst];
+        [self.outputPort sendData:data toDestination:dst];
     }
 }
 

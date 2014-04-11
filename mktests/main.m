@@ -23,10 +23,9 @@ int main(int argc, const char * argv[]){
         MKEndpoint *lp = [MKEndpoint firstDestinationMeetingCriteria:^BOOL(MKEndpoint *candidate) {
             return candidate.online && [candidate.name containsString:@"Launchpad"];
         }];
-        MKConnection *con = [[MKConnection alloc] initWithClient:client];
-        [con addDestination:lp];
-        
-        [con sendData:[NSData dataWithBytes:buf length:3]];
+        UInt8 msg[3] = { 0xb0, 0x00, 0x7f };
+        MKOutputPort *outputPort = client.createOutputPort;
+        [outputPort sendData:[NSData dataWithBytes:msg length:3] toDestination:lp];
 
         CFRunLoopRun();
 }

@@ -14,6 +14,6 @@
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
 - (void)dispose;
 
-- (void)sendData:(NSData *)data toEndpoint:(MKEndpoint *)endpoint;
+- (void)sendData:(NSData *)data toDestination:(MKEndpoint *)endpoint;
 
 @end

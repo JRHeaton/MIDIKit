@@ -29,7 +29,7 @@
     self.MIDIRef = 0;
 }
 
-- (void)sendData:(NSData *)data toEndpoint:(MKEndpoint *)endpoint {
+- (void)sendData:(NSData *)data toDestination:(MKEndpoint *)endpoint {
     if(data.length <= 256) {
         MIDIPacketList list;
         list.numPackets = 1;
