@@ -10,94 +10,155 @@
 
 @implementation MKObject
 
-static NSMutableDictionary *classMap = nil;
+@dynamic valid;
 
-+ (void)registerClass:(Class)cls forCriteria:(BOOL (^)(MKObject *obj))block {
-    if(!classMap) {
-        classMap = [NSMutableDictionary dictionaryWithCapacity:0];
-    }
-
-    if([cls isSubclassOfClass:[self class]]) {
-        classMap[NSStringFromClass(cls)] = block;
-    }
-}
-
-- (id)initWithMIDIRef:(MIDIObjectRef)ref {
-    MKObject *orig = [[self class] new];
-    orig.MIDIRef = ref;
-
-    for(NSString *key in classMap) {
-        BOOL (^blk)(MKObject *obj) = classMap[key];
-
-        Class candidiate = NSClassFromString(key);
-        if([candidiate isSubclassOfClass:[self class]]) {
-            if(blk(orig)) {
-                MKObject *repl = [NSClassFromString(key) new];
-                repl.MIDIRef = ref;
-                return repl;
-            }
-        }
-    }
-
-    return orig;
-}
-
-+ (instancetype)objectWithMIDIRef:(MIDIObjectRef)ref {
-    return [[self alloc] initWithMIDIRef:ref];
-}
-
-+ (instancetype)objectWithUniqueID:(MIDIUniqueID)uniqueID objectType:(MIDIObjectType *)objectType; {
-    MKObject *ret = [self new];
-    MIDIObjectRef obj;
-    MIDIObjectFindByUniqueID(uniqueID, &obj, objectType);
-    ret.MIDIRef = obj;
-    return ret;
+- (instancetype)initWithMIDIRef:(MIDIObjectRef)MIDIRef {
+    if(!(self = [super init])) return nil;
+    
+    _MIDIRef = MIDIRef;
+    _propertyCache = [NSMutableDictionary dictionaryWithCapacity:0];
+    
+    return self;
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ valid=%@, properties=%@", [super description], self.valid ? @"YES" : @"NO", self.allProperties];
+    return [NSString stringWithFormat:@"%@ MIDI Properties=%@", super.description, self.allProperties];
 }
 
-- (NSString *)stringForProperty:(CFStringRef)property {
-    CFStringRef val;
-    MIDIObjectGetStringProperty(self.MIDIRef, property, &val);
-    return (__bridge_transfer NSString *)val;
+- (void)performBlockWithCaching:(void (^)(MKObject *obj))block {
+    self.useCaching = YES;
+    block(self);
+    self.useCaching = NO;
 }
 
-- (NSInteger)integerForProperty:(CFStringRef)property {
-    SInt32 val;
-    MIDIObjectGetIntegerProperty(self.MIDIRef, property, &val);
-    return (NSInteger)val;
+- (instancetype)initWithUniqueID:(MIDIUniqueID)uniqueID {
+    if(!(self = [super init])) return nil;
+    
+    MIDIObjectType type;
+    MIDIObjectFindByUniqueID(uniqueID, &_MIDIRef, &type);
+    
+    return self;
 }
 
-- (NSData *)dataForProperty:(CFStringRef)property {
-    CFDataRef val;
-    MIDIObjectGetDataProperty(self.MIDIRef, property, &val);
-    return (__bridge_transfer NSData *)val;
+- (NSString *)stringPropertyForKey:(CFStringRef)key {
+    CFStringRef ret;
+    NSString *dd;
+    if(self.useCaching && (dd = _propertyCache[(__bridge NSString *)key]) != nil)
+        return dd;
+    
+    MIDIObjectGetStringProperty(self.MIDIRef, key, &ret);
+    if(ret) _propertyCache[(__bridge NSString *)key] = (__bridge NSString *)(ret);
+    return (__bridge_transfer NSString *)(ret);
 }
 
-- (NSDictionary *)dictionaryForProperty:(CFStringRef)property {
-    CFDictionaryRef val;
-    MIDIObjectGetDictionaryProperty(self.MIDIRef, property, &val);
-    return (__bridge_transfer NSDictionary *)val;
+- (NSInteger)integerPropertyForKey:(CFStringRef)key {
+    SInt32 ret;
+    NSNumber *dd;
+    if(self.useCaching && (dd = _propertyCache[(__bridge NSString *)key]) != nil)
+        return dd.integerValue;
+    
+    MIDIObjectGetIntegerProperty(self.MIDIRef, key, &ret);
+    _propertyCache[(__bridge NSString *)key] = @(ret);
+    return ret;
+}
+
+- (NSData *)dataPropertyForKey:(CFStringRef)key {
+    CFDataRef ret;
+    NSData *dd;
+    if(self.useCaching && (dd = _propertyCache[(__bridge NSString *)key]) != nil)
+        return dd;
+    
+    MIDIObjectGetDataProperty(self.MIDIRef, key, &ret);
+    if(ret) _propertyCache[(__bridge NSString *)key] = (__bridge NSData *)(ret);
+    return (__bridge_transfer NSData *)ret;
+}
+
+- (NSDictionary *)dictionaryPropertyForKey:(CFStringRef)key {
+    CFDictionaryRef dict;
+    NSDictionary *dd;
+    if(self.useCaching && (dd = _propertyCache[(__bridge NSString *)key]) != nil)
+        return dd;
+    
+    MIDIObjectGetDictionaryProperty(self.MIDIRef, key, &dict);
+    if(dict) _propertyCache[(__bridge NSString *)key] = (__bridge NSDictionary *)(dict);
+    return (__bridge_transfer NSDictionary *)dict;
 }
 
 - (NSDictionary *)allProperties {
-    CFPropertyListRef val;
-    MIDIObjectGetProperties(self.MIDIRef, &val, true);
-    return (__bridge_transfer NSDictionary *)val;
+    CFPropertyListRef ret;
+    MIDIObjectGetProperties(self.MIDIRef, &ret, true);
+    return (__bridge_transfer NSDictionary *)ret;
+}
+
+- (void)setStringProperty:(NSString *)value forKey:(CFStringRef)key {
+    MIDIObjectSetStringProperty(self.MIDIRef, key, (__bridge CFStringRef)(value));
+    _propertyCache[(__bridge NSString *)(key)] = value;
+}
+
+- (void)setIntegerProperty:(NSInteger)value forKey:(CFStringRef)key {
+    MIDIObjectSetIntegerProperty(self.MIDIRef, key, (SInt32)value);
+    _propertyCache[(__bridge NSString *)(key)] = @(value);
+}
+
+- (void)setDataProperty:(NSData *)value forKey:(CFStringRef)key {
+    MIDIObjectSetDataProperty(self.MIDIRef, key, (__bridge CFDataRef)(value));
+    _propertyCache[(__bridge NSString *)(key)] = value;
+}
+
+- (void)setDictionaryProperty:(NSDictionary *)value forKey:(CFStringRef)key {
+    MIDIObjectSetDictionaryProperty(self.MIDIRef, key, (__bridge CFDictionaryRef)(value));
+    _propertyCache[(__bridge NSString *)(key)] = value;
+}
+
+#define GETTER(type, name, property, propertyType) \
+    - (type)name { \
+        return (type)[self propertyType##PropertyForKey:property]; \
+    }
+
+- (BOOL)isOnline {
+    return ![self integerPropertyForKey:kMIDIPropertyOffline];
+}
+
+GETTER(BOOL, isDrumMachine, kMIDIPropertyIsDrumMachine, integer)
+GETTER(BOOL, isEffectUnit, kMIDIPropertyIsEffectUnit, integer)
+GETTER(BOOL, isEmbeddedEntity, kMIDIPropertyIsEmbeddedEntity, integer)
+GETTER(BOOL, isMixer, kMIDIPropertyIsMixer, integer)
+GETTER(BOOL, isSampler, kMIDIPropertyIsSampler, integer)
+GETTER(BOOL, isPrivate, kMIDIPropertyPrivate, integer)
+
+GETTER(NSString *, manufacturer, kMIDIPropertyManufacturer, string)
+GETTER(NSString *, name, kMIDIPropertyName, string)
+GETTER(NSString *, model, kMIDIPropertyModel, string)
+GETTER(NSInteger, deviceID, kMIDIPropertyDeviceID, integer)
+GETTER(NSString *, displayName, kMIDIPropertyDisplayName, string)
+GETTER(NSString *, driverOwner, kMIDIPropertyDriverOwner, string)
+GETTER(NSInteger, driverVersion, kMIDIPropertyDriverVersion, integer)
+GETTER(NSString *, iconImagePath, kMIDIPropertyImage, string)
+GETTER(NSInteger, maxReceiveChannels, kMIDIPropertyMaxReceiveChannels, integer)
+GETTER(NSInteger, maxSysexSpeed, kMIDIPropertyMaxSysExSpeed, integer)
+GETTER(NSInteger, maxTransmitChannels, kMIDIPropertyMaxTransmitChannels, integer)
+GETTER(BOOL, panDisruptsStereo, kMIDIPropertyPanDisruptsStereo, integer)
+GETTER(NSUInteger, receiveChannelBits, kMIDIPropertyReceiveChannels, integer)
+GETTER(NSUInteger, transmitChannelBits, kMIDIPropertyTransmitChannels, integer)
+GETTER(BOOL, receivesClock, kMIDIPropertyReceivesClock, integer)
+GETTER(BOOL, receivesMTC, kMIDIPropertyReceivesMTC, integer)
+GETTER(BOOL, receivesNotes, kMIDIPropertyReceivesNotes, integer)
+GETTER(BOOL, transmitsMTC, kMIDIPropertyTransmitsMTC, integer)
+GETTER(BOOL, transmitsClock, kMIDIPropertyTransmitsClock, integer)
+GETTER(BOOL, transmitsNotes, kMIDIPropertyTransmitsNotes, integer)
+GETTER(BOOL, receivesProgramChanges, kMIDIPropertyReceivesProgramChanges, integer)
+GETTER(MIDIUniqueID, uniqueID, kMIDIPropertyUniqueID, integer)
+
+- (BOOL)transmitsOnChannel:(NSInteger)channel {
+    return (self.transmitChannelBits & (1 << (channel - 1))) >> (channel - 1);
+}
+
+- (BOOL)receivesOnChannel:(NSInteger)channel {
+    return (self.receiveChannelBits & (1 << (channel - 1))) >> (channel - 1);
 }
 
 - (BOOL)isValid {
     return self.MIDIRef > 0;
-}
-
-- (NSString *)name {
-    return [self stringForProperty:kMIDIPropertyName];
-}
-
-- (BOOL)isOnline {
-    return ![self integerForProperty:kMIDIPropertyOffline];
 }
 
 @end

@@ -48,8 +48,8 @@
     };
 
     PadMsg msg;
-    msg.st.red = red;
-    msg.st.green = green;
+    msg.st.red = red & 0xff;
+    msg.st.green = green & 0xff;
     msg.st.clear = clear;
     msg.st.copy = copy;
 

@@ -11,18 +11,6 @@
 
 @implementation MKDevice
 
-- (void)sendData:(NSData *)data toEndpoint:(MKEndpoint *)endpoint {
-    if(self.client) {
-        [self.client sendData:data toEndpoint:endpoint];
-    }
-}
-
-- (void)sendDataArray:(NSArray *)array toEndpoint:(MKEndpoint *)endpoint {
-    if(self.client) {
-        [self.client sendDataArray:array toEndpoint:endpoint];
-    }
-}
-
 - (MKEndpoint *)rootDestination {
     return [self[0] destinationAtIndex:0];
 }
@@ -32,7 +20,7 @@
 }
 
 - (MKEntity *)entityAtIndex:(NSUInteger)index {
-    return [MKEntity objectWithMIDIRef:MIDIDeviceGetEntity(self.MIDIRef, index)];
+    return [[MKEntity alloc] initWithMIDIRef:MIDIDeviceGetEntity(self.MIDIRef, index)];
 }
 
 - (id)objectAtIndexedSubscript:(NSUInteger)index {

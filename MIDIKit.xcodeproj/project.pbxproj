@@ -23,6 +23,8 @@
 		5273C73F18DEADEE00A8CFD4 /* MKEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C73D18DEADEE00A8CFD4 /* MKEndpoint.h */; };
 		5273C74018DEADEE00A8CFD4 /* MKEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */; };
 		5273C74318DEB2FF00A8CFD4 /* LPDev.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5273C74218DEB2FF00A8CFD4 /* LPDev.mm */; };
+		52B2C12118E7928D00E82760 /* NSString+JRExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B2C11F18E7928D00E82760 /* NSString+JRExtensions.h */; };
+		52B2C12218E7928D00E82760 /* NSString+JRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2C12018E7928D00E82760 /* NSString+JRExtensions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +76,8 @@
 		5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKEndpoint.m; sourceTree = "<group>"; };
 		5273C74118DEB2FF00A8CFD4 /* LPDev.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDev.h; sourceTree = "<group>"; };
 		5273C74218DEB2FF00A8CFD4 /* LPDev.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LPDev.mm; sourceTree = "<group>"; };
+		52B2C11F18E7928D00E82760 /* NSString+JRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+JRExtensions.h"; sourceTree = "<group>"; };
+		52B2C12018E7928D00E82760 /* NSString+JRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JRExtensions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,7 @@
 		5273C6CA18DE96A200A8CFD4 = {
 			isa = PBXGroup;
 			children = (
+				52B2C11E18E7928D00E82760 /* srctree */,
 				5273C6DD18DE96A200A8CFD4 /* MIDIKit */,
 				5273C72418DEA17B00A8CFD4 /* mktests */,
 				5273C6D618DE96A200A8CFD4 /* Frameworks */,
@@ -185,6 +190,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		52B2C11E18E7928D00E82760 /* srctree */ = {
+			isa = PBXGroup;
+			children = (
+				52B2C11F18E7928D00E82760 /* NSString+JRExtensions.h */,
+				52B2C12018E7928D00E82760 /* NSString+JRExtensions.m */,
+			);
+			name = srctree;
+			path = ../../srctree;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -194,6 +209,7 @@
 			files = (
 				5273C73718DEAD5700A8CFD4 /* MKDevice.h in Headers */,
 				5273C73F18DEADEE00A8CFD4 /* MKEndpoint.h in Headers */,
+				52B2C12118E7928D00E82760 /* NSString+JRExtensions.h in Headers */,
 				5273C73B18DEADB800A8CFD4 /* MKEntity.h in Headers */,
 				5273C70418DE9A9800A8CFD4 /* MKObject.h in Headers */,
 				5273C70818DE9E2500A8CFD4 /* MKClient.h in Headers */,
@@ -287,6 +303,7 @@
 				5273C73818DEAD5700A8CFD4 /* MKDevice.m in Sources */,
 				5273C73C18DEADB800A8CFD4 /* MKEntity.m in Sources */,
 				5273C70518DE9A9800A8CFD4 /* MKObject.m in Sources */,
+				52B2C12218E7928D00E82760 /* NSString+JRExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,6 +479,7 @@
 				5273C6FE18DE96A200A8CFD4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5273C72B18DEA17B00A8CFD4 /* Build configuration list for PBXNativeTarget "mktests" */ = {
 			isa = XCConfigurationList;
@@ -470,6 +488,7 @@
 				5273C72D18DEA17B00A8CFD4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

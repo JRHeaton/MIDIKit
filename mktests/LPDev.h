@@ -10,7 +10,6 @@
 
 @interface LPDev : MKDevice
 
-+ (instancetype)firstLaunchpadMiniWithClient:(MKClient *)client;
 
 - (void)sendPadMessageToX:(NSInteger)x y:(NSInteger)y red:(NSInteger)red green:(NSInteger)green copy:(BOOL)copy clear:(BOOL)clear;
 - (void)reset;

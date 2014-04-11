@@ -10,21 +10,20 @@
 #import "MIDIKit.h"
 #import "LPDev.h"
 
+#import "NSString+JRExtensions.h"
+
 int main(int argc, const char * argv[]){
     @autoreleasepool {
+
         MKClient *client = [MKClient clientWithName:@"Johns Client"];
-        [MKDevice registerClass:[LPDev class] forCriteria:^BOOL(MKObject *obj) {
-            return [obj.name isEqualToString:@"Launchpad Mini 4"];
+        [client enumerateDevicesUsingBlock:^(MKDevice *device) {
+            if([device.name isEqualToString:@"Launchpad Mini 4"]) {
+                [client sendDataArray:@[ @0xb0, @0x00, @0x7f ] toEndpoint:device.rootDestination];
+            }
         }];
 
-        LPDev *dev = [LPDev firstLaunchpadMiniWithClient:client];
-        [dev sendPadMessageToX:2 y:4 red:3 green:0 copy:0 clear:1];
-        [client connectSourceToInputPort:dev.rootSource];
-
         CFRunLoopRun();
-
-    }
+}
 
     return 0;
 }
-

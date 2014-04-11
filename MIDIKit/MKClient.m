@@ -13,7 +13,7 @@
 @end
 
 static void MKClientInputCB(const MIDIPacketList *pktlist, void *readProcRefCon, void *srcConnRefCon) {
-    MKClient *self = (__bridge MKClient *)(readProcRefCon);
+//    MKClient *self = (__bridge MKClient *)(readProcRefCon);
 
     NSLog(@"input");
 }
@@ -35,9 +35,9 @@ static void MKClientInputCB(const MIDIPacketList *pktlist, void *readProcRefCon,
         self.MIDIRef = val;
 
         MIDIOutputPortCreate(self.MIDIRef, cfName, &val);
-        self->_outputPort = [MKObject objectWithMIDIRef:val];
+        self->_outputPort = [[MKObject alloc] initWithMIDIRef:val];
         MIDIInputPortCreate(self.MIDIRef, cfName, MKClientInputCB, (__bridge void *)(self), &val);
-        self->_inputPort = [MKObject objectWithMIDIRef:val];
+        self->_inputPort = [[MKObject alloc] initWithMIDIRef:val];
     }
 
     return self;
@@ -54,13 +54,12 @@ static void MKClientInputCB(const MIDIPacketList *pktlist, void *readProcRefCon,
 - (void)enumerateDevicesUsingBlock:(void (^)(MKDevice *device))block {
     for(NSUInteger i=0;i<self.numberOfDevices;++i) {
         MKDevice *dev = [self deviceAtIndex:i];
-        dev.client = self;
         block(dev);
     }
 }
 
 - (MKDevice *)deviceAtIndex:(NSUInteger)index {
-    return [MKDevice objectWithMIDIRef:MIDIGetDevice(index)];
+    return [[MKDevice alloc] initWithMIDIRef:MIDIGetDevice(index)];
 }
 
 - (NSUInteger)numberOfDestinations {
