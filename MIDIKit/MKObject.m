@@ -158,7 +158,7 @@ GETTER(MIDIUniqueID, uniqueID, kMIDIPropertyUniqueID, integer)
 }
 
 - (BOOL)isValid {
-    return self.MIDIRef > 0;
+    return self.MIDIRef != 0;
 }
 
 @end

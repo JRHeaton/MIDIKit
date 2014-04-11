@@ -17,9 +17,7 @@ int main(int argc, const char * argv[]){
 
         MKClient *client = [MKClient clientWithName:@"Johns Client"];
         [client enumerateDevicesUsingBlock:^(MKDevice *device) {
-            if([device.name isEqualToString:@"Launchpad Mini 4"]) {
-                [client sendDataArray:@[ @0xb0, @0x00, @0x7f ] toEndpoint:device.rootDestination];
-            }
+            NSLog(@"%@", device);
         }];
 
         CFRunLoopRun();
