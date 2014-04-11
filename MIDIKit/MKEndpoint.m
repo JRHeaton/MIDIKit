@@ -31,6 +31,18 @@
     return nil;
 }
 
++ (instancetype)firstOnlineDestinationNamed:(NSString *)name {
+    return [self firstDestinationMeetingCriteria:^BOOL(MKEndpoint *candidate) {
+        return candidate.online && [candidate.name isEqualToString:name];
+    }];
+}
+
++ (instancetype)firstOnlineSourceNamed:(NSString *)name {
+    return [self firstSourceMeetingCriteria:^BOOL(MKEndpoint *candidate) {
+        return candidate.online && [candidate.name isEqualToString:name];
+    }];
+}
+
 - (MKEntity *)entity {
     MIDIEntityRef ret;
     if(!MIDIEndpointGetEntity(self.MIDIRef, &ret))

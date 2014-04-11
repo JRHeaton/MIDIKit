@@ -50,13 +50,8 @@ int main(int argc, const char * argv[]){
             return candidate.online && [candidate.name containsString:@"Launchpad Mini"];
         }]];
         
-        [LPMessage enumerateGrid:^(UInt8 x, UInt8 y) {
-            [connection sendMessage:[LPMessage redFullAtX:x Y:y]];
-        }];
+        [connection sendMessage:LPMessage.reset];
         
-        [connection performBlock:^(MKConnection *c) {
-            [connection sendMessage:[LPMessage reset]];
-        } afterDelay:2];
         
         CFRunLoopRun();
 }

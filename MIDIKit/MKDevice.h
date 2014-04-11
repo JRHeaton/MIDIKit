@@ -15,7 +15,8 @@
 @interface MKDevice : MKObject
 
 // Convenient enumeration
-+ (MKDevice *)firstDeviceMeetingCriteria:(BOOL (^)(MKDevice *candidate))block;
++ (instancetype)firstDeviceMeetingCriteria:(BOOL (^)(MKDevice *candidate))block;
++ (instancetype)firstOnlineDeviceNamed:(NSString *)name;
 
 // Index-access to child entities
 - (MKEntity *)entityAtIndex:(NSUInteger)index;

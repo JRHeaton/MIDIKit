@@ -68,7 +68,7 @@
 }
 
 - (UInt8)channel {
-    return (self.type & 0x0F);
+    return (self.type & 0x0F) + 1;
 }
 
 - (void)setType:(MKMessageType)type {

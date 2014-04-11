@@ -11,7 +11,7 @@
 
 @implementation MKDevice
 
-+ (MKDevice *)firstDeviceMeetingCriteria:(BOOL (^)(MKDevice *candidate))block {
++ (instancetype)firstDeviceMeetingCriteria:(BOOL (^)(MKDevice *candidate))block {
     for(NSInteger i=0;i<MIDIGetNumberOfDevices();++i) {
         MKDevice *candidate = [[MKDevice alloc] initWithMIDIRef:MIDIGetDevice(i)];
         if(block(candidate))
@@ -19,6 +19,12 @@
     }
     
     return nil;
+}
+
++ (instancetype)firstOnlineDeviceNamed:(NSString *)name {
+    return [self firstDeviceMeetingCriteria:^BOOL(MKDevice *candidate) {
+        return candidate.online && [candidate.name isEqualToString:name];
+    }];
 }
 
 - (MKEndpoint *)rootDestination {

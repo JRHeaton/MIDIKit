@@ -20,29 +20,17 @@
     
     self.client = client;
     [self.client.outputPorts addObject:self];
-    [self commonInit];
     
     return self;
 }
 
-- (instancetype)initWithMIDIRef:(MIDIObjectRef)MIDIRef {
-    if(!(self = [super initWithMIDIRef:MIDIRef])) return nil;
+- (NSOperationQueue *)sendQueue {
+    static NSOperationQueue *queue = nil;
+    if(!queue) {
+        queue = [NSOperationQueue new];
+    }
     
-    [self commonInit];
-
-    return self;
-}
-
-- (instancetype)initWithUniqueID:(MIDIUniqueID)uniqueID {
-    if(!(self = [super initWithUniqueID:uniqueID])) return nil;
-    
-    [self commonInit];
-    
-    return self;
-}
-
-- (void)commonInit {
-    _sendQueue = [NSOperationQueue new];
+    return queue;
 }
 
 - (void)dispose {

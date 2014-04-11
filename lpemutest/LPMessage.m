@@ -82,10 +82,7 @@ static const UInt8 LPMsg[6][3] = {
     buf[1]  = (0x10 * lucky8(row)) + lucky8(column);
     buf[2]  = (0);
     if(turnOn) {
-        buf[2] |= (redBrightness & 0x3);
-        buf[2] |= (greenBrightness & 0x3) << 5;
-        buf[2] |= (copyToOther << 2);
-        buf[2] |= (clearOther << 3);
+        buf[2]  = [self velocityForRed:redBrightness green:greenBrightness clear:clearOther copy:copyToOther];
     }
     
     return [[self alloc] initWithData:[NSData dataWithBytes:buf length:3]];
@@ -105,6 +102,30 @@ static const UInt8 LPMsg[6][3] = {
 
 + (instancetype)redAtX:(NSUInteger)x Y:(NSUInteger)y brightness:(LPColorBrightness)brightness clear:(BOOL)clear {
     return [self padMessageOn:YES atColumn:x row:y clearOtherBufferPad:clear copyToOtherBuffer:NO redBrightness:brightness greenBrightness:kLPColorOff];
+}
+
++ (UInt8)velocityForRed:(LPColorBrightness)red green:(LPColorBrightness)green clear:(BOOL)clear copy:(BOOL)copy {
+    return ((red & 0x03) | ((green & 0x03) << 5) | (clear << 3) | (copy << 2)) & ~0x40;
+}
+
++ (NSArray *)rapidUpdateMessages:(void (^)(UInt8 index, LPColorBrightness *red, LPColorBrightness *green, BOOL *clear))block {
+    if(!block) return nil;
+    
+    NSMutableArray *ret = [NSMutableArray new];
+    for(NSUInteger i=0;i<80;++i) {
+        LPColorBrightness r1=0, r2=0, g1=0, g2=0;
+        BOOL c1=0, c2=0;
+        block(i, &r1, &g1, &c1);
+        block(++i, &r2, &g2, &c2);
+        
+        UInt8 buf[3] = { 0x92, 0, 0 };
+        buf[1] = [self velocityForRed:r1 green:g1 clear:c1 copy:NO];
+        buf[2] = [self velocityForRed:r2 green:g2 clear:c2 copy:NO];
+        
+        [ret addObject:[LPMessage messageWithData:[NSData dataWithBytes:buf length:3]]];
+    }
+    
+    return ret;
 }
 
 // Helper

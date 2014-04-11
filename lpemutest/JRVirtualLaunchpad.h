@@ -9,9 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "MIDIKit.h"
 
+@class LPMessage;
 @interface JRVirtualLaunchpad : NSObject <MKClientDependentInstaniation, MKVirtualDestinationDelegate> {
     MKVirtualDestination *vDest;
     MKVirtualSource *vSource;
 }
+
+- (void)handleMessage:(LPMessage *)message;
+- (void)handleData:(NSData *)midi;
+
+- (void)reset;
 
 @end

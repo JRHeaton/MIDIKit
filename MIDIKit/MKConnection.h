@@ -44,6 +44,7 @@
 - (void)sendData:(NSData *)data;
 - (void)sendMessage:(MKMessage *)message;
 - (void)sendMessages:(MKMessage *)message, ... NS_REQUIRES_NIL_TERMINATION;
+- (void)sendMessageArray:(NSArray *)messages;
 
 // Async helper
 - (instancetype)performBlock:(void (^)(MKConnection *c))block afterDelay:(NSTimeInterval)delay;

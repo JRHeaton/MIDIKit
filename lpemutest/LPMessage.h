@@ -40,6 +40,8 @@ typedef NS_ENUM(UInt8, LPColorBrightness) {
 + (instancetype)greenAtX:(NSUInteger)x Y:(NSUInteger)y brightness:(LPColorBrightness)brightness clear:(BOOL)clear;
 + (instancetype)redAtX:(NSUInteger)x Y:(NSUInteger)y brightness:(LPColorBrightness)brightness clear:(BOOL)clear;
 
++ (NSArray *)rapidUpdateMessages:(void (^)(UInt8 index, LPColorBrightness *red, LPColorBrightness *green, BOOL *clear))block;
+
 // Helper
 + (void)enumerateGrid:(void (^)(UInt8 x, UInt8 y))block;
 

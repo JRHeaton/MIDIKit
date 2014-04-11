@@ -16,6 +16,8 @@
 
 + (instancetype)firstDestinationMeetingCriteria:(BOOL (^)(MKEndpoint *candidate))block;
 + (instancetype)firstSourceMeetingCriteria:(BOOL (^)(MKEndpoint *candidate))block;
++ (instancetype)firstOnlineDestinationNamed:(NSString *)name;
++ (instancetype)firstOnlineSourceNamed:(NSString *)name;
 
 // Parent entity
 - (MKEntity *)entity;
