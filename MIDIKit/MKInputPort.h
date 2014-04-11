@@ -19,4 +19,6 @@
 
 - (void)dispose;
 
+@property (nonatomic, strong) void (^inputHandler)(MKEndpoint *source, NSData *data);
+
 @end

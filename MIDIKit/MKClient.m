@@ -10,6 +10,7 @@
 #import "MKInputPort.h"
 #import "MKOutputPort.h"
 #import "MKVirtualSource.h"
+#import "MKVirtualDestination.h"
 
 @interface MKClient ()
 
@@ -111,6 +112,10 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
 
 - (MKVirtualSource *)createVirtualSourceNamed:(NSString *)name {
     return [[MKVirtualSource alloc] initWithName:name ?: [NSString stringWithFormat:@"%@-VSource-%lu", self.name, (unsigned long)self.virtualSources.count] client:self];
+}
+
+- (MKVirtualDestination *)createVirtualDestinationNamed:(NSString *)name {
+    return [[MKVirtualDestination alloc] initWithName:name ?: [NSString stringWithFormat:@"%@-VDest-%lu", self.name, (unsigned long)self.virtualDestinations.count] client:self];
 }
 
 - (void)addNotificationDelegate:(id<MKClientNotificationDelegate>)delegate {

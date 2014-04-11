@@ -30,4 +30,12 @@
     return [self sourceAtIndex:0];
 }
 
+- (NSUInteger)numberOfDestinations {
+    return MIDIEntityGetNumberOfDestinations(self.MIDIRef);
+}
+
+- (NSUInteger)numberOfSources {
+    return MIDIEntityGetNumberOfSources(self.MIDIRef);
+}
+
 @end

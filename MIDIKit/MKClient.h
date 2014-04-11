@@ -8,7 +8,7 @@
 
 #import "MKDevice.h"
 
-@class MKInputPort, MKOutputPort, MKVirtualSource;
+@class MKInputPort, MKOutputPort, MKVirtualSource, MKVirtualDestination;
 @protocol MKClientNotificationDelegate;
 @interface MKClient : MKObject
 
@@ -28,6 +28,7 @@
 - (MKInputPort *)createInputPort;
 - (MKOutputPort *)createOutputPort;
 - (MKVirtualSource *)createVirtualSourceNamed:(NSString *)name;
+- (MKVirtualDestination *)createVirtualDestinationNamed:(NSString *)name;
 
 @property (nonatomic, readonly) NSUInteger numberOfDevices;
 @property (nonatomic, readonly) NSUInteger numberOfDestinations;

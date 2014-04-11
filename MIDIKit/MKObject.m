@@ -167,4 +167,11 @@ GETTER(MIDIUniqueID, uniqueID, kMIDIPropertyUniqueID, integer)
     MIDIObjectRemoveProperty(self.MIDIRef, key);
 }
 
+- (BOOL)isEqual:(id)object {
+    if([object isKindOfClass:[MKObject class]]) {
+        return self.MIDIRef == ((MKObject *)object).MIDIRef;
+    }
+    return [super isEqual:object];
+}
+
 @end

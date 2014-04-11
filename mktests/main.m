@@ -17,7 +17,21 @@ int main(int argc, const char * argv[]){
     @autoreleasepool {
 
         MKClient *client = [MKClient clientWithName:@"Johns Client"];
+        MKInputPort *in = [client createInputPort];
+        in.inputHandler = ^(MKEndpoint *source, NSData *data) {
+            for(int i=0;i<data.length;++i) {
+                printf("%02x ", ((unsigned char *)data.bytes)[i]);
+            }
+            puts("");
+        };
         
+        [client enumerateDevicesUsingBlock:^(MKDevice *device) {
+            [in connectSource:device.rootSource];
+            
+        } constructorBlock:nil
+          restrictWithCriteria:^BOOL(MKDevice *rootDev) {
+            return rootDev.online && [rootDev.name containsString:@"Launchpad"];
+        }];
 
         CFRunLoopRun();
 }

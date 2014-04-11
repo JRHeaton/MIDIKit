@@ -11,13 +11,13 @@
 
 @interface MKEntity : MKObject
 
+- (NSUInteger)numberOfDestinations;
+- (NSUInteger)numberOfSources;
 - (MKEndpoint *)destinationAtIndex:(NSUInteger)index;
 - (MKEndpoint *)sourceAtIndex:(NSUInteger)index;
 - (id)objectAtIndexedSubscript:(NSUInteger)index; // defaults to destination
 
 - (MKEndpoint *)firstDestination;
 - (MKEndpoint *)firstSource;
-
-@property (nonatomic, readonly) NSArray *endpoints;
 
 @end

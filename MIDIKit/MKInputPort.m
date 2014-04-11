@@ -15,8 +15,11 @@
 
 static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRefCon, void *srcConnRefCon) {
     MKInputPort *self = (__bridge MKInputPort *)(readProcRefCon);
+    MKEndpoint *source = (__bridge MKEndpoint *)(srcConnRefCon);
     
-    NSLog(@"Well it works");
+    if(self.inputHandler) {
+        self.inputHandler(source, [NSData dataWithBytes:pktlist->packet[0].data length:pktlist->packet[0].length]);
+    }
 }
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client {
@@ -32,7 +35,7 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
 }
 
 - (void)connectSource:(MKEndpoint *)source {
-    MIDIPortConnectSource(self.MIDIRef, source.MIDIRef, (__bridge void *)(self));
+    MIDIPortConnectSource(self.MIDIRef, source.MIDIRef, (__bridge_retained void *)(source));
 }
 
 - (void)disconnectSource:(MKEndpoint *)source {
