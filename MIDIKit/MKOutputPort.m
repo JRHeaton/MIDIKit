@@ -57,4 +57,17 @@
     [self sendData:msg.data toDestination:endpoint];
 }
 
+- (instancetype)sendJSArray:(JSValue *)dataArray toDestination:(MKEndpoint *)endpoint {
+    NSArray *array = dataArray.toArray;
+    NSMutableData *data = [NSMutableData dataWithLength:array.count];
+    
+    for(int i=0;i<array.count;++i) {
+        ((UInt8 *)data.mutableBytes)[i] = [array[i] unsignedCharValue];
+    }
+    
+    [self sendData:data toDestination:endpoint];
+    
+    return self;
+}
+
 @end

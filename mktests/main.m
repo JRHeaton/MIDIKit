@@ -20,10 +20,10 @@ void test_javascript() {
 
 int main(int argc, const char * argv[]){
     @autoreleasepool {
-        MKConnection *c = [MKConnection connectionWithNewClient];
-        [c addDestination:[MKEndpoint objectForUniqueID:LP_ID]];
-        
-        [c sendMessage:[LPMessage LEDTest]];
+        JSContext *c = [JSContext new];
+        c[@"client"] = [MKClient clientWithName:@"fart"];
+        c[@"lp"] = [MKEndpoint firstOnlineDestinationNamed:@"Launchpad Mini 4"];
+        NSLog(@"%@", [c evaluateScript:@"client.firstOutputPort().send([0xb0, 0x00, 0x00], lp)"]);
         
         CFRunLoopRun();
     }

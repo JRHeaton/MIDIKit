@@ -14,24 +14,10 @@
  and this class has some convenience methods for other things also.
  */
 
-@protocol MKClientJS <JSExport>
-
-
-
-@end
-
 @class MKInputPort, MKOutputPort, MKVirtualSource, MKVirtualDestination;
 @protocol MKClientNotificationDelegate;
-@interface MKClient : MKObject
 
-+ (instancetype)clientWithName:(NSString *)name;
-
-// Not sure yet...
-- (void)addNotificationDelegate:(id<MKClientNotificationDelegate>)delegate;
-- (void)removeNotificationDelegate:(id<MKClientNotificationDelegate>)delegate;
-
-// Disposes the MIDIRef(MIDIClientRef) object (invalidates this object)
-- (void)dispose;
+@protocol MKClientJS <JSExport>
 
 // firstInputPort and firstOutputPort will look to see if there are
 // any already-created ports in the arrays below, and if not, create one,
@@ -44,6 +30,9 @@
 - (MKInputPort *)createInputPort;
 - (MKOutputPort *)createOutputPort;
 
+// Disposes the MIDIRef(MIDIClientRef) object (invalidates this object)
+- (void)dispose;
+
 // These create and insert virtual endpoints and return them
 - (MKVirtualSource *)createVirtualSourceNamed:(NSString *)name;
 - (MKVirtualDestination *)createVirtualDestinationNamed:(NSString *)name;
@@ -55,6 +44,16 @@
 @property (nonatomic, readonly) NSMutableArray *inputPorts;
 @property (nonatomic, readonly) NSMutableArray *virtualSources;
 @property (nonatomic, readonly) NSMutableArray *virtualDestinations;
+
+@end
+
+@interface MKClient : MKObject <MKClientJS>
+
++ (instancetype)clientWithName:(NSString *)name;
+
+// Not sure yet...
+- (void)addNotificationDelegate:(id<MKClientNotificationDelegate>)delegate;
+- (void)removeNotificationDelegate:(id<MKClientNotificationDelegate>)delegate;
 
 @end
 

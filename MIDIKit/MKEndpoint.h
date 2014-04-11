@@ -11,8 +11,12 @@
 // Endpoints are either sources or destinations,
 // which may be communicated to/from on input/output ports
 
+@protocol MKEndpointJS <JSExport>
+
+@end
+
 @class MKEntity;
-@interface MKEndpoint : MKObject
+@interface MKEndpoint : MKObject <MKEndpointJS>
 
 + (NSUInteger)numberOfSources;
 + (NSUInteger)numberOfDestinations;

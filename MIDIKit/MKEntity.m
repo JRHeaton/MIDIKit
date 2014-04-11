@@ -7,6 +7,7 @@
 //
 
 #import "MKEntity.h"
+#import "MKDevice.h"
 
 @implementation MKEntity
 

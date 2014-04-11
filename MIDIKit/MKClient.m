@@ -20,6 +20,11 @@
 
 @implementation MKClient
 
+@synthesize inputPorts=_inputPorts;
+@synthesize outputPorts=_outputPorts;
+@synthesize virtualDestinations=_virtualDestinations;
+@synthesize virtualSources=_virtualSources;
+
 static Class _MKClassForType(MIDIObjectType type) {
     Class c;
     switch(type) {

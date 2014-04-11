@@ -13,10 +13,16 @@
 // Output ports are unidirectional ports through which you can
 // transmit MIDI/MIDI-Sysex data to MIDI destination endpoints.
 
-@interface MKOutputPort : MKObject <MKClientDependentInstaniation>
+@protocol MKOutputPortJS <JSExport>
+
+JSExportAs(send, - (instancetype)sendJSArray:(JSValue *)dataArray toDestination:(MKEndpoint *)endpoint);
+- (void)dispose;
+
+@end
+
+@interface MKOutputPort : MKObject <MKClientDependentInstaniation, MKOutputPortJS>
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
-- (void)dispose;
 
 // Sends the MIDI data to the given destination
 - (void)sendData:(NSData *)data toDestination:(MKEndpoint *)endpoint;

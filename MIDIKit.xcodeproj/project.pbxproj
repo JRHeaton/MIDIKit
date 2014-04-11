@@ -22,6 +22,8 @@
 		5273C73C18DEADB800A8CFD4 /* MKEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73A18DEADB800A8CFD4 /* MKEntity.m */; };
 		5273C73F18DEADEE00A8CFD4 /* MKEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C73D18DEADEE00A8CFD4 /* MKEndpoint.h */; };
 		5273C74018DEADEE00A8CFD4 /* MKEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */; };
+		52B169D618F8AE4800EACDAE /* MKJavaScriptContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B169D418F8AE4800EACDAE /* MKJavaScriptContext.h */; };
+		52B169D718F8AE4800EACDAE /* MKJavaScriptContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B169D518F8AE4800EACDAE /* MKJavaScriptContext.m */; };
 		52B22EEC18F7A0EF00A5A5D3 /* MKInputPort.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EEA18F7A0EF00A5A5D3 /* MKInputPort.h */; };
 		52B22EED18F7A0EF00A5A5D3 /* MKInputPort.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EEB18F7A0EF00A5A5D3 /* MKInputPort.m */; };
 		52B22EF018F7A6C600A5A5D3 /* MKOutputPort.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EEE18F7A6C600A5A5D3 /* MKOutputPort.h */; };
@@ -109,6 +111,8 @@
 		5273C73D18DEADEE00A8CFD4 /* MKEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKEndpoint.h; sourceTree = "<group>"; };
 		5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKEndpoint.m; sourceTree = "<group>"; };
 		5273C74118DEB2FF00A8CFD4 /* LPDev.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDev.h; sourceTree = "<group>"; };
+		52B169D418F8AE4800EACDAE /* MKJavaScriptContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKJavaScriptContext.h; sourceTree = "<group>"; };
+		52B169D518F8AE4800EACDAE /* MKJavaScriptContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKJavaScriptContext.m; sourceTree = "<group>"; };
 		52B22EEA18F7A0EF00A5A5D3 /* MKInputPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKInputPort.h; sourceTree = "<group>"; };
 		52B22EEB18F7A0EF00A5A5D3 /* MKInputPort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKInputPort.m; sourceTree = "<group>"; };
 		52B22EEE18F7A6C600A5A5D3 /* MKOutputPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKOutputPort.h; sourceTree = "<group>"; };
@@ -234,6 +238,8 @@
 				52B22EFD18F7C86900A5A5D3 /* MKConnection.m */,
 				52B22F0318F803E900A5A5D3 /* MKMessage.h */,
 				52B22F0418F803E900A5A5D3 /* MKMessage.m */,
+				52B169D418F8AE4800EACDAE /* MKJavaScriptContext.h */,
+				52B169D518F8AE4800EACDAE /* MKJavaScriptContext.m */,
 				5273C6DE18DE96A200A8CFD4 /* Supporting Files */,
 			);
 			path = MIDIKit;
@@ -310,6 +316,7 @@
 				52B22EF818F7B80900A5A5D3 /* MKVirtualDestination.h in Headers */,
 				5273C73F18DEADEE00A8CFD4 /* MKEndpoint.h in Headers */,
 				52B22EF018F7A6C600A5A5D3 /* MKOutputPort.h in Headers */,
+				52B169D618F8AE4800EACDAE /* MKJavaScriptContext.h in Headers */,
 				52B22EF418F7B65D00A5A5D3 /* MKVirtualSource.h in Headers */,
 				52B22F0518F803E900A5A5D3 /* MKMessage.h in Headers */,
 				52B2C12118E7928D00E82760 /* NSString+JRExtensions.h in Headers */,
@@ -430,6 +437,7 @@
 				5273C70518DE9A9800A8CFD4 /* MKObject.m in Sources */,
 				52B22EF918F7B80900A5A5D3 /* MKVirtualDestination.m in Sources */,
 				52B22EF518F7B65D00A5A5D3 /* MKVirtualSource.m in Sources */,
+				52B169D718F8AE4800EACDAE /* MKJavaScriptContext.m in Sources */,
 				52B22EFF18F7C86900A5A5D3 /* MKConnection.m in Sources */,
 				52B2C12218E7928D00E82760 /* NSString+JRExtensions.m in Sources */,
 				52B22EF118F7A6C600A5A5D3 /* MKOutputPort.m in Sources */,
@@ -663,6 +671,7 @@
 				52B22F1618F858E600A5A5D3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

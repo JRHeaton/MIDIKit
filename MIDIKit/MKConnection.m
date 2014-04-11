@@ -13,6 +13,7 @@
 
 @implementation MKConnection
 
+
 + (instancetype)connectionWithClient:(MKClient *)client {
     return [[self alloc] initWithClient:(id)client];
 }

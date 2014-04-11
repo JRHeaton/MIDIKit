@@ -8,13 +8,13 @@
 
 #import "MKObject.h"
 #import "MKEndpoint.h"
-#import "MKDevice.h"
 
 // Entities represent a collection of endpoints on a device.
 // In a typical simple setup, a device will have one entity,
 // which contains one source and one destination. This is not
 // required, though.
 
+@class MKDevice;
 @interface MKEntity : MKObject
 
 - (NSUInteger)numberOfDestinations;

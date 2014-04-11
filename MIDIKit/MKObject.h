@@ -12,6 +12,36 @@
 
 @protocol MKObjectJS <JSExport>
 
+// Properties
+@property (nonatomic, readonly, getter = isOnline) BOOL online;
+@property (nonatomic, readonly, getter = isDrumMachine) BOOL drumMachine;
+@property (nonatomic, readonly, getter = isEffectUnit) BOOL effectUnit;
+@property (nonatomic, readonly, getter = isEmbeddedEntity) BOOL embeddedEntity;
+@property (nonatomic, readonly, getter = isMixer) BOOL mixer;
+@property (nonatomic, readonly, getter = isSampler) BOOL sampler;
+@property (nonatomic, readonly) BOOL isPrivate;
+@property (nonatomic, copy) NSString *manufacturer;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *model;
+@property (nonatomic, copy) NSString *displayName;
+@property (nonatomic, copy) NSString *driverOwner;
+@property (nonatomic, copy) NSString *iconImagePath;
+@property (nonatomic, assign) NSInteger deviceID;
+@property (nonatomic, assign) NSInteger driverVersion;
+@property (nonatomic, assign) NSInteger maxReceiveChannels;
+@property (nonatomic, assign) NSInteger maxSysexSpeed;
+@property (nonatomic, assign) NSInteger maxTransmitChannels;
+@property (nonatomic, assign) NSUInteger receiveChannelBits;
+@property (nonatomic, assign) NSUInteger transmitChannelBits;
+@property (nonatomic, assign) BOOL panDisruptsStereo;
+@property (nonatomic, assign) BOOL receivesClock;
+@property (nonatomic, assign) BOOL receivesMTC;
+@property (nonatomic, assign) BOOL receivesNotes;
+@property (nonatomic, assign) BOOL transmitsClock;
+@property (nonatomic, assign) BOOL transmitsMTC;
+@property (nonatomic, assign) BOOL transmitsNotes;
+@property (nonatomic, assign) BOOL receivesProgramChanges;
+@property (nonatomic, assign) MIDIUniqueID uniqueID;
 
 @end
 
@@ -24,7 +54,7 @@
  though this may change in the future. It's on by default,
  but you may set useCaching to NO.
  */
-@interface MKObject : NSObject {
+@interface MKObject : NSObject <MKObjectJS> {
 @package
     NSMutableDictionary *_propertyCache;
 @protected
@@ -62,36 +92,7 @@
 - (void)setDictionaryProperty:(NSDictionary *)value forKey:(CFStringRef)key;
 - (void)removePropertyForKey:(CFStringRef)key;
 
-// Properties
-@property (nonatomic, readonly, getter = isOnline) BOOL online;
-@property (nonatomic, readonly, getter = isDrumMachine) BOOL drumMachine;
-@property (nonatomic, readonly, getter = isEffectUnit) BOOL effectUnit;
-@property (nonatomic, readonly, getter = isEmbeddedEntity) BOOL embeddedEntity;
-@property (nonatomic, readonly, getter = isMixer) BOOL mixer;
-@property (nonatomic, readonly, getter = isSampler) BOOL sampler;
-@property (nonatomic, readonly) BOOL isPrivate;
-@property (nonatomic, copy) NSString *manufacturer;
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *model;
-@property (nonatomic, copy) NSString *displayName;
-@property (nonatomic, copy) NSString *driverOwner;
-@property (nonatomic, copy) NSString *iconImagePath;
-@property (nonatomic, assign) NSInteger deviceID;
-@property (nonatomic, assign) NSInteger driverVersion;
-@property (nonatomic, assign) NSInteger maxReceiveChannels;
-@property (nonatomic, assign) NSInteger maxSysexSpeed;
-@property (nonatomic, assign) NSInteger maxTransmitChannels;
-@property (nonatomic, assign) NSUInteger receiveChannelBits;
-@property (nonatomic, assign) NSUInteger transmitChannelBits;
-@property (nonatomic, assign) BOOL panDisruptsStereo;
-@property (nonatomic, assign) BOOL receivesClock;
-@property (nonatomic, assign) BOOL receivesMTC;
-@property (nonatomic, assign) BOOL receivesNotes;
-@property (nonatomic, assign) BOOL transmitsClock;
-@property (nonatomic, assign) BOOL transmitsMTC;
-@property (nonatomic, assign) BOOL transmitsNotes;
-@property (nonatomic, assign) BOOL receivesProgramChanges;
-@property (nonatomic, assign) MIDIUniqueID uniqueID;
+
 
 - (BOOL)transmitsOnChannel:(NSInteger)channel;
 - (BOOL)receivesOnChannel:(NSInteger)channel;
