@@ -126,9 +126,21 @@
         return (type)[self propertyType##PropertyForKey:property]; \
     }
 
+#define SETTA(type, name, property, propertyType) \
+    - (void)set##name:(type)val { \
+        [self set##propertyType##Property:val forKey:property]; \
+    }
+
 - (BOOL)isOnline {
     return ![self integerPropertyForKey:kMIDIPropertyOffline];
 }
+
+SETTA(BOOL, DrumMachine, kMIDIPropertyIsDrumMachine, Integer)
+SETTA(BOOL, EffectUnit, kMIDIPropertyIsEffectUnit, Integer)
+SETTA(BOOL, isEmbeddedEntity, kMIDIPropertyIsEmbeddedEntity, Integer)
+SETTA(BOOL, Mixer, kMIDIPropertyIsMixer, Integer)
+SETTA(BOOL, Sampler, kMIDIPropertyIsSampler, Integer)
+SETTA(BOOL, Private, kMIDIPropertyPrivate, Integer)
 
 GETTER(BOOL, isDrumMachine, kMIDIPropertyIsDrumMachine, integer)
 GETTER(BOOL, isEffectUnit, kMIDIPropertyIsEffectUnit, integer)
@@ -136,6 +148,29 @@ GETTER(BOOL, isEmbeddedEntity, kMIDIPropertyIsEmbeddedEntity, integer)
 GETTER(BOOL, isMixer, kMIDIPropertyIsMixer, integer)
 GETTER(BOOL, isSampler, kMIDIPropertyIsSampler, integer)
 GETTER(BOOL, isPrivate, kMIDIPropertyPrivate, integer)
+
+SETTA(NSString *, Manufacturer, kMIDIPropertyManufacturer, String)
+SETTA(NSString *, Name, kMIDIPropertyName, String)
+SETTA(NSString *, Model, kMIDIPropertyModel, String)
+SETTA(NSInteger, DeviceID, kMIDIPropertyDeviceID, Integer)
+SETTA(NSString *, DisplayName, kMIDIPropertyDisplayName, String)
+SETTA(NSString *, DriverOwner, kMIDIPropertyDriverOwner, String)
+SETTA(NSInteger, DriverVersion, kMIDIPropertyDriverVersion, Integer)
+SETTA(NSString *, IconImagePath, kMIDIPropertyImage, String)
+SETTA(NSInteger, MaxReceiveChannels, kMIDIPropertyMaxReceiveChannels, Integer)
+SETTA(NSInteger, MaxSysexSpeed, kMIDIPropertyMaxSysExSpeed, Integer)
+SETTA(NSInteger, MaxTransmitChannels, kMIDIPropertyMaxTransmitChannels, Integer)
+SETTA(BOOL, PanDisruptsStereo, kMIDIPropertyPanDisruptsStereo, Integer)
+SETTA(NSUInteger, ReceiveChannelBits, kMIDIPropertyReceiveChannels, Integer)
+SETTA(NSUInteger, TransmitChannelBits, kMIDIPropertyTransmitChannels, Integer)
+SETTA(BOOL, ReceivesClock, kMIDIPropertyReceivesClock, Integer)
+SETTA(BOOL, ReceivesMTC, kMIDIPropertyReceivesMTC, Integer)
+SETTA(BOOL, ReceivesNotes, kMIDIPropertyReceivesNotes, Integer)
+SETTA(BOOL, TransmitsMTC, kMIDIPropertyTransmitsMTC, Integer)
+SETTA(BOOL, TransmitsClock, kMIDIPropertyTransmitsClock, Integer)
+SETTA(BOOL, TransmitsNotes, kMIDIPropertyTransmitsNotes, Integer)
+SETTA(BOOL, ReceivesProgramChanges, kMIDIPropertyReceivesProgramChanges, Integer)
+SETTA(MIDIUniqueID, UniqueID, kMIDIPropertyUniqueID, Integer)
 
 GETTER(NSString *, manufacturer, kMIDIPropertyManufacturer, string)
 GETTER(NSString *, name, kMIDIPropertyName, string)

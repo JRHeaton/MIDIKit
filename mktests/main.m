@@ -21,9 +21,9 @@ void test_javascript() {
 int main(int argc, const char * argv[]){
     @autoreleasepool {
         MKConnection *c = [MKConnection connectionWithNewClient];
-        [c addDestination:[MKEndpoint firstOnlineDestinationNamed:@"Launchpad Mini 4"]];
+        [c addDestination:[MKEndpoint objectForUniqueID:LP_ID]];
         
-        [c sendMessage:[MKMessage :0x90 :0x33 :31]];
+        [c sendMessage:[LPMessage LEDTest]];
         
         CFRunLoopRun();
     }

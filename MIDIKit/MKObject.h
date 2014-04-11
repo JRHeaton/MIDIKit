@@ -10,6 +10,11 @@
 #import <CoreMIDI/CoreMIDI.h>
 #import <JavaScriptCore/JavaScriptCore.h>
 
+@protocol MKObjectJS <JSExport>
+
+
+@end
+
 /*
  This is the root wrapper class for CoreMIDI objects.
  
@@ -65,32 +70,31 @@
 @property (nonatomic, readonly, getter = isMixer) BOOL mixer;
 @property (nonatomic, readonly, getter = isSampler) BOOL sampler;
 @property (nonatomic, readonly) BOOL isPrivate;
+@property (nonatomic, copy) NSString *manufacturer;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *model;
+@property (nonatomic, copy) NSString *displayName;
+@property (nonatomic, copy) NSString *driverOwner;
+@property (nonatomic, copy) NSString *iconImagePath;
+@property (nonatomic, assign) NSInteger deviceID;
+@property (nonatomic, assign) NSInteger driverVersion;
+@property (nonatomic, assign) NSInteger maxReceiveChannels;
+@property (nonatomic, assign) NSInteger maxSysexSpeed;
+@property (nonatomic, assign) NSInteger maxTransmitChannels;
+@property (nonatomic, assign) NSUInteger receiveChannelBits;
+@property (nonatomic, assign) NSUInteger transmitChannelBits;
+@property (nonatomic, assign) BOOL panDisruptsStereo;
+@property (nonatomic, assign) BOOL receivesClock;
+@property (nonatomic, assign) BOOL receivesMTC;
+@property (nonatomic, assign) BOOL receivesNotes;
+@property (nonatomic, assign) BOOL transmitsClock;
+@property (nonatomic, assign) BOOL transmitsMTC;
+@property (nonatomic, assign) BOOL transmitsNotes;
+@property (nonatomic, assign) BOOL receivesProgramChanges;
+@property (nonatomic, assign) MIDIUniqueID uniqueID;
 
-// More properties
-- (NSString *)manufacturer;
-- (NSString *)name;
-- (NSString *)model;
-- (NSInteger)deviceID;
-- (NSString *)displayName;
-- (NSString *)driverOwner;
-- (NSInteger)driverVersion;
-- (NSString *)iconImagePath;
-- (NSInteger)maxReceiveChannels;
-- (NSInteger)maxSysexSpeed;
-- (NSInteger)maxTransmitChannels;
-- (BOOL)panDisruptsStereo;
-- (NSUInteger)receiveChannelBits;
-- (NSUInteger)transmitChannelBits;
 - (BOOL)transmitsOnChannel:(NSInteger)channel;
 - (BOOL)receivesOnChannel:(NSInteger)channel;
-- (BOOL)receivesClock;
-- (BOOL)receivesMTC;
-- (BOOL)receivesNotes;
-- (BOOL)transmitsClock;
-- (BOOL)transmitsMTC;
-- (BOOL)transmitsNotes;
-- (BOOL)receivesProgramChanges;
-- (MIDIUniqueID)uniqueID;
 
 // Underlying MIDI object
 @property (nonatomic, assign) MIDIObjectRef MIDIRef;

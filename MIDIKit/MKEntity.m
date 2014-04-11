@@ -38,4 +38,12 @@
     return MIDIEntityGetNumberOfSources(self.MIDIRef);
 }
 
+- (MKDevice *)device {
+    MIDIDeviceRef ret;
+    if(!MIDIEntityGetDevice(self.MIDIRef, &ret))
+        return [MKDevice objectForMIDIRef:ret];
+    
+    return nil;
+}
+
 @end

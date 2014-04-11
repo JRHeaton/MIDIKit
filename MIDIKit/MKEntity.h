@@ -8,6 +8,7 @@
 
 #import "MKObject.h"
 #import "MKEndpoint.h"
+#import "MKDevice.h"
 
 // Entities represent a collection of endpoints on a device.
 // In a typical simple setup, a device will have one entity,
@@ -24,5 +25,7 @@
 
 - (MKEndpoint *)firstDestination;
 - (MKEndpoint *)firstSource;
+
+- (MKDevice *)device;
 
 @end

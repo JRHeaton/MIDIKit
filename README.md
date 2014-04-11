@@ -6,14 +6,14 @@ This framework aims to be a convenience/wrapper framework around CoreMIDI, a low
 ##To Do
 Name| Status
 ----|-------
-MIDI system state notifications| Set up, switch needs done
+MIDI File Parsing | Incomplete
 
 ##What works
 - Enumerating devices, sources, destinations, and entities.
 - Creating and disposing wrappers for all CoreMIDI object types
-- Input/Output to MIDI devices via ports
+- Input/Output to MIDI devices via ports (or connections)
 - Creating and using virtual endpoints
-
+- Receiving updates about the MIDI system state
 
 #Concepts
 - `Object(MKObject.h)` - The main, base wrapper class around CoreMIDI types.

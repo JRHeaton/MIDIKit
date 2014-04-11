@@ -14,6 +14,12 @@
  and this class has some convenience methods for other things also.
  */
 
+@protocol MKClientJS <JSExport>
+
+
+
+@end
+
 @class MKInputPort, MKOutputPort, MKVirtualSource, MKVirtualDestination;
 @protocol MKClientNotificationDelegate;
 @interface MKClient : MKObject
