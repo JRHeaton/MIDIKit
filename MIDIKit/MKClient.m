@@ -89,7 +89,7 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
 }
 
 - (instancetype)init {
-    return [self initWithName:[NSString stringWithFormat:@"%s-client", getprogname()]];
+    return [self initWithName:[NSString stringWithFormat:@"%@-%d-Client", [NSProcessInfo processInfo].processName, [NSProcessInfo processInfo].processIdentifier]];
 }
 
 - (void)enumerateDevicesUsingBlock:(void (^)(MKDevice *device))enumerationBlock
