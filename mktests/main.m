@@ -37,11 +37,10 @@ int main(int argc, const char * argv[]){
         MKDevice *dev = [MKDevice firstDeviceMeetingCriteria:^BOOL(MKDevice *candidate) {
             return candidate.online && [candidate.name containsString:@"Launchpad"];
         }];
-        test *t = [test new];
-        [client.firstInputPort connectSource:dev.rootSource];
-        [client.firstInputPort addInputDelegate:t];
-
-        [client.firstOutputPort sendData:[NSData dataWithBytes:buf length:3] toDestination:dev.rootDestination];
+        MKConnection *conn = [MKConnection connectionWithClient:client];
+        [conn addDestination:dev.rootDestination];
+        
+        [conn sendData:[NSData dataWithBytes:buf length:3]];
         
         CFRunLoopRun();
 }

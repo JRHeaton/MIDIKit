@@ -13,6 +13,10 @@
 
 @implementation MKConnection
 
++ (instancetype)connectionWithClient:(MKClient *)client {
+    return [[self alloc] initWithClient:(id)client];
+}
+
 - (instancetype)initWithInputPort:(MKInputPort *)inputPort outputPort:(MKOutputPort *)outputPort {
     if(!(self = [super init])) return nil;
     
@@ -24,7 +28,7 @@
 }
 
 - (instancetype)initWithClient:(MKClient *)client {
-    return [self initWithInputPort:client.createInputPort outputPort:client.createOutputPort];
+    return [self initWithInputPort:client.firstInputPort outputPort:client.firstOutputPort];
 }
 
 - (void)addDestination:(MKEndpoint *)destination {

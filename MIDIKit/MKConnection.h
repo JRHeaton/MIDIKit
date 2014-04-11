@@ -12,6 +12,7 @@
 
 @interface MKConnection : NSObject
 
++ (instancetype)connectionWithClient:(MKClient *)client;
 - (instancetype)initWithInputPort:(MKInputPort *)inputPort outputPort:(MKOutputPort *)outputPort;
 - (instancetype)initWithClient:(MKClient *)client;
 
