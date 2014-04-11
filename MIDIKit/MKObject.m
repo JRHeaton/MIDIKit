@@ -163,4 +163,8 @@ GETTER(MIDIUniqueID, uniqueID, kMIDIPropertyUniqueID, integer)
     return self.MIDIRef != 0;
 }
 
+- (void)removePropertyForKey:(CFStringRef)key {
+    MIDIObjectRemoveProperty(self.MIDIRef, key);
+}
+
 @end

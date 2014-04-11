@@ -1,5 +1,5 @@
 //
-//  MKInputPort.h
+//  MKOutputPort.h
 //  MIDIKit
 //
 //  Created by John Heaton on 4/11/14.
@@ -7,17 +7,14 @@
 //
 
 #import "MKObject.h"
-#import "MKEntity.h"
 #import "MKClient.h"
 
-@interface MKInputPort : MKObject
+@interface MKOutputPort : MKObject
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
-
-- (void)connectSource:(MKEndpoint *)source;
-- (void)disconnectSource:(MKEndpoint *)source;
-
 - (void)dispose;
+
+- (void)sendData:(NSData *)data toEndpoint:(MKEndpoint *)endpoint;
 
 @property (nonatomic, weak) MKClient *client;
 

@@ -14,12 +14,6 @@
 
 @end
 
-static void MKClientInputCB(const MIDIPacketList *pktlist, void *readProcRefCon, void *srcConnRefCon) {
-//    MKClient *self = (__bridge MKClient *)(readProcRefCon);
-
-    NSLog(@"input");
-}
-
 @implementation MKClient
 
 static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCon) {
@@ -50,15 +44,12 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
         CFStringRef cfName = (__bridge CFStringRef)(name);
         MIDIObjectRef val;
         
+        _inputPorts = [NSMutableArray arrayWithCapacity:0];
+        _outputPorts = [NSMutableArray arrayWithCapacity:0];
         self.notificationDelegates = [NSMutableSet setWithCapacity:0];
 
         MIDIClientCreate(cfName, _MKClientMIDINotifyProc, (__bridge void *)(self), &val);
         self.MIDIRef = val;
-
-        MIDIOutputPortCreate(self.MIDIRef, cfName, &val);
-        self->_outputPort = [[MKObject alloc] initWithMIDIRef:val];
-        MIDIInputPortCreate(self.MIDIRef, cfName, MKClientInputCB, (__bridge void *)(self), &val);
-        self->_inputPort = [[MKInputPort alloc] initWithMIDIRef:val];
     }
 
     return self;
@@ -69,16 +60,18 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
 }
 
 - (void)dealloc {
-    MIDIPortDispose(self.inputPort.MIDIRef);
-    MIDIPortDispose(self.outputPort.MIDIRef);
     MIDIClientDispose(self.MIDIRef);
 }
 
 - (void)enumerateDevicesUsingBlock:(void (^)(MKDevice *device))enumerationBlock
-                  constructorBlock:(MKDevice *(^)(MIDIDeviceRef dev))constructorBlock {
+                  constructorBlock:(MKDevice *(^)(MKDevice *rootDev))constructorBlock
+              restrictWithCriteria:(BOOL (^)(MKDevice *rootDev))criteriaBlock {
     
     for(NSUInteger i=0;i<self.numberOfDevices;++i) {
-        enumerationBlock(!constructorBlock ? [self deviceAtIndex:i] : (constructorBlock(MIDIGetDevice(i)) ?: [self deviceAtIndex:i]));
+        MKDevice *rootDev = [[MKDevice alloc] initWithMIDIRef:MIDIGetDevice(i)];
+        if((criteriaBlock && criteriaBlock(rootDev)) || !criteriaBlock) {
+            enumerationBlock(!constructorBlock ? rootDev : (constructorBlock(rootDev) ?: rootDev));
+        }
     }
 }
 
@@ -98,34 +91,21 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
     return MIDIGetNumberOfSources();
 }
 
-- (void)sendData:(NSData *)data toEndpoint:(MKEndpoint *)endpoint {
-    MIDIPacketList list;
-    if(data.length <= 256) {
-        list.numPackets = 1;
-        list.packet[0].timeStamp = 0;
-        list.packet[0].length = data.length;
-        memcpy(list.packet[0].data, data.bytes, data.length);
-    } else {
-//        UInt8 *dat = (UInt8 *)data.bytes;
-//        MIDIPacket *p = MIDIPacketListInit(&list);
-//
-//        NSUInteger remainder = data.length % 256;
-//
-//        for(NSUInteger i=0;i<data.length / 256;++i) {
-//            p = MIDIPacketListAdd(&list, i*256, p, 0, MIN(, <#const Byte *data#>)
-//        }
-    }
-
-    MIDISend(self.outputPort.MIDIRef, endpoint.MIDIRef, (const MIDIPacketList *)&list);
+- (void)dispose {
+    MIDIClientDispose(self.MIDIRef);
+    self.MIDIRef = 0;
 }
 
-- (void)sendDataArray:(NSArray *)array toEndpoint:(MKEndpoint *)endpoint {
-    NSMutableData *data = [NSMutableData dataWithLength:array.count];
-    for(NSNumber *byte in array) {
-        UInt8 val = byte.unsignedCharValue;
-        [data appendBytes:&val length:1];
-    }
-    [self sendData:data toEndpoint:endpoint];
+- (MKInputPort *)createInputPort {
+    MKInputPort *ret = [[MKInputPort alloc] initWithName:[NSString stringWithFormat:@"%@-Input-%lu", self.name, (unsigned long)self.inputPorts.count] client:self];
+    [self.inputPorts addObject:ret];
+    return ret;
+}
+
+- (MKOutputPort *)createOutputPort {
+    MKOutputPort *ret = [[MKOutputPort alloc] initWithName:[NSString stringWithFormat:@"%@-Output-%lu", self.name, (unsigned long)self.outputPorts.count] client:self];
+    [self.outputPorts addObject:ret];
+    return ret;
 }
 
 - (void)addNotificationDelegate:(id<MKClientNotificationDelegate>)delegate {

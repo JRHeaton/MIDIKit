@@ -7,7 +7,16 @@
 //
 
 #import "MKEndpoint.h"
+#import "MKEntity.h"
 
 @implementation MKEndpoint
+
+- (MKEntity *)entity {
+    MIDIEntityRef ret;
+    if(!MIDIEndpointGetEntity(self.MIDIRef, &ret))
+        return [[MKEntity alloc] initWithMIDIRef:ret];
+    
+    return nil;
+}
 
 @end

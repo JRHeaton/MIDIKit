@@ -24,6 +24,8 @@
 		5273C74018DEADEE00A8CFD4 /* MKEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */; };
 		52B22EEC18F7A0EF00A5A5D3 /* MKInputPort.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EEA18F7A0EF00A5A5D3 /* MKInputPort.h */; };
 		52B22EED18F7A0EF00A5A5D3 /* MKInputPort.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EEB18F7A0EF00A5A5D3 /* MKInputPort.m */; };
+		52B22EF018F7A6C600A5A5D3 /* MKOutputPort.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EEE18F7A6C600A5A5D3 /* MKOutputPort.h */; };
+		52B22EF118F7A6C600A5A5D3 /* MKOutputPort.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EEF18F7A6C600A5A5D3 /* MKOutputPort.m */; };
 		52B2C12118E7928D00E82760 /* NSString+JRExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B2C11F18E7928D00E82760 /* NSString+JRExtensions.h */; };
 		52B2C12218E7928D00E82760 /* NSString+JRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2C12018E7928D00E82760 /* NSString+JRExtensions.m */; };
 /* End PBXBuildFile section */
@@ -78,6 +80,8 @@
 		5273C74118DEB2FF00A8CFD4 /* LPDev.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDev.h; sourceTree = "<group>"; };
 		52B22EEA18F7A0EF00A5A5D3 /* MKInputPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKInputPort.h; sourceTree = "<group>"; };
 		52B22EEB18F7A0EF00A5A5D3 /* MKInputPort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKInputPort.m; sourceTree = "<group>"; };
+		52B22EEE18F7A6C600A5A5D3 /* MKOutputPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKOutputPort.h; sourceTree = "<group>"; };
+		52B22EEF18F7A6C600A5A5D3 /* MKOutputPort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKOutputPort.m; sourceTree = "<group>"; };
 		52B2C11F18E7928D00E82760 /* NSString+JRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+JRExtensions.h"; sourceTree = "<group>"; };
 		52B2C12018E7928D00E82760 /* NSString+JRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JRExtensions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -154,6 +158,8 @@
 				5273C70718DE9E2500A8CFD4 /* MKClient.m */,
 				52B22EEA18F7A0EF00A5A5D3 /* MKInputPort.h */,
 				52B22EEB18F7A0EF00A5A5D3 /* MKInputPort.m */,
+				52B22EEE18F7A6C600A5A5D3 /* MKOutputPort.h */,
+				52B22EEF18F7A6C600A5A5D3 /* MKOutputPort.m */,
 				5273C73518DEAD5700A8CFD4 /* MKDevice.h */,
 				5273C73618DEAD5700A8CFD4 /* MKDevice.m */,
 				5273C73918DEADB800A8CFD4 /* MKEntity.h */,
@@ -212,6 +218,7 @@
 			files = (
 				5273C73718DEAD5700A8CFD4 /* MKDevice.h in Headers */,
 				5273C73F18DEADEE00A8CFD4 /* MKEndpoint.h in Headers */,
+				52B22EF018F7A6C600A5A5D3 /* MKOutputPort.h in Headers */,
 				52B2C12118E7928D00E82760 /* NSString+JRExtensions.h in Headers */,
 				52B22EEC18F7A0EF00A5A5D3 /* MKInputPort.h in Headers */,
 				5273C73B18DEADB800A8CFD4 /* MKEntity.h in Headers */,
@@ -309,6 +316,7 @@
 				52B22EED18F7A0EF00A5A5D3 /* MKInputPort.m in Sources */,
 				5273C70518DE9A9800A8CFD4 /* MKObject.m in Sources */,
 				52B2C12218E7928D00E82760 /* NSString+JRExtensions.m in Sources */,
+				52B22EF118F7A6C600A5A5D3 /* MKOutputPort.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

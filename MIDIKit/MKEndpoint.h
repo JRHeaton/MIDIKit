@@ -8,7 +8,9 @@
 
 #import "MKObject.h"
 
-
+@class MKEntity;
 @interface MKEndpoint : MKObject
+
+- (MKEntity *)entity;
 
 @end

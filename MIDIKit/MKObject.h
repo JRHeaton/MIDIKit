@@ -12,6 +12,8 @@
 @interface MKObject : NSObject {
 @package
     NSMutableDictionary *_propertyCache;
+@protected
+    MIDIObjectRef _MIDIRef;
 }
 
 - (instancetype)initWithMIDIRef:(MIDIObjectRef)MIDIRef;
@@ -29,6 +31,7 @@
 - (void)setIntegerProperty:(NSInteger)value forKey:(CFStringRef)key;
 - (void)setDataProperty:(NSData *)value forKey:(CFStringRef)key;
 - (void)setDictionaryProperty:(NSDictionary *)value forKey:(CFStringRef)key;
+- (void)removePropertyForKey:(CFStringRef)key;
 
 @property (nonatomic, readonly, getter = isOnline) BOOL online;
 @property (nonatomic, readonly, getter = isDrumMachine) BOOL drumMachine;

@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 John Heaton. All rights reserved.
 //
 
-#import "MKObject.h"
 #import "MKDevice.h"
 #import "MKInputPort.h"
+#import "MKOutputPort.h"
 
 // The client object is essentially your root interface
 // to the MIDI server. In this context, it also encapsulates
@@ -30,21 +30,18 @@
 + (instancetype)clientWithName:(NSString *)name;
 
 - (void)enumerateDevicesUsingBlock:(void (^)(MKDevice *device))enumerationBlock
-                  constructorBlock:(MKDevice *(^)(MIDIDeviceRef dev))constructorBlock;
+                  constructorBlock:(MKDevice *(^)(MKDevice *rootDev))constructorBlock
+              restrictWithCriteria:(BOOL (^)(MKDevice *rootDev))criteriaBlock;
+
 - (MKDevice *)deviceAtIndex:(NSUInteger)index;
-
-// Send a chunk of data to a given endpoint as a standard MIDI message
-// NOTE: the timeStamp on this message will be 0 (immediate)
-- (void)sendData:(NSData *)data toEndpoint:(MKEndpoint *)endpoint;
-
-// This is a convenience method which takes an array of NSNumbers,
-// whose values are unsigned one-byte values to be inserted into the
-// MIDI packet list(s) before sending.
-// Therefore, this syntax can be used: @[ @0x90, @0xaa, @127 ]
-- (void)sendDataArray:(NSArray *)array toEndpoint:(MKEndpoint *)endpoint;
 
 - (void)addNotificationDelegate:(id<MKClientNotificationDelegate>)delegate;
 - (void)removeNotificationDelegate:(id<MKClientNotificationDelegate>)delegate;
+
+- (void)dispose;
+
+- (MKInputPort *)createInputPort;
+- (MKOutputPort *)createOutputPort;
 
 // Handy dynamic enumeration properties
 // NOTE: These are SYNCHRONOUS, and when they're called
@@ -55,9 +52,7 @@
 @property (nonatomic, readonly) NSUInteger numberOfDestinations;
 @property (nonatomic, readonly) NSUInteger numberOfSources;
 
-// These are wrapper objects for the auto-created input and output ports
-// of this client.
-@property (nonatomic, readonly) MKObject *outputPort;
-@property (nonatomic, readonly) MKInputPort *inputPort;
+@property (nonatomic, readonly) NSMutableArray *outputPorts;
+@property (nonatomic, readonly) NSMutableArray *inputPorts;
 
 @end

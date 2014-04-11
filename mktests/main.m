@@ -12,30 +12,19 @@
 
 #import "NSString+JRExtensions.h"
 
-@interface testdev : MKDevice
-
-- (void)test:(MKClient *)client;
-
-@end
-
-@implementation testdev
-
-- (void)test:(MKClient *)client {
-    [client sendDataArray:@[ @0xb0, @0x00, @0x7f ] toEndpoint:self.rootDestination];
-}
-
-@end
-
 int main(int argc, const char * argv[]){
     @autoreleasepool {
 
         MKClient *client = [MKClient clientWithName:@"Johns Client"];
+        MKOutputPort *output = [[MKOutputPort alloc] initWithName:@"Output" client:client];
+        MKInputPort *input = [[MKInputPort alloc] initWithName:@"input" client:client];
         [client enumerateDevicesUsingBlock:^(MKDevice *device) {
-            if([device.name isEqualToString:@"Launchpad Mini 4"]) {
-                [(testdev *)device test:client];
-            }
-        } constructorBlock:^MKDevice *(MIDIDeviceRef dev) {
-            return [[testdev alloc] initWithMIDIRef:dev];
+            static uint8 buf[3] = { 0x90, 0x34, 31 };
+            [output sendData:[NSData dataWithBytes:buf length:3] toEndpoint:device.rootDestination];
+            
+            [input connectSource:device.rootSource];
+        } constructorBlock:nil restrictWithCriteria:^BOOL(MKDevice *rootDev) {
+            return [rootDev.name rangeOfString:@"Launchpad"].location != NSNotFound && rootDev.online;
         }];
 
         CFRunLoopRun();
