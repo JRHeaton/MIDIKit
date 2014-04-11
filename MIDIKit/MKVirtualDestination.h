@@ -9,6 +9,9 @@
 #import "MKEndpoint.h"
 #import "MKClient.h"
 
+// A virtual destination is a client-created endpoint
+// that is usable by other clients just like a normal destination.
+
 @protocol MKVirtualDestinationDelegate;
 @interface MKVirtualDestination : MKEndpoint <MKClientDependentInstaniation>
 
@@ -21,6 +24,7 @@
 
 @protocol MKVirtualDestinationDelegate <NSObject>
 
+// Called when a packet is received
 - (void)virtualDestination:(MKVirtualDestination *)virtualDestination
               receivedData:(NSData *)data;
 

@@ -14,6 +14,14 @@
 
 @implementation MKMessage
 
++ (instancetype)controlChangeMessageWithController:(UInt8)controller value:(UInt8)value {
+    static UInt8 buf[3] = { 0xb0, 0x00, 0x00 };
+    buf[1] = controller;
+    buf[2] = value;
+    
+    return [[self alloc] initWithData:[NSData dataWithBytes:buf length:3]];
+}
+
 - (instancetype)initWithData:(NSData *)data {
     if(!(self = [super init])) return nil;
     _mutableData = data.mutableCopy ?: [NSMutableData dataWithCapacity:0];

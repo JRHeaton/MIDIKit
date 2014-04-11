@@ -51,4 +51,13 @@
     [self sendData:message.data];
 }
 
+- (void)sendMessages:(MKMessage *)message, ... {
+    va_list args;
+    va_start(args, message);
+    for(MKMessage *msg = message;msg != nil;msg = va_arg(args, MKMessage *)) {
+        [self sendMessage:msg];
+    }
+    va_end(args);
+}
+
 @end

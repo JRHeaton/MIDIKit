@@ -55,8 +55,8 @@ int main(int argc, const char * argv[]){
         conn = [MKConnection connectionWithClient:client];
         [conn addDestination:dev.rootDestination];
     
-        [conn sendMessage:LPMessage.LEDTest];
-        
+        [conn sendMessages:LPMessage.reset, [LPMessage padMessageOn:YES atColumn:1 row:3 clearOtherBufferPad:YES copyToOtherBuffer:NO redBrightness:kLPColorMax greenBrightness:kLPColorOff], nil];
+                
         CFRunLoopRun();
 }
 

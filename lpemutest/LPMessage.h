@@ -8,9 +8,32 @@
 
 #import "MKMessage.h"
 
+typedef NS_ENUM(UInt8, LPColorBrightness) {
+    kLPColorOff = 0, 
+    kLPColorMin = 1,
+    kLPColorMid = 2,
+    kLPColorMax = 3
+};
+
 @interface LPMessage : MKMessage
 
 + (instancetype)reset;
 + (instancetype)LEDTest;
++ (instancetype)setLayoutXY;
++ (instancetype)setLayoutDrumRack;
++ (instancetype)enableAutoSwitching;
++ (instancetype)disableAutoSwitching;
++ (instancetype)bufferMessageWithDisplayBuffer:(NSUInteger)displayBuffer
+                                updatingBuffer:(NSUInteger)updatingBuffer
+                      copyNewDisplayToUpdating:(BOOL)copyToUpdating;
++ (instancetype)setFirstBuffers;
++ (instancetype)setSecondBuffers;
++ (instancetype)padMessageOn:(BOOL)turnOn
+                    atColumn:(NSUInteger)column
+                         row:(NSUInteger)row
+         clearOtherBufferPad:(BOOL)clearOther
+           copyToOtherBuffer:(BOOL)copyToOther
+               redBrightness:(LPColorBrightness)redBrightness
+             greenBrightness:(LPColorBrightness)greenBrightness;
 
 @end

@@ -9,6 +9,11 @@
 #import "MKEndpoint.h"
 #import "MKClient.h"
 
+// A virtual source is a client-created endpoint that
+// is visible to other MIDI clients as a source that they can
+// connect to an input port and receive data with, just as they
+// would with a normal source.
+
 @interface MKVirtualSource : MKEndpoint <MKClientDependentInstaniation>
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;

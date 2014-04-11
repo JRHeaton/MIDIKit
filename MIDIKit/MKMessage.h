@@ -17,6 +17,8 @@ typedef NS_ENUM(UInt8, MKMessageType) {
 
 @interface MKMessage : NSObject
 
++ (instancetype)controlChangeMessageWithController:(UInt8)controller value:(UInt8)value;
+
 - (instancetype)initWithData:(NSData *)data;
 - (instancetype)initWithPacket:(MIDIPacket *)packet;
 
