@@ -16,14 +16,15 @@ MIDI system state notifications| Set up, switch needs done
 
 
 #Concepts
-#####`Object(MKObject.h)` - The main, base wrapper class around CoreMIDI types.
-#####`Client(MKClient.h)` - The important one. You *must* create a client to use this framework.
-#####`Endpoint(MKEndpoint.h)` - A unidirectional endpoint, either source or destination.
-#####`Entity(MKEntity.h)` - Contains a set of endpoints
-#####`Device(MKDevice.h)` - A device, which contains a set of entities.
-#####`Port(MK{Input/Output}Port.h)` - A client-owned port through which you communicate with a source or destination.
-#####`Message(MKMessage.h)` - Essentially a data wrapper class that implements logic for MIDI messages. Subclass this for specific devices.
-####`Connection(MKConnection.h)` - A high level convenience class for I/O to multiple sources/destinations.
+- `Object(MKObject.h)` - The main, base wrapper class around CoreMIDI types.
+- `Client(MKClient.h)` - The important one. You *must* create a client to use this framework.
+- `Endpoint(MKEndpoint.h)` - A unidirectional endpoint, either source or destination.
+- `Entity(MKEntity.h)` - Contains a set of endpoints
+- `Device(MKDevice.h)` - A device, which contains a set of entities.
+- `Port(MK{Input/Output}Port.h)` - A client-owned port through which you communicate with a source or destination.
+- `Message(MKMessage.h)` - Essentially a data wrapper class that implements logic for MIDI messages. Subclass this for specific devices.
+-----
+- `Connection(MKConnection.h)` - A high level convenience class for I/O to multiple sources/destinations.
 
 Before we get technical, let's dive into a quick example.
 ```objc
