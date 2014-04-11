@@ -23,7 +23,6 @@ MIDI system state notifications| Set up, switch needs done
 - `Device(MKDevice.h)` - A device, which contains a set of entities.
 - `Port(MK{Input/Output}Port.h)` - A client-owned port through which you communicate with a source or destination.
 - `Message(MKMessage.h)` - Essentially a data wrapper class that implements logic for MIDI messages. Subclass this for specific devices.
------
 - `Connection(MKConnection.h)` - A high level convenience class for I/O to multiple sources/destinations.
 
 Before we get technical, let's dive into a quick example.
