@@ -16,6 +16,10 @@
     return [[self alloc] initWithMIDIRef:MIDIRef];
 }
 
++ (instancetype)objectForUniqueID:(MIDIUniqueID)uniqueID {
+    return [[self alloc] initWithUniqueID:uniqueID];
+}
+
 - (instancetype)initWithMIDIRef:(MIDIObjectRef)MIDIRef {
     if(!(self = [super init])) return nil;
     

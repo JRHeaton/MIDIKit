@@ -20,6 +20,19 @@
 
 @implementation MKClient
 
+static Class _MKClassForType(MIDIObjectType type) {
+    Class c;
+    switch(type) {
+        case kMIDIObjectType_Device: c = [MKDevice class]; break;
+        case kMIDIObjectType_Destination:
+        case kMIDIObjectType_Source: c = [MKEndpoint class]; break;
+        case kMIDIObjectType_Entity: c = [MKEntity class]; break;
+        default: c = [MKObject class]; break;
+    }
+    
+    return c;
+}
+
 static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCon) {
     MKClient *self = (__bridge MKClient *)(refCon);
 
@@ -30,22 +43,21 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
             if(!self.notificationDelegates.count) return;
             
             MIDIObjectAddRemoveNotification *notif = (MIDIObjectAddRemoveNotification *)message;
-            Class c;
-            switch(notif->childType) {
-                case kMIDIObjectType_Device: c = [MKDevice class]; break;
-                case kMIDIObjectType_Destination:
-                case kMIDIObjectType_Source: c = [MKEndpoint class]; break;
-                case kMIDIObjectType_Entity: c = [MKEntity class]; break;
-                default: c = [MKObject class]; break;
-            }
-            
             for(id<MKClientNotificationDelegate> delegate in self.notificationDelegates) {
                 if([delegate respondsToSelector:@selector(midiClient:objectConnected:ofType:)]) {
-                    [delegate midiClient:self objectConnected:[[c alloc] initWithMIDIRef:notif->child] ofType:notif->childType];
+                    [delegate midiClient:self objectConnected:[[_MKClassForType(notif->childType) alloc] initWithMIDIRef:notif->child] ofType:notif->childType];
                 }
             }
         } break;
-        case kMIDIMsgPropertyChanged: break;
+        case kMIDIMsgPropertyChanged: {
+            MIDIObjectPropertyChangeNotification *notif = (MIDIObjectPropertyChangeNotification *)message;
+            
+            for(id<MKClientNotificationDelegate> delegate in self.notificationDelegates) {
+                if([delegate respondsToSelector:@selector(midiClient:object:changedValueOfPropertyForKey:)]) {
+                    [delegate midiClient:self object:[[_MKClassForType(notif->objectType) alloc] initWithMIDIRef:notif->object] changedValueOfPropertyForKey:notif->propertyName];
+                }
+            }
+        } break;
         case kMIDIMsgThruConnectionsChanged: break;
         case kMIDIMsgSerialPortOwnerChanged: break;
         case kMIDIMsgIOError: break;

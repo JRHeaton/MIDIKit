@@ -83,5 +83,6 @@
 
 - (void)midiClient:(MKClient *)client objectConnected:(MKObject *)object ofType:(MIDIObjectType)type;
 - (void)midiClient:(MKClient *)client objectDisconnected:(MKObject *)object ofType:(MIDIObjectType)type;
+- (void)midiClient:(MKClient *)client object:(MKObject *)object changedValueOfPropertyForKey:(CFStringRef)key;
 
 @end

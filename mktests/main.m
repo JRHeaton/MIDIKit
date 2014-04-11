@@ -8,52 +8,19 @@
 
 #import <Foundation/Foundation.h>
 #import "MIDIKit.h"
-#import "LPDev.h"
 #import "LPMessage.h"
 
-
-#import <JavaScriptCore/JavaScriptCore.h>
 #import "NSString+JRExtensions.h"
-MKConnection *conn;
 
-@interface test : NSObject <MKInputPortDelegate>
-
-
-
-@end
-
-@implementation test
-
-- (void)loggy {
-    NSLog(@"dsf");
-}
-
-- (void)inputPort:(MKInputPort *)inputPort receivedData:(NSData *)data fromSource:(MKEndpoint *)source {
-    MKMessage *msg = [[MKMessage alloc] initWithData:data];
-    NSLog(@"%@", msg);
-    
-    [inputPort.client.firstOutputPort sendData:data toDestination:[MKEndpoint firstDestinationMeetingCriteria:^BOOL(MKEndpoint *candidate) {
-        return [candidate.name containsString:@"Launchpad Mini"];
-    }]];
-}
-
-@end
+#define LP_ID 0xf0b43c3a
 
 int main(int argc, const char * argv[]){
     @autoreleasepool {
-
-        uint8 buf[3] = { 0xb0  , 0, 0 };
-        
         MKConnection *connection = [MKConnection connectionWithNewClient];
-        [connection addDestination:[MKEndpoint firstDestinationMeetingCriteria:^BOOL(MKEndpoint *candidate) {
-            return candidate.online && [candidate.name containsString:@"Launchpad Mini"];
-        }]];
-        
-        [connection sendMessage:[LPMessage LEDTest]];
-        
+        [connection addDestination:[MKEndpoint objectForUniqueID:LP_ID]];
         
         CFRunLoopRun();
-}
+    }
 
     return 0;
 }

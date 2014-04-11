@@ -22,7 +22,7 @@
     
     _inputPort = inputPort;
     _outputPort = outputPort;
-    _destinations = [NSMutableSet setWithCapacity:0];
+    _destinations = [NSMutableOrderedSet orderedSetWithCapacity:0];
     
     return self;
 }
@@ -47,6 +47,10 @@
 - (void)removeDestination:(MKEndpoint *)destination {
     if([self.destinations containsObject:destination])
         [self.destinations removeObject:destination];
+}
+
+- (MKEndpoint *)destinationAtIndex:(NSUInteger)index {
+    return [_destinations objectAtIndex:index];
 }
 
 - (void)sendData:(NSData *)data {

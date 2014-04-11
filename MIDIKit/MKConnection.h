@@ -36,7 +36,8 @@
 
 - (void)addDestination:(MKEndpoint *)destination;
 - (void)removeDestination:(MKEndpoint *)destination;
-@property (nonatomic, readonly) NSMutableSet *destinations;
+- (MKEndpoint *)destinationAtIndex:(NSUInteger)index;
+@property (nonatomic, readonly) NSMutableOrderedSet *destinations;
 
 @property (nonatomic, readonly) MKInputPort *inputPort;
 @property (nonatomic, readonly) MKOutputPort *outputPort;
