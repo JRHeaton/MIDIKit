@@ -36,7 +36,7 @@ But *how*?
 - (void)inputPort:(MKInputPort *)inputPort
      receivedData:(NSData *)data
        fromSource:(MKEndpoint *)source {
-    NSLog(@"Got data on port %@ from source %@, inputPort, source);
+    NSLog(@"Got data of length %lu on port %@ from source %@", data.length, inputPort.name, source.name);
 }
 
 @end
