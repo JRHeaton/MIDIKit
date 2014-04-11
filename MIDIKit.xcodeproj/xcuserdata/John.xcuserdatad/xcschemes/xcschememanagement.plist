@@ -9,10 +9,15 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-		<key>mktests.xcscheme</key>
+		<key>lpemutest.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>2</integer>
+		</dict>
+		<key>mktests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -33,6 +38,11 @@
 			<true/>
 		</dict>
 		<key>5273C72118DEA17B00A8CFD4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>52B22F0A18F858E500A5A5D3</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -47,4 +47,8 @@
     }
 }
 
+- (void)sendMessage:(MKMessage *)message {
+    [self sendData:message.data];
+}
+
 @end

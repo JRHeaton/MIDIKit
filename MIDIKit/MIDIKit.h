@@ -21,3 +21,5 @@
 #import "MKEndpoint.h"
 #import "MKConnection.h"
 #import "MKMessage.h"
+#import "MKVirtualSource.h"
+#import "MKVirtualDestination.h"

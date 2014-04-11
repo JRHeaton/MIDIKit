@@ -26,6 +26,19 @@
     return self;
 }
 
+- (instancetype)initWithPacket:(MIDIPacket *)packet {
+    if(!(self = [self init])) return nil;
+    
+    [self.mutableData setLength:packet->length];
+    memcpy(self.bytes, packet->data, packet->length);
+    
+    return self;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ length=0x%lx, type=0x%02x, keyOrController=0x%02x, velocityOrValue=0x%02x, channel=%d", super.description, (unsigned long)self.length, self.type, self.keyOrController, self.velocityOrValue, self.channel];
+}
+
 - (MKMessageType)type {
     return self.length ? (MKMessageType)self.bytes[0] : 0;
 }
@@ -74,8 +87,13 @@
 }
 
 - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)idx {
-    if(![object isKindOfClass:[NSNumber class]]) return;
-    [self setByte:((NSNumber *)object).unsignedCharValue atIndex:idx];
+    if([object isKindOfClass:[NSNumber class]]) {
+        [self setByte:((NSNumber *)object).unsignedCharValue atIndex:idx];
+    }
+}
+
+- (BOOL)isEqual:(id)object {
+    return [object isKindOfClass:[MKMessage class]] && [self.mutableData isEqualToData:((MKMessage *)object).mutableData];
 }
 
 @end

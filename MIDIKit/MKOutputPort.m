@@ -42,4 +42,8 @@
     }
 }
 
+- (void)sendMessage:(MKMessage *)msg toDestination:(MKEndpoint *)endpoint {
+    [self sendData:msg.data toDestination:endpoint];
+}
+
 @end

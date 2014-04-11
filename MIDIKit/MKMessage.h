@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreMIDI/CoreMIDI.h>
 
 typedef NS_ENUM(UInt8, MKMessageType) {
     kMKMessageTypeNoteOn = 0x90,
@@ -17,6 +18,7 @@ typedef NS_ENUM(UInt8, MKMessageType) {
 @interface MKMessage : NSObject
 
 - (instancetype)initWithData:(NSData *)data;
+- (instancetype)initWithPacket:(MIDIPacket *)packet;
 
 @property (nonatomic, assign) MKMessageType type;
 @property (nonatomic, assign) UInt8 keyOrController;

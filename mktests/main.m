@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "MIDIKit.h"
 #import "LPDev.h"
+#import "LPMessage.h"
 
 
 #import <JavaScriptCore/JavaScriptCore.h>
@@ -28,7 +29,8 @@ MKConnection *conn;
 }
 
 - (void)inputPort:(MKInputPort *)inputPort receivedData:(NSData *)data fromSource:(MKEndpoint *)source {
-    NSLog(@"%@", inputPort.client);
+    MKMessage *msg = [[MKMessage alloc] initWithData:data];
+    NSLog(@"%@", msg);
     
     [inputPort.client.firstOutputPort sendData:data toDestination:[MKEndpoint firstDestinationMeetingCriteria:^BOOL(MKEndpoint *candidate) {
         return [candidate.name containsString:@"Launchpad Mini"];
@@ -52,12 +54,8 @@ int main(int argc, const char * argv[]){
         [client.firstInputPort connectSource:dev.rootSource];
         conn = [MKConnection connectionWithClient:client];
         [conn addDestination:dev.rootDestination];
-        
-        MKMessage *msg = [MKMessage new];
-        msg.type = kMKMessageTypeNoteOn;
-        msg.keyOrController = 0x33;
-        msg.velocityOrValue = 127;
-        [conn sendData:msg.data];
+    
+        [conn sendMessage:LPMessage.LEDTest];
         
         CFRunLoopRun();
 }

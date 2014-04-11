@@ -35,6 +35,12 @@
 		52B22EFF18F7C86900A5A5D3 /* MKConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EFD18F7C86900A5A5D3 /* MKConnection.m */; };
 		52B22F0518F803E900A5A5D3 /* MKMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22F0318F803E900A5A5D3 /* MKMessage.h */; };
 		52B22F0618F803E900A5A5D3 /* MKMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22F0418F803E900A5A5D3 /* MKMessage.m */; };
+		52B22F0C18F858E600A5A5D3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C70F18DEA14E00A8CFD4 /* Foundation.framework */; };
+		52B22F0F18F858E600A5A5D3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22F0E18F858E600A5A5D3 /* main.m */; };
+		52B22F1918F858F600A5A5D3 /* MIDIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D418DE96A200A8CFD4 /* MIDIKit.framework */; };
+		52B22F1C18F8592700A5A5D3 /* JRVirtualLaunchpad.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22F1B18F8592700A5A5D3 /* JRVirtualLaunchpad.m */; };
+		52B22F1F18F85C3F00A5A5D3 /* LPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22F1E18F85C3F00A5A5D3 /* LPMessage.m */; };
+		52B22F2018F85CCF00A5A5D3 /* LPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22F1E18F85C3F00A5A5D3 /* LPMessage.m */; };
 		52B2C12118E7928D00E82760 /* NSString+JRExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B2C11F18E7928D00E82760 /* NSString+JRExtensions.h */; };
 		52B2C12218E7928D00E82760 /* NSString+JRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2C12018E7928D00E82760 /* NSString+JRExtensions.m */; };
 /* End PBXBuildFile section */
@@ -47,10 +53,26 @@
 			remoteGlobalIDString = 5273C6D318DE96A200A8CFD4;
 			remoteInfo = MIDIKit;
 		};
+		52B22F1718F858ED00A5A5D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5273C6CB18DE96A200A8CFD4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5273C6D318DE96A200A8CFD4;
+			remoteInfo = MIDIKit;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		5273C72018DEA17B00A8CFD4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		52B22F0918F858E500A5A5D3 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -100,6 +122,13 @@
 		52B22EFD18F7C86900A5A5D3 /* MKConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKConnection.m; sourceTree = "<group>"; };
 		52B22F0318F803E900A5A5D3 /* MKMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMessage.h; sourceTree = "<group>"; };
 		52B22F0418F803E900A5A5D3 /* MKMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMessage.m; sourceTree = "<group>"; };
+		52B22F0B18F858E500A5A5D3 /* lpemutest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = lpemutest; sourceTree = BUILT_PRODUCTS_DIR; };
+		52B22F0E18F858E600A5A5D3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		52B22F1118F858E600A5A5D3 /* lpemutest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "lpemutest-Prefix.pch"; sourceTree = "<group>"; };
+		52B22F1A18F8592700A5A5D3 /* JRVirtualLaunchpad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRVirtualLaunchpad.h; sourceTree = "<group>"; };
+		52B22F1B18F8592700A5A5D3 /* JRVirtualLaunchpad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRVirtualLaunchpad.m; sourceTree = "<group>"; };
+		52B22F1D18F85C3F00A5A5D3 /* LPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPMessage.h; sourceTree = "<group>"; };
+		52B22F1E18F85C3F00A5A5D3 /* LPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPMessage.m; sourceTree = "<group>"; };
 		52B2C11F18E7928D00E82760 /* NSString+JRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+JRExtensions.h"; sourceTree = "<group>"; };
 		52B2C12018E7928D00E82760 /* NSString+JRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JRExtensions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,6 +152,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		52B22F0818F858E500A5A5D3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52B22F0C18F858E600A5A5D3 /* Foundation.framework in Frameworks */,
+				52B22F1918F858F600A5A5D3 /* MIDIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -132,6 +170,7 @@
 				52B2C11E18E7928D00E82760 /* srctree */,
 				5273C6DD18DE96A200A8CFD4 /* MIDIKit */,
 				5273C72418DEA17B00A8CFD4 /* mktests */,
+				52B22F0D18F858E600A5A5D3 /* lpemutest */,
 				5273C6D618DE96A200A8CFD4 /* Frameworks */,
 				5273C6D518DE96A200A8CFD4 /* Products */,
 			);
@@ -142,6 +181,7 @@
 			children = (
 				5273C6D418DE96A200A8CFD4 /* MIDIKit.framework */,
 				5273C72218DEA17B00A8CFD4 /* mktests */,
+				52B22F0B18F858E500A5A5D3 /* lpemutest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -227,6 +267,27 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		52B22F0D18F858E600A5A5D3 /* lpemutest */ = {
+			isa = PBXGroup;
+			children = (
+				52B22F0E18F858E600A5A5D3 /* main.m */,
+				52B22F1D18F85C3F00A5A5D3 /* LPMessage.h */,
+				52B22F1E18F85C3F00A5A5D3 /* LPMessage.m */,
+				52B22F1A18F8592700A5A5D3 /* JRVirtualLaunchpad.h */,
+				52B22F1B18F8592700A5A5D3 /* JRVirtualLaunchpad.m */,
+				52B22F1018F858E600A5A5D3 /* Supporting Files */,
+			);
+			path = lpemutest;
+			sourceTree = "<group>";
+		};
+		52B22F1018F858E600A5A5D3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				52B22F1118F858E600A5A5D3 /* lpemutest-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		52B2C11E18E7928D00E82760 /* srctree */ = {
 			isa = PBXGroup;
 			children = (
@@ -298,6 +359,24 @@
 			productReference = 5273C72218DEA17B00A8CFD4 /* mktests */;
 			productType = "com.apple.product-type.tool";
 		};
+		52B22F0A18F858E500A5A5D3 /* lpemutest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52B22F1418F858E600A5A5D3 /* Build configuration list for PBXNativeTarget "lpemutest" */;
+			buildPhases = (
+				52B22F0718F858E500A5A5D3 /* Sources */,
+				52B22F0818F858E500A5A5D3 /* Frameworks */,
+				52B22F0918F858E500A5A5D3 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				52B22F1818F858ED00A5A5D3 /* PBXTargetDependency */,
+			);
+			name = lpemutest;
+			productName = lpemutest;
+			productReference = 52B22F0B18F858E500A5A5D3 /* lpemutest */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -321,6 +400,7 @@
 			targets = (
 				5273C6D318DE96A200A8CFD4 /* MIDIKit */,
 				5273C72118DEA17B00A8CFD4 /* mktests */,
+				52B22F0A18F858E500A5A5D3 /* lpemutest */,
 			);
 		};
 /* End PBXProject section */
@@ -361,6 +441,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				5273C72618DEA17B00A8CFD4 /* main.m in Sources */,
+				52B22F2018F85CCF00A5A5D3 /* LPMessage.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52B22F0718F858E500A5A5D3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52B22F1F18F85C3F00A5A5D3 /* LPMessage.m in Sources */,
+				52B22F1C18F8592700A5A5D3 /* JRVirtualLaunchpad.m in Sources */,
+				52B22F0F18F858E600A5A5D3 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +462,11 @@
 			isa = PBXTargetDependency;
 			target = 5273C6D318DE96A200A8CFD4 /* MIDIKit */;
 			targetProxy = 5273C72E18DEA17F00A8CFD4 /* PBXContainerItemProxy */;
+		};
+		52B22F1818F858ED00A5A5D3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5273C6D318DE96A200A8CFD4 /* MIDIKit */;
+			targetProxy = 52B22F1718F858ED00A5A5D3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -508,6 +604,28 @@
 			};
 			name = Release;
 		};
+		52B22F1518F858E600A5A5D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "lpemutest/lpemutest-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		52B22F1618F858E600A5A5D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "lpemutest/lpemutest-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -537,6 +655,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		52B22F1418F858E600A5A5D3 /* Build configuration list for PBXNativeTarget "lpemutest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52B22F1518F858E600A5A5D3 /* Debug */,
+				52B22F1618F858E600A5A5D3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

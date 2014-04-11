@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@class MKInputPort, MKOutputPort, MKClient, MKEndpoint;
+#import "MKMessage.h"
+#import "MKEndpoint.h"
+#import "MKInputPort.h"
+#import "MKOutputPort.h"
 
 @interface MKConnection : NSObject
 
@@ -24,5 +26,6 @@
 @property (nonatomic, readonly) MKOutputPort *outputPort;
 
 - (void)sendData:(NSData *)data;
+- (void)sendMessage:(MKMessage *)message;
 
 @end

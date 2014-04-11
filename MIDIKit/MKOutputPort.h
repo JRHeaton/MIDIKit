@@ -8,6 +8,7 @@
 
 #import "MKObject.h"
 #import "MKClient.h"
+#import "MKMessage.h"
 
 // Output ports are unidirectional ports through which you can
 // transmit MIDI/MIDI-Sysex data to MIDI destination endpoints.
@@ -19,5 +20,6 @@
 
 // Sends the MIDI data to the given destination
 - (void)sendData:(NSData *)data toDestination:(MKEndpoint *)endpoint;
+- (void)sendMessage:(MKMessage *)msg toDestination:(MKEndpoint *)endpoint;
 
 @end
