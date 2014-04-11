@@ -12,11 +12,11 @@
 @implementation MKDevice
 
 - (MKEndpoint *)rootDestination {
-    return [self[0] destinationAtIndex:0];
+    return [[self entityAtIndex:0] destinationAtIndex:0];
 }
 
 - (MKEndpoint *)rootSource {
-    return [self[0] sourceAtIndex:0];
+    return [[self entityAtIndex:0] sourceAtIndex:0];
 }
 
 - (MKEntity *)entityAtIndex:(NSUInteger)index {

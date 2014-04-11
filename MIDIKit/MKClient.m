@@ -7,6 +7,9 @@
 //
 
 #import "MKClient.h"
+#import "MKInputPort.h"
+#import "MKOutputPort.h"
+#import "MKVirtualSource.h"
 
 @interface MKClient ()
 
@@ -46,6 +49,8 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
         
         _inputPorts = [NSMutableArray arrayWithCapacity:0];
         _outputPorts = [NSMutableArray arrayWithCapacity:0];
+        _virtualSources = [NSMutableArray arrayWithCapacity:0];
+        _virtualDestinations = [NSMutableArray arrayWithCapacity:0];
         self.notificationDelegates = [NSMutableSet setWithCapacity:0];
 
         MIDIClientCreate(cfName, _MKClientMIDINotifyProc, (__bridge void *)(self), &val);
@@ -97,15 +102,15 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
 }
 
 - (MKInputPort *)createInputPort {
-    MKInputPort *ret = [[MKInputPort alloc] initWithName:[NSString stringWithFormat:@"%@-Input-%lu", self.name, (unsigned long)self.inputPorts.count] client:self];
-    [self.inputPorts addObject:ret];
-    return ret;
+    return [[MKInputPort alloc] initWithName:[NSString stringWithFormat:@"%@-Input-%lu", self.name, (unsigned long)self.inputPorts.count] client:self];
 }
 
 - (MKOutputPort *)createOutputPort {
-    MKOutputPort *ret = [[MKOutputPort alloc] initWithName:[NSString stringWithFormat:@"%@-Output-%lu", self.name, (unsigned long)self.outputPorts.count] client:self];
-    [self.outputPorts addObject:ret];
-    return ret;
+    return [[MKOutputPort alloc] initWithName:[NSString stringWithFormat:@"%@-Output-%lu", self.name, (unsigned long)self.outputPorts.count] client:self];
+}
+
+- (MKVirtualSource *)createVirtualSourceNamed:(NSString *)name {
+    return [[MKVirtualSource alloc] initWithName:name ?: [NSString stringWithFormat:@"%@-VSource-%lu", self.name, (unsigned long)self.virtualSources.count] client:self];
 }
 
 - (void)addNotificationDelegate:(id<MKClientNotificationDelegate>)delegate {

@@ -26,6 +26,11 @@
 		52B22EED18F7A0EF00A5A5D3 /* MKInputPort.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EEB18F7A0EF00A5A5D3 /* MKInputPort.m */; };
 		52B22EF018F7A6C600A5A5D3 /* MKOutputPort.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EEE18F7A6C600A5A5D3 /* MKOutputPort.h */; };
 		52B22EF118F7A6C600A5A5D3 /* MKOutputPort.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EEF18F7A6C600A5A5D3 /* MKOutputPort.m */; };
+		52B22EF418F7B65D00A5A5D3 /* MKVirtualSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EF218F7B65D00A5A5D3 /* MKVirtualSource.h */; };
+		52B22EF518F7B65D00A5A5D3 /* MKVirtualSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EF318F7B65D00A5A5D3 /* MKVirtualSource.m */; };
+		52B22EF818F7B80900A5A5D3 /* MKVirtualDestination.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EF618F7B80900A5A5D3 /* MKVirtualDestination.h */; };
+		52B22EF918F7B80900A5A5D3 /* MKVirtualDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EF718F7B80900A5A5D3 /* MKVirtualDestination.m */; };
+		52B22EFB18F7BAF400A5A5D3 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B22EFA18F7BAF400A5A5D3 /* JavaScriptCore.framework */; };
 		52B2C12118E7928D00E82760 /* NSString+JRExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B2C11F18E7928D00E82760 /* NSString+JRExtensions.h */; };
 		52B2C12218E7928D00E82760 /* NSString+JRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2C12018E7928D00E82760 /* NSString+JRExtensions.m */; };
 /* End PBXBuildFile section */
@@ -82,6 +87,11 @@
 		52B22EEB18F7A0EF00A5A5D3 /* MKInputPort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKInputPort.m; sourceTree = "<group>"; };
 		52B22EEE18F7A6C600A5A5D3 /* MKOutputPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKOutputPort.h; sourceTree = "<group>"; };
 		52B22EEF18F7A6C600A5A5D3 /* MKOutputPort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKOutputPort.m; sourceTree = "<group>"; };
+		52B22EF218F7B65D00A5A5D3 /* MKVirtualSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKVirtualSource.h; sourceTree = "<group>"; };
+		52B22EF318F7B65D00A5A5D3 /* MKVirtualSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKVirtualSource.m; sourceTree = "<group>"; };
+		52B22EF618F7B80900A5A5D3 /* MKVirtualDestination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKVirtualDestination.h; sourceTree = "<group>"; };
+		52B22EF718F7B80900A5A5D3 /* MKVirtualDestination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKVirtualDestination.m; sourceTree = "<group>"; };
+		52B22EFA18F7BAF400A5A5D3 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		52B2C11F18E7928D00E82760 /* NSString+JRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+JRExtensions.h"; sourceTree = "<group>"; };
 		52B2C12018E7928D00E82760 /* NSString+JRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JRExtensions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -91,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52B22EFB18F7BAF400A5A5D3 /* JavaScriptCore.framework in Frameworks */,
 				5273C6D818DE96A200A8CFD4 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,6 +141,7 @@
 		5273C6D618DE96A200A8CFD4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				52B22EFA18F7BAF400A5A5D3 /* JavaScriptCore.framework */,
 				5273C6D718DE96A200A8CFD4 /* Cocoa.framework */,
 				5273C6EC18DE96A200A8CFD4 /* XCTest.framework */,
 				5273C70F18DEA14E00A8CFD4 /* Foundation.framework */,
@@ -166,6 +178,10 @@
 				5273C73A18DEADB800A8CFD4 /* MKEntity.m */,
 				5273C73D18DEADEE00A8CFD4 /* MKEndpoint.h */,
 				5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */,
+				52B22EF218F7B65D00A5A5D3 /* MKVirtualSource.h */,
+				52B22EF318F7B65D00A5A5D3 /* MKVirtualSource.m */,
+				52B22EF618F7B80900A5A5D3 /* MKVirtualDestination.h */,
+				52B22EF718F7B80900A5A5D3 /* MKVirtualDestination.m */,
 				5273C6DE18DE96A200A8CFD4 /* Supporting Files */,
 			);
 			path = MIDIKit;
@@ -217,8 +233,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5273C73718DEAD5700A8CFD4 /* MKDevice.h in Headers */,
+				52B22EF818F7B80900A5A5D3 /* MKVirtualDestination.h in Headers */,
 				5273C73F18DEADEE00A8CFD4 /* MKEndpoint.h in Headers */,
 				52B22EF018F7A6C600A5A5D3 /* MKOutputPort.h in Headers */,
+				52B22EF418F7B65D00A5A5D3 /* MKVirtualSource.h in Headers */,
 				52B2C12118E7928D00E82760 /* NSString+JRExtensions.h in Headers */,
 				52B22EEC18F7A0EF00A5A5D3 /* MKInputPort.h in Headers */,
 				5273C73B18DEADB800A8CFD4 /* MKEntity.h in Headers */,
@@ -315,6 +333,8 @@
 				5273C73C18DEADB800A8CFD4 /* MKEntity.m in Sources */,
 				52B22EED18F7A0EF00A5A5D3 /* MKInputPort.m in Sources */,
 				5273C70518DE9A9800A8CFD4 /* MKObject.m in Sources */,
+				52B22EF918F7B80900A5A5D3 /* MKVirtualDestination.m in Sources */,
+				52B22EF518F7B65D00A5A5D3 /* MKVirtualSource.m in Sources */,
 				52B2C12218E7928D00E82760 /* NSString+JRExtensions.m in Sources */,
 				52B22EF118F7A6C600A5A5D3 /* MKOutputPort.m in Sources */,
 			);

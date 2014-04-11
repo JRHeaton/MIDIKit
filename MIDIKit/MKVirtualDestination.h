@@ -1,19 +1,16 @@
 //
-//  MKOutputPort.h
+//  MKVirtualDestination.h
 //  MIDIKit
 //
 //  Created by John Heaton on 4/11/14.
 //  Copyright (c) 2014 John Heaton. All rights reserved.
 //
 
-#import "MKObject.h"
+#import "MKEndpoint.h"
 #import "MKClient.h"
 
-@interface MKOutputPort : MKObject <MKClientDependentInstaniation>
+@interface MKVirtualDestination : MKEndpoint <MKClientDependentInstaniation>
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
-- (void)dispose;
-
-- (void)sendData:(NSData *)data toEndpoint:(MKEndpoint *)endpoint;
 
 @end

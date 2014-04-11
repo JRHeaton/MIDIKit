@@ -10,7 +10,7 @@
 #import "MKEntity.h"
 #import "MKClient.h"
 
-@interface MKInputPort : MKObject
+@interface MKInputPort : MKObject <MKClientDependentInstaniation>
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
 
@@ -18,7 +18,5 @@
 - (void)disconnectSource:(MKEndpoint *)source;
 
 - (void)dispose;
-
-@property (nonatomic, weak) MKClient *client;
 
 @end

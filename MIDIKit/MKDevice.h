@@ -9,14 +9,6 @@
 #import "MKObject.h"
 #import "MKEntity.h"
 
-// A MIDI device owns one or more entities, which owns one or more endpoints.
-// Endpoints are bidirectional.
-// Example:
-// + Device: 'Launchpad S'
-// | + Entity 0: 'Launchpad S'
-// | | - Endpoint 0: 'Launchpad S'
-// This wrapper class provides areas of convenience when working with devices
-
 @interface MKDevice : MKObject
 
 - (MKEntity *)entityAtIndex:(NSUInteger)index;
@@ -26,8 +18,6 @@
 - (MKEndpoint *)rootDestination;
 - (MKEndpoint *)rootSource;
 
-// Please try to use numberOfEntities rather than entities.count
-// for performance reasons
 @property (nonatomic, readonly) NSUInteger numberOfEntities;
 @property (nonatomic, readonly) NSArray *entities;
 

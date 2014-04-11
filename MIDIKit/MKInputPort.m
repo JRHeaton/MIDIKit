@@ -11,6 +11,8 @@
 
 @implementation MKInputPort
 
+@synthesize client=_client;
+
 static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRefCon, void *srcConnRefCon) {
     MKInputPort *self = (__bridge MKInputPort *)(readProcRefCon);
     
@@ -24,6 +26,7 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
         return nil;
     
     self.client = client;
+    [self.client.inputPorts addObject:self];
     
     return self;
 }
