@@ -16,6 +16,7 @@
     if(!(self = [super init])) return nil;
     
     _MIDIRef = MIDIRef;
+    self.useCaching = YES;
     _propertyCache = [NSMutableDictionary dictionaryWithCapacity:0];
     
     return self;
@@ -26,9 +27,10 @@
 }
 
 - (void)performBlockWithCaching:(void (^)(MKObject *obj))block {
+    BOOL old = self.useCaching;
     self.useCaching = YES;
     block(self);
-    self.useCaching = NO;
+    self.useCaching = old;
 }
 
 - (instancetype)initWithUniqueID:(MIDIUniqueID)uniqueID {

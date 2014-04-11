@@ -41,7 +41,8 @@
 - (void)sendDataArray:(NSArray *)array toEndpoint:(MKEndpoint *)endpoint;
 
 // Starts listening for input data from the given source endpoint.
-- (void)connectSourceToInputPort:(MKEndpoint *)source;
+- (void)connectSource:(MKEndpoint *)source;
+- (void)disconnectSource:(MKEndpoint *)source;
 
 // Handy dynamic enumeration properties
 // NOTE: These are SYNCHRONOUS, and when they're called

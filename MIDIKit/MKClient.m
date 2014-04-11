@@ -47,8 +47,12 @@ static void MKClientInputCB(const MIDIPacketList *pktlist, void *readProcRefCon,
     return [self initWithName:[NSString stringWithFormat:@"%s-client", getprogname()]];
 }
 
-- (void)connectSourceToInputPort:(MKEndpoint *)source {
+- (void)connectSource:(MKEndpoint *)source {
     MIDIPortConnectSource(_inputPort.MIDIRef, source.MIDIRef, NULL);
+}
+
+- (void)disconnectSource:(MKEndpoint *)source {
+    MIDIPortDisconnectSource(_inputPort.MIDIRef, source.MIDIRef);
 }
 
 - (void)enumerateDevicesUsingBlock:(void (^)(MKDevice *device))block {
