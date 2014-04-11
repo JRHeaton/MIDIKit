@@ -11,6 +11,8 @@
 @class MKEntity;
 @interface MKEndpoint : MKObject
 
++ (instancetype)firstDestinationMeetingCriteria:(BOOL (^)(MKEndpoint *candidate))block;
+
 - (MKEntity *)entity;
 
 @end

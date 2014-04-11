@@ -40,6 +40,7 @@
 @property (nonatomic, readonly, getter = isMixer) BOOL mixer;
 @property (nonatomic, readonly, getter = isSampler) BOOL sampler;
 @property (nonatomic, readonly) BOOL isPrivate;
+
 - (NSString *)manufacturer;
 - (NSString *)name;
 - (NSString *)model;

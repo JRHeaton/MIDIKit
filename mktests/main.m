@@ -10,28 +10,23 @@
 #import "MIDIKit.h"
 #import "LPDev.h"
 
+
 #import <JavaScriptCore/JavaScriptCore.h>
 #import "NSString+JRExtensions.h"
 
 int main(int argc, const char * argv[]){
     @autoreleasepool {
 
-        MKClient *client = [MKClient clientWithName:@"Johns Client"];
-        MKInputPort *in = [client createInputPort];
-        in.inputHandler = ^(MKEndpoint *source, NSData *data) {
-            for(int i=0;i<data.length;++i) {
-                printf("%02x ", ((unsigned char *)data.bytes)[i]);
-            }
-            puts("");
-        };
+        uint8 buf[3] = { 0x90, 0x44, 31 };
         
-        [client enumerateDevicesUsingBlock:^(MKDevice *device) {
-            [in connectSource:device.rootSource];
-            
-        } constructorBlock:nil
-          restrictWithCriteria:^BOOL(MKDevice *rootDev) {
-            return rootDev.online && [rootDev.name containsString:@"Launchpad"];
+        MKClient *client = [MKClient clientWithName:@"Johns Client"];
+        MKEndpoint *lp = [MKEndpoint firstDestinationMeetingCriteria:^BOOL(MKEndpoint *candidate) {
+            return candidate.online && [candidate.name containsString:@"Launchpad"];
         }];
+        MKConnection *con = [[MKConnection alloc] initWithClient:client];
+        [con addDestination:lp];
+        
+        [con sendData:[NSData dataWithBytes:buf length:3]];
 
         CFRunLoopRun();
 }

@@ -19,3 +19,4 @@
 #import "MKDevice.h"
 #import "MKEntity.h"
 #import "MKEndpoint.h"
+#import "MKConnection.h"
