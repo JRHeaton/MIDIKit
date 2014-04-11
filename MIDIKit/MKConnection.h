@@ -27,6 +27,7 @@
 // NOTE: instantiation with a client will automatically
 // create an input and output port from the client
 // if they're not already created.
++ (instancetype)connectionWithNewClient;
 + (instancetype)connectionWithClient:(MKClient *)client;
 - (instancetype)initWithClient:(MKClient *)client;
 

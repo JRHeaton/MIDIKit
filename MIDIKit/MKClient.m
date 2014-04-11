@@ -80,10 +80,6 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
     return [self initWithName:[NSString stringWithFormat:@"%s-client", getprogname()]];
 }
 
-- (void)dealloc {
-    MIDIClientDispose(self.MIDIRef);
-}
-
 - (void)enumerateDevicesUsingBlock:(void (^)(MKDevice *device))enumerationBlock
                   constructorBlock:(MKDevice *(^)(MKDevice *rootDev))constructorBlock
               restrictWithCriteria:(BOOL (^)(MKDevice *rootDev))criteriaBlock {

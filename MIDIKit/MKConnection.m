@@ -27,6 +27,10 @@
     return self;
 }
 
++ (instancetype)connectionWithNewClient {
+    return [self connectionWithClient:[MKClient new]];
+}
+
 + (instancetype)connectionWithInputPort:(MKInputPort *)inputPort outputPort:(MKOutputPort *)outputPort {
     return [[self alloc] initWithInputPort:inputPort outputPort:outputPort];
 }

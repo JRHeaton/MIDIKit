@@ -44,13 +44,12 @@ int main(int argc, const char * argv[]){
 
         uint8 buf[3] = { 0xb0  , 0, 0 };
         
-        MKClient *client = [MKClient clientWithName:@"Johns Client"];
-        MKConnection *connection = [MKConnection connectionWithClient:client];
+        MKConnection *connection = [MKConnection connectionWithNewClient];
         [connection addDestination:[MKEndpoint firstDestinationMeetingCriteria:^BOOL(MKEndpoint *candidate) {
             return candidate.online && [candidate.name containsString:@"Launchpad Mini"];
         }]];
         
-        [connection sendMessage:LPMessage.reset];
+        [connection sendMessage:[LPMessage LEDTest]];
         
         
         CFRunLoopRun();
