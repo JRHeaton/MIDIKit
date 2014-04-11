@@ -9,8 +9,19 @@
 #import "MKEndpoint.h"
 #import "MKClient.h"
 
+@protocol MKVirtualDestinationDelegate;
 @interface MKVirtualDestination : MKEndpoint <MKClientDependentInstaniation>
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
+
+- (void)addDelegate:(id<MKVirtualDestinationDelegate>)delegate;
+- (void)removeDelegate:(id<MKVirtualDestinationDelegate>)delegate;
+
+@end
+
+@protocol MKVirtualDestinationDelegate <NSObject>
+
+- (void)virtualDestination:(MKVirtualDestination *)virtualDestination
+              receivedData:(NSData *)data;
 
 @end

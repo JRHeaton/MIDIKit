@@ -27,8 +27,23 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
         case kMIDIMsgSetupChanged: break;
         case kMIDIMsgObjectAdded:
         case kMIDIMsgObjectRemoved: {
-            MIDIObjectAddRemoveNotification *notif = (MIDIObjectAddRemoveNotification *)message;
+            if(!self.notificationDelegates.count) return;
             
+            MIDIObjectAddRemoveNotification *notif = (MIDIObjectAddRemoveNotification *)message;
+            Class c;
+            switch(notif->childType) {
+                case kMIDIObjectType_Device: c = [MKDevice class]; break;
+                case kMIDIObjectType_Destination:
+                case kMIDIObjectType_Source: c = [MKEndpoint class]; break;
+                case kMIDIObjectType_Entity: c = [MKEntity class]; break;
+                default: c = [MKObject class]; break;
+            }
+            
+            for(id<MKClientNotificationDelegate> delegate in self.notificationDelegates) {
+                if([delegate respondsToSelector:@selector(midiClient:objectConnected:ofType:)]) {
+                    [delegate midiClient:self objectConnected:[[c alloc] initWithMIDIRef:notif->child] ofType:notif->childType];
+                }
+            }
         } break;
         case kMIDIMsgPropertyChanged: break;
         case kMIDIMsgThruConnectionsChanged: break;

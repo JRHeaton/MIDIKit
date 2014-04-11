@@ -20,3 +20,4 @@
 #import "MKEntity.h"
 #import "MKEndpoint.h"
 #import "MKConnection.h"
+#import "MKMessage.h"

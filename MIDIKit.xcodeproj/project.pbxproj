@@ -33,6 +33,8 @@
 		52B22EFB18F7BAF400A5A5D3 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B22EFA18F7BAF400A5A5D3 /* JavaScriptCore.framework */; };
 		52B22EFE18F7C86900A5A5D3 /* MKConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EFC18F7C86900A5A5D3 /* MKConnection.h */; };
 		52B22EFF18F7C86900A5A5D3 /* MKConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EFD18F7C86900A5A5D3 /* MKConnection.m */; };
+		52B22F0518F803E900A5A5D3 /* MKMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22F0318F803E900A5A5D3 /* MKMessage.h */; };
+		52B22F0618F803E900A5A5D3 /* MKMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22F0418F803E900A5A5D3 /* MKMessage.m */; };
 		52B2C12118E7928D00E82760 /* NSString+JRExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B2C11F18E7928D00E82760 /* NSString+JRExtensions.h */; };
 		52B2C12218E7928D00E82760 /* NSString+JRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2C12018E7928D00E82760 /* NSString+JRExtensions.m */; };
 /* End PBXBuildFile section */
@@ -96,6 +98,8 @@
 		52B22EFA18F7BAF400A5A5D3 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		52B22EFC18F7C86900A5A5D3 /* MKConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKConnection.h; sourceTree = "<group>"; };
 		52B22EFD18F7C86900A5A5D3 /* MKConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKConnection.m; sourceTree = "<group>"; };
+		52B22F0318F803E900A5A5D3 /* MKMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMessage.h; sourceTree = "<group>"; };
+		52B22F0418F803E900A5A5D3 /* MKMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMessage.m; sourceTree = "<group>"; };
 		52B2C11F18E7928D00E82760 /* NSString+JRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+JRExtensions.h"; sourceTree = "<group>"; };
 		52B2C12018E7928D00E82760 /* NSString+JRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JRExtensions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -188,6 +192,8 @@
 				52B22EF718F7B80900A5A5D3 /* MKVirtualDestination.m */,
 				52B22EFC18F7C86900A5A5D3 /* MKConnection.h */,
 				52B22EFD18F7C86900A5A5D3 /* MKConnection.m */,
+				52B22F0318F803E900A5A5D3 /* MKMessage.h */,
+				52B22F0418F803E900A5A5D3 /* MKMessage.m */,
 				5273C6DE18DE96A200A8CFD4 /* Supporting Files */,
 			);
 			path = MIDIKit;
@@ -244,6 +250,7 @@
 				5273C73F18DEADEE00A8CFD4 /* MKEndpoint.h in Headers */,
 				52B22EF018F7A6C600A5A5D3 /* MKOutputPort.h in Headers */,
 				52B22EF418F7B65D00A5A5D3 /* MKVirtualSource.h in Headers */,
+				52B22F0518F803E900A5A5D3 /* MKMessage.h in Headers */,
 				52B2C12118E7928D00E82760 /* NSString+JRExtensions.h in Headers */,
 				52B22EEC18F7A0EF00A5A5D3 /* MKInputPort.h in Headers */,
 				5273C73B18DEADB800A8CFD4 /* MKEntity.h in Headers */,
@@ -337,6 +344,7 @@
 				5273C70918DE9E2500A8CFD4 /* MKClient.m in Sources */,
 				5273C74018DEADEE00A8CFD4 /* MKEndpoint.m in Sources */,
 				5273C73818DEAD5700A8CFD4 /* MKDevice.m in Sources */,
+				52B22F0618F803E900A5A5D3 /* MKMessage.m in Sources */,
 				5273C73C18DEADB800A8CFD4 /* MKEntity.m in Sources */,
 				52B22EED18F7A0EF00A5A5D3 /* MKInputPort.m in Sources */,
 				5273C70518DE9A9800A8CFD4 /* MKObject.m in Sources */,

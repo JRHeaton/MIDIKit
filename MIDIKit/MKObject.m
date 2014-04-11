@@ -175,4 +175,13 @@ GETTER(MIDIUniqueID, uniqueID, kMIDIPropertyUniqueID, integer)
     return [super isEqual:object];
 }
 
+- (void)purgeCache {
+    [_propertyCache removeAllObjects];
+}
+
+- (void)setMIDIRef:(MIDIObjectRef)MIDIRef {
+    _MIDIRef = MIDIRef;
+    [self purgeCache];
+}
+
 @end

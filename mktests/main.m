@@ -13,6 +13,7 @@
 
 #import <JavaScriptCore/JavaScriptCore.h>
 #import "NSString+JRExtensions.h"
+MKConnection *conn;
 
 @interface test : NSObject <MKInputPortDelegate>
 
@@ -22,8 +23,16 @@
 
 @implementation test
 
+- (void)loggy {
+    NSLog(@"dsf");
+}
+
 - (void)inputPort:(MKInputPort *)inputPort receivedData:(NSData *)data fromSource:(MKEndpoint *)source {
-    NSLog(@"Got data of length %lu on port %@ from source %@", data.length, inputPort.name, source.name);
+    NSLog(@"%@", inputPort.client);
+    
+    [inputPort.client.firstOutputPort sendData:data toDestination:[MKEndpoint firstDestinationMeetingCriteria:^BOOL(MKEndpoint *candidate) {
+        return [candidate.name containsString:@"Launchpad Mini"];
+    }]];
 }
 
 @end
@@ -37,10 +46,18 @@ int main(int argc, const char * argv[]){
         MKDevice *dev = [MKDevice firstDeviceMeetingCriteria:^BOOL(MKDevice *candidate) {
             return candidate.online && [candidate.name containsString:@"Launchpad"];
         }];
-        MKConnection *conn = [MKConnection connectionWithClient:client];
+        test *t = [test new];
+        [client.firstInputPort addInputDelegate:t];
+        
+        [client.firstInputPort connectSource:dev.rootSource];
+        conn = [MKConnection connectionWithClient:client];
         [conn addDestination:dev.rootDestination];
         
-        [conn sendData:[NSData dataWithBytes:buf length:3]];
+        MKMessage *msg = [MKMessage new];
+        msg.type = kMKMessageTypeNoteOn;
+        msg.keyOrController = 0x33;
+        msg.velocityOrValue = 127;
+        [conn sendData:msg.data];
         
         CFRunLoopRun();
 }

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreMIDI/CoreMIDI.h>
+#import <JavaScriptCore/JavaScriptCore.h>
 
 /*
  This is the root wrapper class for CoreMIDI objects.
@@ -35,6 +36,7 @@
 
 // Turns useCaching on during execution, then back to previous setting
 - (void)performBlockWithCaching:(void (^)(MKObject *obj))block;
+- (void)purgeCache;
 
 // Accessing MIDI properties
 - (NSString *)stringPropertyForKey:(CFStringRef)key;

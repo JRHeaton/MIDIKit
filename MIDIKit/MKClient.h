@@ -78,3 +78,10 @@
 @property (nonatomic, weak) MKClient *client;
 
 @end
+
+@protocol MKClientNotificationDelegate <NSObject>
+
+- (void)midiClient:(MKClient *)client objectConnected:(MKObject *)object ofType:(MIDIObjectType)type;
+- (void)midiClient:(MKClient *)client objectDisconnected:(MKObject *)object ofType:(MIDIObjectType)type;
+
+@end
