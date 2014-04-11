@@ -30,8 +30,17 @@ typedef NS_ENUM(UInt8, MKMessageType) {
 
 + (instancetype)messageWithData:(NSData *)data;
 + (instancetype)messageWithPacket:(MIDIPacket *)packet;
++ (instancetype)messageWithType:(MKMessageType)type
+                keyOrController:(UInt8)keyOrController
+                velocityOrValue:(UInt8)velocityOrValue;
 - (instancetype)initWithData:(NSData *)data;
 - (instancetype)initWithPacket:(MIDIPacket *)packet;
+- (instancetype)initWithType:(MKMessageType)type
+             keyOrController:(UInt8)keyOrController
+             velocityOrValue:(UInt8)velocityOrValue;
+
+// Hacky, but useful...
++ (instancetype):(UInt8)type :(UInt8)keyOrController :(UInt8)velocityOrValue;
 
 // First 3 bytes of the buffer(zero if doesn't exist)
 @property (nonatomic, assign) MKMessageType type;

@@ -20,7 +20,10 @@ void test_javascript() {
 
 int main(int argc, const char * argv[]){
     @autoreleasepool {
-        test_javascript();
+        MKConnection *c = [MKConnection connectionWithNewClient];
+        [c addDestination:[MKEndpoint firstOnlineDestinationNamed:@"Launchpad Mini 4"]];
+        
+        [c sendMessage:[MKMessage :0x90 :0x33 :31]];
         
         CFRunLoopRun();
     }

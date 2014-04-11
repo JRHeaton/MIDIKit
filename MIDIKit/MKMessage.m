@@ -51,6 +51,22 @@
     return self;
 }
 
++ (instancetype)messageWithType:(MKMessageType)type keyOrController:(UInt8)keyOrController velocityOrValue:(UInt8)velocityOrValue {
+    return [[self alloc] initWithType:type keyOrController:keyOrController velocityOrValue:velocityOrValue];
+}
+
++ (instancetype):(UInt8)type :(UInt8)keyOrController :(UInt8)velocityOrValue {
+    return [[self alloc] initWithType:type keyOrController:keyOrController velocityOrValue:velocityOrValue];
+}
+
+- (instancetype)initWithType:(MKMessageType)type
+             keyOrController:(UInt8)keyOrController
+             velocityOrValue:(UInt8)velocityOrValue {
+    UInt8 buf[3] = { type, keyOrController, velocityOrValue };
+
+    return [self initWithData:[NSData dataWithBytes:buf length:3]];
+}
+
 - (NSString *)description {
     return [NSString stringWithFormat:@"%@ length=0x%lx, type=0x%02x, keyOrController=0x%02x, velocityOrValue=0x%02x, channel=%d", super.description, (unsigned long)self.length, self.type, self.keyOrController, self.velocityOrValue, self.channel];
 }
@@ -71,8 +87,12 @@
     return (self.type & 0x0F) + 1;
 }
 
+- (void)setChannel:(UInt8)channel {
+    [self setByte:(self.type | channel) atIndex:0];
+}
+
 - (void)setType:(MKMessageType)type {
-    [self setByte:type atIndex:0];
+    [self setByte:(type | self.channel) atIndex:0];
 }
 
 - (void)setKeyOrController:(UInt8)keyOrController {
