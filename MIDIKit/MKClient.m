@@ -93,6 +93,10 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
     return self;
 }
 
++ (instancetype)client {
+    return [[self alloc] init];
+}
+
 - (instancetype)init {
     return [self initWithName:[NSString stringWithFormat:@"%@-%d-Client", [NSProcessInfo processInfo].processName, [NSProcessInfo processInfo].processIdentifier]];
 }
@@ -102,20 +106,12 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
     self.MIDIRef = 0;
 }
 
-- (MKInputPort *)firstInputPort {
-    return !self.inputPorts.count ? self.createInputPort : self.inputPorts[0];
+- (MKInputPort *)createInputPortNamed:(NSString *)name {
+    return [[MKInputPort alloc] initWithName:name ?: [NSString stringWithFormat:@"%@-Input-%lu", self.name, (unsigned long)self.inputPorts.count] client:self];
 }
 
-- (MKInputPort *)firstOutputPort {
-    return !self.outputPorts.count ? self.createOutputPort : self.outputPorts[0];
-}
-
-- (MKInputPort *)createInputPort {
-    return [[MKInputPort alloc] initWithName:[NSString stringWithFormat:@"%@-Input-%lu", self.name, (unsigned long)self.inputPorts.count] client:self];
-}
-
-- (MKOutputPort *)createOutputPort {
-    return [[MKOutputPort alloc] initWithName:[NSString stringWithFormat:@"%@-Output-%lu", self.name, (unsigned long)self.outputPorts.count] client:self];
+- (MKOutputPort *)createOutputPortNamed:(NSString *)name {
+    return [[MKOutputPort alloc] initWithName:name ?: [NSString stringWithFormat:@"%@-Output-%lu", self.name, (unsigned long)self.outputPorts.count] client:self];
 }
 
 - (MKVirtualSource *)createVirtualSourceNamed:(NSString *)name {
@@ -134,6 +130,30 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
 - (void)removeNotificationDelegate:(id<MKClientNotificationDelegate>)delegate {
     if([self.notificationDelegates containsObject:delegate])
         [self.notificationDelegates removeObject:delegate];
+}
+
+- (MKVirtualSource *)createVirtualSource {
+    return [self createVirtualSourceNamed:nil];
+}
+
+- (MKVirtualDestination *)createVirtualDestination {
+    return [self createVirtualDestinationNamed:nil];
+}
+
+- (MKInputPort *)createInputPort {
+    return [self createInputPortNamed:nil];
+}
+
+- (MKOutputPort *)createOutputPort {
+    return [self createOutputPortNamed:nil];
+}
+
+- (MKInputPort *)firstInputPort {
+    return !self.inputPorts.count ? self.createInputPort : self.inputPorts[0];
+}
+
+- (MKInputPort *)firstOutputPort {
+    return !self.outputPorts.count ? self.createOutputPort : self.outputPorts[0];
 }
 
 @end

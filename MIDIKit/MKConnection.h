@@ -31,8 +31,7 @@
 JSExportAs(connectionWithPorts,
 + (instancetype)connectionWithInputPort:(MKInputPort *)inputPort outputPort:(MKOutputPort *)outputPort);
 
-JSExportAs(sendMessages,
-- (void)sendMessageArray:(NSArray *)messages);
+- (void)sendMessageArray:(NSArray *)messages;
 - (void)sendMessage:(MKMessage *)message;
 
 JSExportAs(send, - (instancetype)sendNumberArray:(NSArray *)array);

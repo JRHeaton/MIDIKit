@@ -14,10 +14,35 @@
 
 @implementation MKMessage
 
-@synthesize type=_type;
-@synthesize keyOrController=_keyOrController;
-@synthesize velocityOrValue=_velocityOrValue;
-@synthesize channel=_channel;
+@dynamic type, key, controller, velocity, value;
+
++ (MKMessageType)noteOnType {
+    return kMKMessageTypeNoteOn;
+}
+
++ (MKMessageType)noteOffType {
+    return kMKMessageTypeNoteOff;
+}
+
++ (MKMessageType)controlChangeType {
+    return kMKMessageTypeControlChange;
+}
+
++ (MKMessageType)polyphonicAfterTouchType {
+    return kMKMessageTypePolyphonicKeyPressureAfterTouch;
+}
+
++ (MKMessageType)programChangeType {
+    return kMKMessageTypeProgramChange;
+}
+
++ (MKMessageType)channelAfterTouchType {
+    return kMKMessageTypeChannelPressureAfterTouch;
+}
+
++ (MKMessageType)pitchBendType {
+    return kMKMessageTypePitchBend;
+}
 
 + (instancetype)controlChangeMessageWithController:(UInt8)controller value:(UInt8)value {
     static UInt8 buf[3] = { 0xb0, 0x00, 0x00 };
@@ -36,14 +61,14 @@
 }
 
 - (instancetype)initWithData:(NSData *)data {
-    if(!(self = [super init])) return nil;
+    if(!(self = [self init])) return nil;
     _mutableData = data.mutableCopy ?: [NSMutableData dataWithCapacity:0];
     return self;
 }
 
 - (instancetype)init {
     if(!(self = [super init])) return nil;
-    _mutableData = [NSMutableData dataWithCapacity:0];
+    _mutableData = [NSMutableData dataWithLength:3];
     return self;
 }
 
@@ -88,16 +113,48 @@
     return self.length ? self.bytes[2] : 0;
 }
 
+- (UInt8)velocity {
+    return self.velocityOrValue;
+}
+
+- (void)setVelocity:(UInt8)velocity {
+    [self setVelocityOrValue:velocity];
+}
+
+- (UInt8)value {
+    return self.velocityOrValue;
+}
+
+- (void)setValue:(UInt8)value {
+    [self setVelocityOrValue:value];
+}
+
+- (UInt8)key {
+    return self.keyOrController;
+}
+
+- (void)setKey:(UInt8)value {
+    [self setKeyOrController:value];
+}
+
+- (UInt8)controller {
+    return self.keyOrController;
+}
+
+- (void)setController:(UInt8)controller {
+    [self setKeyOrController:controller];
+}
+
 - (UInt8)channel {
-    return (self.type & 0x0F) + 1;
+    return (self.bytes[0] & 0x0F) + 1;
 }
 
 - (void)setChannel:(UInt8)channel {
-    [self setByte:(self.type | channel) atIndex:0];
+    [self setByte:(self.type | (MAX(1, MIN(16, channel)) - 1)) atIndex:0];
 }
 
 - (void)setType:(MKMessageType)type {
-    [self setByte:(type | self.channel) atIndex:0];
+    [self setByte:(type | (self.channel - 1)) atIndex:0];
 }
 
 - (void)setKeyOrController:(UInt8)keyOrController {
@@ -108,8 +165,8 @@
     [self setByte:velocityOrValue atIndex:2];
 }
 
-- (NSData *)data {
-    return (NSData *)self.mutableData;
+- (NSMutableData *)data {
+    return self.mutableData;
 }
 
 - (UInt8 *)bytes {

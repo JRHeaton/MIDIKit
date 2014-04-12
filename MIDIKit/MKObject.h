@@ -54,6 +54,9 @@
 // Whether or not the MIDIRef is junk
 @property (nonatomic, readonly, getter = isValid) BOOL valid;
 
+- (BOOL)transmitsOnChannel:(NSInteger)channel;
+- (BOOL)receivesOnChannel:(NSInteger)channel;
+
 @end
 
 /*
@@ -86,10 +89,6 @@
 - (NSData *)dataPropertyForKey:(CFStringRef)key;
 - (NSDictionary *)dictionaryPropertyForKey:(CFStringRef)key;
 
-// This will copy the entire dict. This is called in -description,
-// but is not recommended for general use. It may be slow.
-- (NSDictionary *)allProperties;
-
 // Setting/removing properties
 - (void)setStringProperty:(NSString *)value forKey:(CFStringRef)key;
 - (void)setIntegerProperty:(NSInteger)value forKey:(CFStringRef)key;
@@ -97,8 +96,9 @@
 - (void)setDictionaryProperty:(NSDictionary *)value forKey:(CFStringRef)key;
 - (void)removePropertyForKey:(CFStringRef)key;
 
-- (BOOL)transmitsOnChannel:(NSInteger)channel;
-- (BOOL)receivesOnChannel:(NSInteger)channel;
+// This will copy the entire dict. This is called in -description,
+// but is not recommended for general use. It may be slow.
+- (NSDictionary *)allProperties;
 
 // Underlying MIDI object
 @property (nonatomic, assign) MIDIObjectRef MIDIRef;

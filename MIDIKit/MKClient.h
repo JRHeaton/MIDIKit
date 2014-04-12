@@ -19,6 +19,8 @@
 
 @protocol MKClientJS <JSExport>
 
++ (instancetype)new;
++ (instancetype)client; // created based on process name
 + (instancetype)clientWithName:(NSString *)name;
 
 // firstInputPort and firstOutputPort will look to see if there are
@@ -27,17 +29,21 @@
 - (MKInputPort *)firstInputPort;
 - (MKOutputPort *)firstOutputPort;
 
-// This will create and and insert a port into the corresponding array,
+// This will create and and insert a port/endpoint into the corresponding array,
 // and return it.
 - (MKInputPort *)createInputPort;
 - (MKOutputPort *)createOutputPort;
+- (MKVirtualSource *)createVirtualSource;
+- (MKVirtualDestination *)createVirtualDestination;
+
+// Named port/endpoint instantiation
+- (MKInputPort *)createInputPortNamed:(NSString *)name;
+- (MKOutputPort *)createOutputPortNamed:(NSString *)name;
+- (MKVirtualSource *)createVirtualSourceNamed:(NSString *)name;
+- (MKVirtualDestination *)createVirtualDestinationNamed:(NSString *)name;
 
 // Disposes the MIDIRef(MIDIClientRef) object (invalidates this object)
 - (void)dispose;
-
-// These create and insert virtual endpoints and return them
-- (MKVirtualSource *)createVirtualSourceNamed:(NSString *)name;
-- (MKVirtualDestination *)createVirtualDestinationNamed:(NSString *)name;
 
 // If the convenience methods for instantiation of ports and endpoints
 // on this class is used, they are inserted automatically into these
@@ -57,6 +63,17 @@
 
 @end
 
+@protocol MKClientNotificationDelegate <NSObject>
+
+- (void)midiClient:(MKClient *)client objectConnected:(MKObject *)object ofType:(MIDIObjectType)type;
+- (void)midiClient:(MKClient *)client objectDisconnected:(MKObject *)object ofType:(MIDIObjectType)type;
+- (void)midiClient:(MKClient *)client object:(MKObject *)object changedValueOfPropertyForKey:(CFStringRef)key;
+
+@end
+
+
+// ---------------------------------------------------
+// Protocols used for instaniation/reference to client
 @protocol MKClientReference <NSObject, JSExport>
 
 @property (nonatomic, weak) MKClient *client;
@@ -68,13 +85,5 @@
 @protocol MKClientDependentInstaniation <NSObject>
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
-
-@end
-
-@protocol MKClientNotificationDelegate <NSObject>
-
-- (void)midiClient:(MKClient *)client objectConnected:(MKObject *)object ofType:(MIDIObjectType)type;
-- (void)midiClient:(MKClient *)client objectDisconnected:(MKObject *)object ofType:(MIDIObjectType)type;
-- (void)midiClient:(MKClient *)client object:(MKObject *)object changedValueOfPropertyForKey:(CFStringRef)key;
 
 @end

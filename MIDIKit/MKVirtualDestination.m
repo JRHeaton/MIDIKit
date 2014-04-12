@@ -35,7 +35,7 @@ static void _MKVirtualDestinationReadProc(const MIDIPacketList *pktlist, void *r
         return nil;
     
     self.client = client;
-    [self.client.virtualSources addObject:self];
+    [self.client.virtualDestinations addObject:self];
     _delegates = [NSMutableSet setWithCapacity:0];
     
     return self;

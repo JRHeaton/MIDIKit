@@ -1,5 +1,7 @@
-var client = MKClient.clientWithName("my client");
-var connection = MKConnection.connectionWithClient(client);
+var client = MKClient.new()
+var lp = MKEndpoint.firstOnlineDestinationNamed('Launchpad Mini 4');
+var port = client.firstOutputPort();
 
-connection.addDestination(MKEndpoint.firstOnlineDestinationNamed("Launchpad Mini 4"));
-connection.sendMessages([LPMessage.setLayoutXY(), LPMessage.LEDTest()]);
+var msg = LPMessage.reset();
+
+port.sendMessage(msg, lp);

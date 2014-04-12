@@ -21,7 +21,12 @@
 }
 
 - (void)setup {
-    self[@"console"] = @{ @"log" : ^(NSString *log) { NSLog(@"%@", log); } };
+    void (^logBlock)(NSString *log) = ^(NSString *log) { NSLog(@"%@", log); };
+    void (^logObjectBlock)(JSValue *val) = ^(JSValue *val) { NSLog(@"%@", val.toObject); };
+
+    self[@"console"] = @{ @"log" : logBlock, @"logObject" : logObjectBlock };
+    self[@"log"] = logBlock;
+    self[@"logObject"] = logObjectBlock;
 
     for(NSString *className in @[ @"MKObject",
                                   @"MKClient",
@@ -34,7 +39,10 @@
                                   @"MKVirtualDestination",
                                   @"MKConnection",
                                   @"MKMessage" ]) {
-        self[className] = NSClassFromString(className);
+        // Include unprefixed (MKClient and Client)
+        Class c = NSClassFromString(className);
+
+        self[className] = c;
     }
 }
 

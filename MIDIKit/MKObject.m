@@ -41,6 +41,10 @@
     block(self);
     self.useCaching = old;
 }
+//
+//- (instancetype)init {
+//    return nil;
+//}
 
 - (instancetype)initWithUniqueID:(MIDIUniqueID)uniqueID {
     if(!(self = [super init])) return nil;
