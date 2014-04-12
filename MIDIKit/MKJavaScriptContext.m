@@ -8,6 +8,7 @@
 
 #import "MKJavaScriptContext.h"
 #import "MKClient.h"
+#import "MKConnection.h"
 
 @implementation MKJavaScriptContext
 
@@ -32,6 +33,16 @@
     };
     self[@"firstOnlineSourceNamed"] = ^(NSString *name) {
         return [MKEndpoint firstOnlineSourceNamed:name];
+    };
+    self[@"createConnection"] = ^(MKClient *client) {
+        MKConnection *ret;
+        if(client && [client isKindOfClass:[MKClient class]]) {
+            ret = [MKConnection connectionWithClient:client];
+        } else {
+            ret = [MKConnection connectionWithNewClient];
+        }
+        
+        return ret;
     };
     
 }

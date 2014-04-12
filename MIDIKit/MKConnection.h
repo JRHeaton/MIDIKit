@@ -11,6 +11,7 @@
 #import "MKEndpoint.h"
 #import "MKInputPort.h"
 #import "MKOutputPort.h"
+#import <JavaScriptCore/JavaScriptCore.h>
 
 // A connection object is essentially a convenient way to
 // send and receive from multiple sources and destinations
@@ -22,7 +23,26 @@
 // [connection addDestination:myDestination];
 // [connection sendMessage:[MKMessage controlChangeMessageWithController:0 value:0]];
 
-@interface MKConnection : NSObject
+@protocol MKConnectionJS <JSExport>
+
+- (void)sendMessageArray:(NSArray *)messages;
+- (void)sendMessage:(MKMessage *)message;
+
+JSExportAs(send, - (instancetype)sendNumberArray:(NSArray *)array);
+
+@property (nonatomic, weak) MKClient *client;
+
+@property (nonatomic, readonly) MKInputPort *inputPort;
+@property (nonatomic, readonly) MKOutputPort *outputPort;
+
+- (instancetype)addDestination:(MKEndpoint *)destination;
+- (instancetype)removeDestination:(MKEndpoint *)destination;
+- (MKEndpoint *)destinationAtIndex:(NSUInteger)index;
+@property (nonatomic, readonly) NSMutableOrderedSet *destinations;
+
+@end
+
+@interface MKConnection : NSObject <MKConnectionJS>
 
 // NOTE: instantiation with a client will automatically
 // create an input and output port from the client
@@ -34,23 +54,11 @@
 + (instancetype)connectionWithInputPort:(MKInputPort *)inputPort outputPort:(MKOutputPort *)outputPort;
 - (instancetype)initWithInputPort:(MKInputPort *)inputPort outputPort:(MKOutputPort *)outputPort;
 
-- (void)addDestination:(MKEndpoint *)destination;
-- (void)removeDestination:(MKEndpoint *)destination;
-- (MKEndpoint *)destinationAtIndex:(NSUInteger)index;
-@property (nonatomic, readonly) NSMutableOrderedSet *destinations;
-
-@property (nonatomic, readonly) MKInputPort *inputPort;
-@property (nonatomic, readonly) MKOutputPort *outputPort;
-
 // Uses the output port to send to all destinations
 - (void)sendData:(NSData *)data;
-- (void)sendMessage:(MKMessage *)message;
 - (void)sendMessages:(MKMessage *)message, ... NS_REQUIRES_NIL_TERMINATION;
-- (void)sendMessageArray:(NSArray *)messages;
 
 // Async helper
 - (instancetype)performBlock:(void (^)(MKConnection *c))block afterDelay:(NSTimeInterval)delay;
-
-@property (nonatomic, weak) MKClient *client;
 
 @end

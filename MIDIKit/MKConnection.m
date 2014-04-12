@@ -12,7 +12,11 @@
 #import "MKOutputPort.h"
 
 @implementation MKConnection
+@synthesize client=_client;
 
+@synthesize inputPort=_inputPort;
+@synthesize outputPort=_outputPort;
+@synthesize destinations=_destinations;
 
 + (instancetype)connectionWithClient:(MKClient *)client {
     return [[self alloc] initWithClient:(id)client];
@@ -42,14 +46,18 @@
     return self;
 }
 
-- (void)addDestination:(MKEndpoint *)destination {
+- (instancetype)addDestination:(MKEndpoint *)destination {
     if(![self.destinations containsObject:destination])
         [self.destinations addObject:destination];
+    
+    return self;
 }
 
-- (void)removeDestination:(MKEndpoint *)destination {
+- (instancetype)removeDestination:(MKEndpoint *)destination {
     if([self.destinations containsObject:destination])
         [self.destinations removeObject:destination];
+    
+    return self;
 }
 
 - (MKEndpoint *)destinationAtIndex:(NSUInteger)index {
@@ -60,6 +68,20 @@
     for(MKEndpoint *dst in self.destinations) {
         [self.outputPort sendData:data toDestination:dst];
     }
+}
+
+- (instancetype)sendNumberArray:(NSArray *)array {
+    NSMutableData *data = [NSMutableData new];
+    for(NSNumber *number in array) {
+        if([number isKindOfClass:[NSNumber class]]) {
+            unsigned char byte = number.unsignedCharValue;
+            [data appendBytes:&byte length:1];
+        }
+    }
+    
+    [self sendData:data];
+    
+    return self;
 }
 
 - (void)sendMessage:(MKMessage *)message {
