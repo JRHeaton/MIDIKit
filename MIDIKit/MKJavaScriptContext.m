@@ -21,8 +21,10 @@
 }
 
 - (void)setup {
+    MKClient *client = [MKClient clientWithName:@"MKJavaScriptClient"];
+    
     self[@"console"] = @{ @"log" : ^(NSString *log) { NSLog(@"%@", log); } };
-    self[@"client"] = [MKClient clientWithName:@"MKJavaScriptClient"];
+    self[@"client"] = client;
     self[@"numberOfDevices"] = ^{ return [MKDevice numberOfDevices]; };
     self[@"numberOfSources"] = ^{ return [MKEndpoint numberOfSources]; };
     self[@"sourceAtIndex"] = ^(NSUInteger index) { return [MKEndpoint sourceAtIndex:index]; };
@@ -35,16 +37,8 @@
         return [MKEndpoint firstOnlineSourceNamed:name];
     };
     self[@"createConnection"] = ^(MKClient *client) {
-        MKConnection *ret;
-        if(client && [client isKindOfClass:[MKClient class]]) {
-            ret = [MKConnection connectionWithClient:client];
-        } else {
-            ret = [MKConnection connectionWithNewClient];
-        }
-        
-        return ret;
+        return [MKConnection connectionWithClient:client];
     };
-    
 }
 
 @end
