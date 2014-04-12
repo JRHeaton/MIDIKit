@@ -98,7 +98,6 @@
 }
 
 - (void)sendMessageArray:(NSArray *)messages {
-    NSLog(@"called w %@", messages);
     for(MKMessage *msg in messages) {
         if([msg isKindOfClass:[MKMessage class]]) {
             [self sendMessage:msg];
