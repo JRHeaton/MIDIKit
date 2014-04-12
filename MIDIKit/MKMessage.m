@@ -77,7 +77,7 @@
 }
 
 - (MKMessageType)type {
-    return self.length ? (MKMessageType)self.bytes[0] : 0;
+    return self.length ? (MKMessageType)(self.bytes[0] & 0xF0) : 0;
 }
 
 - (UInt8)keyOrController {
