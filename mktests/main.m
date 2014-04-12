@@ -48,6 +48,12 @@ int main(int argc, const char * argv[]){
             return candidate.online && [candidate.name containsString:@"MPK"];
         }];
         [c.firstInputPort connectSource:mpk];
+
+        [c.firstOutputPort sendMessage:[LPMessage LEDTest] toDestination:[MKEndpoint firstOnlineDestinationNamed:@"Launchpad Mini 4"]];
+
+        [c.firstOutputPort sendMessageArray:[LPMessage rapidUpdateMessages:^(UInt8 index, LPColorBrightness *red, LPColorBrightness *green, BOOL *clear) {
+            *red = kLPColorMax;
+        }] toDestination:[MKEndpoint firstOnlineDestinationNamed:@"Launchpad Mini 4"]];
         
         CFRunLoopRun();
     }

@@ -27,6 +27,7 @@ JSExportAs(send, - (instancetype)sendJSArray:(JSValue *)dataArray toDestination:
 // Sends the MIDI data to the given destination
 - (void)sendData:(NSData *)data toDestination:(MKEndpoint *)endpoint;
 - (void)sendMessage:(MKMessage *)msg toDestination:(MKEndpoint *)endpoint;
+- (void)sendMessageArray:(NSArray *)messages toDestination:(MKEndpoint *)endpoint;
 
 // This queue can be manipulated for various reasons.
 // Example: [myOutputPort.sendQueue setMaxConcurrentOperationCount:1]

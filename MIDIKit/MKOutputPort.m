@@ -70,4 +70,12 @@
     return self;
 }
 
+- (void)sendMessageArray:(NSArray *)messages toDestination:(MKEndpoint *)endpoint {
+    for(MKMessage *msg in messages) {
+        if([msg isKindOfClass:[MKMessage class]]) {
+            [self sendMessage:msg toDestination:endpoint];
+        }
+    }
+}
+
 @end
