@@ -16,6 +16,7 @@
 @implementation MKInputPort
 
 @synthesize client=_client;
+@synthesize inputHandler=_inputHandler;
 
 static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRefCon, void *srcConnRefCon) {
     MKInputPort *self = (__bridge MKInputPort *)(readProcRefCon);
@@ -25,6 +26,14 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
         if([delegate respondsToSelector:@selector(inputPort:receivedData:fromSource:)]) {
             [delegate inputPort:self receivedData:[NSData dataWithBytes:pktlist->packet[0].data length:pktlist->packet[0].length] fromSource:source];
         }
+    }
+    
+    if(self.inputHandler) {
+        NSMutableArray *dataArray = [NSMutableArray arrayWithCapacity:0];
+        for(int i=0;i<pktlist->packet[0].length;++i) {
+            [dataArray addObject:[NSNumber numberWithUnsignedChar:pktlist->packet[0].data[i]]];
+        }
+        [self.inputHandler callWithArguments:@[dataArray]];
     }
 }
 

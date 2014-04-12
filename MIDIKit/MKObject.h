@@ -92,8 +92,6 @@
 - (void)setDictionaryProperty:(NSDictionary *)value forKey:(CFStringRef)key;
 - (void)removePropertyForKey:(CFStringRef)key;
 
-
-
 - (BOOL)transmitsOnChannel:(NSInteger)channel;
 - (BOOL)receivesOnChannel:(NSInteger)channel;
 

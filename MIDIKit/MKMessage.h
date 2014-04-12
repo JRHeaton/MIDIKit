@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreMIDI/CoreMIDI.h>
+#import <JavaScriptCore/JavaScriptCore.h>
 
 typedef NS_ENUM(UInt8, MKMessageType) {
     kMKMessageTypeNoteOn = 0x90,
@@ -24,23 +25,7 @@ typedef NS_ENUM(UInt8, MKMessageType) {
 // for generating messages that correspond to light commands
 // on a pad device.
 
-@interface MKMessage : NSObject
-
-+ (instancetype)controlChangeMessageWithController:(UInt8)controller value:(UInt8)value;
-
-+ (instancetype)messageWithData:(NSData *)data;
-+ (instancetype)messageWithPacket:(MIDIPacket *)packet;
-+ (instancetype)messageWithType:(MKMessageType)type
-                keyOrController:(UInt8)keyOrController
-                velocityOrValue:(UInt8)velocityOrValue;
-- (instancetype)initWithData:(NSData *)data;
-- (instancetype)initWithPacket:(MIDIPacket *)packet;
-- (instancetype)initWithType:(MKMessageType)type
-             keyOrController:(UInt8)keyOrController
-             velocityOrValue:(UInt8)velocityOrValue;
-
-// Hacky, but useful...
-+ (instancetype):(UInt8)type :(UInt8)keyOrController :(UInt8)velocityOrValue;
+@protocol MKMessageJS <JSExport>
 
 // First 3 bytes of the buffer(zero if doesn't exist)
 @property (nonatomic, assign) MKMessageType type;
@@ -61,6 +46,27 @@ typedef NS_ENUM(UInt8, MKMessageType) {
 // These will expand the data length to fit.
 // Subscripting example: myMessage[0] = @(0x90);
 - (void)setByte:(UInt8)byte atIndex:(NSUInteger)index;
+
+@end
+
+@interface MKMessage : NSObject <MKMessageJS>
+
++ (instancetype)controlChangeMessageWithController:(UInt8)controller value:(UInt8)value;
+
++ (instancetype)messageWithData:(NSData *)data;
++ (instancetype)messageWithPacket:(MIDIPacket *)packet;
++ (instancetype)messageWithType:(MKMessageType)type
+                keyOrController:(UInt8)keyOrController
+                velocityOrValue:(UInt8)velocityOrValue;
+- (instancetype)initWithData:(NSData *)data;
+- (instancetype)initWithPacket:(MIDIPacket *)packet;
+- (instancetype)initWithType:(MKMessageType)type
+             keyOrController:(UInt8)keyOrController
+             velocityOrValue:(UInt8)velocityOrValue;
+
+// Hacky, but useful...
++ (instancetype):(UInt8)type :(UInt8)keyOrController :(UInt8)velocityOrValue;
+
 - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)idx;
 
 @end

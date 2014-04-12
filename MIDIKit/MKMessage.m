@@ -14,6 +14,11 @@
 
 @implementation MKMessage
 
+@synthesize type=_type;
+@synthesize keyOrController=_keyOrController;
+@synthesize velocityOrValue=_velocityOrValue;
+@synthesize channel=_channel;
+
 + (instancetype)controlChangeMessageWithController:(UInt8)controller value:(UInt8)value {
     static UInt8 buf[3] = { 0xb0, 0x00, 0x00 };
     buf[1] = controller;

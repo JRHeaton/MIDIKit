@@ -67,12 +67,12 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		5273C72018DEA17B00A8CFD4 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = usr/share/man/man1;
+			dstSubfolderSpec = 16;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		52B22F0918F858E500A5A5D3 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -111,6 +111,7 @@
 		5273C73D18DEADEE00A8CFD4 /* MKEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKEndpoint.h; sourceTree = "<group>"; };
 		5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKEndpoint.m; sourceTree = "<group>"; };
 		5273C74118DEB2FF00A8CFD4 /* LPDev.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDev.h; sourceTree = "<group>"; };
+		52B095A018F8B5F900CB1440 /* test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = test.js; sourceTree = "<group>"; };
 		52B169D418F8AE4800EACDAE /* MKJavaScriptContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKJavaScriptContext.h; sourceTree = "<group>"; };
 		52B169D518F8AE4800EACDAE /* MKJavaScriptContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKJavaScriptContext.m; sourceTree = "<group>"; };
 		52B22EEA18F7A0EF00A5A5D3 /* MKInputPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKInputPort.h; sourceTree = "<group>"; };
@@ -259,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				5273C72518DEA17B00A8CFD4 /* main.m */,
+				52B095A018F8B5F900CB1440 /* test.js */,
 				5273C74118DEB2FF00A8CFD4 /* LPDev.h */,
 				5273C72718DEA17B00A8CFD4 /* Supporting Files */,
 			);

@@ -7,6 +7,7 @@
 //
 
 #import "MKMessage.h"
+#import <JavaScriptCore/JavaScriptCore.h>
 
 typedef NS_ENUM(UInt8, LPColorBrightness) {
     kLPColorOff = 0, 
@@ -15,9 +16,14 @@ typedef NS_ENUM(UInt8, LPColorBrightness) {
     kLPColorMax = 3
 };
 
-@interface LPMessage : MKMessage
+@protocol LPMessageJS <JSExport>
 
 + (instancetype)reset;
+
+@end
+
+@interface LPMessage : MKMessage <LPMessageJS>
+
 + (instancetype)LEDTest;
 + (instancetype)setLayoutXY;
 + (instancetype)setLayoutDrumRack;

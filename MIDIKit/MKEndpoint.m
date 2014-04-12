@@ -19,6 +19,14 @@
     return MIDIGetNumberOfDestinations();
 }
 
++ (instancetype)sourceAtIndex:(NSUInteger)index {
+    return [MKEndpoint objectForMIDIRef:MIDIGetSource(index)];
+}
+
++ (instancetype)destinationAtIndex:(NSUInteger)index {
+    return [MKEndpoint objectForMIDIRef:MIDIGetDestination(index)];
+}
+
 + (instancetype)firstDestinationMeetingCriteria:(BOOL (^)(MKEndpoint *candidate))block {
     for(NSInteger i=0;i<MIDIGetNumberOfDestinations();++i) {
         MKEndpoint *candidate = [[MKEndpoint alloc] initWithMIDIRef:MIDIGetDestination(i)];

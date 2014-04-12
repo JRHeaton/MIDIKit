@@ -13,13 +13,7 @@
 // Input ports are unidirectional ports through which
 // you can receive input from MIDI source endpoints.
 
-@protocol MKInputPortDelegate;
-@interface MKInputPort : MKObject <MKClientDependentInstaniation> {
-    NSMutableSet *_inputDelegates;
-}
-
-+ (instancetype)inputPortWithName:(NSString *)name client:(MKClient *)client;
-- (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
+@protocol MKInputPortJS <JSExport>
 
 // Calling this method will begin input from the given source
 // to this input port, thus triggering the delegate callbacks
@@ -28,6 +22,18 @@
 
 // This disposes the underlying port
 - (void)dispose;
+
+@property (nonatomic, strong) JSValue *inputHandler;
+
+@end
+
+@protocol MKInputPortDelegate;
+@interface MKInputPort : MKObject <MKClientDependentInstaniation, MKInputPortJS> {
+    NSMutableSet *_inputDelegates;
+}
+
++ (instancetype)inputPortWithName:(NSString *)name client:(MKClient *)client;
+- (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
 
 // Adds an input delegate who is interested in receiving
 // input callbacks

@@ -11,11 +11,14 @@
 // Endpoints are either sources or destinations,
 // which may be communicated to/from on input/output ports
 
+@class MKEntity;
 @protocol MKEndpointJS <JSExport>
+
+// Parent entity
+- (MKEntity *)entity;
 
 @end
 
-@class MKEntity;
 @interface MKEndpoint : MKObject <MKEndpointJS>
 
 + (NSUInteger)numberOfSources;
@@ -26,7 +29,7 @@
 + (instancetype)firstOnlineDestinationNamed:(NSString *)name;
 + (instancetype)firstOnlineSourceNamed:(NSString *)name;
 
-// Parent entity
-- (MKEntity *)entity;
++ (instancetype)sourceAtIndex:(NSUInteger)index;
++ (instancetype)destinationAtIndex:(NSUInteger)index;
 
 @end

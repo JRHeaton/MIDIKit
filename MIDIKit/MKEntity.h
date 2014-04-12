@@ -15,17 +15,22 @@
 // required, though.
 
 @class MKDevice;
-@interface MKEntity : MKObject
-
-- (NSUInteger)numberOfDestinations;
-- (NSUInteger)numberOfSources;
-- (MKEndpoint *)destinationAtIndex:(NSUInteger)index;
-- (MKEndpoint *)sourceAtIndex:(NSUInteger)index;
-- (id)objectAtIndexedSubscript:(NSUInteger)index; // defaults to destination
+@protocol MKEntityJS <JSExport>
 
 - (MKEndpoint *)firstDestination;
 - (MKEndpoint *)firstSource;
 
 - (MKDevice *)device;
+
+- (NSUInteger)numberOfDestinations;
+- (NSUInteger)numberOfSources;
+- (MKEndpoint *)destinationAtIndex:(NSUInteger)index;
+- (MKEndpoint *)sourceAtIndex:(NSUInteger)index;
+
+@end
+
+@interface MKEntity : MKObject <MKEntityJS>
+
+- (id)objectAtIndexedSubscript:(NSUInteger)index; // defaults to destination
 
 @end
