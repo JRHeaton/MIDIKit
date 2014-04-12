@@ -19,6 +19,8 @@
 
 @protocol MKClientJS <JSExport>
 
++ (instancetype)clientWithName:(NSString *)name;
+
 // firstInputPort and firstOutputPort will look to see if there are
 // any already-created ports in the arrays below, and if not, create one,
 // and return it.
@@ -49,11 +51,15 @@
 
 @interface MKClient : MKObject <MKClientJS>
 
-+ (instancetype)clientWithName:(NSString *)name;
-
 // Not sure yet...
 - (void)addNotificationDelegate:(id<MKClientNotificationDelegate>)delegate;
 - (void)removeNotificationDelegate:(id<MKClientNotificationDelegate>)delegate;
+
+@end
+
+@protocol MKClientReference <NSObject, JSExport>
+
+@property (nonatomic, weak) MKClient *client;
 
 @end
 
@@ -62,8 +68,6 @@
 @protocol MKClientDependentInstaniation <NSObject>
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
-
-@property (nonatomic, weak) MKClient *client;
 
 @end
 

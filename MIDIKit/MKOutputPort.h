@@ -18,16 +18,19 @@
 JSExportAs(send, - (instancetype)sendJSArray:(JSValue *)dataArray toDestination:(MKEndpoint *)endpoint);
 - (void)dispose;
 
+JSExportAs(sendMessage,
+- (void)sendMessage:(MKMessage *)msg toDestination:(MKEndpoint *)endpoint);
+
+JSExportAs(sendMessages, - (void)sendMessageArray:(NSArray *)messages toDestination:(MKEndpoint *)endpoint);
+
 @end
 
-@interface MKOutputPort : MKObject <MKClientDependentInstaniation, MKOutputPortJS>
+@interface MKOutputPort : MKObject <MKClientDependentInstaniation, MKOutputPortJS, MKClientReference>
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
 
 // Sends the MIDI data to the given destination
 - (void)sendData:(NSData *)data toDestination:(MKEndpoint *)endpoint;
-- (void)sendMessage:(MKMessage *)msg toDestination:(MKEndpoint *)endpoint;
-- (void)sendMessageArray:(NSArray *)messages toDestination:(MKEndpoint *)endpoint;
 
 // This queue can be manipulated for various reasons.
 // Example: [myOutputPort.sendQueue setMaxConcurrentOperationCount:1]

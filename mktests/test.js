@@ -1,1 +1,5 @@
-createConnection().addDestination(firstOnlineDestinationNamed('Launchpad Mini 4')).send([0xb0, 0x00, 0x7f]);
+var client = MKClient.clientWithName("my client");
+var connection = MKConnection.connectionWithClient(client);
+
+connection.addDestination(KEndpoint.firstOnlineDestinationNamed("Launchpad Mini 4"));
+connection.sendMessages([LPMessage.setLayoutXY(), LPMessage.LEDTest()]);

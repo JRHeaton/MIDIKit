@@ -12,6 +12,8 @@
 
 @protocol MKObjectJS <JSExport>
 
++ (instancetype)objectForUniqueID:(MIDIUniqueID)uniqueID;
+
 // Properties
 @property (nonatomic, readonly, getter = isOnline) BOOL online;
 @property (nonatomic, readonly, getter = isDrumMachine) BOOL drumMachine;
@@ -43,6 +45,15 @@
 @property (nonatomic, assign) BOOL receivesProgramChanges;
 @property (nonatomic, assign) MIDIUniqueID uniqueID;
 
+- (void)purgeCache;
+
+// If YES(default), then as properties are retrieved they are
+// cached
+@property (nonatomic, assign) BOOL useCaching;
+
+// Whether or not the MIDIRef is junk
+@property (nonatomic, readonly, getter = isValid) BOOL valid;
+
 @end
 
 /*
@@ -63,17 +74,11 @@
 
 // Instantiation
 + (instancetype)objectForMIDIRef:(MIDIObjectRef)MIDIRef;
-+ (instancetype)objectForUniqueID:(MIDIUniqueID)uniqueID;
 - (instancetype)initWithMIDIRef:(MIDIObjectRef)MIDIRef;
 - (instancetype)initWithUniqueID:(MIDIUniqueID)uniqueID;
 
-// If YES(default), then as properties are retrieved they are
-// cached
-@property (nonatomic, assign) BOOL useCaching;
-
 // Turns useCaching on during execution, then back to previous setting
 - (void)performBlockWithCaching:(void (^)(MKObject *obj))block;
-- (void)purgeCache;
 
 // Accessing MIDI properties
 - (NSString *)stringPropertyForKey:(CFStringRef)key;
@@ -97,8 +102,5 @@
 
 // Underlying MIDI object
 @property (nonatomic, assign) MIDIObjectRef MIDIRef;
-
-// Whether or not the MIDIRef is junk
-@property (nonatomic, readonly, getter = isValid) BOOL valid;
 
 @end

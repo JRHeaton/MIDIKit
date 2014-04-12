@@ -13,7 +13,7 @@
 // that is usable by other clients just like a normal destination.
 
 @protocol MKVirtualDestinationDelegate;
-@interface MKVirtualDestination : MKEndpoint <MKClientDependentInstaniation>
+@interface MKVirtualDestination : MKEndpoint <MKClientDependentInstaniation, MKClientReference>
 
 // Creates a new virtual destination and adds it to the MIDI server
 + (instancetype)virtualDestinationWithName:(NSString *)name client:(MKClient *)client;

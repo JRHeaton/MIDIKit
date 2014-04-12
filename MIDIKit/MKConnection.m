@@ -27,7 +27,7 @@
     
     _inputPort = inputPort;
     _outputPort = outputPort;
-    _destinations = [NSMutableOrderedSet orderedSetWithCapacity:0];
+    _destinations = [NSMutableArray arrayWithCapacity:0];
     
     return self;
 }
@@ -98,6 +98,7 @@
 }
 
 - (void)sendMessageArray:(NSArray *)messages {
+    NSLog(@"called w %@", messages);
     for(MKMessage *msg in messages) {
         if([msg isKindOfClass:[MKMessage class]]) {
             [self sendMessage:msg];

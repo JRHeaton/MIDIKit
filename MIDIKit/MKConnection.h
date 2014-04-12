@@ -25,7 +25,14 @@
 
 @protocol MKConnectionJS <JSExport>
 
-- (void)sendMessageArray:(NSArray *)messages;
++ (instancetype)connectionWithNewClient;
++ (instancetype)connectionWithClient:(MKClient *)client;
+
+JSExportAs(connectionWithPorts,
++ (instancetype)connectionWithInputPort:(MKInputPort *)inputPort outputPort:(MKOutputPort *)outputPort);
+
+JSExportAs(sendMessages,
+- (void)sendMessageArray:(NSArray *)messages);
 - (void)sendMessage:(MKMessage *)message;
 
 JSExportAs(send, - (instancetype)sendNumberArray:(NSArray *)array);
@@ -38,7 +45,7 @@ JSExportAs(send, - (instancetype)sendNumberArray:(NSArray *)array);
 - (instancetype)addDestination:(MKEndpoint *)destination;
 - (instancetype)removeDestination:(MKEndpoint *)destination;
 - (MKEndpoint *)destinationAtIndex:(NSUInteger)index;
-@property (nonatomic, readonly) NSMutableOrderedSet *destinations;
+@property (nonatomic, readonly) NSMutableArray *destinations;
 
 @end
 
@@ -47,18 +54,14 @@ JSExportAs(send, - (instancetype)sendNumberArray:(NSArray *)array);
 // NOTE: instantiation with a client will automatically
 // create an input and output port from the client
 // if they're not already created.
-+ (instancetype)connectionWithNewClient;
-+ (instancetype)connectionWithClient:(MKClient *)client;
 - (instancetype)initWithClient:(MKClient *)client;
-
-+ (instancetype)connectionWithInputPort:(MKInputPort *)inputPort outputPort:(MKOutputPort *)outputPort;
 - (instancetype)initWithInputPort:(MKInputPort *)inputPort outputPort:(MKOutputPort *)outputPort;
+
+// Async helper
+- (instancetype)performBlock:(void (^)(MKConnection *c))block afterDelay:(NSTimeInterval)delay;
 
 // Uses the output port to send to all destinations
 - (void)sendData:(NSData *)data;
 - (void)sendMessages:(MKMessage *)message, ... NS_REQUIRES_NIL_TERMINATION;
-
-// Async helper
-- (instancetype)performBlock:(void (^)(MKConnection *c))block afterDelay:(NSTimeInterval)delay;
 
 @end

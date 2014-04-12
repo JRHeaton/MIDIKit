@@ -11,6 +11,9 @@
 
 @implementation MKDevice
 
+@dynamic numberOfEntities;
+@dynamic entities;
+
 + (NSUInteger)numberOfDevices {
     return MIDIGetNumberOfDevices();
 }

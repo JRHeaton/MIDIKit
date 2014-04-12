@@ -14,7 +14,7 @@
 // connect to an input port and receive data with, just as they
 // would with a normal source.
 
-@interface MKVirtualSource : MKEndpoint <MKClientDependentInstaniation>
+@interface MKVirtualSource : MKEndpoint <MKClientDependentInstaniation, MKClientReference>
 
 // Creates a new virtual source and adds it to the MIDI server
 + (instancetype)virtualSourceWithName:(NSString *)name client:(MKClient *)client;

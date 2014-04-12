@@ -27,6 +27,11 @@ typedef NS_ENUM(UInt8, MKMessageType) {
 
 @protocol MKMessageJS <JSExport>
 
+JSExportAs(message,
++ (instancetype)messageWithType:(MKMessageType)type
+                keyOrController:(UInt8)keyOrController
+                velocityOrValue:(UInt8)velocityOrValue);
+
 // First 3 bytes of the buffer(zero if doesn't exist)
 @property (nonatomic, assign) MKMessageType type;
 @property (nonatomic, assign) UInt8 keyOrController;
@@ -55,9 +60,7 @@ typedef NS_ENUM(UInt8, MKMessageType) {
 
 + (instancetype)messageWithData:(NSData *)data;
 + (instancetype)messageWithPacket:(MIDIPacket *)packet;
-+ (instancetype)messageWithType:(MKMessageType)type
-                keyOrController:(UInt8)keyOrController
-                velocityOrValue:(UInt8)velocityOrValue;
+
 - (instancetype)initWithData:(NSData *)data;
 - (instancetype)initWithPacket:(MIDIPacket *)packet;
 - (instancetype)initWithType:(MKMessageType)type

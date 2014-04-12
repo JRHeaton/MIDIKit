@@ -41,19 +41,10 @@ void test_javascript() {
 
 int main(int argc, const char * argv[]){
     @autoreleasepool {
-        MKClient *c = [MKClient new];
-        [c.firstInputPort addInputDelegate:[Test new]];
-        
-        MKEndpoint *mpk = [MKEndpoint firstSourceMeetingCriteria:^BOOL(MKEndpoint *candidate) {
-            return candidate.online && [candidate.name containsString:@"MPK"];
-        }];
-        [c.firstInputPort connectSource:mpk];
+        MKJavaScriptContext *c = [MKJavaScriptContext new];
+        c[@"LPMessage"] = [LPMessage class];
 
-        [c.firstOutputPort sendMessage:[LPMessage LEDTest] toDestination:[MKEndpoint firstOnlineDestinationNamed:@"Launchpad Mini 4"]];
-
-        [c.firstOutputPort sendMessageArray:[LPMessage rapidUpdateMessages:^(UInt8 index, LPColorBrightness *red, LPColorBrightness *green, BOOL *clear) {
-            *red = kLPColorMax;
-        }] toDestination:[MKEndpoint firstOnlineDestinationNamed:@"Launchpad Mini 4"]];
+        NSLog(@"%@", [c evaluateScript:[NSString stringWithContentsOfFile:@"/Users/John/Dropbox/Developer/projects/MIDIKit/mktests/test.js" encoding:NSUTF8StringEncoding error:nil]]);
         
         CFRunLoopRun();
     }

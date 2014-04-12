@@ -21,24 +21,21 @@
 }
 
 - (void)setup {
-    MKClient *client = [MKClient clientWithName:@"MKJavaScriptClient"];
-    
     self[@"console"] = @{ @"log" : ^(NSString *log) { NSLog(@"%@", log); } };
-    self[@"client"] = client;
-    self[@"numberOfDevices"] = ^{ return [MKDevice numberOfDevices]; };
-    self[@"numberOfSources"] = ^{ return [MKEndpoint numberOfSources]; };
-    self[@"sourceAtIndex"] = ^(NSUInteger index) { return [MKEndpoint sourceAtIndex:index]; };
-    self[@"destinationAtIndex"] = ^(NSUInteger index) { return [MKEndpoint destinationAtIndex:index]; };
-    self[@"numberOfDestinations"] = ^{ return [MKEndpoint numberOfDestinations]; };
-    self[@"firstOnlineDestinationNamed"] = ^(NSString *name) {
-        return [MKEndpoint firstOnlineDestinationNamed:name];
-    };
-    self[@"firstOnlineSourceNamed"] = ^(NSString *name) {
-        return [MKEndpoint firstOnlineSourceNamed:name];
-    };
-    self[@"createConnection"] = ^(MKClient *client) {
-        return [MKConnection connectionWithClient:client];
-    };
+
+    for(NSString *className in @[ @"MKObject",
+                                  @"MKClient",
+                                  @"MKInputPort",
+                                  @"MKOutputPort",
+                                  @"MKDevice",
+                                  @"MKEntity",
+                                  @"MKEndpoint",
+                                  @"MKVirtualSource",
+                                  @"MKVirtualDestination",
+                                  @"MKConnection",
+                                  @"MKMessage" ]) {
+        self[className] = NSClassFromString(className);
+    }
 }
 
 @end

@@ -14,6 +14,15 @@
 @class MKEntity;
 @protocol MKEndpointJS <JSExport>
 
++ (NSUInteger)numberOfSources;
++ (NSUInteger)numberOfDestinations;
+
++ (instancetype)firstOnlineDestinationNamed:(NSString *)name;
++ (instancetype)firstOnlineSourceNamed:(NSString *)name;
+
++ (instancetype)sourceAtIndex:(NSUInteger)index;
++ (instancetype)destinationAtIndex:(NSUInteger)index;
+
 // Parent entity
 - (MKEntity *)entity;
 
@@ -21,15 +30,7 @@
 
 @interface MKEndpoint : MKObject <MKEndpointJS>
 
-+ (NSUInteger)numberOfSources;
-+ (NSUInteger)numberOfDestinations;
-
 + (instancetype)firstDestinationMeetingCriteria:(BOOL (^)(MKEndpoint *candidate))block;
 + (instancetype)firstSourceMeetingCriteria:(BOOL (^)(MKEndpoint *candidate))block;
-+ (instancetype)firstOnlineDestinationNamed:(NSString *)name;
-+ (instancetype)firstOnlineSourceNamed:(NSString *)name;
-
-+ (instancetype)sourceAtIndex:(NSUInteger)index;
-+ (instancetype)destinationAtIndex:(NSUInteger)index;
 
 @end

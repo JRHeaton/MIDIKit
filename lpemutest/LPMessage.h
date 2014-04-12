@@ -19,21 +19,23 @@ typedef NS_ENUM(UInt8, LPColorBrightness) {
 @protocol LPMessageJS <JSExport>
 
 + (instancetype)reset;
-
-@end
-
-@interface LPMessage : MKMessage <LPMessageJS>
-
++ (instancetype)setFirstBuffers;
++ (instancetype)setSecondBuffers;
 + (instancetype)LEDTest;
 + (instancetype)setLayoutXY;
 + (instancetype)setLayoutDrumRack;
 + (instancetype)enableAutoSwitching;
 + (instancetype)disableAutoSwitching;
+
+@end
+
+@interface LPMessage : MKMessage <LPMessageJS>
+
+
 + (instancetype)bufferMessageWithDisplayBuffer:(NSUInteger)displayBuffer
                                 updatingBuffer:(NSUInteger)updatingBuffer
                       copyNewDisplayToUpdating:(BOOL)copyToUpdating;
-+ (instancetype)setFirstBuffers;
-+ (instancetype)setSecondBuffers;
+
 + (instancetype)padMessageOn:(BOOL)turnOn
                     atColumn:(NSUInteger)column
                          row:(NSUInteger)row

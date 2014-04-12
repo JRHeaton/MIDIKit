@@ -10,6 +10,7 @@
 
 @implementation MKObject
 
+@synthesize useCaching=_useCaching;
 @dynamic valid;
 
 + (instancetype)objectForMIDIRef:(MIDIObjectRef)MIDIRef {

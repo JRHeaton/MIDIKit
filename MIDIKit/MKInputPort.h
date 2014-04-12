@@ -28,7 +28,7 @@
 @end
 
 @protocol MKInputPortDelegate;
-@interface MKInputPort : MKObject <MKClientDependentInstaniation, MKInputPortJS> {
+@interface MKInputPort : MKObject <MKClientDependentInstaniation, MKInputPortJS, MKClientReference> {
     NSMutableSet *_inputDelegates;
 }
 
