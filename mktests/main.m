@@ -42,12 +42,10 @@ int main(int argc, const char * argv[]){
         c.exceptionHandler = ^(JSContext *context, JSValue *exception) {
             NSLog(@"%@", exception);
         };
-        NSLog(@"%@", [c evaluateScript:[NSString stringWithContentsOfFile:@"/Users/John/Dropbox/Developer/projects/MIDIKit/mktests/test.js" encoding:NSUTF8StringEncoding error:nil]]);
 
-        MKConnection *con = [MKConnection.new addDestination:[MKEndpoint firstOnlineDestinationNamed:@"Launchpad Mini 4"]];
-        [con sendMessage:[MKMessage :0xb0 :0x00 :0x7f]];
+#define JS_FILE "launchpad.js"
 
-        con = nil;
+        NSLog(@"%@", [c evaluateScript:[NSString stringWithContentsOfFile:@"/Users/John/Dropbox/Developer/projects/MIDIKit/mktests/" JS_FILE encoding:NSUTF8StringEncoding error:nil]]);
 
         CFRunLoopRun();
     }

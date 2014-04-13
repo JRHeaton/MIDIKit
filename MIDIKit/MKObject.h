@@ -61,9 +61,9 @@
 @property (nonatomic, assign) BOOL receivesProgramChanges;
 
 #pragma mark Setters
-- (void)setStringProperty:(NSString *)value forKey:(NSString *)key;
-- (void)setIntegerProperty:(NSInteger)value forKey:(NSString *)key;
-- (void)setDictionaryProperty:(NSDictionary *)value forKey:(NSString *)key;
+- (instancetype)setStringProperty:(NSString *)value forKey:(NSString *)key;
+- (instancetype)setIntegerProperty:(NSInteger)value forKey:(NSString *)key;
+- (instancetype)setDictionaryProperty:(NSDictionary *)value forKey:(NSString *)key;
 
 #pragma mark Getters
 - (NSString *)stringPropertyForKey:(NSString *)key;
@@ -73,11 +73,11 @@
 #pragma mark Transmission Capabilities
 - (BOOL)transmitsOnChannel:(NSUInteger)channel;
 - (BOOL)receivesOnChannel:(NSUInteger)channel;
-- (void)setTransmits:(BOOL)transmits onChannel:(NSInteger)channel;
+- (instancetype)setTransmits:(BOOL)transmits onChannel:(NSInteger)channel;
 
 
 #pragma mark - -Cache Control-
-- (void)purgeCache;
+- (instancetype)purgeCache;
 
 // If YES(default), then as properties are retrieved they are
 // cached

@@ -44,6 +44,9 @@
 		528DCB7B18FAD2200090FFFB /* MKMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22F0318F803E900A5A5D3 /* MKMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		528DCB7C18FAD2260090FFFB /* MKJavaScriptContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B169D418F8AE4800EACDAE /* MKJavaScriptContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		528DCB7D18FAD2290090FFFB /* MKJavaScriptModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 522EA42318FA9A9500444217 /* MKJavaScriptModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		528DCB8218FB00540090FFFB /* test.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 52B095A018F8B5F900CB1440 /* test.js */; };
+		528DCB8318FB00560090FFFB /* LPConnection.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 522EA41B18FA7C4F00444217 /* LPConnection.js */; };
+		528DCB8518FB00920090FFFB /* launchpad.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 528DCB8418FB008E0090FFFB /* launchpad.js */; };
 		52B169D618F8AE4800EACDAE /* MKJavaScriptContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B169D418F8AE4800EACDAE /* MKJavaScriptContext.h */; };
 		52B169D718F8AE4800EACDAE /* MKJavaScriptContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B169D518F8AE4800EACDAE /* MKJavaScriptContext.m */; };
 		52B22EEC18F7A0EF00A5A5D3 /* MKInputPort.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EEA18F7A0EF00A5A5D3 /* MKInputPort.h */; };
@@ -114,9 +117,12 @@
 		5273C72018DEA17B00A8CFD4 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
-			dstPath = usr/share/man/man1;
+			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				528DCB8218FB00540090FFFB /* test.js in CopyFiles */,
+				528DCB8318FB00560090FFFB /* LPConnection.js in CopyFiles */,
+				528DCB8518FB00920090FFFB /* launchpad.js in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +179,7 @@
 		528DCB6418FABF870090FFFB /* testNativeBundle-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "testNativeBundle-Prefix.pch"; sourceTree = "<group>"; };
 		528DCB6C18FABFE60090FFFB /* JRNativeBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRNativeBundle.h; sourceTree = "<group>"; };
 		528DCB6D18FABFE60090FFFB /* JRNativeBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRNativeBundle.m; sourceTree = "<group>"; };
+		528DCB8418FB008E0090FFFB /* launchpad.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = launchpad.js; sourceTree = "<group>"; };
 		52B095A018F8B5F900CB1440 /* test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = test.js; sourceTree = "<group>"; };
 		52B169D418F8AE4800EACDAE /* MKJavaScriptContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKJavaScriptContext.h; sourceTree = "<group>"; };
 		52B169D518F8AE4800EACDAE /* MKJavaScriptContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKJavaScriptContext.m; sourceTree = "<group>"; };
@@ -342,6 +349,7 @@
 				5273C72518DEA17B00A8CFD4 /* main.m */,
 				522EA41D18FA98F000444217 /* LPMessage.h */,
 				522EA41E18FA98F000444217 /* LPMessage.m */,
+				528DCB8418FB008E0090FFFB /* launchpad.js */,
 				52B095A018F8B5F900CB1440 /* test.js */,
 				522EA41B18FA7C4F00444217 /* LPConnection.js */,
 				5273C74118DEB2FF00A8CFD4 /* LPDev.h */,

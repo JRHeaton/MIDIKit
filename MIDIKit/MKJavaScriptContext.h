@@ -29,4 +29,7 @@
 - (void)loadClass:(Class)c;
 - (BOOL)classIsLoaded:(Class)c;
 
+- (JSValue *)objectForKeyedSubscript:(id)key;
+- (void)setObject:(id)object forKeyedSubscript:(NSObject <NSCopying> *)key;
+
 @end

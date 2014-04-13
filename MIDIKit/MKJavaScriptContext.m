@@ -220,4 +220,12 @@ static JSValue *_MKJavaScriptContextRequireHook(Class self, SEL _cmd, MKJavaScri
     return [self loadNativeModule:module withListName:@"NativeModule"];
 }
 
+- (void)setObject:(id)object forKeyedSubscript:(NSObject<NSCopying> *)key {
+    [super setObject:object forKeyedSubscript:key];
+}
+
+- (JSValue *)objectForKeyedSubscript:(id)key {
+    return [super objectForKeyedSubscript:key];
+}
+
 @end

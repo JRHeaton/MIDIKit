@@ -108,15 +108,17 @@
     return (__bridge_transfer NSDictionary *)dict;
 }
 
-- (void)setStringProperty:(NSString *)value forKey:(NSString *)key {
+- (instancetype)setStringProperty:(NSString *)value forKey:(NSString *)key {
     MIDIObjectSetStringProperty(self.MIDIRef, (__bridge CFStringRef)(key), (__bridge CFStringRef)(value));
     
     _propertyCache[(key)] = value;
+    return self;
 }
 
-- (void)setIntegerProperty:(NSInteger)value forKey:(NSString *)key {
+- (instancetype)setIntegerProperty:(NSInteger)value forKey:(NSString *)key {
     MIDIObjectSetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(key), (SInt32)value);
     _propertyCache[(key)] = @(value);
+    return self;
 }
 
 - (void)setDataProperty:(NSData *)value forKey:(NSString *)key {
@@ -124,9 +126,10 @@
     _propertyCache[(key)] = value;
 }
 
-- (void)setDictionaryProperty:(NSDictionary *)value forKey:(NSString *)key {
+- (instancetype)setDictionaryProperty:(NSDictionary *)value forKey:(NSString *)key {
     MIDIObjectSetDictionaryProperty(self.MIDIRef, (__bridge CFStringRef)(key), (__bridge CFDictionaryRef)(value));
     _propertyCache[(key)] = value;
+    return self;
 }
 
 - (void)removePropertyForKey:(NSString *)key {
@@ -143,7 +146,7 @@
     return (self.receiveChannelBits & (1 << (channel - 1))) >> (channel - 1);
 }
 
-- (void)setTransmits:(BOOL)transmits onChannel:(NSInteger)channel {
+- (instancetype)setTransmits:(BOOL)transmits onChannel:(NSInteger)channel {
     NSUInteger transmitsBits = self.transmitChannelBits;
     channel = [self channelInRange:channel];
 
@@ -155,6 +158,7 @@
     }
 
     self.transmitChannelBits = transmitsBits;
+    return self;
 }
 
 
@@ -192,8 +196,9 @@
     self.useCaching = old;
 }
 
-- (void)purgeCache {
+- (instancetype)purgeCache {
     [_propertyCache removeAllObjects];
+    return self;
 }
 
 
