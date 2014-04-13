@@ -15,8 +15,8 @@
     return [JSValue valueWithObject:@"Cool Pants" inContext:ctx];
 }
 
-+ (void)doThingy {
-    NSLog(@"WE DID IT WE DID IT");
++ (NSUInteger)someNumber {
+    return 123456789;
 }
 
 @end

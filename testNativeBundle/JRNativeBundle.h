@@ -11,6 +11,7 @@
 
 @protocol JRNativeBundleJS <JSExport>
 
++ (instancetype)new;
 + (NSUInteger)someNumber;
 
 @end

@@ -11,7 +11,7 @@
 @implementation JRNativeBundle
 
 + (NSUInteger)someNumber {
-    return 50000253;
+    return 44448888;
 }
 //
 //+ (JSValue *)requireReturnValue:(MKJavaScriptContext *)context {

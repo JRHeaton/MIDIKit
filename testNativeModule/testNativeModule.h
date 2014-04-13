@@ -12,7 +12,8 @@
 
 @protocol testNativeJS <JSExport>
 
-+ (void)doThingy;
++ (instancetype)new;
++ (NSUInteger)someNumber;
 
 @end
 
