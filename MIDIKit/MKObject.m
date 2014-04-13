@@ -64,74 +64,73 @@
 
 #pragma mark - MIDI Properties
 
-- (NSString *)stringPropertyForKey:(CFStringRef)key {
+- (NSString *)stringPropertyForKey:(NSString *)key {
     CFStringRef ret;
     NSString *dd;
-    if(self.useCaching && (dd = _propertyCache[(__bridge NSString *)key]) != nil)
+    if(self.useCaching && (dd = _propertyCache[key]) != nil)
         return dd;
     
-    MIDIObjectGetStringProperty(self.MIDIRef, key, &ret);
-    if(ret) _propertyCache[(__bridge NSString *)key] = (__bridge NSString *)(ret);
-    return (__bridge_transfer NSString *)(ret);
+    MIDIObjectGetStringProperty(self.MIDIRef, (__bridge CFStringRef)(key), &ret);
+    if(ret) _propertyCache[key] = dd = (__bridge_transfer NSString *)(ret);
+    return dd;
 }
 
-- (NSInteger)integerPropertyForKey:(CFStringRef)key {
+- (NSInteger)integerPropertyForKey:(NSString *)key {
     SInt32 ret;
     NSNumber *dd;
-    if(self.useCaching && (dd = _propertyCache[(__bridge NSString *)key]) != nil)
+    if(self.useCaching && (dd = _propertyCache[key]) != nil)
         return dd.integerValue;
     
-    MIDIObjectGetIntegerProperty(self.MIDIRef, key, &ret);
-    _propertyCache[(__bridge NSString *)key] = @(ret);
+    MIDIObjectGetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(key), &ret);
+    _propertyCache[key] = @(ret);
     return ret;
 }
 
-- (NSData *)dataPropertyForKey:(CFStringRef)key {
+- (NSData *)dataPropertyForKey:(NSString *)key {
     CFDataRef ret;
     NSData *dd;
-    if(self.useCaching && (dd = _propertyCache[(__bridge NSString *)key]) != nil)
+    if(self.useCaching && (dd = _propertyCache[key]) != nil)
         return dd;
     
-    MIDIObjectGetDataProperty(self.MIDIRef, key, &ret);
-    if(ret) _propertyCache[(__bridge NSString *)key] = (__bridge NSData *)(ret);
+    MIDIObjectGetDataProperty(self.MIDIRef, (__bridge CFStringRef)(key), &ret);
+    if(ret) _propertyCache[key] = (__bridge NSData *)(ret);
     return (__bridge_transfer NSData *)ret;
 }
 
-- (NSDictionary *)dictionaryPropertyForKey:(CFStringRef)key {
+- (NSDictionary *)dictionaryPropertyForKey:(NSString *)key {
     CFDictionaryRef dict;
     NSDictionary *dd;
-    if(self.useCaching && (dd = _propertyCache[(__bridge NSString *)key]) != nil)
+    if(self.useCaching && (dd = _propertyCache[key]) != nil)
         return dd;
     
-    MIDIObjectGetDictionaryProperty(self.MIDIRef, key, &dict);
-    if(dict) _propertyCache[(__bridge NSString *)key] = (__bridge NSDictionary *)(dict);
+    MIDIObjectGetDictionaryProperty(self.MIDIRef, (__bridge CFStringRef)(key), &dict);
+    if(dict) _propertyCache[key] = (__bridge NSDictionary *)(dict);
     return (__bridge_transfer NSDictionary *)dict;
 }
 
-- (void)setStringProperty:(NSString *)value forKey:(CFStringRef)key {
-    MIDIObjectSetStringProperty(self.MIDIRef, key, (__bridge CFStringRef)(value));
-
-    NSLog(@"key = %@", key);
-    _propertyCache[(__bridge NSString *)(key)] = value;
+- (void)setStringProperty:(NSString *)value forKey:(NSString *)key {
+    MIDIObjectSetStringProperty(self.MIDIRef, (__bridge CFStringRef)(key), (__bridge CFStringRef)(value));
+    
+    _propertyCache[(key)] = value;
 }
 
-- (void)setIntegerProperty:(NSInteger)value forKey:(CFStringRef)key {
-    MIDIObjectSetIntegerProperty(self.MIDIRef, key, (SInt32)value);
-    _propertyCache[(__bridge NSString *)(key)] = @(value);
+- (void)setIntegerProperty:(NSInteger)value forKey:(NSString *)key {
+    MIDIObjectSetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(key), (SInt32)value);
+    _propertyCache[(key)] = @(value);
 }
 
-- (void)setDataProperty:(NSData *)value forKey:(CFStringRef)key {
-    MIDIObjectSetDataProperty(self.MIDIRef, key, (__bridge CFDataRef)(value));
-    _propertyCache[(__bridge NSString *)(key)] = value;
+- (void)setDataProperty:(NSData *)value forKey:(NSString *)key {
+    MIDIObjectSetDataProperty(self.MIDIRef, (__bridge CFStringRef)(key), (__bridge CFDataRef)(value));
+    _propertyCache[(key)] = value;
 }
 
-- (void)setDictionaryProperty:(NSDictionary *)value forKey:(CFStringRef)key {
-    MIDIObjectSetDictionaryProperty(self.MIDIRef, key, (__bridge CFDictionaryRef)(value));
-    _propertyCache[(__bridge NSString *)(key)] = value;
+- (void)setDictionaryProperty:(NSDictionary *)value forKey:(NSString *)key {
+    MIDIObjectSetDictionaryProperty(self.MIDIRef, (__bridge CFStringRef)(key), (__bridge CFDictionaryRef)(value));
+    _propertyCache[(key)] = value;
 }
 
-- (void)removePropertyForKey:(CFStringRef)key {
-    MIDIObjectRemoveProperty(self.MIDIRef, key);
+- (void)removePropertyForKey:(NSString *)key {
+    MIDIObjectRemoveProperty(self.MIDIRef, (__bridge CFStringRef)(key));
 }
 
 - (BOOL)transmitsOnChannel:(NSUInteger)channel {
@@ -206,7 +205,7 @@
 }
 
 - (BOOL)isOnline {
-    return ![self integerPropertyForKey:kMIDIPropertyOffline];
+    return ![self integerPropertyForKey:(__bridge NSString *)kMIDIPropertyOffline];
 }
 
 - (BOOL)isValid {
@@ -225,12 +224,12 @@
 
 #define GETTER(type, name, property, propertyType) \
 - (type)name { \
-return (type)[self propertyType##PropertyForKey:property]; \
+return (type)[self propertyType##PropertyForKey:(__bridge NSString *)property]; \
 }
 
 #define SETTER(type, name, property, propertyType) \
 - (void)set##name:(type)val { \
-[self set##propertyType##Property:val forKey:property]; \
+[self set##propertyType##Property:val forKey:(__bridge NSString *)property]; \
 }
 
 SETTER(BOOL, DrumMachine, kMIDIPropertyIsDrumMachine, Integer)

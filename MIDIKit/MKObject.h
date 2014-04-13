@@ -59,6 +59,16 @@
 @property (nonatomic, assign) BOOL transmitsNotes;
 @property (nonatomic, assign) BOOL receivesProgramChanges;
 
+#pragma mark Setters
+- (void)setStringProperty:(NSString *)value forKey:(NSString *)key;
+- (void)setIntegerProperty:(NSInteger)value forKey:(NSString *)key;
+- (void)setDictionaryProperty:(NSDictionary *)value forKey:(NSString *)key;
+
+#pragma mark Getters
+- (NSString *)stringPropertyForKey:(NSString *)key;
+- (NSInteger)integerPropertyForKey:(NSString *)key;
+- (NSDictionary *)dictionaryPropertyForKey:(NSString *)key;
+
 #pragma mark Transmission Capabilities
 - (BOOL)transmitsOnChannel:(NSUInteger)channel;
 - (BOOL)receivesOnChannel:(NSUInteger)channel;
@@ -114,19 +124,13 @@
 #pragma mark - -Properties-
 
 #pragma mark Getters
-- (NSString *)stringPropertyForKey:(CFStringRef)key;
-- (NSInteger)integerPropertyForKey:(CFStringRef)key;
-- (NSData *)dataPropertyForKey:(CFStringRef)key;
-- (NSDictionary *)dictionaryPropertyForKey:(CFStringRef)key;
+- (NSData *)dataPropertyForKey:(NSString *)key;
 
 #pragma mark Setters
-- (void)setStringProperty:(NSString *)value forKey:(CFStringRef)key;
-- (void)setIntegerProperty:(NSInteger)value forKey:(CFStringRef)key;
-- (void)setDataProperty:(NSData *)value forKey:(CFStringRef)key;
-- (void)setDictionaryProperty:(NSDictionary *)value forKey:(CFStringRef)key;
+- (void)setDataProperty:(NSData *)value forKey:(NSString *)key;
 
 #pragma mark Removal
-- (void)removePropertyForKey:(CFStringRef)key;
+- (void)removePropertyForKey:(NSString *)key;
 
 #pragma mark Copying All Properties
 // This will copy the entire dict. This is called in -description,

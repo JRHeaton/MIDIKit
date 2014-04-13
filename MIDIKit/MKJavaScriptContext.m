@@ -79,8 +79,6 @@
                                   @"MKMessage" ]) {
         [self loadNativeModule:NSClassFromString(className)];
     }
-
-    NSLog(@"FIRSTY %@", self[@"process"][@"moduleLoadList"].toObject);
 }
 
 - (JSValue *)evaluateScriptAtPath:(NSString *)name {
@@ -112,7 +110,6 @@
             if(!val) {
                 [_self printString:[NSString stringWithFormat:@"Error evaluating script: \'%@\', error = %@", name, e]];
             } else {
-                NSLog(@"%@", self[@"process"].toObject);
                 [_self evaluateScript:[NSString stringWithFormat:@"process.moduleLoadList.push(\'Script %@\');", name.lastPathComponent]];
             }
 
