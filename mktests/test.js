@@ -8,3 +8,9 @@ console.log('native: ' + native)
 log(testNativeModule)
 log(testNativeModule.doThingy)
 log(testNativeModule.doThingy())
+
+log('Loading bundle.........');
+var bundle = require('/Users/John/Dropbox/Developer/projects/MIDIKit/DerivedData/MIDIKit/Build/Products/Debug/testNativeBundle.bundle');
+
+log('bundle: ' + bundle);
+log('bundle class: ' + JRNativeBundle);

@@ -19,6 +19,11 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>testNativeBundle.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>testNativeModule.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -58,6 +63,11 @@
 			<true/>
 		</dict>
 		<key>528DCB3F18FAB3E50090FFFB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>528DCB5B18FABF870090FFFB</key>
 		<dict>
 			<key>primary</key>
 			<true/>

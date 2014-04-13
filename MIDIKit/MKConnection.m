@@ -18,8 +18,8 @@
 @synthesize outputPort=_outputPort;
 @synthesize destinations=_destinations;
 
-+ (NSArray *)classesToLoad {
-    return @[ self.class ];
++ (JSValue *)requireReturnValue:(MKJavaScriptContext *)context {
+    return context[NSStringFromClass(self.class)];
 }
 
 + (instancetype)connectionWithClient:(MKClient *)client {

@@ -16,8 +16,8 @@
 
 @dynamic type, key, controller, velocity, status, data1, data2;
 
-+ (NSArray *)classesToLoad {
-    return @[ self.class ];
++ (JSValue *)requireReturnValue:(MKJavaScriptContext *)context {
+    return ((JSContext *)context)[NSStringFromClass(self.class)];
 }
 
 #pragma mark - Types

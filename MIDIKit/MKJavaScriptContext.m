@@ -10,22 +10,19 @@
 #import "MKClient.h"
 #import "MKConnection.h"
 #import <dlfcn.h>
+#import <objc/runtime.h>
 
 @implementation MKJavaScriptContext {
     BOOL _initialized;
+    NSMutableSet *loadedModules;
 }
 
 - (instancetype)init {
     if(!(self = [super init])) return nil;
     
     [self _setupFancyPantsContext];
+    loadedModules = [NSMutableSet new];
     
-    return self;
-}
-
-- (instancetype)initWithVirtualMachine:(JSVirtualMachine *)virtualMachine {
-    if(!(self = [super initWithVirtualMachine:virtualMachine])) return nil;
-
     return self;
 }
 
@@ -34,12 +31,13 @@
 }
 
 - (void)classesLoaded:(NSNotification *)notif {
-    NSArray *classes = notif.userInfo[NSLoadedClasses];
-
-    for(NSString *className in classes) {
-        NSLog(@"Just loaded %@", className);
-        [self loadNativeModule:NSClassFromString(className)];
-    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:notif.name object:notif.object];
+//    NSArray *classes = notif.userInfo[NSLoadedClasses];
+//
+//    for(NSString *className in classes) {
+//        NSLog(@"Just loaded %@", className);
+//        [self loadNativeModule:NSClassFromString(className)];
+//    }
 }
 
 - (void)_setupFancyPantsContext {
@@ -138,6 +136,10 @@
     return nil;
 }
 
+static JSValue *_MKJavaScriptContextRequireHook(Class self, SEL _cmd, MKJavaScriptContext *ctx) {
+    return ctx[NSStringFromClass(self)];
+}
+
 - (JSValue *)loadNativeModuleAtPath:(NSString *)path {
     BOOL isDir;
     if(![[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir]) {
@@ -147,20 +149,25 @@
     if(isDir) {
         NSBundle *bundle = [NSBundle bundleWithPath:path];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(classesLoaded:) name:NSBundleDidLoadNotification object:bundle];
-        [bundle load];
+        if([bundle load]) {
+            Class pClass= [bundle principalClass];
+            if(![pClass respondsToSelector:@selector(requireReturnValue:)]) {
+                class_addMethod(objc_getMetaClass(class_getName(pClass)), @selector(requireReturnValue:), (IMP)_MKJavaScriptContextRequireHook, [MKJavaScriptContext methodSignatureForSelector:@selector(requireReturnValue:)].methodReturnType);
+            }
+
+            JSValue *ret = [self loadNativeModule:pClass];
+            return ret;
+        }
 
         return nil; // this is async w/ notification
     } else {
         void *handle = dlopen(path.UTF8String, RTLD_NOW);
         if(!handle) return nil;
 
-        NSArray *(*MKModuleClasses)() = dlsym(handle, "MKModuleClasses");
-        if(!MKModuleClasses) return nil;
+        Class (*MKModuleClass)() = dlsym(handle, "MKModuleClass");
+        if(!MKModuleClass) return nil;
 
-        for(Class<MKJavaScriptModule> cls in MKModuleClasses()) {
-            JSValue *ret = [self loadNativeModule:cls];
-            return ret;
-        }
+        return [self loadNativeModule:MKModuleClass()];
     }
 
     return nil;
@@ -178,11 +185,15 @@
 }
 
 - (BOOL)classIsLoaded:(Class)c {
-    return !self[NSStringFromClass(c)].isUndefined;
+    NSString *key = NSStringFromClass(c);
+    JSValue *val = self[key];
+
+    return val && !val.isUndefined;
 }
 
 - (JSValue *)loadNativeModule:(Class<MKJavaScriptModule>)module {
     Class cMod = (Class)module;
+    if([loadedModules containsObject:module]) return [module requireReturnValue:self];
     if(![cMod conformsToProtocol:@protocol(MKJavaScriptModule)]) return nil;
 
     if([cMod respondsToSelector:@selector(classesToLoad:)]) {
@@ -196,6 +207,8 @@
     if([cMod respondsToSelector:@selector(requireReturnValue:)]) {
         ret = [cMod requireReturnValue:self];
     }
+
+    [loadedModules addObject:module];
 
     return ret;
 }

@@ -12,7 +12,6 @@
 @implementation testNativeModule
 
 + (JSValue *)requireReturnValue:(MKJavaScriptContext *)ctx {
-    NSLog(@"ctx %@", ctx);
     return [JSValue valueWithObject:@"Cool Pants" inContext:ctx];
 }
 
@@ -22,6 +21,6 @@
 
 @end
 
-NSArray *MKModuleClasses() {
-    return @[ [testNativeModule class] ];
+Class MKModuleClass() {
+    return [testNativeModule class];
 }

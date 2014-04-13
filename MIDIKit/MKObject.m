@@ -14,10 +14,6 @@
 @synthesize useCaching=_useCaching;
 @dynamic valid;
 
-+ (JSValue *)requireReturnValue:(MKJavaScriptContext *)context {
-    return context[NSStringFromClass(self.class)];
-}
-
 + (void)load {
     if(!dlsym(RTLD_SELF, "MIDIRestart")) {
         [NSException raise:@"MKMissingDependencyException" format:@"CoreMIDI.framework is required to be linked in order for MIDIKit to work"];
