@@ -250,6 +250,92 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		524005D718FB03F10030B46D /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				5273C70618DE9E2500A8CFD4 /* MKClient.h */,
+				5273C70718DE9E2500A8CFD4 /* MKClient.m */,
+				524005DA18FB04300030B46D /* Ports */,
+				524005DB18FB04370030B46D /* Device */,
+				524005DC18FB043D0030B46D /* Entity */,
+			);
+			name = Client;
+			sourceTree = "<group>";
+		};
+		524005D818FB04040030B46D /* JavaScript Support */ = {
+			isa = PBXGroup;
+			children = (
+				52B169D418F8AE4800EACDAE /* MKJavaScriptContext.h */,
+				52B169D518F8AE4800EACDAE /* MKJavaScriptContext.m */,
+				522EA42318FA9A9500444217 /* MKJavaScriptModule.h */,
+			);
+			name = "JavaScript Support";
+			sourceTree = "<group>";
+		};
+		524005D918FB041F0030B46D /* Wrappers */ = {
+			isa = PBXGroup;
+			children = (
+				5273C70218DE9A9800A8CFD4 /* MKObject.h */,
+				5273C70318DE9A9800A8CFD4 /* MKObject.m */,
+				524005D718FB03F10030B46D /* Client */,
+			);
+			name = Wrappers;
+			sourceTree = "<group>";
+		};
+		524005DA18FB04300030B46D /* Ports */ = {
+			isa = PBXGroup;
+			children = (
+				52B22EEA18F7A0EF00A5A5D3 /* MKInputPort.h */,
+				52B22EEB18F7A0EF00A5A5D3 /* MKInputPort.m */,
+				52B22EEE18F7A6C600A5A5D3 /* MKOutputPort.h */,
+				52B22EEF18F7A6C600A5A5D3 /* MKOutputPort.m */,
+			);
+			name = Ports;
+			sourceTree = "<group>";
+		};
+		524005DB18FB04370030B46D /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				5273C73518DEAD5700A8CFD4 /* MKDevice.h */,
+				5273C73618DEAD5700A8CFD4 /* MKDevice.m */,
+			);
+			name = Device;
+			sourceTree = "<group>";
+		};
+		524005DC18FB043D0030B46D /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				5273C73918DEADB800A8CFD4 /* MKEntity.h */,
+				5273C73A18DEADB800A8CFD4 /* MKEntity.m */,
+				524005DD18FB044E0030B46D /* Endpoints */,
+			);
+			name = Entity;
+			sourceTree = "<group>";
+		};
+		524005DD18FB044E0030B46D /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				5273C73D18DEADEE00A8CFD4 /* MKEndpoint.h */,
+				5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */,
+				52B22EF218F7B65D00A5A5D3 /* MKVirtualSource.h */,
+				52B22EF318F7B65D00A5A5D3 /* MKVirtualSource.m */,
+				52B22EF618F7B80900A5A5D3 /* MKVirtualDestination.h */,
+				52B22EF718F7B80900A5A5D3 /* MKVirtualDestination.m */,
+			);
+			name = Endpoints;
+			sourceTree = "<group>";
+		};
+		524005DE18FB045D0030B46D /* Helper/Convenience */ = {
+			isa = PBXGroup;
+			children = (
+				52B22EFC18F7C86900A5A5D3 /* MKConnection.h */,
+				52B22EFD18F7C86900A5A5D3 /* MKConnection.m */,
+				52B22F0318F803E900A5A5D3 /* MKMessage.h */,
+				52B22F0418F803E900A5A5D3 /* MKMessage.m */,
+			);
+			name = Helper/Convenience;
+			sourceTree = "<group>";
+		};
 		5273C6CA18DE96A200A8CFD4 = {
 			isa = PBXGroup;
 			children = (
@@ -303,31 +389,9 @@
 			isa = PBXGroup;
 			children = (
 				5273C6E418DE96A200A8CFD4 /* MIDIKit.h */,
-				5273C70218DE9A9800A8CFD4 /* MKObject.h */,
-				5273C70318DE9A9800A8CFD4 /* MKObject.m */,
-				5273C70618DE9E2500A8CFD4 /* MKClient.h */,
-				5273C70718DE9E2500A8CFD4 /* MKClient.m */,
-				52B22EEA18F7A0EF00A5A5D3 /* MKInputPort.h */,
-				52B22EEB18F7A0EF00A5A5D3 /* MKInputPort.m */,
-				52B22EEE18F7A6C600A5A5D3 /* MKOutputPort.h */,
-				52B22EEF18F7A6C600A5A5D3 /* MKOutputPort.m */,
-				5273C73518DEAD5700A8CFD4 /* MKDevice.h */,
-				5273C73618DEAD5700A8CFD4 /* MKDevice.m */,
-				5273C73918DEADB800A8CFD4 /* MKEntity.h */,
-				5273C73A18DEADB800A8CFD4 /* MKEntity.m */,
-				5273C73D18DEADEE00A8CFD4 /* MKEndpoint.h */,
-				5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */,
-				52B22EF218F7B65D00A5A5D3 /* MKVirtualSource.h */,
-				52B22EF318F7B65D00A5A5D3 /* MKVirtualSource.m */,
-				52B22EF618F7B80900A5A5D3 /* MKVirtualDestination.h */,
-				52B22EF718F7B80900A5A5D3 /* MKVirtualDestination.m */,
-				52B22EFC18F7C86900A5A5D3 /* MKConnection.h */,
-				52B22EFD18F7C86900A5A5D3 /* MKConnection.m */,
-				52B22F0318F803E900A5A5D3 /* MKMessage.h */,
-				52B22F0418F803E900A5A5D3 /* MKMessage.m */,
-				52B169D418F8AE4800EACDAE /* MKJavaScriptContext.h */,
-				52B169D518F8AE4800EACDAE /* MKJavaScriptContext.m */,
-				522EA42318FA9A9500444217 /* MKJavaScriptModule.h */,
+				524005DE18FB045D0030B46D /* Helper/Convenience */,
+				524005D818FB04040030B46D /* JavaScript Support */,
+				524005D918FB041F0030B46D /* Wrappers */,
 				5273C6DE18DE96A200A8CFD4 /* Supporting Files */,
 			);
 			path = MIDIKit;
@@ -979,6 +1043,7 @@
 				528DCB4F18FAB3E50090FFFB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		528DCB6518FABF870090FFFB /* Build configuration list for PBXNativeTarget "testNativeBundle" */ = {
 			isa = XCConfigurationList;
@@ -987,6 +1052,7 @@
 				528DCB6718FABF870090FFFB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		52B22F1418F858E600A5A5D3 /* Build configuration list for PBXNativeTarget "lpemutest" */ = {
 			isa = XCConfigurationList;
