@@ -1,5 +1,4 @@
-var x = require('/Users/John/Dropbox/Developer/projects/MIDIKit/mktests/tt.js')
+var msg = require('/Users/John/Dropbox/Developer/projects/MIDIKit/mktests/msg.js')
 
 var client = MKClient.new();
-
-x.Setup(client).Reset().Test()
+client.firstOutputPort().sendMessage(msg.Reset(), MKEndpoint.firstOnlineDestinationNamed('Launchpad Mini 4'));

@@ -36,47 +36,35 @@
     void (^logBlock)(NSString *log) = ^(NSString *log) { [self printString:log]; };
     void (^logObjectBlock)(JSValue *val) = ^(JSValue *val) { [self printString:[val.toObject description]]; };
 
+    self[@"_cwd"] = [NSFileManager defaultManager].currentDirectoryPath;
     __weak typeof(self) _self = self;
     self[@"require"] = ^JSValue *(NSString *name) {
         BOOL isScript = [name hasSuffix:@".js"];
 
-        switch (isScript && [[name lastPathComponent] componentsSeparatedByString:@"."].count > 1) {
-            case YES: {
-                if(!name.isAbsolutePath) {
-                    name = [[NSFileManager defaultManager].currentDirectoryPath stringByAppendingPathComponent:name];
-                }
-
-                NSError *e;
-                static NSString *evalFmt = @"(function (){ var module = {exports:{}}; var exports = module.exports; var obj = (function (){ %@ })(); return module.exports; })()";
-                NSString *eval = [NSString stringWithFormat:evalFmt, [NSString stringWithContentsOfFile:name encoding:NSUTF8StringEncoding error:&e]];
-                JSValue *val = [_self evaluateScript:eval];
-
-                static NSString *clearModule = @"delete module";
-                [_self evaluateScript:clearModule];
-
-                if(e || !val) {
-                    [_self printString:[NSString stringWithFormat:@"Error loading script \'%@\': %@", name, e]];
-                }
-
-                return val;
-            } break;
-            case NO: {
-                
-            } break;
+        if(isScript) {
+            return [_self evaluateScriptAtPath:name];
         }
 
         return nil;
     };
+
+    NSProcessInfo *info = [NSProcessInfo processInfo];
     self[@"process"] = @{
                          @"exit" : ^(int code) { exit(code); },
                          @"execPath" : [NSBundle mainBundle].executablePath,
-                         @"pid" : @([NSProcessInfo processInfo].processIdentifier),
-                         @"cwd" : [[NSFileManager defaultManager] currentDirectoryPath]
+                         @"pid" : @(info.processIdentifier),
+                         @"cwd" : ^JSValue *() { return _self[@"_cwd"]; },
+                         @"chdir" : ^(NSString *dir) { _self[@"_cwd"] = dir; },
+                         @"moduleLoadList" : @[],
+                         @"env" : info.environment,
+                         @"argv" : info.arguments
                          };
-    self[@"console"] = @{ @"log" : logBlock, @"logObject" : logObjectBlock };
+    self[@"console"] = @{
+                         @"log" : logBlock,
+                         @"logObject" : logObjectBlock
+                         };
     self[@"log"] = logBlock;
     self[@"logObject"] = logObjectBlock;
-    self[@"moduleLoadList"] = @[];
 
     for(NSString *className in @[ @"MKObject",
                                   @"MKClient",
@@ -91,6 +79,52 @@
                                   @"MKMessage" ]) {
         self[className] = NSClassFromString(className);
     }
+}
+
+- (JSValue *)evaluateScriptAtPath:(NSString *)name {
+    BOOL isValidScript =
+    [name hasSuffix:@".js"]
+    && [[name lastPathComponent] componentsSeparatedByString:@"."].count > 1
+    && [[NSFileManager defaultManager] fileExistsAtPath:name];
+
+    __weak typeof(self) _self = self;
+    switch (isValidScript) {
+        case YES: {
+            if(!name.isAbsolutePath) {
+                name = [_self[@"_cwd"].toString stringByAppendingPathComponent:name];
+            }
+
+            NSError *e;
+            static NSString *evalFmt = @"(function (){ var module = {exports:{}}; var exports = module.exports; var obj = (function (){ %@ })(); return module.exports; })()";
+            NSString *eval = [NSString stringWithFormat:evalFmt, [NSString stringWithContentsOfFile:name encoding:NSUTF8StringEncoding error:&e]];
+
+            if(e) {
+                [_self printString:[NSString stringWithFormat:@"Error loading script: \'%@\'", name]];
+                return nil;
+            }
+            JSValue *val = [_self evaluateScript:eval];
+
+            static NSString *clearModule = @"delete module";
+            [_self evaluateScript:clearModule];
+
+            if(!val) {
+                [_self printString:[NSString stringWithFormat:@"Error evaluating script: \'%@\', error = %@", name, e]];
+            } else {
+                [_self evaluateScript:[NSString stringWithFormat:@"process.moduleLoadList.push(\'Script %@\');", name.lastPathComponent]];
+            }
+
+            return val;
+        } break;
+        case NO: {
+
+        } break;
+    }
+
+    return nil;
+}
+
+- (BOOL)loadNativeModuleAtPath:(NSString *)path {
+    return NO;
 }
 
 @end

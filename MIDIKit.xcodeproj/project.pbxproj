@@ -88,7 +88,7 @@
 /* Begin PBXFileReference section */
 		522EA3FA18FA690500444217 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 		522EA3FD18FA6B0400444217 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		522EA41B18FA7C4F00444217 /* tt.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = tt.js; sourceTree = "<group>"; };
+		522EA41B18FA7C4F00444217 /* msg.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = msg.js; sourceTree = "<group>"; };
 		5273C6D418DE96A200A8CFD4 /* MIDIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MIDIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5273C6D718DE96A200A8CFD4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		5273C6DA18DE96A200A8CFD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -266,7 +266,7 @@
 			children = (
 				5273C72518DEA17B00A8CFD4 /* main.m */,
 				52B095A018F8B5F900CB1440 /* test.js */,
-				522EA41B18FA7C4F00444217 /* tt.js */,
+				522EA41B18FA7C4F00444217 /* msg.js */,
 				5273C74118DEB2FF00A8CFD4 /* LPDev.h */,
 				5273C72718DEA17B00A8CFD4 /* Supporting Files */,
 			);

@@ -21,5 +21,7 @@
 
 @interface MKJavaScriptContext : JSContext
 
+- (JSValue *)evaluateScriptAtPath:(NSString *)path;
+- (BOOL)loadNativeModuleAtPath:(NSString *)path;
 
 @end
