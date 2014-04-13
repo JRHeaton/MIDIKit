@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <JavaScriptCore/JavaScriptCore.h>
 
 @class MKJavaScriptContext;
 @protocol MKJavaScriptModule <NSObject>
 
-@required
-+ (NSArray *)classesToLoad;
+@optional
++ (NSArray *)classesToLoad:(MKJavaScriptContext *)context;
++ (JSValue *)requireReturnValue:(MKJavaScriptContext *)context;
 
 @end

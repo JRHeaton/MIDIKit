@@ -9,6 +9,7 @@
 #import "MKJavaScriptContext.h"
 #import "MKClient.h"
 #import "MKConnection.h"
+#import <dlfcn.h>
 
 @implementation MKJavaScriptContext {
     BOOL _initialized;
@@ -32,6 +33,15 @@
     printf("%s\n", string.UTF8String);
 }
 
+- (void)classesLoaded:(NSNotification *)notif {
+    NSArray *classes = notif.userInfo[NSLoadedClasses];
+
+    for(NSString *className in classes) {
+        NSLog(@"Just loaded %@", className);
+        [self loadNativeModule:NSClassFromString(className)];
+    }
+}
+
 - (void)_setupFancyPantsContext {
     void (^logBlock)(NSString *log) = ^(NSString *log) { [self printString:log]; };
     void (^logObjectBlock)(JSValue *val) = ^(JSValue *val) { [self printString:[val.toObject description]]; };
@@ -39,10 +49,18 @@
     self[@"_cwd"] = [NSFileManager defaultManager].currentDirectoryPath;
     __weak typeof(self) _self = self;
     self[@"require"] = ^JSValue *(NSString *name) {
+        if(!name.isAbsolutePath) {
+            name = [_self[@"_cwd"].toString stringByAppendingPathComponent:name];
+        }
+
         BOOL isScript = [name hasSuffix:@".js"];
 
         if(isScript) {
             return [_self evaluateScriptAtPath:name];
+        } else if([name hasSuffix:@".mkmodule"]
+                   || [name hasSuffix:@".bundle"]
+                   || [name hasSuffix:@".dylib"]) {
+            return [_self loadNativeModuleAtPath:name];
         }
 
         return nil;
@@ -90,9 +108,6 @@
     __weak typeof(self) _self = self;
     switch (isValidScript) {
         case YES: {
-            if(!name.isAbsolutePath) {
-                name = [_self[@"_cwd"].toString stringByAppendingPathComponent:name];
-            }
 
             NSError *e;
             static NSString *evalFmt = @"(function (){ var module = {exports:{}}; var exports = module.exports; var obj = (function (){ %@ })(); return module.exports; })()";
@@ -123,22 +138,66 @@
     return nil;
 }
 
-- (BOOL)loadNativeModuleAtPath:(NSString *)path {
-    return NO;
+- (JSValue *)loadNativeModuleAtPath:(NSString *)path {
+    BOOL isDir;
+    if(![[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir]) {
+        return NO;
+    }
+
+    if(isDir) {
+        NSBundle *bundle = [NSBundle bundleWithPath:path];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(classesLoaded:) name:NSBundleDidLoadNotification object:bundle];
+        [bundle load];
+
+        return nil; // this is async w/ notification
+    } else {
+        void *handle = dlopen(path.UTF8String, RTLD_NOW);
+        if(!handle) return nil;
+
+        NSArray *(*MKModuleClasses)() = dlsym(handle, "MKModuleClasses");
+        if(!MKModuleClasses) return nil;
+
+        for(Class<MKJavaScriptModule> cls in MKModuleClasses()) {
+            JSValue *ret = [self loadNativeModule:cls];
+            return ret;
+        }
+    }
+
+    return nil;
 }
 
-- (void)loadNativeModule:(Class<MKJavaScriptModule>)module {
-    if(![(Class)module respondsToSelector:@selector(classesToLoad)]) return;
+- (void)loadClass:(Class)c {
+    if([self classIsLoaded:c]) return;
 
-    for(Class cls in [module classesToLoad]) {
-        NSString *className = NSStringFromClass(cls);
-        if(![self[className] isUndefined]) continue; // already loaded
+    NSString *className = NSStringFromClass(c);
+    static NSString *script = @"process.moduleLoadList.push(\'NativeModule %@\');";
+    NSString *formatted = [NSString stringWithFormat:script, className];
+    [self evaluateScript:formatted];
 
-        static NSString *script = @"process.moduleLoadList.push(\'NativeModule %@\');";
-        NSString *formatted = [NSString stringWithFormat:script, className];
-        [self evaluateScript:formatted];
-        self[className] = cls;
+    self[NSStringFromClass(c)] = c;
+}
+
+- (BOOL)classIsLoaded:(Class)c {
+    return !self[NSStringFromClass(c)].isUndefined;
+}
+
+- (JSValue *)loadNativeModule:(Class<MKJavaScriptModule>)module {
+    Class cMod = (Class)module;
+    if(![cMod conformsToProtocol:@protocol(MKJavaScriptModule)]) return nil;
+
+    if([cMod respondsToSelector:@selector(classesToLoad:)]) {
+        for(Class cls in [module classesToLoad:self]) {
+            [self loadClass:cls];
+        }
     }
+    [self loadClass:cMod];
+
+    JSValue *ret = nil;
+    if([cMod respondsToSelector:@selector(requireReturnValue:)]) {
+        ret = [cMod requireReturnValue:self];
+    }
+
+    return ret;
 }
 
 @end

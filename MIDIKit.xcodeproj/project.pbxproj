@@ -25,6 +25,8 @@
 		5273C73C18DEADB800A8CFD4 /* MKEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73A18DEADB800A8CFD4 /* MKEntity.m */; };
 		5273C73F18DEADEE00A8CFD4 /* MKEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C73D18DEADEE00A8CFD4 /* MKEndpoint.h */; };
 		5273C74018DEADEE00A8CFD4 /* MKEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */; };
+		528DCB3518FAB3E50090FFFB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D718DE96A200A8CFD4 /* Cocoa.framework */; };
+		528DCB3B18FAB3E50090FFFB /* testNativeModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 528DCB3A18FAB3E50090FFFB /* testNativeModule.m */; };
 		52B169D618F8AE4800EACDAE /* MKJavaScriptContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B169D418F8AE4800EACDAE /* MKJavaScriptContext.h */; };
 		52B169D718F8AE4800EACDAE /* MKJavaScriptContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B169D518F8AE4800EACDAE /* MKJavaScriptContext.m */; };
 		52B22EEC18F7A0EF00A5A5D3 /* MKInputPort.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EEA18F7A0EF00A5A5D3 /* MKInputPort.h */; };
@@ -50,6 +52,20 @@
 
 /* Begin PBXContainerItemProxy section */
 		5273C72E18DEA17F00A8CFD4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5273C6CB18DE96A200A8CFD4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5273C6D318DE96A200A8CFD4;
+			remoteInfo = MIDIKit;
+		};
+		528DCB5418FAB4660090FFFB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5273C6CB18DE96A200A8CFD4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 528DCB3318FAB3E50090FFFB;
+			remoteInfo = testNativeModule;
+		};
+		528DCB5618FAB46A0090FFFB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5273C6CB18DE96A200A8CFD4 /* Project object */;
 			proxyType = 1;
@@ -118,6 +134,10 @@
 		5273C73D18DEADEE00A8CFD4 /* MKEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKEndpoint.h; sourceTree = "<group>"; };
 		5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKEndpoint.m; sourceTree = "<group>"; };
 		5273C74118DEB2FF00A8CFD4 /* LPDev.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDev.h; sourceTree = "<group>"; };
+		528DCB3418FAB3E50090FFFB /* testNativeModule.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = testNativeModule.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		528DCB3818FAB3E50090FFFB /* testNativeModule-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "testNativeModule-Prefix.pch"; sourceTree = "<group>"; };
+		528DCB3918FAB3E50090FFFB /* testNativeModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = testNativeModule.h; sourceTree = "<group>"; };
+		528DCB3A18FAB3E50090FFFB /* testNativeModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = testNativeModule.m; sourceTree = "<group>"; };
 		52B095A018F8B5F900CB1440 /* test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = test.js; sourceTree = "<group>"; };
 		52B169D418F8AE4800EACDAE /* MKJavaScriptContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKJavaScriptContext.h; sourceTree = "<group>"; };
 		52B169D518F8AE4800EACDAE /* MKJavaScriptContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKJavaScriptContext.m; sourceTree = "<group>"; };
@@ -162,6 +182,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		528DCB3118FAB3E50090FFFB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				528DCB3518FAB3E50090FFFB /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52B22F0818F858E500A5A5D3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -181,6 +209,7 @@
 				5273C6DD18DE96A200A8CFD4 /* MIDIKit */,
 				5273C72418DEA17B00A8CFD4 /* mktests */,
 				52B22F0D18F858E600A5A5D3 /* lpemutest */,
+				528DCB3618FAB3E50090FFFB /* testNativeModule */,
 				5273C6D618DE96A200A8CFD4 /* Frameworks */,
 				5273C6D518DE96A200A8CFD4 /* Products */,
 			);
@@ -192,6 +221,7 @@
 				5273C6D418DE96A200A8CFD4 /* MIDIKit.framework */,
 				5273C72218DEA17B00A8CFD4 /* mktests */,
 				52B22F0B18F858E500A5A5D3 /* lpemutest */,
+				528DCB3418FAB3E50090FFFB /* testNativeModule.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -286,6 +316,24 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		528DCB3618FAB3E50090FFFB /* testNativeModule */ = {
+			isa = PBXGroup;
+			children = (
+				528DCB3918FAB3E50090FFFB /* testNativeModule.h */,
+				528DCB3A18FAB3E50090FFFB /* testNativeModule.m */,
+				528DCB3718FAB3E50090FFFB /* Supporting Files */,
+			);
+			path = testNativeModule;
+			sourceTree = "<group>";
+		};
+		528DCB3718FAB3E50090FFFB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				528DCB3818FAB3E50090FFFB /* testNativeModule-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		52B22F0D18F858E600A5A5D3 /* lpemutest */ = {
 			isa = PBXGroup;
 			children = (
@@ -339,6 +387,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		528DCB3218FAB3E50090FFFB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -372,11 +427,30 @@
 			);
 			dependencies = (
 				5273C72F18DEA17F00A8CFD4 /* PBXTargetDependency */,
+				528DCB5518FAB4660090FFFB /* PBXTargetDependency */,
 			);
 			name = mktests;
 			productName = mktests;
 			productReference = 5273C72218DEA17B00A8CFD4 /* mktests */;
 			productType = "com.apple.product-type.tool";
+		};
+		528DCB3318FAB3E50090FFFB /* testNativeModule */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 528DCB5218FAB3E50090FFFB /* Build configuration list for PBXNativeTarget "testNativeModule" */;
+			buildPhases = (
+				528DCB3018FAB3E50090FFFB /* Sources */,
+				528DCB3118FAB3E50090FFFB /* Frameworks */,
+				528DCB3218FAB3E50090FFFB /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				528DCB5718FAB46A0090FFFB /* PBXTargetDependency */,
+			);
+			name = testNativeModule;
+			productName = testNativeModule;
+			productReference = 528DCB3418FAB3E50090FFFB /* testNativeModule.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
 		};
 		52B22F0A18F858E500A5A5D3 /* lpemutest */ = {
 			isa = PBXNativeTarget;
@@ -420,6 +494,7 @@
 				5273C6D318DE96A200A8CFD4 /* MIDIKit */,
 				5273C72118DEA17B00A8CFD4 /* mktests */,
 				52B22F0A18F858E500A5A5D3 /* lpemutest */,
+				528DCB3318FAB3E50090FFFB /* testNativeModule */,
 			);
 		};
 /* End PBXProject section */
@@ -465,6 +540,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		528DCB3018FAB3E50090FFFB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				528DCB3B18FAB3E50090FFFB /* testNativeModule.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52B22F0718F858E500A5A5D3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -482,6 +565,16 @@
 			isa = PBXTargetDependency;
 			target = 5273C6D318DE96A200A8CFD4 /* MIDIKit */;
 			targetProxy = 5273C72E18DEA17F00A8CFD4 /* PBXContainerItemProxy */;
+		};
+		528DCB5518FAB4660090FFFB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 528DCB3318FAB3E50090FFFB /* testNativeModule */;
+			targetProxy = 528DCB5418FAB4660090FFFB /* PBXContainerItemProxy */;
+		};
+		528DCB5718FAB46A0090FFFB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5273C6D318DE96A200A8CFD4 /* MIDIKit */;
+			targetProxy = 528DCB5618FAB46A0090FFFB /* PBXContainerItemProxy */;
 		};
 		52B22F1818F858ED00A5A5D3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -624,6 +717,35 @@
 			};
 			name = Release;
 		};
+		528DCB4E18FAB3E50090FFFB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "testNativeModule/testNativeModule-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+			};
+			name = Debug;
+		};
+		528DCB4F18FAB3E50090FFFB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "testNativeModule/testNativeModule-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+			};
+			name = Release;
+		};
 		52B22F1518F858E600A5A5D3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -675,6 +797,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		528DCB5218FAB3E50090FFFB /* Build configuration list for PBXNativeTarget "testNativeModule" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				528DCB4E18FAB3E50090FFFB /* Debug */,
+				528DCB4F18FAB3E50090FFFB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		52B22F1418F858E600A5A5D3 /* Build configuration list for PBXNativeTarget "lpemutest" */ = {
 			isa = XCConfigurationList;

@@ -24,3 +24,4 @@
 #import "MKVirtualSource.h"
 #import "MKVirtualDestination.h"
 #import "MKJavaScriptContext.h"
+#import "MKJavaScriptModule.h"

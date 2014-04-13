@@ -14,9 +14,8 @@
 @synthesize useCaching=_useCaching;
 @dynamic valid;
 
-// for JS
-+ (NSArray *)classesToLoad {
-    return @[ self.class ];
++ (JSValue *)requireReturnValue:(MKJavaScriptContext *)context {
+    return context[NSStringFromClass(self.class)];
 }
 
 + (void)load {

@@ -1,5 +1,10 @@
-var LPConnection = require('/Users/John/Dropbox/Developer/projects/MIDIKit/mktests/LPConnection.js')
+//var LPConnection = require('/Users/John/Dropbox/Developer/projects/MIDIKit/mktests/LPConnection.js')
+//var Launchpad = new LPConnection();
+//Launchpad.Reset()
 
-var Launchpad = new LPConnection();
+var native = require('/Users/John/Dropbox/Developer/projects/MIDIKit/DerivedData/MIDIKit/Build/Products/Debug/testNativeModule.dylib');
 
-Launchpad.Reset()
+console.log('native: ' + native)
+log(testNativeModule)
+log(testNativeModule.doThingy)
+log(testNativeModule.doThingy())
