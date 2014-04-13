@@ -69,9 +69,9 @@
     self[@"process"] = @{
 #if TARGET_OS_MAC
                          @"exit" : ^(int code) { exit(code); },
+                         @"chdir" : ^(NSString *dir) { _self[@"_cwd"] = dir; },
 #endif
                          @"execPath" : [NSBundle mainBundle].executablePath,
-                         @"chdir" : ^(NSString *dir) { _self[@"_cwd"] = dir; },
                          @"cwd" : ^JSValue *() { return _self[@"_cwd"]; },
                          @"pid" : @(info.processIdentifier),
                          @"moduleLoadList" : @[],
