@@ -14,7 +14,7 @@
 // which may be communicated to/from on input/output ports
 
 @class MKEntity;
-@protocol MKEndpointJS <JSExport>
+@protocol MKEndpointJS <JSExport, MKObjectJS>
 
 #pragma mark - -Enumeration/Init-
 + (NSUInteger)numberOfSources;
@@ -33,7 +33,7 @@
 
 
 #pragma mark - -Endpoint Wrapper-
-@interface MKEndpoint : MKObject <MKEndpointJS, MKObjectJS>
+@interface MKEndpoint : MKObject <MKEndpointJS>
 
 
 #pragma mark - -Enumeration/Init-

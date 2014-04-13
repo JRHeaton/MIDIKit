@@ -19,7 +19,7 @@
 @class MKInputPort, MKOutputPort, MKVirtualSource, MKVirtualDestination;
 @protocol MKClientNotificationDelegate;
 
-@protocol MKClientJS <JSExport>
+@protocol MKClientJS <JSExport, MKObjectJS>
 
 #pragma mark - -Init-
 + (instancetype)new;
@@ -133,7 +133,7 @@
 #pragma mark - -Client Instantiation Protocol-
 // Common protocol for objects that are created with a parent client
 // and a name.
-@protocol MKClientDependentInstaniation <NSObject>
+@protocol MKClientDependentInstaniation <NSObject, MKClientReference>
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
 

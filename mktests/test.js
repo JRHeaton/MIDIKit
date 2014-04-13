@@ -4,6 +4,8 @@
 
 var native = require('/Users/John/Dropbox/Developer/projects/MIDIKit/DerivedData/MIDIKit/Build/Products/Debug/testNativeModule.dylib');
 
+console.log('LPMessage.reset: ' + LPMessage.reset);
+
 console.log('native: ' + native)
 log(testNativeModule)
 log(testNativeModule.doThingy)

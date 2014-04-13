@@ -17,7 +17,7 @@
 // required, though.
 
 @class MKDevice;
-@protocol MKEntityJS <JSExport>
+@protocol MKEntityJS <JSExport, MKObjectJS>
 
 #pragma mark - -Child Objects-
 - (MKEndpoint *)firstDestination;
@@ -36,7 +36,7 @@
 
 
 #pragma mark - -Entity Wrapper-
-@interface MKEntity : MKObject <MKEntityJS, MKObjectJS>
+@interface MKEntity : MKObject <MKEntityJS>
 
 #pragma mark - -Subscripting-
 - (id)objectAtIndexedSubscript:(NSUInteger)index; // defaults to destination

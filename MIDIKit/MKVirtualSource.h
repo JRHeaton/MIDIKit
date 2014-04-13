@@ -9,6 +9,12 @@
 #import "MKEndpoint.h"
 #import "MKClient.h"
 
+#pragma mark - -Mutual ObjC/JavaScript-
+
+@protocol MKVirtualSourceJS <JSExport, MKObjectJS, MKEndpointJS>
+
+@end
+
 #pragma mark - -Virtual Source Endpoint Wrapper-
 
 // A virtual source is a client-created endpoint that
@@ -16,7 +22,7 @@
 // connect to an input port and receive data with, just as they
 // would with a normal source.
 
-@interface MKVirtualSource : MKEndpoint <MKClientDependentInstaniation, MKClientReference, MKObjectJS>
+@interface MKVirtualSource : MKEndpoint <MKClientDependentInstaniation, MKVirtualSourceJS>
 
 #pragma mark - -Init-
 // Creates a new virtual source and adds it to the MIDI server

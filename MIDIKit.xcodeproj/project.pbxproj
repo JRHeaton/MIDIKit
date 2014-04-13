@@ -30,6 +30,22 @@
 		528DCB5D18FABF870090FFFB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D718DE96A200A8CFD4 /* Cocoa.framework */; };
 		528DCB6318FABF870090FFFB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 528DCB6118FABF870090FFFB /* InfoPlist.strings */; };
 		528DCB6E18FABFE60090FFFB /* JRNativeBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 528DCB6D18FABFE60090FFFB /* JRNativeBundle.m */; };
+		528DCB7018FAD20A0090FFFB /* MIDIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C6E418DE96A200A8CFD4 /* MIDIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		528DCB7118FAD20D0090FFFB /* MKObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C70218DE9A9800A8CFD4 /* MKObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		528DCB7218FAD20F0090FFFB /* MKClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C70618DE9E2500A8CFD4 /* MKClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		528DCB7318FAD2110090FFFB /* MKInputPort.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EEA18F7A0EF00A5A5D3 /* MKInputPort.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		528DCB7418FAD2130090FFFB /* MKOutputPort.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EEE18F7A6C600A5A5D3 /* MKOutputPort.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		528DCB7518FAD2170090FFFB /* MKDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C73518DEAD5700A8CFD4 /* MKDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		528DCB7618FAD2190090FFFB /* MKEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C73918DEADB800A8CFD4 /* MKEntity.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		528DCB7718FAD21B0090FFFB /* MKEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C73D18DEADEE00A8CFD4 /* MKEndpoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		528DCB7818FAD21C0090FFFB /* MKVirtualSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EF218F7B65D00A5A5D3 /* MKVirtualSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		528DCB7918FAD21E0090FFFB /* MKVirtualDestination.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EF618F7B80900A5A5D3 /* MKVirtualDestination.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		528DCB7A18FAD21F0090FFFB /* MKConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EFC18F7C86900A5A5D3 /* MKConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		528DCB7B18FAD2200090FFFB /* MKMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22F0318F803E900A5A5D3 /* MKMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		528DCB7C18FAD2260090FFFB /* MKJavaScriptContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B169D418F8AE4800EACDAE /* MKJavaScriptContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		528DCB7D18FAD2290090FFFB /* MKJavaScriptModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 522EA42318FA9A9500444217 /* MKJavaScriptModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		528DCB8018FAD3340090FFFB /* MKObjectMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 528DCB7E18FAD3340090FFFB /* MKObjectMap.h */; };
+		528DCB8118FAD3340090FFFB /* MKObjectMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 528DCB7F18FAD3340090FFFB /* MKObjectMap.m */; };
 		52B169D618F8AE4800EACDAE /* MKJavaScriptContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B169D418F8AE4800EACDAE /* MKJavaScriptContext.h */; };
 		52B169D718F8AE4800EACDAE /* MKJavaScriptContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B169D518F8AE4800EACDAE /* MKJavaScriptContext.m */; };
 		52B22EEC18F7A0EF00A5A5D3 /* MKInputPort.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EEA18F7A0EF00A5A5D3 /* MKInputPort.h */; };
@@ -161,6 +177,8 @@
 		528DCB6418FABF870090FFFB /* testNativeBundle-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "testNativeBundle-Prefix.pch"; sourceTree = "<group>"; };
 		528DCB6C18FABFE60090FFFB /* JRNativeBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRNativeBundle.h; sourceTree = "<group>"; };
 		528DCB6D18FABFE60090FFFB /* JRNativeBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRNativeBundle.m; sourceTree = "<group>"; };
+		528DCB7E18FAD3340090FFFB /* MKObjectMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKObjectMap.h; sourceTree = "<group>"; };
+		528DCB7F18FAD3340090FFFB /* MKObjectMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKObjectMap.m; sourceTree = "<group>"; };
 		52B095A018F8B5F900CB1440 /* test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = test.js; sourceTree = "<group>"; };
 		52B169D418F8AE4800EACDAE /* MKJavaScriptContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKJavaScriptContext.h; sourceTree = "<group>"; };
 		52B169D518F8AE4800EACDAE /* MKJavaScriptContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKJavaScriptContext.m; sourceTree = "<group>"; };
@@ -287,6 +305,8 @@
 			isa = PBXGroup;
 			children = (
 				5273C6E418DE96A200A8CFD4 /* MIDIKit.h */,
+				528DCB7E18FAD3340090FFFB /* MKObjectMap.h */,
+				528DCB7F18FAD3340090FFFB /* MKObjectMap.m */,
 				5273C70218DE9A9800A8CFD4 /* MKObject.h */,
 				5273C70318DE9A9800A8CFD4 /* MKObject.m */,
 				5273C70618DE9E2500A8CFD4 /* MKClient.h */,
@@ -423,6 +443,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				528DCB8018FAD3340090FFFB /* MKObjectMap.h in Headers */,
 				52B22EFE18F7C86900A5A5D3 /* MKConnection.h in Headers */,
 				5273C73718DEAD5700A8CFD4 /* MKDevice.h in Headers */,
 				52B22EF818F7B80900A5A5D3 /* MKVirtualDestination.h in Headers */,
@@ -444,6 +465,27 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		528DCB6F18FAD2040090FFFB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				528DCB7018FAD20A0090FFFB /* MIDIKit.h in Headers */,
+				528DCB7518FAD2170090FFFB /* MKDevice.h in Headers */,
+				528DCB7718FAD21B0090FFFB /* MKEndpoint.h in Headers */,
+				528DCB7918FAD21E0090FFFB /* MKVirtualDestination.h in Headers */,
+				528DCB7A18FAD21F0090FFFB /* MKConnection.h in Headers */,
+				528DCB7B18FAD2200090FFFB /* MKMessage.h in Headers */,
+				528DCB7118FAD20D0090FFFB /* MKObject.h in Headers */,
+				528DCB7818FAD21C0090FFFB /* MKVirtualSource.h in Headers */,
+				528DCB7618FAD2190090FFFB /* MKEntity.h in Headers */,
+				528DCB7218FAD20F0090FFFB /* MKClient.h in Headers */,
+				528DCB7318FAD2110090FFFB /* MKInputPort.h in Headers */,
+				528DCB7C18FAD2260090FFFB /* MKJavaScriptContext.h in Headers */,
+				528DCB7D18FAD2290090FFFB /* MKJavaScriptModule.h in Headers */,
+				528DCB7418FAD2130090FFFB /* MKOutputPort.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,6 +555,7 @@
 				528DCB5818FABF870090FFFB /* Sources */,
 				528DCB5918FABF870090FFFB /* Frameworks */,
 				528DCB5A18FABF870090FFFB /* Resources */,
+				528DCB6F18FAD2040090FFFB /* Headers */,
 			);
 			buildRules = (
 			);
@@ -599,6 +642,7 @@
 				5273C70918DE9E2500A8CFD4 /* MKClient.m in Sources */,
 				5273C74018DEADEE00A8CFD4 /* MKEndpoint.m in Sources */,
 				5273C73818DEAD5700A8CFD4 /* MKDevice.m in Sources */,
+				528DCB8118FAD3340090FFFB /* MKObjectMap.m in Sources */,
 				52B22F0618F803E900A5A5D3 /* MKMessage.m in Sources */,
 				5273C73C18DEADB800A8CFD4 /* MKEntity.m in Sources */,
 				52B22EED18F7A0EF00A5A5D3 /* MKInputPort.m in Sources */,
@@ -781,6 +825,11 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MIDIKit/MIDIKit-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)",
+				);
 				INFOPLIST_FILE = "MIDIKit/MIDIKit-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
@@ -796,6 +845,11 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MIDIKit/MIDIKit-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)",
+				);
 				INFOPLIST_FILE = "MIDIKit/MIDIKit-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;

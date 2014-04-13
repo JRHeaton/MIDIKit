@@ -14,7 +14,7 @@
 // Devices are parent objects of entities,
 // and are usually the 'root' object created by the driver.
 
-@protocol MKDeviceJS <JSExport>
+@protocol MKDeviceJS <JSExport, MKObjectJS>
 
 #pragma mark - -Enumeration/Init-
 + (NSUInteger)numberOfDevices;
@@ -42,7 +42,7 @@
 
 
 #pragma mark - -Device Wrapper-
-@interface MKDevice : MKObject <MKDeviceJS, MKObjectJS>
+@interface MKDevice : MKObject <MKDeviceJS>
 
 #pragma mark - -Enumeration/Init-
 // Convenient enumeration

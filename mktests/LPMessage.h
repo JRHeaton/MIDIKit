@@ -17,7 +17,7 @@ typedef NS_ENUM(UInt8, LPColorBrightness) {
     kLPColorMax = 3
 };
 
-@protocol LPMessageJS <JSExport>
+@protocol LPMessageJS <JSExport, MKMessageJS>
 
 + (instancetype)reset;
 + (instancetype)setFirstBuffers;
@@ -30,7 +30,7 @@ typedef NS_ENUM(UInt8, LPColorBrightness) {
 
 @end
 
-@interface LPMessage : MKMessage <LPMessageJS, MKMessageJS>
+@interface LPMessage : MKMessage <LPMessageJS>
 
 + (instancetype)bufferMessageWithDisplayBuffer:(NSUInteger)displayBuffer
                                 updatingBuffer:(NSUInteger)updatingBuffer
