@@ -25,8 +25,7 @@
 @protocol MKClientJS <JSExport, MKObjectJS>
 
 #pragma mark - -Init-
-+ (instancetype)new;
-+ (instancetype)client; // created based on process name
++ (instancetype)global;
 + (instancetype)clientWithName:(NSString *)name;
 
 
@@ -59,6 +58,11 @@
 #pragma mark - -CoreMIDI Client Disposal-
 // Disposes the MIDIRef(MIDIClientRef) object (invalidates this object)
 - (void)dispose;
+
+
+#pragma mark - -Notifications-
++ (void)startSendingNotifications;
++ (void)stopSendingNotifications;
 
 
 #pragma mark - -Child Object Containers-
@@ -121,6 +125,16 @@
 - (void)midiClientThruConnectionsChanged:(MKClient *)client;
 
 @end
+
+
+#pragma mark - -Notifications-
+
+#pragma mark Names
+extern NSString *MKObjectPropertyChangedNotification;
+
+#pragma mark UserInfo Keys
+extern NSString *MKUserInfoPropertyNameKey;
+extern NSString *MKUserInfoObjectInstanceKey;
 
 
 #pragma mark - -Client Reference Protocol-

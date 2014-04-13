@@ -104,12 +104,9 @@
 
 #pragma mark - -Base Object Wrapper-
 @interface MKObject : NSObject <MKObjectJS, MKJavaScriptModule> {
-@package
-    NSMutableDictionary *_propertyCache;
 @protected
     MIDIObjectRef _MIDIRef;
 }
-
 
 #pragma mark - -Init-
 + (instancetype)objectWithMIDIRef:(MIDIObjectRef)MIDIRef;
@@ -132,6 +129,7 @@
 
 #pragma mark Removal
 - (void)removePropertyForKey:(NSString *)key;
+- (void)removeCachedPropertyForKey:(NSString *)key;
 
 #pragma mark Copying All Properties
 // This will copy the entire dict. This is called in -description,

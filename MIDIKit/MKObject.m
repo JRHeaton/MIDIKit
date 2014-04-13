@@ -9,6 +9,11 @@
 #import "MKObject.h"
 #import <dlfcn.h>
 #import <objc/runtime.h>
+#import "MKClient.h"
+
+@interface MKObject ()
+@property (nonatomic, strong) NSMutableDictionary *propertyCache;
+@end
 
 @implementation MKObject
 
@@ -68,6 +73,19 @@ exception:
 - (void)commonInit {
     self.useCaching = YES;
     _propertyCache = [NSMutableDictionary dictionaryWithCapacity:0];
+
+    // global
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(propertyWasUpdated:) name:MKObjectPropertyChangedNotification object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)propertyWasUpdated:(NSNotification *)notif {
+    NSString *propertyName = notif.userInfo[MKUserInfoPropertyNameKey];
+
+    [self removeCachedPropertyForKey:propertyName];
 }
 
 - (NSString *)description {
@@ -144,7 +162,12 @@ exception:
     return self;
 }
 
+- (void)removeCachedPropertyForKey:(NSString *)key {
+    [self.propertyCache removeObjectForKey:key];
+}
+
 - (void)removePropertyForKey:(NSString *)key {
+    [self removeCachedPropertyForKey:key];
     MIDIObjectRemoveProperty(self.MIDIRef, (__bridge CFStringRef)(key));
 }
 

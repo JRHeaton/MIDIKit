@@ -13,6 +13,10 @@
 #import "MKVirtualDestination.h"
 #import "MKDevice.h"
 
+NSString *MKObjectPropertyChangedNotification = @"MKObjectPropertyChangedNotification";
+NSString *MKUserInfoPropertyNameKey = @"MKUserInfoPropertyNameKey";
+NSString *MKUserInfoObjectInstanceKey = @"MKUserInfoObjectInstanceKey";
+
 @interface MKClient ()
 
 @property (nonatomic, strong) NSMutableSet *notificationDelegates;
@@ -20,6 +24,8 @@
 @end
 
 @implementation MKClient
+
+static BOOL _MKClientShouldPostNotifications = NO;
 
 @synthesize inputPorts=_inputPorts;
 @synthesize outputPorts=_outputPorts;
@@ -73,8 +79,18 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
             MIDIObjectPropertyChangeNotification *notif = (MIDIObjectPropertyChangeNotification *)message;
 
             id objectInstance = [[_MKClassForType(notif->objectType, nil) alloc] initWithMIDIRef:notif->object];
-            NSString *propertyName = ((__bridge NSString *)notif->propertyName).copy;
+
+            CFRetain(notif->propertyName);
+            NSString *propertyName = (__bridge_transfer NSString *)notif->propertyName;
             [self dispatchNotificationSelector:@selector(midiClient:object:changedValueOfPropertyForKey:) withArguments:@[ self, objectInstance, propertyName ] ];
+
+            if(_MKClientShouldPostNotifications) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:MKObjectPropertyChangedNotification
+                                                                    object:self
+                                                                  userInfo:@{ MKUserInfoPropertyNameKey : propertyName,
+                                                                              MKUserInfoObjectInstanceKey : objectInstance
+                                                                              }];
+            }
         } break;
         case kMIDIMsgThruConnectionsChanged: break;
         case kMIDIMsgSerialPortOwnerChanged: break;
@@ -83,7 +99,6 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
             [self dispatchNotificationSelector:@selector(midiClient:driverIOErrorWithDevice:errorCode:) withArguments:@[ self, [MKDevice objectWithMIDIRef:notif->driverDevice], @(notif->errorCode)]];
         } break;
     }
-
 }
 
 - (void)dispatchNotificationSelector:(SEL)selector withArguments:(NSArray *)arguments {
@@ -102,6 +117,17 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
             [invocation invokeWithTarget:delegate];
         }
     }
+}
+
++ (void)startSendingNotifications {
+    _MKClientShouldPostNotifications = YES;
+
+    // ensure this is allocated
+    (void)[[self alloc] init];
+}
+
++ (void)stopSendingNotifications {
+    _MKClientShouldPostNotifications = NO;
 }
 
 + (instancetype)clientWithName:(NSString *)name {
@@ -126,7 +152,7 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
     return self;
 }
 
-+ (instancetype)client {
++ (instancetype)global {
     return [[self alloc] init];
 }
 
