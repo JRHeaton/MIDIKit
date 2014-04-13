@@ -52,9 +52,8 @@
             list.packet[0].timeStamp = 0;
             memcpy(list.packet[0].data, data.bytes, data.length);
 
-            NSLog(@"%@", [MKMessage messageWithData:data]);
             if(MIDISend(self.MIDIRef, endpoint.MIDIRef, &list) != 0) {
-                NSLog(@"CC %@", [JSContext currentContext]);
+                // Handle error
             }
         } else {
             [NSException raise:@"Data is too large" format:@"I am lazy and need to implement this."];

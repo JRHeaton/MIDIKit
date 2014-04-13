@@ -33,12 +33,11 @@
 
 - (void)classesLoaded:(NSNotification *)notif {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:notif.name object:notif.object];
-//    NSArray *classes = notif.userInfo[NSLoadedClasses];
-//
-//    for(NSString *className in classes) {
-//        NSLog(@"Just loaded %@", className);
-//        [self loadNativeModule:NSClassFromString(className)];
-//    }
+    NSArray *classes = notif.userInfo[NSLoadedClasses];
+
+    for(NSString *className in classes) {
+        [self loadNativeModule:NSClassFromString(className)];
+    }
 }
 
 - (void)_setupFancyPantsContext {
