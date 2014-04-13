@@ -37,7 +37,7 @@
 
 #pragma mark - -Input Port Wrapper-
 @protocol MKInputPortDelegate;
-@interface MKInputPort : MKObject <MKClientDependentInstaniation, MKInputPortJS, MKClientReference> {
+@interface MKInputPort : MKObject <MKClientDependentInstaniation, MKInputPortJS, MKClientReference, MKObjectJS> {
     NSMutableSet *_inputDelegates;
 }
 

@@ -2,4 +2,4 @@ var LPConnection = require('/Users/John/Dropbox/Developer/projects/MIDIKit/mktes
 
 var Launchpad = new LPConnection();
 
-Launchpad.Reset().Test()
+Launchpad.Reset().Test();

@@ -58,7 +58,7 @@ JSExportAs(messages,
 - (NSUInteger)length;
 
 // These will expand the data length to fit.
-- (void)setByte:(UInt8)byte atIndex:(NSUInteger)index;
+- (instancetype)setByte:(UInt8)byte atIndex:(NSUInteger)index;
 
 // Channel of the note message
 @property (nonatomic, assign) UInt8 channel;

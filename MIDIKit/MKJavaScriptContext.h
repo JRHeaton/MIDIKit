@@ -7,6 +7,7 @@
 //
 
 #import <JavaScriptCore/JavaScriptCore.h>
+#import "MKJavaScriptModule.h"
 
 #pragma mark - -JavaScript Context-
 
@@ -23,5 +24,6 @@
 
 - (JSValue *)evaluateScriptAtPath:(NSString *)path;
 - (BOOL)loadNativeModuleAtPath:(NSString *)path;
+- (JSValue *)loadNativeModule:(Class<MKJavaScriptModule>)module;
 
 @end

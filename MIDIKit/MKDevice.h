@@ -42,7 +42,7 @@
 
 
 #pragma mark - -Device Wrapper-
-@interface MKDevice : MKObject <MKDeviceJS>
+@interface MKDevice : MKObject <MKDeviceJS, MKObjectJS>
 
 #pragma mark - -Enumeration/Init-
 // Convenient enumeration

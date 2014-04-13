@@ -39,8 +39,8 @@
 
 int main(int argc, const char * argv[]){
     @autoreleasepool {
-        MKJavaScriptContext *c = [MKJavaScriptContext new];
-        c[@"LPMessage"] = [LPMessage class];
+        MKJavaScriptContext *c = [[MKJavaScriptContext alloc] init];
+        NSLog(@"loaded: %@", [c loadNativeModule:[LPMessage class]]);
 
         c.exceptionHandler = ^(JSContext *context, JSValue *exception) {
             NSLog(@"%@", exception);

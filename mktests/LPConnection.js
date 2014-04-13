@@ -6,6 +6,8 @@
 module.exports = function (name) {
     this.connection = MKConnection.new();
 
+    this.connection.client.setTransmitsOnChannel(true, 5);
+
     if(!name) name = 'Launchpad Mini 4';
     this.name = name;
 
@@ -19,7 +21,7 @@ module.exports.prototype.Find = function () {
 }
 
 module.exports.prototype.Test = function () {
-    this.connection.sendMessage(LPMessage.LEDTest());
+    this.connection.sendMessage(LPMessage.messageWithType(LPMessage.controlChangeType()).setByteAtIndex(0x7d, 2));
     return this;
 }
 

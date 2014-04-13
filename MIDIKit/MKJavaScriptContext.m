@@ -10,20 +10,20 @@
 #import "MKClient.h"
 #import "MKConnection.h"
 
-@implementation MKJavaScriptContext
+@implementation MKJavaScriptContext {
+    BOOL _initialized;
+}
 
 - (instancetype)init {
     if(!(self = [super init])) return nil;
     
-    [self setup];
+    [self _setupFancyPantsContext];
     
     return self;
 }
 
 - (instancetype)initWithVirtualMachine:(JSVirtualMachine *)virtualMachine {
     if(!(self = [super initWithVirtualMachine:virtualMachine])) return nil;
-
-    [self setup];
 
     return self;
 }
@@ -32,7 +32,7 @@
     printf("%s\n", string.UTF8String);
 }
 
-- (void)setup {
+- (void)_setupFancyPantsContext {
     void (^logBlock)(NSString *log) = ^(NSString *log) { [self printString:log]; };
     void (^logObjectBlock)(JSValue *val) = ^(JSValue *val) { [self printString:[val.toObject description]]; };
 
@@ -77,8 +77,10 @@
                                   @"MKVirtualDestination",
                                   @"MKConnection",
                                   @"MKMessage" ]) {
-        self[className] = NSClassFromString(className);
+        [self loadNativeModule:NSClassFromString(className)];
     }
+
+    NSLog(@"FIRSTY %@", self[@"process"][@"moduleLoadList"].toObject);
 }
 
 - (JSValue *)evaluateScriptAtPath:(NSString *)name {
@@ -110,6 +112,7 @@
             if(!val) {
                 [_self printString:[NSString stringWithFormat:@"Error evaluating script: \'%@\', error = %@", name, e]];
             } else {
+                NSLog(@"%@", self[@"process"].toObject);
                 [_self evaluateScript:[NSString stringWithFormat:@"process.moduleLoadList.push(\'Script %@\');", name.lastPathComponent]];
             }
 
@@ -125,6 +128,19 @@
 
 - (BOOL)loadNativeModuleAtPath:(NSString *)path {
     return NO;
+}
+
+- (JSValue *)loadNativeModule:(Class<MKJavaScriptModule>)module {
+    NSString *className = NSStringFromClass(module);
+    if(![self[className] isUndefined]) return nil;
+
+    static NSString *script = @"process.moduleLoadList.push(\'NativeModule %@\');";
+    NSString *formatted = [NSString stringWithFormat:script, className];
+
+    [self evaluateScript:formatted];
+    self[className] = module;
+
+    return self[className];
 }
 
 @end

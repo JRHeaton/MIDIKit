@@ -37,7 +37,7 @@ JSExportAs(sendMessages, - (void)sendMessageArray:(NSArray *)messages toDestinat
 
 
 #pragma mark - -Output Port Wrapper-
-@interface MKOutputPort : MKObject <MKClientDependentInstaniation, MKOutputPortJS, MKClientReference>
+@interface MKOutputPort : MKObject <MKClientDependentInstaniation, MKOutputPortJS, MKClientReference, MKObjectJS>
 
 #pragma mark - -Init-
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;

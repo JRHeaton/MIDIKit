@@ -16,7 +16,7 @@
 // connect to an input port and receive data with, just as they
 // would with a normal source.
 
-@interface MKVirtualSource : MKEndpoint <MKClientDependentInstaniation, MKClientReference>
+@interface MKVirtualSource : MKEndpoint <MKClientDependentInstaniation, MKClientReference, MKObjectJS>
 
 #pragma mark - -Init-
 // Creates a new virtual source and adds it to the MIDI server

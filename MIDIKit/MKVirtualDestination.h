@@ -15,7 +15,7 @@
 // that is usable by other clients just like a normal destination.
 
 @protocol MKVirtualDestinationDelegate;
-@interface MKVirtualDestination : MKEndpoint <MKClientDependentInstaniation, MKClientReference>
+@interface MKVirtualDestination : MKEndpoint <MKClientDependentInstaniation, MKClientReference, MKObjectJS>
 
 #pragma mark - -Init-
 // Creates a new virtual destination and adds it to the MIDI server

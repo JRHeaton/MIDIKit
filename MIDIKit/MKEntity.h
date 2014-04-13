@@ -36,7 +36,7 @@
 
 
 #pragma mark - -Entity Wrapper-
-@interface MKEntity : MKObject <MKEntityJS>
+@interface MKEntity : MKObject <MKEntityJS, MKObjectJS>
 
 #pragma mark - -Subscripting-
 - (id)objectAtIndexedSubscript:(NSUInteger)index; // defaults to destination

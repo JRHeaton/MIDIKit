@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreMIDI/CoreMIDI.h>
 #import <JavaScriptCore/JavaScriptCore.h>
+#import "MKJavaScriptContext.h"
 
 #pragma mark - -Mutual ObjC/JavaScript-
 
@@ -91,7 +92,7 @@
  */
 
 #pragma mark - -Base Object Wrapper-
-@interface MKObject : NSObject <MKObjectJS> {
+@interface MKObject : NSObject <MKObjectJS, MKJavaScriptModule> {
 @package
     NSMutableDictionary *_propertyCache;
 @protected

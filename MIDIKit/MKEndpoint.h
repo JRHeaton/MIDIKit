@@ -33,7 +33,7 @@
 
 
 #pragma mark - -Endpoint Wrapper-
-@interface MKEndpoint : MKObject <MKEndpointJS>
+@interface MKEndpoint : MKObject <MKEndpointJS, MKObjectJS>
 
 
 #pragma mark - -Enumeration/Init-

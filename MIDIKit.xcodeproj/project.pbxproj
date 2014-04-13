@@ -10,6 +10,7 @@
 		522EA40018FA7A5100444217 /* MIDIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D418DE96A200A8CFD4 /* MIDIKit.framework */; };
 		522EA41F18FA98F000444217 /* LPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 522EA41E18FA98F000444217 /* LPMessage.m */; };
 		522EA42018FA98F000444217 /* LPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 522EA41E18FA98F000444217 /* LPMessage.m */; };
+		522EA42418FA9A9500444217 /* MKJavaScriptModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 522EA42318FA9A9500444217 /* MKJavaScriptModule.h */; };
 		5273C6D818DE96A200A8CFD4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D718DE96A200A8CFD4 /* Cocoa.framework */; };
 		5273C6E218DE96A200A8CFD4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5273C6E018DE96A200A8CFD4 /* InfoPlist.strings */; };
 		5273C70418DE9A9800A8CFD4 /* MKObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C70218DE9A9800A8CFD4 /* MKObject.h */; };
@@ -91,6 +92,7 @@
 		522EA41B18FA7C4F00444217 /* LPConnection.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = LPConnection.js; sourceTree = "<group>"; };
 		522EA41D18FA98F000444217 /* LPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPMessage.h; sourceTree = "<group>"; };
 		522EA41E18FA98F000444217 /* LPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPMessage.m; sourceTree = "<group>"; };
+		522EA42318FA9A9500444217 /* MKJavaScriptModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKJavaScriptModule.h; sourceTree = "<group>"; };
 		5273C6D418DE96A200A8CFD4 /* MIDIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MIDIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5273C6D718DE96A200A8CFD4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		5273C6DA18DE96A200A8CFD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -246,6 +248,7 @@
 				52B22F0418F803E900A5A5D3 /* MKMessage.m */,
 				52B169D418F8AE4800EACDAE /* MKJavaScriptContext.h */,
 				52B169D518F8AE4800EACDAE /* MKJavaScriptContext.m */,
+				522EA42318FA9A9500444217 /* MKJavaScriptModule.h */,
 				5273C6DE18DE96A200A8CFD4 /* Supporting Files */,
 			);
 			path = MIDIKit;
@@ -326,6 +329,7 @@
 				52B22EF018F7A6C600A5A5D3 /* MKOutputPort.h in Headers */,
 				52B169D618F8AE4800EACDAE /* MKJavaScriptContext.h in Headers */,
 				52B22EF418F7B65D00A5A5D3 /* MKVirtualSource.h in Headers */,
+				522EA42418FA9A9500444217 /* MKJavaScriptModule.h in Headers */,
 				52B22F0518F803E900A5A5D3 /* MKMessage.h in Headers */,
 				52B2C12118E7928D00E82760 /* NSString+JRExtensions.h in Headers */,
 				52B22EEC18F7A0EF00A5A5D3 /* MKInputPort.h in Headers */,

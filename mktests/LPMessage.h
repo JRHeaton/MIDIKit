@@ -8,6 +8,7 @@
 
 #import "MKMessage.h"
 #import <JavaScriptCore/JavaScriptCore.h>
+#import "MKJavaScriptContext.h"
 
 typedef NS_ENUM(UInt8, LPColorBrightness) {
     kLPColorOff = 0, 
@@ -29,8 +30,7 @@ typedef NS_ENUM(UInt8, LPColorBrightness) {
 
 @end
 
-@interface LPMessage : MKMessage <LPMessageJS>
-
+@interface LPMessage : MKMessage <LPMessageJS, MKMessageJS>
 
 + (instancetype)bufferMessageWithDisplayBuffer:(NSUInteger)displayBuffer
                                 updatingBuffer:(NSUInteger)updatingBuffer

@@ -304,11 +304,13 @@ FORWARD(velocity, data2, setVelocity, setData2)
     return self.mutableData.length;
 }
 
-- (void)setByte:(UInt8)byte atIndex:(NSUInteger)idx {
+- (instancetype)setByte:(UInt8)byte atIndex:(NSUInteger)idx {
     if(idx >= self.length) {
         [self.mutableData setLength:idx+1];
     }
     self.bytes[idx] = byte;
+
+    return self;
 }
 
 - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)idx {

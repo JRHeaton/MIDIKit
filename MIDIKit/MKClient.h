@@ -71,7 +71,7 @@
 
 
 #pragma mark - -Client Wrapper-
-@interface MKClient : MKObject <MKClientJS>
+@interface MKClient : MKObject <MKClientJS, MKObjectJS>
 
 
 #pragma mark - -Global Notificadtion Delegates-
