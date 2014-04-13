@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		522EA40018FA7A5100444217 /* MIDIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D418DE96A200A8CFD4 /* MIDIKit.framework */; };
+		522EA41F18FA98F000444217 /* LPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 522EA41E18FA98F000444217 /* LPMessage.m */; };
+		522EA42018FA98F000444217 /* LPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 522EA41E18FA98F000444217 /* LPMessage.m */; };
 		5273C6D818DE96A200A8CFD4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D718DE96A200A8CFD4 /* Cocoa.framework */; };
 		5273C6E218DE96A200A8CFD4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5273C6E018DE96A200A8CFD4 /* InfoPlist.strings */; };
 		5273C70418DE9A9800A8CFD4 /* MKObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C70218DE9A9800A8CFD4 /* MKObject.h */; };
@@ -41,8 +43,6 @@
 		52B22F0F18F858E600A5A5D3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22F0E18F858E600A5A5D3 /* main.m */; };
 		52B22F1918F858F600A5A5D3 /* MIDIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D418DE96A200A8CFD4 /* MIDIKit.framework */; };
 		52B22F1C18F8592700A5A5D3 /* JRVirtualLaunchpad.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22F1B18F8592700A5A5D3 /* JRVirtualLaunchpad.m */; };
-		52B22F1F18F85C3F00A5A5D3 /* LPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22F1E18F85C3F00A5A5D3 /* LPMessage.m */; };
-		52B22F2018F85CCF00A5A5D3 /* LPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22F1E18F85C3F00A5A5D3 /* LPMessage.m */; };
 		52B2C12118E7928D00E82760 /* NSString+JRExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B2C11F18E7928D00E82760 /* NSString+JRExtensions.h */; };
 		52B2C12218E7928D00E82760 /* NSString+JRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2C12018E7928D00E82760 /* NSString+JRExtensions.m */; };
 /* End PBXBuildFile section */
@@ -89,6 +89,8 @@
 		522EA3FA18FA690500444217 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 		522EA3FD18FA6B0400444217 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		522EA41B18FA7C4F00444217 /* LPConnection.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = LPConnection.js; sourceTree = "<group>"; };
+		522EA41D18FA98F000444217 /* LPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPMessage.h; sourceTree = "<group>"; };
+		522EA41E18FA98F000444217 /* LPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPMessage.m; sourceTree = "<group>"; };
 		5273C6D418DE96A200A8CFD4 /* MIDIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MIDIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5273C6D718DE96A200A8CFD4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		5273C6DA18DE96A200A8CFD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -135,8 +137,6 @@
 		52B22F1118F858E600A5A5D3 /* lpemutest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "lpemutest-Prefix.pch"; sourceTree = "<group>"; };
 		52B22F1A18F8592700A5A5D3 /* JRVirtualLaunchpad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRVirtualLaunchpad.h; sourceTree = "<group>"; };
 		52B22F1B18F8592700A5A5D3 /* JRVirtualLaunchpad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRVirtualLaunchpad.m; sourceTree = "<group>"; };
-		52B22F1D18F85C3F00A5A5D3 /* LPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPMessage.h; sourceTree = "<group>"; };
-		52B22F1E18F85C3F00A5A5D3 /* LPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPMessage.m; sourceTree = "<group>"; };
 		52B2C11F18E7928D00E82760 /* NSString+JRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+JRExtensions.h"; sourceTree = "<group>"; };
 		52B2C12018E7928D00E82760 /* NSString+JRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JRExtensions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -265,6 +265,8 @@
 			isa = PBXGroup;
 			children = (
 				5273C72518DEA17B00A8CFD4 /* main.m */,
+				522EA41D18FA98F000444217 /* LPMessage.h */,
+				522EA41E18FA98F000444217 /* LPMessage.m */,
 				52B095A018F8B5F900CB1440 /* test.js */,
 				522EA41B18FA7C4F00444217 /* LPConnection.js */,
 				5273C74118DEB2FF00A8CFD4 /* LPDev.h */,
@@ -285,8 +287,6 @@
 			isa = PBXGroup;
 			children = (
 				52B22F0E18F858E600A5A5D3 /* main.m */,
-				52B22F1D18F85C3F00A5A5D3 /* LPMessage.h */,
-				52B22F1E18F85C3F00A5A5D3 /* LPMessage.m */,
 				52B22F1A18F8592700A5A5D3 /* JRVirtualLaunchpad.h */,
 				52B22F1B18F8592700A5A5D3 /* JRVirtualLaunchpad.m */,
 				52B22F1018F858E600A5A5D3 /* Supporting Files */,
@@ -457,7 +457,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5273C72618DEA17B00A8CFD4 /* main.m in Sources */,
-				52B22F2018F85CCF00A5A5D3 /* LPMessage.m in Sources */,
+				522EA41F18FA98F000444217 /* LPMessage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,7 +465,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52B22F1F18F85C3F00A5A5D3 /* LPMessage.m in Sources */,
+				522EA42018FA98F000444217 /* LPMessage.m in Sources */,
 				52B22F1C18F8592700A5A5D3 /* JRVirtualLaunchpad.m in Sources */,
 				52B22F0F18F858E600A5A5D3 /* main.m in Sources */,
 			);
