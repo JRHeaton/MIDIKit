@@ -22,7 +22,6 @@
 #pragma mark Byte Array
 JSExportAs(send,
 - (instancetype)sendJSArray:(JSValue *)dataArray toDestination:(MKEndpoint *)endpoint);
-- (void)dispose;
 
 #pragma mark Message
 JSExportAs(sendMessage,
@@ -30,6 +29,9 @@ JSExportAs(sendMessage,
 
 #pragma mark Message Array
 JSExportAs(sendMessages, - (void)sendMessageArray:(NSArray *)messages toDestination:(MKEndpoint *)endpoint);
+
+#pragma mark Port Disposal
+- (void)dispose;
 
 @end
 

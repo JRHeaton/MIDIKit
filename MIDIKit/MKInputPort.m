@@ -42,10 +42,13 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
 }
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client {
-    if(!client.valid || !(self = [super init])) return nil;
-    
-    if(MIDIInputPortCreate(client.MIDIRef, (__bridge CFStringRef)(name), _MKInputPortReadProc, (__bridge void *)(self), &_MIDIRef) != 0)
+    MIDIPortRef p;
+
+    if(!client.valid) return nil;
+    if(MIDIInputPortCreate(client.MIDIRef, (__bridge CFStringRef)(name), _MKInputPortReadProc, (__bridge void *)(self), &p) != 0)
         return nil;
+
+    if(!(self = [super initWithMIDIRef:p])) return nil;
     
     self.client = client;
     [self.client.inputPorts addObject:self];

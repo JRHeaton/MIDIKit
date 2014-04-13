@@ -80,7 +80,7 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
         case kMIDIMsgSerialPortOwnerChanged: break;
         case kMIDIMsgIOError: {
             MIDIIOErrorNotification *notif = (MIDIIOErrorNotification *)message;
-            [self dispatchNotificationSelector:@selector(midiClient:driverIOErrorWithDevice:errorCode:) withArguments:@[ self, [MKDevice objectForMIDIRef:notif->driverDevice], @(notif->errorCode)]];
+            [self dispatchNotificationSelector:@selector(midiClient:driverIOErrorWithDevice:errorCode:) withArguments:@[ self, [MKDevice objectWithMIDIRef:notif->driverDevice], @(notif->errorCode)]];
         } break;
     }
 
@@ -109,21 +109,19 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
 }
 
 - (instancetype)initWithName:(NSString *)name {
+    MIDIClientRef c;
+    CFStringRef cfName = (__bridge CFStringRef)(name);
+
     if(!name) return [self init];
+    if(MIDIClientCreate(cfName, _MKClientMIDINotifyProc, (__bridge void *)(self), &c) != 0) return nil;
 
-    if((self = [super init])) {
-        CFStringRef cfName = (__bridge CFStringRef)(name);
-        MIDIObjectRef val;
-        
-        _inputPorts = [NSMutableArray arrayWithCapacity:0];
-        _outputPorts = [NSMutableArray arrayWithCapacity:0];
-        _virtualSources = [NSMutableArray arrayWithCapacity:0];
-        _virtualDestinations = [NSMutableArray arrayWithCapacity:0];
-        _notificationDelegates = [NSMutableSet setWithCapacity:0];
-
-        MIDIClientCreate(cfName, _MKClientMIDINotifyProc, (__bridge void *)(self), &val);
-        self.MIDIRef = val;
-    }
+    if(!(self = [super initWithMIDIRef:c])) return nil;
+    
+    _inputPorts = [NSMutableArray arrayWithCapacity:0];
+    _outputPorts = [NSMutableArray arrayWithCapacity:0];
+    _virtualSources = [NSMutableArray arrayWithCapacity:0];
+    _virtualDestinations = [NSMutableArray arrayWithCapacity:0];
+    _notificationDelegates = [NSMutableSet setWithCapacity:0];
 
     return self;
 }

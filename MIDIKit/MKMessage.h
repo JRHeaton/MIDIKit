@@ -33,6 +33,17 @@ typedef NS_ENUM(UInt8, MKMessageType) {
 @protocol MKMessageJS <JSExport>
 
 + (instancetype)new;
++ (instancetype)messageWithType:(MKMessageType)type;
+
+// Cleaner syntax for variable-length messages: MKMessage.message(0xf0, 0xa, 0xb, 0xc, 0xd, 0xf7)
+JSExportAs(message,
++ (instancetype)messageJS:(JSValue *)val
+);
+
+// Same, but for many messages in one stream of arguments
+JSExportAs(messages,
++ (NSArray *)messagesJS:(JSValue *)val
+);
 
 // Convenience/accessibility for JavaScript
 + (MKMessageType)noteOnType;
@@ -70,6 +81,8 @@ typedef NS_ENUM(UInt8, MKMessageType) {
 + (instancetype)controlChangeMessageWithController:(UInt8)controller value:(UInt8)value;
 + (instancetype)noteOnMessageWithKey:(UInt8)key velocity:(UInt8)velocity;
 
+- (instancetype)initWithType:(MKMessageType)type;
+
 + (instancetype)messageWithData:(NSData *)data;
 + (instancetype)messageWithPacket:(MIDIPacket *)packet;
 
@@ -80,9 +93,9 @@ typedef NS_ENUM(UInt8, MKMessageType) {
 - (instancetype)initWithData:(NSData *)data;
 - (instancetype)initWithPacket:(MIDIPacket *)packet;
 
-// Cleaner syntax for three-byte messages: [MKMessage :0x90 :0x35 :127]
-+ (instancetype):(UInt8)status :(UInt8)data1 :(UInt8)data2;
+// same as -[MKMessage :status :data1 :data2]
 - (instancetype)initWithStatus:(UInt8)status :(UInt8)data1 :(UInt8)data2;
++ (instancetype):(UInt8)status :(UInt8)data1 :(UInt8)data2;
 
 // Messages stay mutable for performance reasons
 - (NSMutableData *)data;

@@ -15,7 +15,7 @@
 @protocol MKObjectJS <JSExport>
 
 #pragma mark - -Init-
-+ (instancetype)objectForUniqueID:(MIDIUniqueID)uniqueID;
++ (instancetype)objectWithUniqueID:(MIDIUniqueID)uniqueID;
 
 #pragma mark - -Properties-
 
@@ -100,7 +100,7 @@
 
 
 #pragma mark - -Init-
-+ (instancetype)objectForMIDIRef:(MIDIObjectRef)MIDIRef;
++ (instancetype)objectWithMIDIRef:(MIDIObjectRef)MIDIRef;
 - (instancetype)initWithMIDIRef:(MIDIObjectRef)MIDIRef;
 - (instancetype)initWithUniqueID:(MIDIUniqueID)uniqueID;
 

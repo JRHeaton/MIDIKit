@@ -13,11 +13,13 @@
 @synthesize client=_client;
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client {
-    if(!client.valid || !(self = [super init])) return nil;
-    
-    if(MIDIOutputPortCreate(client.MIDIRef, (__bridge CFStringRef)(name), &_MIDIRef) != 0)
+    MIDIPortRef p;
+
+    if(!client.valid) return nil;
+    if(MIDIOutputPortCreate(client.MIDIRef, (__bridge CFStringRef)(name), &p) != 0)
         return nil;
-    
+    if(!(self = [super initWithMIDIRef:p])) return nil;
+
     self.client = client;
     [self.client.outputPorts addObject:self];
     

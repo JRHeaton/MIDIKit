@@ -4,4 +4,4 @@ var port = client.firstOutputPort();
 
 var msg = LPMessage.reset();
 
-port.sendMessage(msg, lp);
+port.sendMessages(MKMessage.messages(0x90, 0x30, 127, 0x90, 0x31, 31), lp);

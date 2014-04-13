@@ -39,6 +39,10 @@
 
 int main(int argc, const char * argv[]){
     @autoreleasepool {
+        MKJavaScriptContext *c = [MKJavaScriptContext new];
+        c[@"LPMessage"] = [LPMessage class];
+
+        NSLog(@"%@", [c evaluateScript:[NSString stringWithContentsOfFile:@"/Users/John/Dropbox/Developer/projects/MIDIKit/mktests/test.js" encoding:NSUTF8StringEncoding error:nil]]);
 
         CFRunLoopRun();
     }

@@ -71,6 +71,37 @@
     return [[self alloc] initWithPacket:packet];
 }
 
++ (instancetype)messageWithType:(MKMessageType)type {
+    return [[self alloc] initWithType:type];
+}
+
+- (instancetype)initWithType:(MKMessageType)type {
+    if(!(self = [self init])) return nil;
+
+    self.type = type;
+
+    return self;
+}
+
++ (NSMutableData *)_dataFromJSArray:(NSArray *)array {
+    NSMutableData *data = [NSMutableData data];
+
+    for(NSUInteger i=0;i<array.count;++i) {
+        UInt8 byte = [array[i] toNumber].unsignedCharValue;
+        [data appendBytes:&byte length:1];
+    }
+
+    return data;
+}
+
++ (instancetype)messageJS:(JSValue *)val {
+    return [[self alloc] initWithData:[self _dataFromJSArray:[JSContext currentArguments]]];
+}
+
++ (NSArray *)messagesJS:(JSValue *)val {
+    return [self messagesWithData:[self _dataFromJSArray:[JSContext currentArguments]]];
+}
+
 + (NSArray *)messagesWithData:(NSData *)data {
     NSMutableArray *ret = [NSMutableArray array];
 

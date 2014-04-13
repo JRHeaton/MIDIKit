@@ -7,17 +7,24 @@
 //
 
 #import "MKObject.h"
+#import <dlfcn.h>
 
 @implementation MKObject
 
 @synthesize useCaching=_useCaching;
 @dynamic valid;
 
-+ (instancetype)objectForMIDIRef:(MIDIObjectRef)MIDIRef {
++ (void)load {
+    if(!dlsym(RTLD_SELF, "MIDIRestart")) {
+        [NSException raise:@"MKMissingDependencyException" format:@"CoreMIDI.framework is required to be linked in order for MIDIKit to work"];
+    }
+}
+
++ (instancetype)objectWithMIDIRef:(MIDIObjectRef)MIDIRef {
     return [[self alloc] initWithMIDIRef:MIDIRef];
 }
 
-+ (instancetype)objectForUniqueID:(MIDIUniqueID)uniqueID {
++ (instancetype)objectWithUniqueID:(MIDIUniqueID)uniqueID {
     return [[self alloc] initWithUniqueID:uniqueID];
 }
 
@@ -30,11 +37,11 @@
     return self;
 }
 
-//- (instancetype)init {
-//    [NSException raise:NSInvalidArgumentException format:@"You must initialize MKObject with a unique ID or CoreMIDI object"];
-//
-//    return nil;
-//}
+- (instancetype)init {
+    [NSException raise:NSInvalidArgumentException format:@"You must initialize MKObject with a unique ID or CoreMIDI object"];
+
+    return nil;
+}
 
 - (instancetype)initWithUniqueID:(MIDIUniqueID)uniqueID {
     if(!(self = [super init])) return nil;
@@ -103,6 +110,8 @@
 
 - (void)setStringProperty:(NSString *)value forKey:(CFStringRef)key {
     MIDIObjectSetStringProperty(self.MIDIRef, key, (__bridge CFStringRef)(value));
+
+    NSLog(@"key = %@", key);
     _propertyCache[(__bridge NSString *)(key)] = value;
 }
 

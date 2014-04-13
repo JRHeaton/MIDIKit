@@ -20,11 +20,11 @@
 }
 
 + (instancetype)sourceAtIndex:(NSUInteger)index {
-    return [MKEndpoint objectForMIDIRef:MIDIGetSource(index)];
+    return [MKEndpoint objectWithMIDIRef:MIDIGetSource(index)];
 }
 
 + (instancetype)destinationAtIndex:(NSUInteger)index {
-    return [MKEndpoint objectForMIDIRef:MIDIGetDestination(index)];
+    return [MKEndpoint objectWithMIDIRef:MIDIGetDestination(index)];
 }
 
 + (instancetype)firstDestinationMeetingCriteria:(BOOL (^)(MKEndpoint *candidate))block {

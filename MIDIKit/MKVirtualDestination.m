@@ -29,10 +29,12 @@ static void _MKVirtualDestinationReadProc(const MIDIPacketList *pktlist, void *r
 }
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client {
-    if(!client.valid || !(self = [super init])) return nil;
-    
+    MIDIEndpointRef e;
+
+    if(!client.valid) return nil;
     if(MIDIDestinationCreate(client.MIDIRef, (__bridge CFStringRef)(name), _MKVirtualDestinationReadProc, (__bridge void *)(self), &_MIDIRef) != 0)
         return nil;
+    if(!(self = [super initWithMIDIRef:e])) return nil;
     
     self.client = client;
     [self.client.virtualDestinations addObject:self];
