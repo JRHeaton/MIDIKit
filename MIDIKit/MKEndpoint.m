@@ -28,32 +28,62 @@
 }
 
 + (instancetype)firstDestinationMeetingCriteria:(BOOL (^)(MKEndpoint *candidate))block {
-    for(NSInteger i=0;i<MIDIGetNumberOfDestinations();++i) {
-        MKEndpoint *candidate = [[MKEndpoint alloc] initWithMIDIRef:MIDIGetDestination(i)];
-        if(block(candidate))
-            return candidate;
-    }
+
     
     return nil;
 }
 
 + (instancetype)firstSourceMeetingCriteria:(BOOL (^)(MKEndpoint *candidate))block {
-    for(NSInteger i=0;i<MIDIGetNumberOfSources();++i) {
-        MKEndpoint *candidate = [[MKEndpoint alloc] initWithMIDIRef:MIDIGetSource(i)];
-        if(block(candidate))
-            return candidate;
-    }
+
     
     return nil;
 }
 
-+ (instancetype)firstOnlineDestinationNamed:(NSString *)name {
++ (instancetype)enumerateDestinations:(MKEndpointEnumerationHandler)block {
+    if(!block) return nil;
+
+    BOOL stop = NO;
+    for(NSInteger i=0;i<MIDIGetNumberOfDestinations() && !stop;++i) {
+        MKEndpoint *candidate = [[MKEndpoint alloc] initWithMIDIRef:MIDIGetDestination(i)];
+        if(block(candidate, i, &stop))
+            return candidate;
+    }
+
+    return nil;
+}
+
++ (instancetype)enumerateSources:(MKEndpointEnumerationHandler)block {
+    if(!block) return nil;
+
+    BOOL stop = NO;
+    for(NSInteger i=0;i<MIDIGetNumberOfSources() && !stop;++i) {
+        MKEndpoint *candidate = [[MKEndpoint alloc] initWithMIDIRef:MIDIGetSource(i)];
+        if(block(candidate, i, &stop))
+            return candidate;
+    }
+
+    return nil;
+}
+
++ (instancetype)firstSourceContaining:(NSString *)namePart {
+    return [self enumerateSources:^BOOL(MKEndpoint *endpoint, NSUInteger index, BOOL *stop) {
+        return endpoint.online && [endpoint.name rangeOfString:namePart].location != NSNotFound;
+    }];
+}
+
++ (instancetype)firstDestinationContaining:(NSString *)namePart {
+    return [self enumerateDestinations:^BOOL(MKEndpoint *endpoint, NSUInteger index, BOOL *stop) {
+        return endpoint.online && [endpoint.name rangeOfString:namePart].location != NSNotFound;
+    }];
+}
+
++ (instancetype)firstDestinationNamed:(NSString *)name {
     return [self firstDestinationMeetingCriteria:^BOOL(MKEndpoint *candidate) {
         return candidate.online && [candidate.name isEqualToString:name];
     }];
 }
 
-+ (instancetype)firstOnlineSourceNamed:(NSString *)name {
++ (instancetype)firstSourceNamed:(NSString *)name {
     return [self firstSourceMeetingCriteria:^BOOL(MKEndpoint *candidate) {
         return candidate.online && [candidate.name isEqualToString:name];
     }];

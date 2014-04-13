@@ -43,10 +43,10 @@ int main(int argc, const char * argv[]){
             NSLog(@"%@", exception);
         };
 
-#define JS_FILE "launchpad.js"
+#define JS_FILE "test.js"
 
         NSLog(@"%@", [c evaluateScript:[NSString stringWithContentsOfFile:@"/Users/John/Dropbox/Developer/projects/MIDIKit/mktests/" JS_FILE encoding:NSUTF8StringEncoding error:nil]]);
-
+        
         CFRunLoopRun();
     }
 

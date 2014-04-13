@@ -4,10 +4,20 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>MIDIKit.xcscheme</key>
+		<key>MIDIKit (OS X).xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>MIDIKit (iOS).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>iOSMIDITests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
 		</dict>
 		<key>lpemutest.xcscheme</key>
 		<dict>
@@ -33,6 +43,26 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>522EA3E618FA4DDE00444217</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>524005E318FB06CD0030B46D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>524005F018FB06CD0030B46D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5240060B18FB08220030B46D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5240062218FB08220030B46D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

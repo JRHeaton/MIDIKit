@@ -67,11 +67,13 @@
 
     NSProcessInfo *info = [NSProcessInfo processInfo];
     self[@"process"] = @{
+#if TARGET_OS_MAC
                          @"exit" : ^(int code) { exit(code); },
+#endif
                          @"execPath" : [NSBundle mainBundle].executablePath,
-                         @"pid" : @(info.processIdentifier),
-                         @"cwd" : ^JSValue *() { return _self[@"_cwd"]; },
                          @"chdir" : ^(NSString *dir) { _self[@"_cwd"] = dir; },
+                         @"cwd" : ^JSValue *() { return _self[@"_cwd"]; },
+                         @"pid" : @(info.processIdentifier),
                          @"moduleLoadList" : @[],
                          @"env" : info.environment,
                          @"argv" : info.arguments,
@@ -106,7 +108,7 @@
     && [[NSFileManager defaultManager] fileExistsAtPath:name];
 
     __weak typeof(self) _self = self;
-    switch (isValidScript) {
+    switch ((UInt8)isValidScript) {
         case YES: {
 
             NSError *e;
@@ -138,11 +140,21 @@
     return nil;
 }
 
+#if TARGET_OS_MAC
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-function"
 static JSValue *_MKJavaScriptContextRequireHook(Class self, SEL _cmd, MKJavaScriptContext *ctx) {
     return ctx[NSStringFromClass(self)];
 }
+#pragma clang diagnostic pop
+#endif
 
 - (JSValue *)loadNativeModuleAtPath:(NSString *)path {
+#if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
+    // IPHONE CANNOT LOAD CODE
+    [NSException raise:@"MKInvalidFeatureException" format:@"iOS cannot load code dynamically"];
+
+#else
     BOOL isDir;
     if(![[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir]) {
         return NO;
@@ -162,7 +174,9 @@ static JSValue *_MKJavaScriptContextRequireHook(Class self, SEL _cmd, MKJavaScri
         }
 
         return nil; // this is async w/ notification
-    } else {
+    }
+
+    else {
         void *handle = dlopen(path.UTF8String, RTLD_NOW);
         if(!handle) return nil;
 
@@ -171,6 +185,7 @@ static JSValue *_MKJavaScriptContextRequireHook(Class self, SEL _cmd, MKJavaScri
 
         return [self loadNativeModule:MKModuleClass()];
     }
+#endif
 
     return nil;
 }

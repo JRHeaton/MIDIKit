@@ -13,7 +13,9 @@
 // Endpoints are either sources or destinations,
 // which may be communicated to/from on input/output ports
 
-@class MKEntity;
+@class MKEntity, MKEndpoint;
+typedef BOOL (^MKEndpointEnumerationHandler)(MKEndpoint *endpoint, NSUInteger index, BOOL *stop);
+
 @protocol MKEndpointJS <JSExport, MKObjectJS>
 
 #pragma mark - -Enumeration/Init-
@@ -22,8 +24,13 @@
 + (instancetype)sourceAtIndex:(NSUInteger)index;
 + (instancetype)destinationAtIndex:(NSUInteger)index;
 
-+ (instancetype)firstOnlineDestinationNamed:(NSString *)name;
-+ (instancetype)firstOnlineSourceNamed:(NSString *)name;
++ (instancetype)enumerateDestinations:(MKEndpointEnumerationHandler)block;
++ (instancetype)enumerateSources:(MKEndpointEnumerationHandler)block;
+
++ (instancetype)firstSourceNamed:(NSString *)name;
++ (instancetype)firstSourceContaining:(NSString *)namePart;
++ (instancetype)firstDestinationNamed:(NSString *)name;
++ (instancetype)firstDestinationContaining:(NSString *)namePart;
 
 
 #pragma mark - -Parent Entity-

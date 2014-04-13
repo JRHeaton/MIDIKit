@@ -8,6 +8,7 @@
 
 #import "MKObject.h"
 #import <dlfcn.h>
+#import <objc/runtime.h>
 
 @implementation MKObject
 
@@ -15,9 +16,20 @@
 @dynamic valid;
 
 + (void)load {
-    if(!dlsym(RTLD_SELF, "MIDIRestart")) {
-        [NSException raise:@"MKMissingDependencyException" format:@"CoreMIDI.framework is required to be linked in order for MIDIKit to work"];
+#if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
+    if(!objc_getClass("MIDINetworkSession")) {
+        goto exception;
     }
+#else
+    if(!dlsym(RTLD_SELF, "MIDIRestart")) {
+        goto exception;
+    }
+#endif
+
+ret: return;
+
+exception:
+    [NSException raise:@"MKMissingDependencyException" format:@"CoreMIDI.framework is required to be linked in order for MIDIKit to work"];
 }
 
 + (instancetype)objectWithMIDIRef:(MIDIObjectRef)MIDIRef {
@@ -152,7 +164,7 @@
 
     UInt8 bit = (1 << (channel - 1));
 
-    switch (transmits) {
+    switch ((UInt8)transmits) {
         case YES: transmitsBits |= bit; break;
         case NO: transmitsBits &= ~bit;
     }
