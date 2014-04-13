@@ -65,8 +65,6 @@
 		52B22F0F18F858E600A5A5D3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22F0E18F858E600A5A5D3 /* main.m */; };
 		52B22F1918F858F600A5A5D3 /* MIDIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D418DE96A200A8CFD4 /* MIDIKit.framework */; };
 		52B22F1C18F8592700A5A5D3 /* JRVirtualLaunchpad.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22F1B18F8592700A5A5D3 /* JRVirtualLaunchpad.m */; };
-		52B2C12118E7928D00E82760 /* NSString+JRExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B2C11F18E7928D00E82760 /* NSString+JRExtensions.h */; };
-		52B2C12218E7928D00E82760 /* NSString+JRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2C12018E7928D00E82760 /* NSString+JRExtensions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -200,8 +198,6 @@
 		52B22F1118F858E600A5A5D3 /* lpemutest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "lpemutest-Prefix.pch"; sourceTree = "<group>"; };
 		52B22F1A18F8592700A5A5D3 /* JRVirtualLaunchpad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRVirtualLaunchpad.h; sourceTree = "<group>"; };
 		52B22F1B18F8592700A5A5D3 /* JRVirtualLaunchpad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRVirtualLaunchpad.m; sourceTree = "<group>"; };
-		52B2C11F18E7928D00E82760 /* NSString+JRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+JRExtensions.h"; sourceTree = "<group>"; };
-		52B2C12018E7928D00E82760 /* NSString+JRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JRExtensions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,7 +250,6 @@
 		5273C6CA18DE96A200A8CFD4 = {
 			isa = PBXGroup;
 			children = (
-				52B2C11E18E7928D00E82760 /* srctree */,
 				5273C6DD18DE96A200A8CFD4 /* MIDIKit */,
 				5273C72418DEA17B00A8CFD4 /* mktests */,
 				52B22F0D18F858E600A5A5D3 /* lpemutest */,
@@ -426,16 +421,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		52B2C11E18E7928D00E82760 /* srctree */ = {
-			isa = PBXGroup;
-			children = (
-				52B2C11F18E7928D00E82760 /* NSString+JRExtensions.h */,
-				52B2C12018E7928D00E82760 /* NSString+JRExtensions.m */,
-			);
-			name = srctree;
-			path = ../../srctree;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -453,7 +438,6 @@
 				52B22EF418F7B65D00A5A5D3 /* MKVirtualSource.h in Headers */,
 				522EA42418FA9A9500444217 /* MKJavaScriptModule.h in Headers */,
 				52B22F0518F803E900A5A5D3 /* MKMessage.h in Headers */,
-				52B2C12118E7928D00E82760 /* NSString+JRExtensions.h in Headers */,
 				52B22EEC18F7A0EF00A5A5D3 /* MKInputPort.h in Headers */,
 				5273C73B18DEADB800A8CFD4 /* MKEntity.h in Headers */,
 				5273C70418DE9A9800A8CFD4 /* MKObject.h in Headers */,
@@ -651,7 +635,6 @@
 				52B22EF518F7B65D00A5A5D3 /* MKVirtualSource.m in Sources */,
 				52B169D718F8AE4800EACDAE /* MKJavaScriptContext.m in Sources */,
 				52B22EFF18F7C86900A5A5D3 /* MKConnection.m in Sources */,
-				52B2C12218E7928D00E82760 /* NSString+JRExtensions.m in Sources */,
 				52B22EF118F7A6C600A5A5D3 /* MKOutputPort.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
