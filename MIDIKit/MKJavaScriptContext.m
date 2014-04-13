@@ -20,6 +20,14 @@
     return self;
 }
 
+- (instancetype)initWithVirtualMachine:(JSVirtualMachine *)virtualMachine {
+    if(!(self = [super initWithVirtualMachine:virtualMachine])) return nil;
+
+    [self setup];
+
+    return self;
+}
+
 - (void)setup {
     void (^logBlock)(NSString *log) = ^(NSString *log) { NSLog(@"%@", log); };
     void (^logObjectBlock)(JSValue *val) = ^(JSValue *val) { NSLog(@"%@", val.toObject); };
@@ -39,10 +47,7 @@
                                   @"MKVirtualDestination",
                                   @"MKConnection",
                                   @"MKMessage" ]) {
-        // Include unprefixed (MKClient and Client)
-        Class c = NSClassFromString(className);
-
-        self[className] = c;
+        self[className] = NSClassFromString(className);
     }
 }
 

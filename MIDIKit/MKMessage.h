@@ -54,33 +54,35 @@ typedef NS_ENUM(UInt8, MKMessageType) {
 // Type of message
 @property (nonatomic, assign) MKMessageType type;
 
-// 2nd and 3rd bytes of the buffer(zero if doesn't exist)
+// 1st, 2nd and 3rd bytes of the message
+// All of these properties access/set the same corresponding byte
+// status byte containing type and channel
+@property (nonatomic, assign) UInt8 status;
 // key for note messages, controller for control change/other
-@property (nonatomic, assign) UInt8 key, controller;
-// velocity for note messages, value for others
-@property (nonatomic, assign) UInt8 velocity, value;
+@property (nonatomic, assign) UInt8 key, controller, data1;
+// velocity for note messages
+@property (nonatomic, assign) UInt8 velocity, data2;
 
 @end
 
 @interface MKMessage : NSObject <MKMessageJS>
 
-+ (instancetype)messageWithType:(MKMessageType)type
-                keyOrController:(UInt8)keyOrController
-                velocityOrValue:(UInt8)velocityOrValue;
-
 + (instancetype)controlChangeMessageWithController:(UInt8)controller value:(UInt8)value;
++ (instancetype)noteOnMessageWithKey:(UInt8)key velocity:(UInt8)velocity;
 
 + (instancetype)messageWithData:(NSData *)data;
 + (instancetype)messageWithPacket:(MIDIPacket *)packet;
 
++ (NSArray *)messagesWithData:(NSData *)data;
++ (NSArray *)messagesWithPacket:(MIDIPacket *)packet;
++ (NSArray *)messagesWithPacketList:(MIDIPacketList *)list;
+
 - (instancetype)initWithData:(NSData *)data;
 - (instancetype)initWithPacket:(MIDIPacket *)packet;
-- (instancetype)initWithType:(MKMessageType)type
-             keyOrController:(UInt8)keyOrController
-             velocityOrValue:(UInt8)velocityOrValue;
 
 // Cleaner syntax for three-byte messages: [MKMessage :0x90 :0x35 :127]
-+ (instancetype):(UInt8)type :(UInt8)keyOrController :(UInt8)velocityOrValue;
++ (instancetype):(UInt8)status :(UInt8)data1 :(UInt8)data2;
+- (instancetype)initWithStatus:(UInt8)status :(UInt8)data1 :(UInt8)data2;
 
 // Messages stay mutable for performance reasons
 - (NSMutableData *)data;

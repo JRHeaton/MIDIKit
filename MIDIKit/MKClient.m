@@ -11,6 +11,7 @@
 #import "MKOutputPort.h"
 #import "MKVirtualSource.h"
 #import "MKVirtualDestination.h"
+#import "MKDevice.h"
 
 @interface MKClient ()
 
@@ -25,14 +26,18 @@
 @synthesize virtualDestinations=_virtualDestinations;
 @synthesize virtualSources=_virtualSources;
 
-static Class _MKClassForType(MIDIObjectType type) {
+static Class _MKClassForType(MIDIObjectType type, NSString **objectTypeName) {
     Class c;
-    switch(type) {
-        case kMIDIObjectType_Device: c = [MKDevice class]; break;
-        case kMIDIObjectType_Destination:
-        case kMIDIObjectType_Source: c = [MKEndpoint class]; break;
-        case kMIDIObjectType_Entity: c = [MKEntity class]; break;
-        default: c = [MKObject class]; break;
+    NSString *n;
+    switch(type & ~kMIDIObjectType_ExternalMask) {
+        case kMIDIObjectType_Device: c = [MKDevice class]; n = @"device"; break;
+        case kMIDIObjectType_Destination: c = [MKEndpoint class]; n = @"destination"; break;
+        case kMIDIObjectType_Source: c = [MKEndpoint class]; n = @"source"; break;
+        case kMIDIObjectType_Entity: c = [MKEntity class]; n = @"entity"; break;
+        default: c = [MKObject class]; n = @"object"; break;
+    }
+    if(objectTypeName) {
+        *objectTypeName = n.copy;
     }
     
     return c;
@@ -41,31 +46,61 @@ static Class _MKClassForType(MIDIObjectType type) {
 static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCon) {
     MKClient *self = (__bridge MKClient *)(refCon);
 
+    NSString *typeName;
     switch((SInt32)message->messageID) {
-        case kMIDIMsgSetupChanged: break;
-        case kMIDIMsgObjectAdded:
-        case kMIDIMsgObjectRemoved: {
-            if(!self.notificationDelegates.count) return;
-            
+        case kMIDIMsgSetupChanged: [self dispatchNotificationSelector:@selector(midiClientSetupChanged:) withArguments:@[self]]; break;
+        case kMIDIMsgObjectAdded: {
             MIDIObjectAddRemoveNotification *notif = (MIDIObjectAddRemoveNotification *)message;
-            for(id<MKClientNotificationDelegate> delegate in self.notificationDelegates) {
-                if([delegate respondsToSelector:@selector(midiClient:objectConnected:ofType:)]) {
-                    [delegate midiClient:self objectConnected:[[_MKClassForType(notif->childType) alloc] initWithMIDIRef:notif->child] ofType:notif->childType];
-                }
+
+            id objectInstance = [[_MKClassForType(notif->childType, &typeName) alloc] initWithMIDIRef:notif->child];
+            [self dispatchNotificationSelector:@selector(midiClient:objectAdded:ofType:) withArguments:@[ self, objectInstance, @(notif->childType) ]];
+
+            if(![typeName isEqualToString:@"object"]) {
+                [self dispatchNotificationSelector:NSSelectorFromString([NSString stringWithFormat:@"midiClient:%@Added:", typeName]) withArguments:@[ self, objectInstance ]];
+            }
+        } break;
+        case kMIDIMsgObjectRemoved: {
+            MIDIObjectAddRemoveNotification *notif = (MIDIObjectAddRemoveNotification *)message;
+
+            id objectInstance = [[_MKClassForType(notif->childType, &typeName) alloc] initWithMIDIRef:notif->child];
+            [self dispatchNotificationSelector:@selector(midiClient:objectRemoved:ofType:) withArguments:@[ self, objectInstance, @(notif->childType) ]];
+
+            if(![typeName isEqualToString:@"object"]) {
+                [self dispatchNotificationSelector:NSSelectorFromString([NSString stringWithFormat:@"midiClient:%@Removed:", typeName]) withArguments:@[ self, objectInstance ]];
             }
         } break;
         case kMIDIMsgPropertyChanged: {
             MIDIObjectPropertyChangeNotification *notif = (MIDIObjectPropertyChangeNotification *)message;
-            
-            for(id<MKClientNotificationDelegate> delegate in self.notificationDelegates) {
-                if([delegate respondsToSelector:@selector(midiClient:object:changedValueOfPropertyForKey:)]) {
-                    [delegate midiClient:self object:[[_MKClassForType(notif->objectType) alloc] initWithMIDIRef:notif->object] changedValueOfPropertyForKey:notif->propertyName];
-                }
-            }
+
+            id objectInstance = [[_MKClassForType(notif->objectType, nil) alloc] initWithMIDIRef:notif->object];
+            NSString *propertyName = ((__bridge NSString *)notif->propertyName).copy;
+            [self dispatchNotificationSelector:@selector(midiClient:object:changedValueOfPropertyForKey:) withArguments:@[ self, objectInstance, propertyName ] ];
         } break;
         case kMIDIMsgThruConnectionsChanged: break;
         case kMIDIMsgSerialPortOwnerChanged: break;
-        case kMIDIMsgIOError: break;
+        case kMIDIMsgIOError: {
+            MIDIIOErrorNotification *notif = (MIDIIOErrorNotification *)message;
+            [self dispatchNotificationSelector:@selector(midiClient:driverIOErrorWithDevice:errorCode:) withArguments:@[ self, [MKDevice objectForMIDIRef:notif->driverDevice], @(notif->errorCode)]];
+        } break;
+    }
+
+}
+
+- (void)dispatchNotificationSelector:(SEL)selector withArguments:(NSArray *)arguments {
+    if(!self.notificationDelegates.count) return;
+
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[self.notificationDelegates.anyObject methodSignatureForSelector:selector]];
+    [invocation setSelector:selector];
+
+    for(NSUInteger i=0;i<arguments.count;++i) {
+        __unsafe_unretained id val = arguments[i];
+        [invocation setArgument:&val atIndex:i + 2];
+    }
+
+    for(NSObject<MKClientNotificationDelegate> *delegate in self.notificationDelegates) {
+        if([delegate respondsToSelector:selector]) {
+            [invocation invokeWithTarget:delegate];
+        }
     }
 }
 
@@ -84,7 +119,7 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
         _outputPorts = [NSMutableArray arrayWithCapacity:0];
         _virtualSources = [NSMutableArray arrayWithCapacity:0];
         _virtualDestinations = [NSMutableArray arrayWithCapacity:0];
-        self.notificationDelegates = [NSMutableSet setWithCapacity:0];
+        _notificationDelegates = [NSMutableSet setWithCapacity:0];
 
         MIDIClientCreate(cfName, _MKClientMIDINotifyProc, (__bridge void *)(self), &val);
         self.MIDIRef = val;
@@ -149,11 +184,11 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
 }
 
 - (MKInputPort *)firstInputPort {
-    return !self.inputPorts.count ? self.createInputPort : self.inputPorts[0];
+    return !self.inputPorts.count ? self.createInputPort : self.inputPorts.firstObject;
 }
 
 - (MKInputPort *)firstOutputPort {
-    return !self.outputPorts.count ? self.createOutputPort : self.outputPorts[0];
+    return !self.outputPorts.count ? self.createOutputPort : self.outputPorts.firstObject;
 }
 
 @end

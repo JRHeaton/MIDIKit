@@ -9,22 +9,29 @@
 #import "MKEndpoint.h"
 #import "MKClient.h"
 
+#pragma mark - -Virtual Destination Endpoint Wrapper-
+
 // A virtual destination is a client-created endpoint
 // that is usable by other clients just like a normal destination.
 
 @protocol MKVirtualDestinationDelegate;
 @interface MKVirtualDestination : MKEndpoint <MKClientDependentInstaniation, MKClientReference>
 
+#pragma mark - -Init-
 // Creates a new virtual destination and adds it to the MIDI server
 + (instancetype)virtualDestinationWithName:(NSString *)name client:(MKClient *)client;
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
 
+
+#pragma mark - -Data Delegates-
 // Adds a new delegate to be notified when data is received
 - (void)addDelegate:(id<MKVirtualDestinationDelegate>)delegate;
 - (void)removeDelegate:(id<MKVirtualDestinationDelegate>)delegate;
 
 @end
 
+
+#pragma mark - -Virtual Destination Data Delegate-
 @protocol MKVirtualDestinationDelegate <NSObject>
 
 // Called when a packet is received

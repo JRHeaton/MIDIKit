@@ -61,7 +61,7 @@
 }
 
 - (MKEndpoint *)destinationAtIndex:(NSUInteger)index {
-    return [_destinations objectAtIndex:index];
+    return _destinations[index];
 }
 
 - (void)sendData:(NSData *)data {

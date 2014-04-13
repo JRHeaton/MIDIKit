@@ -14,7 +14,9 @@
 
 @implementation MKMessage
 
-@dynamic type, key, controller, velocity, value;
+@dynamic type, key, controller, velocity, status, data1, data2;
+
+#pragma mark - Types
 
 + (MKMessageType)noteOnType {
     return kMKMessageTypeNoteOn;
@@ -44,12 +46,21 @@
     return kMKMessageTypePitchBend;
 }
 
+
+#pragma mark - Init
+
+- (instancetype)init {
+    if(!(self = [super init])) return nil;
+    _mutableData = [NSMutableData dataWithLength:3];
+    return self;
+}
+
 + (instancetype)controlChangeMessageWithController:(UInt8)controller value:(UInt8)value {
-    static UInt8 buf[3] = { 0xb0, 0x00, 0x00 };
-    buf[1] = controller;
-    buf[2] = value;
-    
-    return [[self alloc] initWithData:[NSData dataWithBytes:buf length:3]];
+    return [[self alloc] initWithStatus:kMKMessageTypeControlChange :controller :value];
+}
+
++ (instancetype)noteOnMessageWithKey:(UInt8)key velocity:(UInt8)velocity {
+    return [[self alloc] initWithStatus:kMKMessageTypeNoteOn :key :velocity];
 }
 
 + (instancetype)messageWithData:(NSData *)data {
@@ -60,15 +71,81 @@
     return [[self alloc] initWithPacket:packet];
 }
 
-- (instancetype)initWithData:(NSData *)data {
-    if(!(self = [self init])) return nil;
-    _mutableData = data.mutableCopy ?: [NSMutableData dataWithCapacity:0];
-    return self;
++ (NSArray *)messagesWithData:(NSData *)data {
+    NSMutableArray *ret = [NSMutableArray array];
+
+#define NUM_TYPES 8
+    static MKMessageType handledTypes[NUM_TYPES] = {
+        kMKMessageTypeNoteOff,
+        kMKMessageTypeNoteOn,
+        kMKMessageTypePolyphonicKeyPressureAfterTouch,
+        kMKMessageTypeControlChange,
+        kMKMessageTypeProgramChange,
+        kMKMessageTypeChannelPressureAfterTouch,
+        kMKMessageTypePitchBend,
+        kMKMessageTypeSysex
+    };
+    UInt8 *buff = (UInt8 *)data.bytes;
+
+    UInt8 off = 0;
+    while(off < data.length) {
+        UInt8 *buf = &buff[off];
+
+        bool found = false;
+        for(int i=0;i<NUM_TYPES;++i) {
+            MKMessageType type = handledTypes[i];
+
+            if((buf[0] & 0xf0) == type) {
+                UInt8 goodLen = (data.length - off);
+                switch (type) {
+                    case kMKMessageTypeSysex:
+                        for(NSUInteger x=0;x<goodLen;++x) {
+                            if(buf[x] == 0xF7) { // EOX
+                                goodLen = x + 1;
+                                goto done;
+                            }
+                        }
+
+                        break;
+                    default: goodLen = MIN(3, goodLen); // standard MIDI message
+                }
+            done:
+
+                [ret addObject:[MKMessage messageWithData:[NSData dataWithBytes:buf length:goodLen]]];
+
+                off += goodLen;
+                found = true;
+            }
+        }
+        if(found)
+            found = false;
+        else
+            off++;
+    }
+#undef NUM_TYPES
+
+    return ret;
 }
 
-- (instancetype)init {
-    if(!(self = [super init])) return nil;
-    _mutableData = [NSMutableData dataWithLength:3];
++ (NSArray *)messagesWithPacket:(MIDIPacket *)packet {
+    return [self messagesWithData:[NSData dataWithBytesNoCopy:packet->data length:packet->length freeWhenDone:NO]];
+}
+
++ (NSArray *)messagesWithPacketList:(MIDIPacketList *)list {
+    NSMutableArray *ret = [NSMutableArray array];
+
+    MIDIPacket *packet = &list->packet[0];
+    for (int i=0;i<list->numPackets;++i) {
+        packet = MIDIPacketNext(packet);
+        [ret addObjectsFromArray:[self messagesWithPacket:packet]];
+    }
+
+    return ret.count ? ret.copy : nil;
+}
+
+- (instancetype)initWithData:(NSData *)data {
+    if(!(self = [self init])) return nil;
+    _mutableData = data ? ([data isKindOfClass:[NSMutableData class]] ? data : data.mutableCopy) : [NSMutableData dataWithCapacity:0];
     return self;
 }
 
@@ -81,69 +158,88 @@
     return self;
 }
 
-+ (instancetype)messageWithType:(MKMessageType)type keyOrController:(UInt8)keyOrController velocityOrValue:(UInt8)velocityOrValue {
-    return [[self alloc] initWithType:type keyOrController:keyOrController velocityOrValue:velocityOrValue];
+- (instancetype)initWithStatus:(UInt8)status :(UInt8)data1 :(UInt8)data2 {
+    if(!(self = [self init])) return nil;
+
+    self.status = status;
+    self.data1 = data1;
+    self.data2 = data2;
+
+    return self;
 }
 
-+ (instancetype):(UInt8)type :(UInt8)keyOrController :(UInt8)velocityOrValue {
-    return [[self alloc] initWithType:type keyOrController:keyOrController velocityOrValue:velocityOrValue];
++ (instancetype):(UInt8)status :(UInt8)data1 :(UInt8)data2 {
+    return [[self alloc] initWithStatus:status :data1 :data2];
 }
 
-- (instancetype)initWithType:(MKMessageType)type
-             keyOrController:(UInt8)keyOrController
-             velocityOrValue:(UInt8)velocityOrValue {
-    UInt8 buf[3] = { type, keyOrController, velocityOrValue };
+- (NSString *)_hexStringForData:(NSData *)data maxByteCount:(NSUInteger)max {
+    NSMutableString *str = [NSMutableString string];
 
-    return [self initWithData:[NSData dataWithBytes:buf length:3]];
+    for(NSUInteger i=0;i<MIN(max, data.length); ++i) {
+        BOOL atDataEnd = (i == (data.length - 1));
+        BOOL atMax = (i == (max - 1));
+        [str appendFormat:@"0x%02X%@", ((unsigned char *)data.bytes)[i], (atMax && !atDataEnd) ? @", ..." : (atDataEnd ? @"" : @" ")];
+    }
+
+    return str;
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ length=0x%lx, type=0x%02x, keyOrController=0x%02x, velocityOrValue=0x%02x, channel=%d", super.description, (unsigned long)self.length, self.type, self.keyOrController, self.velocityOrValue, self.channel];
+    NSString *typeName;
+    switch (self.type) {
+        case kMKMessageTypeSysex: typeName = @"Sysex"; break;
+        case kMKMessageTypeChannelPressureAfterTouch: typeName = @"Channel AfterTouch"; break;
+        case kMKMessageTypeControlChange: typeName = @"Control Change"; break;
+        case kMKMessageTypeNoteOff: typeName = @"Note Off"; break;
+        case kMKMessageTypeNoteOn: typeName = @"Note On"; break;
+        case kMKMessageTypePitchBend: typeName = @"Pitch Bend"; break;
+        case kMKMessageTypePolyphonicKeyPressureAfterTouch: typeName = @"Polyphonic AfterTouch"; break;
+        case kMKMessageTypeProgramChange: typeName = @"Program Change"; break;
+        default: typeName = @"Unknown"; break;
+    }
+
+    NSString *dataString;
+    switch (self.type) {
+        case kMKMessageTypeSysex: dataString = [self _hexStringForData:self.data maxByteCount:20]; break;
+        default: dataString = [NSString stringWithFormat:@"0x%02X, 0x%02X, 0x%02X", self.status, self.data1, self.data2];
+    }
+
+    return [NSString stringWithFormat:@"%@ type=0x%X(%@), length=0x%lX, data={%@}", super.description, self.type, typeName, (unsigned long)self.length, dataString];
 }
 
 - (MKMessageType)type {
     return self.length ? (MKMessageType)(self.bytes[0] & 0xF0) : 0;
 }
 
-- (UInt8)keyOrController {
-    return self.length ? self.bytes[1] : 0;
+- (UInt8)status {
+    return self.length ? self.bytes[0] : 0;
 }
 
-- (UInt8)velocityOrValue {
-    return self.length ? self.bytes[2] : 0;
+- (UInt8)data1 {
+    return self.length > 1 ? self.bytes[1] : 0;
 }
 
-- (UInt8)velocity {
-    return self.velocityOrValue;
+- (UInt8)data2 {
+    return self.length > 2 ? self.bytes[2] : 0;
 }
 
-- (void)setVelocity:(UInt8)velocity {
-    [self setVelocityOrValue:velocity];
+- (void)setData1:(UInt8)data1 {
+    [self setByte:data1 atIndex:1];
 }
 
-- (UInt8)value {
-    return self.velocityOrValue;
+- (void)setData2:(UInt8)data2 {
+    [self setByte:data2 atIndex:2];
 }
 
-- (void)setValue:(UInt8)value {
-    [self setVelocityOrValue:value];
-}
+#define FORWARD(newGetter, oldGetter, newSetter, oldSetter) \
+- (UInt8)newGetter { return self.oldGetter; } \
+- (void)newSetter:(UInt8)val { [self oldSetter:val]; }
 
-- (UInt8)key {
-    return self.keyOrController;
-}
+FORWARD(key, data1, setKey, setData1)
+FORWARD(controller, data1, setController, setData1)
+FORWARD(velocity, data2, setVelocity, setData2)
 
-- (void)setKey:(UInt8)value {
-    [self setKeyOrController:value];
-}
-
-- (UInt8)controller {
-    return self.keyOrController;
-}
-
-- (void)setController:(UInt8)controller {
-    [self setKeyOrController:controller];
-}
+#undef FORWARD
 
 - (UInt8)channel {
     return (self.bytes[0] & 0x0F) + 1;

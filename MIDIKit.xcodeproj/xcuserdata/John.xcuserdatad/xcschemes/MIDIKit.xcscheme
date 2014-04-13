@@ -38,6 +38,16 @@
                ReferencedContainer = "container:MIDIKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "522EA3E618FA4DDE00444217"
+               BuildableName = "MIDIKit OS X Tests.xctest"
+               BlueprintName = "MIDIKit OS X Tests"
+               ReferencedContainer = "container:MIDIKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

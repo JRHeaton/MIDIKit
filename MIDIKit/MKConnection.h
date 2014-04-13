@@ -13,6 +13,8 @@
 #import "MKOutputPort.h"
 #import <JavaScriptCore/JavaScriptCore.h>
 
+#pragma mark - -Mutual ObjC/JavaScript-
+
 // A connection object is essentially a convenient way to
 // send and receive from multiple sources and destinations
 // without having to constantly iterate through a container
@@ -25,22 +27,28 @@
 
 @protocol MKConnectionJS <JSExport>
 
+#pragma mark - -Init-
 + (instancetype)connectionWithNewClient;
 + (instancetype)connectionWithClient:(MKClient *)client;
 
 JSExportAs(connectionWithPorts,
 + (instancetype)connectionWithInputPort:(MKInputPort *)inputPort outputPort:(MKOutputPort *)outputPort);
 
+
+#pragma mark - -Sending Data-
 - (void)sendMessageArray:(NSArray *)messages;
 - (void)sendMessage:(MKMessage *)message;
 
 JSExportAs(send, - (instancetype)sendNumberArray:(NSArray *)array);
 
-@property (nonatomic, weak) MKClient *client;
 
+#pragma mark - -Coordinating Wrappers-
+@property (nonatomic, weak) MKClient *client;
 @property (nonatomic, readonly) MKInputPort *inputPort;
 @property (nonatomic, readonly) MKOutputPort *outputPort;
 
+
+#pragma mark - -Output Destinations-
 - (instancetype)addDestination:(MKEndpoint *)destination;
 - (instancetype)removeDestination:(MKEndpoint *)destination;
 - (MKEndpoint *)destinationAtIndex:(NSUInteger)index;
@@ -48,17 +56,24 @@ JSExportAs(send, - (instancetype)sendNumberArray:(NSArray *)array);
 
 @end
 
+
+#pragma mark - -Connection Helper Class-
 @interface MKConnection : NSObject <MKConnectionJS>
 
+#pragma mark - -Init-
 // NOTE: instantiation with a client will automatically
 // create an input and output port from the client
 // if they're not already created.
 - (instancetype)initWithClient:(MKClient *)client;
 - (instancetype)initWithInputPort:(MKInputPort *)inputPort outputPort:(MKOutputPort *)outputPort;
 
+
+#pragma mark - -Timed Block Execution Helpers-
 // Async helper
 - (instancetype)performBlock:(void (^)(MKConnection *c))block afterDelay:(NSTimeInterval)delay;
 
+
+#pragma mark - -Sending Data-
 // Uses the output port to send to all destinations
 - (void)sendData:(NSData *)data;
 - (void)sendMessages:(MKMessage *)message, ... NS_REQUIRES_NIL_TERMINATION;

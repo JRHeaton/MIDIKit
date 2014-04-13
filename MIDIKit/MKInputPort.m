@@ -31,7 +31,7 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
     if(self.inputHandler) {
         NSMutableArray *dataArray = [NSMutableArray arrayWithCapacity:0];
         for(int i=0;i<pktlist->packet[0].length;++i) {
-            [dataArray addObject:[NSNumber numberWithUnsignedChar:pktlist->packet[0].data[i]]];
+            [dataArray addObject:@(pktlist->packet[0].data[i])];
         }
         [self.inputHandler callWithArguments:@[dataArray]];
     }

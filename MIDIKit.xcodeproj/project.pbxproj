@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		522EA3E818FA4DDE00444217 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6EC18DE96A200A8CFD4 /* XCTest.framework */; };
+		522EA3EE18FA4DDE00444217 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 522EA3EC18FA4DDE00444217 /* InfoPlist.strings */; };
 		5273C6D818DE96A200A8CFD4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D718DE96A200A8CFD4 /* Cocoa.framework */; };
 		5273C6E218DE96A200A8CFD4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5273C6E018DE96A200A8CFD4 /* InfoPlist.strings */; };
 		5273C70418DE9A9800A8CFD4 /* MKObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C70218DE9A9800A8CFD4 /* MKObject.h */; };
@@ -48,6 +50,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		522EA3F218FA4DDE00444217 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5273C6CB18DE96A200A8CFD4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5273C6D318DE96A200A8CFD4;
+			remoteInfo = MIDIKit;
+		};
 		5273C72E18DEA17F00A8CFD4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5273C6CB18DE96A200A8CFD4 /* Project object */;
@@ -86,6 +95,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		522EA3E718FA4DDE00444217 /* MIDIKit OS X Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MIDIKit OS X Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		522EA3EB18FA4DDE00444217 /* MIDIKit OS X Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MIDIKit OS X Tests-Info.plist"; sourceTree = "<group>"; };
+		522EA3ED18FA4DDE00444217 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		522EA3F118FA4DDE00444217 /* MIDIKit OS X Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MIDIKit OS X Tests-Prefix.pch"; sourceTree = "<group>"; };
 		5273C6D418DE96A200A8CFD4 /* MIDIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MIDIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5273C6D718DE96A200A8CFD4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		5273C6DA18DE96A200A8CFD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -139,6 +152,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		522EA3E418FA4DDE00444217 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				522EA3E818FA4DDE00444217 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5273C6D018DE96A200A8CFD4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -169,6 +190,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		522EA3E918FA4DDE00444217 /* MIDIKit OS X Tests */ = {
+			isa = PBXGroup;
+			children = (
+				522EA3EA18FA4DDE00444217 /* Supporting Files */,
+			);
+			path = "MIDIKit OS X Tests";
+			sourceTree = "<group>";
+		};
+		522EA3EA18FA4DDE00444217 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				522EA3EB18FA4DDE00444217 /* MIDIKit OS X Tests-Info.plist */,
+				522EA3EC18FA4DDE00444217 /* InfoPlist.strings */,
+				522EA3F118FA4DDE00444217 /* MIDIKit OS X Tests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		5273C6CA18DE96A200A8CFD4 = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +215,7 @@
 				5273C6DD18DE96A200A8CFD4 /* MIDIKit */,
 				5273C72418DEA17B00A8CFD4 /* mktests */,
 				52B22F0D18F858E600A5A5D3 /* lpemutest */,
+				522EA3E918FA4DDE00444217 /* MIDIKit OS X Tests */,
 				5273C6D618DE96A200A8CFD4 /* Frameworks */,
 				5273C6D518DE96A200A8CFD4 /* Products */,
 			);
@@ -187,6 +227,7 @@
 				5273C6D418DE96A200A8CFD4 /* MIDIKit.framework */,
 				5273C72218DEA17B00A8CFD4 /* mktests */,
 				52B22F0B18F858E500A5A5D3 /* lpemutest */,
+				522EA3E718FA4DDE00444217 /* MIDIKit OS X Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -332,6 +373,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		522EA3E618FA4DDE00444217 /* MIDIKit OS X Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 522EA3F618FA4DDE00444217 /* Build configuration list for PBXNativeTarget "MIDIKit OS X Tests" */;
+			buildPhases = (
+				522EA3E318FA4DDE00444217 /* Sources */,
+				522EA3E418FA4DDE00444217 /* Frameworks */,
+				522EA3E518FA4DDE00444217 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				522EA3F318FA4DDE00444217 /* PBXTargetDependency */,
+			);
+			name = "MIDIKit OS X Tests";
+			productName = "MIDIKit OS X Tests";
+			productReference = 522EA3E718FA4DDE00444217 /* MIDIKit OS X Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		5273C6D318DE96A200A8CFD4 /* MIDIKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5273C6FC18DE96A200A8CFD4 /* Build configuration list for PBXNativeTarget "MIDIKit" */;
@@ -394,6 +453,11 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "John Heaton";
+				TargetAttributes = {
+					522EA3E618FA4DDE00444217 = {
+						TestTargetID = 5273C6D318DE96A200A8CFD4;
+					};
+				};
 			};
 			buildConfigurationList = 5273C6CE18DE96A200A8CFD4 /* Build configuration list for PBXProject "MIDIKit" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -410,11 +474,20 @@
 				5273C6D318DE96A200A8CFD4 /* MIDIKit */,
 				5273C72118DEA17B00A8CFD4 /* mktests */,
 				52B22F0A18F858E500A5A5D3 /* lpemutest */,
+				522EA3E618FA4DDE00444217 /* MIDIKit OS X Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		522EA3E518FA4DDE00444217 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				522EA3EE18FA4DDE00444217 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5273C6D218DE96A200A8CFD4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -426,6 +499,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		522EA3E318FA4DDE00444217 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5273C6CF18DE96A200A8CFD4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -468,6 +548,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		522EA3F318FA4DDE00444217 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5273C6D318DE96A200A8CFD4 /* MIDIKit */;
+			targetProxy = 522EA3F218FA4DDE00444217 /* PBXContainerItemProxy */;
+		};
 		5273C72F18DEA17F00A8CFD4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5273C6D318DE96A200A8CFD4 /* MIDIKit */;
@@ -481,6 +566,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		522EA3EC18FA4DDE00444217 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				522EA3ED18FA4DDE00444217 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		5273C6E018DE96A200A8CFD4 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -492,6 +585,40 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		522EA3F418FA4DDE00444217 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MIDIKit OS X Tests/MIDIKit OS X Tests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "MIDIKit OS X Tests/MIDIKit OS X Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		522EA3F518FA4DDE00444217 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MIDIKit OS X Tests/MIDIKit OS X Tests-Prefix.pch";
+				INFOPLIST_FILE = "MIDIKit OS X Tests/MIDIKit OS X Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
 		5273C6FA18DE96A200A8CFD4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -639,6 +766,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		522EA3F618FA4DDE00444217 /* Build configuration list for PBXNativeTarget "MIDIKit OS X Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				522EA3F418FA4DDE00444217 /* Debug */,
+				522EA3F518FA4DDE00444217 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		5273C6CE18DE96A200A8CFD4 /* Build configuration list for PBXProject "MIDIKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
