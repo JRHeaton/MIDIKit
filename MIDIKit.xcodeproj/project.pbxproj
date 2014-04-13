@@ -90,6 +90,8 @@
 		52B22F0F18F858E600A5A5D3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22F0E18F858E600A5A5D3 /* main.m */; };
 		52B22F1918F858F600A5A5D3 /* MIDIKit Framework (Mac).framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D418DE96A200A8CFD4 /* MIDIKit Framework (Mac).framework */; };
 		52B22F1C18F8592700A5A5D3 /* JRVirtualLaunchpad.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22F1B18F8592700A5A5D3 /* JRVirtualLaunchpad.m */; };
+		52DDEDBB18FB303B0019BE98 /* JRSecondModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 52DDEDB918FB303B0019BE98 /* JRSecondModule.h */; };
+		52DDEDBC18FB303B0019BE98 /* JRSecondModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DDEDBA18FB303B0019BE98 /* JRSecondModule.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -255,6 +257,8 @@
 		52B22F1118F858E600A5A5D3 /* lpemutest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "lpemutest-Prefix.pch"; sourceTree = "<group>"; };
 		52B22F1A18F8592700A5A5D3 /* JRVirtualLaunchpad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRVirtualLaunchpad.h; sourceTree = "<group>"; };
 		52B22F1B18F8592700A5A5D3 /* JRVirtualLaunchpad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRVirtualLaunchpad.m; sourceTree = "<group>"; };
+		52DDEDB918FB303B0019BE98 /* JRSecondModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSecondModule.h; sourceTree = "<group>"; };
+		52DDEDBA18FB303B0019BE98 /* JRSecondModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSecondModule.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -582,6 +586,8 @@
 			children = (
 				528DCB6C18FABFE60090FFFB /* JRNativeBundle.h */,
 				528DCB6D18FABFE60090FFFB /* JRNativeBundle.m */,
+				52DDEDB918FB303B0019BE98 /* JRSecondModule.h */,
+				52DDEDBA18FB303B0019BE98 /* JRSecondModule.m */,
 				528DCB5F18FABF870090FFFB /* Supporting Files */,
 			);
 			path = testNativeBundle;
@@ -657,6 +663,7 @@
 				528DCB7A18FAD21F0090FFFB /* MKConnection.h in Headers */,
 				528DCB7B18FAD2200090FFFB /* MKMessage.h in Headers */,
 				528DCB7118FAD20D0090FFFB /* MKObject.h in Headers */,
+				52DDEDBB18FB303B0019BE98 /* JRSecondModule.h in Headers */,
 				528DCB7818FAD21C0090FFFB /* MKVirtualSource.h in Headers */,
 				528DCB7618FAD2190090FFFB /* MKEntity.h in Headers */,
 				528DCB7218FAD20F0090FFFB /* MKClient.h in Headers */,
@@ -936,6 +943,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				528DCB6E18FABFE60090FFFB /* JRNativeBundle.m in Sources */,
+				52DDEDBC18FB303B0019BE98 /* JRSecondModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1321,6 +1329,7 @@
 				5240060318FB06CD0030B46D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5240063118FB08220030B46D /* Build configuration list for PBXNativeTarget "iOSMIDITests" */ = {
 			isa = XCConfigurationList;
@@ -1329,6 +1338,7 @@
 				5240063318FB08220030B46D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5273C6CE18DE96A200A8CFD4 /* Build configuration list for PBXProject "MIDIKit" */ = {
 			isa = XCConfigurationList;

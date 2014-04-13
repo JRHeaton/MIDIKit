@@ -36,25 +36,25 @@
 
 int main(int argc, const char * argv[]){
     @autoreleasepool {
-//        MKJavaScriptContext *c = [[MKJavaScriptContext alloc] init];
-//        [c loadNativeModule:[LPMessage class]];
+        MKJavaScriptContext *c = [[MKJavaScriptContext alloc] init];
+        [c loadNativeModule:[LPMessage class]];
+
+        c.exceptionHandler = ^(JSContext *context, JSValue *exception) {
+            NSLog(@"%@", exception);
+        };
+
+#define JS_FILE "test.js"
+
+        NSLog(@"%@", [c evaluateScript:[NSString stringWithContentsOfFile:@"/Users/John/Dropbox/Developer/projects/MIDIKit/mktests/" JS_FILE encoding:NSUTF8StringEncoding error:nil]]);
+
+//        [MKClient startSendingNotifications];
 //
-//        c.exceptionHandler = ^(JSContext *context, JSValue *exception) {
-//            NSLog(@"%@", exception);
-//        };
+//        MKEndpoint *lp = [MKEndpoint firstDestinationContaining:@"Launchpad"];
+//        NSLog(@"online: %d", lp.online);
 //
-//#define JS_FILE "launchpad.js"
-
-//        NSLog(@"%@", [c evaluateScript:[NSString stringWithContentsOfFile:@"/Users/John/Dropbox/Developer/projects/MIDIKit/mktests/" JS_FILE encoding:NSUTF8StringEncoding error:nil]]);
-
-        [MKClient startSendingNotifications];
-
-        MKEndpoint *lp = [MKEndpoint firstDestinationContaining:@"Launchpad"];
-        NSLog(@"online: %d", lp.online);
-
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            NSLog(@"online: %d", lp.online);
-        });
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            NSLog(@"online: %d", lp.online);
+//        });
 
         CFRunLoopRun();
     }

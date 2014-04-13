@@ -40,10 +40,13 @@ runTest('Native Module (Bundle)', function () {
     var bundle = require('./testNativeBundle.bundle');
 
     badValTestNamed('Module loads successfully', bundle, 'require(\'./testNativeBundle.bundle\')');
-    badValTestNamed('Module class: ' + JRNativeBundle, bundle)
-    badValTestNamed('Module function: ' + JRNativeBundle.someNumber(), JRNativeBundle.someNumber, 'JRNativeBundle.someNumber()')
-    badValTestNamed('Module instance: ' + JRNativeBundle.new(), JRNativeBundle.new, 'JRNativeBundle.new()')
-    badValTestNamed('require() return value: ' + bundle, bundle)
+    badValTestNamed('Module class : ' + JRNativeBundle, bundle)
+    badValTestNamed('Module function : ' + JRNativeBundle.someNumber(), JRNativeBundle.someNumber, 'JRNativeBundle.someNumber()')
+    badValTestNamed('Module instance : ' + JRNativeBundle.new(), JRNativeBundle.new, 'JRNativeBundle.new()')
+    badValTestNamed('require() return value : ' + bundle, bundle)
+    log('----------------------------------------------------------');
+    badValTestNamed('Second Module Class : ' + JRSecondModule, JRSecondModule)
+    badValTestNamed('Module function : ' + JRSecondModule.fart(), JRNativeBundle.fart, 'JRNativeBundle.fart()')
 })
 
 runTest('Node Context Characteristics', function () {
