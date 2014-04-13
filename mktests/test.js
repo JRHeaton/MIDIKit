@@ -2,7 +2,7 @@
 //var Launchpad = new LPConnection();
 //Launchpad.Reset()
 
-var native = require('/Users/John/Dropbox/Developer/projects/MIDIKit/DerivedData/MIDIKit/Build/Products/Debug/testNativeModule.dylib');
+var native = require('./testNativeModule.dylib');
 
 console.log('LPMessage.reset: ' + LPMessage.reset);
 
@@ -12,7 +12,7 @@ log(testNativeModule.doThingy)
 log(testNativeModule.doThingy())
 
 log('Loading bundle.........');
-var bundle = require('/Users/John/Dropbox/Developer/projects/MIDIKit/DerivedData/MIDIKit/Build/Products/Debug/testNativeBundle.bundle');
+var bundle = require('./testNativeBundle.bundle');
 
 log('bundle: ' + bundle);
 log('bundle class: ' + JRNativeBundle);
