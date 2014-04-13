@@ -96,7 +96,7 @@
                                   @"MKVirtualDestination",
                                   @"MKConnection",
                                   @"MKMessage" ]) {
-        [self loadNativeModule:NSClassFromString(className)];
+        [self loadNativeModule:NSClassFromString(className) withListName:@"InternalModule"];
     }
 }
 
@@ -170,7 +170,7 @@ static JSValue *_MKJavaScriptContextRequireHook(Class self, SEL _cmd, MKJavaScri
         Class (*MKModuleClass)() = dlsym(handle, "MKModuleClass");
         if(!MKModuleClass) return nil;
 
-        return [self loadNativeModule:MKModuleClass() withListName:@"InternalModule"];
+        return [self loadNativeModule:MKModuleClass()];
     }
 
     return nil;
