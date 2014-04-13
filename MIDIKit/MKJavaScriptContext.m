@@ -9,6 +9,7 @@
 #import "MKJavaScriptContext.h"
 #import "MKClient.h"
 #import "MKConnection.h"
+#import "MIDIKit.h"
 #import <dlfcn.h>
 #import <objc/runtime.h>
 
@@ -44,6 +45,7 @@
     void (^logBlock)(NSString *log) = ^(NSString *log) { [self printString:log]; };
     void (^logObjectBlock)(JSValue *val) = ^(JSValue *val) { [self printString:[val.toObject description]]; };
 
+    self[@"objectDescription"] = ^(JSValue *val) { return [val.toObject description]; };
     self[@"_cwd"] = [NSFileManager defaultManager].currentDirectoryPath;
     __weak typeof(self) _self = self;
     self[@"require"] = ^JSValue *(NSString *name) {
@@ -73,7 +75,8 @@
                          @"chdir" : ^(NSString *dir) { _self[@"_cwd"] = dir; },
                          @"moduleLoadList" : @[],
                          @"env" : info.environment,
-                         @"argv" : info.arguments
+                         @"argv" : info.arguments,
+                         @"version" : [NSString stringWithFormat:@"%u.%u.%u", kMIDIKitVersionMajor, kMIDIKitVersionMinor, kMIDIKitVersionPatch]
                          };
     self[@"console"] = @{
                          @"log" : logBlock,
@@ -167,7 +170,7 @@ static JSValue *_MKJavaScriptContextRequireHook(Class self, SEL _cmd, MKJavaScri
         Class (*MKModuleClass)() = dlsym(handle, "MKModuleClass");
         if(!MKModuleClass) return nil;
 
-        return [self loadNativeModule:MKModuleClass()];
+        return [self loadNativeModule:MKModuleClass() withListName:@"InternalModule"];
     }
 
     return nil;
@@ -175,11 +178,6 @@ static JSValue *_MKJavaScriptContextRequireHook(Class self, SEL _cmd, MKJavaScri
 
 - (void)loadClass:(Class)c {
     if([self classIsLoaded:c]) return;
-
-    NSString *className = NSStringFromClass(c);
-    static NSString *script = @"process.moduleLoadList.push(\'NativeModule %@\');";
-    NSString *formatted = [NSString stringWithFormat:script, className];
-    [self evaluateScript:formatted];
 
     self[NSStringFromClass(c)] = c;
 }
@@ -191,7 +189,7 @@ static JSValue *_MKJavaScriptContextRequireHook(Class self, SEL _cmd, MKJavaScri
     return val && !val.isUndefined;
 }
 
-- (JSValue *)loadNativeModule:(Class<MKJavaScriptModule>)module {
+- (JSValue *)loadNativeModule:(Class<MKJavaScriptModule>)module withListName:(NSString *)listName {
     Class cMod = (Class)module;
     if([loadedModules containsObject:module]) return [module requireReturnValue:self];
     if(![cMod conformsToProtocol:@protocol(MKJavaScriptModule)]) return nil;
@@ -203,14 +201,23 @@ static JSValue *_MKJavaScriptContextRequireHook(Class self, SEL _cmd, MKJavaScri
     }
     [self loadClass:cMod];
 
+    NSString *className = NSStringFromClass(cMod);
+    static NSString *script = @"process.moduleLoadList.push(\'%@ %@\');";
+    NSString *formatted = [NSString stringWithFormat:script, listName, className];
+    [self evaluateScript:formatted];
+
     JSValue *ret = nil;
     if([cMod respondsToSelector:@selector(requireReturnValue:)]) {
         ret = [cMod requireReturnValue:self];
     }
 
     [loadedModules addObject:module];
-
+    
     return ret;
+}
+
+- (JSValue *)loadNativeModule:(Class<MKJavaScriptModule>)module {
+    return [self loadNativeModule:module withListName:@"NativeModule"];
 }
 
 @end

@@ -76,17 +76,20 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
     return self;
 }
 
-- (void)connectSource:(MKEndpoint *)source {
+- (instancetype)connectSource:(MKEndpoint *)source {
     MIDIPortConnectSource(self.MIDIRef, source.MIDIRef, (__bridge_retained void *)(source));
+    return self;
 }
 
-- (void)disconnectSource:(MKEndpoint *)source {
+- (instancetype)disconnectSource:(MKEndpoint *)source {
     MIDIPortDisconnectSource(self.MIDIRef, source.MIDIRef);
+    return self;
 }
 
-- (void)dispose {
+- (instancetype)dispose {
     MIDIPortDispose(self.MIDIRef);
     self.MIDIRef = 0;
+    return self;
 }
 
 - (void)addInputDelegate:(id<MKInputPortDelegate>)delegate {

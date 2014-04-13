@@ -32,21 +32,17 @@
 + (instancetype)connectionWithNewClient;
 + (instancetype)connectionWithClient:(MKClient *)client;
 
-JSExportAs(connectionWithPorts,
-+ (instancetype)connectionWithInputPort:(MKInputPort *)inputPort outputPort:(MKOutputPort *)outputPort);
-
-
 #pragma mark - -Sending Data-
-- (void)sendMessageArray:(NSArray *)messages;
-- (void)sendMessage:(MKMessage *)message;
+- (instancetype)sendMessageArray:(NSArray *)messages;
+- (instancetype)sendMessage:(MKMessage *)message;
 
 JSExportAs(send, - (instancetype)sendNumberArray:(NSArray *)array);
 
 
 #pragma mark - -Coordinating Wrappers-
 @property (nonatomic, weak) MKClient *client;
-@property (nonatomic, readonly) MKInputPort *inputPort;
-@property (nonatomic, readonly) MKOutputPort *outputPort;
+@property (nonatomic, strong) MKInputPort *inputPort;
+@property (nonatomic, strong) MKOutputPort *outputPort;
 
 
 #pragma mark - -Output Destinations-
@@ -66,8 +62,6 @@ JSExportAs(send, - (instancetype)sendNumberArray:(NSArray *)array);
 // create an input and output port from the client
 // if they're not already created.
 - (instancetype)initWithClient:(MKClient *)client;
-- (instancetype)initWithInputPort:(MKInputPort *)inputPort outputPort:(MKOutputPort *)outputPort;
-
 
 #pragma mark - -Timed Block Execution Helpers-
 // Async helper

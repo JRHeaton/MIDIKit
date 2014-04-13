@@ -35,7 +35,6 @@
 #pragma mark - -Endpoint Wrapper-
 @interface MKEndpoint : MKObject <MKEndpointJS>
 
-
 #pragma mark - -Enumeration/Init-
 + (instancetype)firstDestinationMeetingCriteria:(BOOL (^)(MKEndpoint *candidate))block;
 + (instancetype)firstSourceMeetingCriteria:(BOOL (^)(MKEndpoint *candidate))block;

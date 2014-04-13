@@ -245,6 +245,10 @@
     return self.length ? self.bytes[0] : 0;
 }
 
+- (void)setStatus:(UInt8)status {
+    [self setByte:status atIndex:0];
+}
+
 - (UInt8)data1 {
     return self.length > 1 ? self.bytes[1] : 0;
 }

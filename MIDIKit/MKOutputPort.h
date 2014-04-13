@@ -8,8 +8,9 @@
 
 #import "MKObject.h"
 #import "MKClient.h"
-#import "MKMessage.h"
 
+@class MKMessage;
+@class MKEndpoint;
 #pragma mark - -Mutual ObjC/JavaScript-
 
 // Output ports are unidirectional ports through which you can
@@ -25,13 +26,13 @@ JSExportAs(send,
 
 #pragma mark Message
 JSExportAs(sendMessage,
-- (void)sendMessage:(MKMessage *)msg toDestination:(MKEndpoint *)endpoint);
+- (instancetype)sendMessage:(MKMessage *)msg toDestination:(MKEndpoint *)endpoint);
 
 #pragma mark Message Array
-JSExportAs(sendMessages, - (void)sendMessageArray:(NSArray *)messages toDestination:(MKEndpoint *)endpoint);
+JSExportAs(sendMessages, - (instancetype)sendMessageArray:(NSArray *)messages toDestination:(MKEndpoint *)endpoint);
 
 #pragma mark Port Disposal
-- (void)dispose;
+- (instancetype)dispose;
 
 @end
 

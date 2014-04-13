@@ -11,8 +11,6 @@
 #import "MIDIKit.h"
 #import "LPMessage.h"
 
-#import "MKJavaScriptContext.h"
-
 #define LP_ID 0xf0b43c3a
 
 @interface ClientTest : NSObject <MKClientNotificationDelegate>
@@ -45,6 +43,11 @@ int main(int argc, const char * argv[]){
             NSLog(@"%@", exception);
         };
         NSLog(@"%@", [c evaluateScript:[NSString stringWithContentsOfFile:@"/Users/John/Dropbox/Developer/projects/MIDIKit/mktests/test.js" encoding:NSUTF8StringEncoding error:nil]]);
+
+        MKConnection *con = [MKConnection.new addDestination:[MKEndpoint firstOnlineDestinationNamed:@"Launchpad Mini 4"]];
+        [con sendMessage:[MKMessage :0xb0 :0x00 :0x7f]];
+
+        con = nil;
 
         CFRunLoopRun();
     }

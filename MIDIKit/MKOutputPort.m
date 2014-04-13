@@ -7,6 +7,8 @@
 //
 
 #import "MKOutputPort.h"
+#import "MKObject.h"
+#import "MKMessage.h"
 
 @implementation MKOutputPort
 
@@ -35,9 +37,10 @@
     return queue;
 }
 
-- (void)dispose {
+- (instancetype)dispose {
     MIDIPortDispose(self.MIDIRef);
     self.MIDIRef = 0;
+    return self;
 }
 
 - (void)sendData:(NSData *)data toDestination:(MKEndpoint *)endpoint {
@@ -55,8 +58,9 @@
     }];
 }
 
-- (void)sendMessage:(MKMessage *)msg toDestination:(MKEndpoint *)endpoint {
+- (instancetype)sendMessage:(MKMessage *)msg toDestination:(MKEndpoint *)endpoint {
     [self sendData:msg.data toDestination:endpoint];
+    return self;
 }
 
 - (instancetype)sendJSArray:(JSValue *)dataArray toDestination:(MKEndpoint *)endpoint {
@@ -72,12 +76,13 @@
     return self;
 }
 
-- (void)sendMessageArray:(NSArray *)messages toDestination:(MKEndpoint *)endpoint {
+- (instancetype)sendMessageArray:(NSArray *)messages toDestination:(MKEndpoint *)endpoint {
     for(MKMessage *msg in messages) {
         if([msg isKindOfClass:[MKMessage class]]) {
             [self sendMessage:msg toDestination:endpoint];
         }
     }
+    return self;
 }
 
 @end

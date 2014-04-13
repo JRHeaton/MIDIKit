@@ -20,13 +20,13 @@
 #pragma mark - -Connecting Sources-
 // Calling this method will begin input from the given source
 // to this input port, thus triggering the delegate callbacks
-- (void)connectSource:(MKEndpoint *)source;
-- (void)disconnectSource:(MKEndpoint *)source;
+- (instancetype)connectSource:(MKEndpoint *)source;
+- (instancetype)disconnectSource:(MKEndpoint *)source;
 
 
 #pragma mark - -CoreMIDI Port Disposal-
 // This disposes the underlying port
-- (void)dispose;
+- (instancetype)dispose;
 
 
 #pragma mark - -I/O-

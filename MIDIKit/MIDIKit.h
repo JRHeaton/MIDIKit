@@ -25,3 +25,7 @@
 #import "MKVirtualDestination.h"
 #import "MKJavaScriptContext.h"
 #import "MKJavaScriptModule.h"
+
+#define kMIDIKitVersionMajor 0
+#define kMIDIKitVersionMinor 2
+#define kMIDIKitVersionPatch 0

@@ -30,10 +30,10 @@ runTest('Native Module (Dylib)', function () {
     var dylib = require('./testNativeModule.dylib');
 
     badValTestNamed('Module loads successfully', dylib, 'require(\'./testNativeModule.dylib\')');
-    badValTestNamed('Module class: ' + testNativeModule, dylib)
-    badValTestNamed('Module function: ' + testNativeModule.someNumber(), testNativeModule.someNumber, 'testNativeModule.someNumber()')
-    badValTestNamed('Module instance: ' + testNativeModule.new(), testNativeModule.new, 'testNativeModule.new()')
-    badValTestNamed('require() return value: ' + dylib, dylib)
+    badValTestNamed('Module class : ' + testNativeModule, dylib)
+    badValTestNamed('Module function : ' + testNativeModule.someNumber(), testNativeModule.someNumber, 'testNativeModule.someNumber()')
+    badValTestNamed('Module instance : ' + testNativeModule.new(), testNativeModule.new, 'testNativeModule.new()')
+    badValTestNamed('require() return value : ' + dylib, dylib)
 })
 
 runTest('Native Module (Bundle)', function () {
@@ -46,12 +46,10 @@ runTest('Native Module (Bundle)', function () {
     badValTestNamed('require() return value: ' + bundle, bundle)
 })
 
-var inputPort = MKClient.new().firstInputPort();
-logObject(inputPort)
-inputPort.connectSource(MKEndpoint.firstOnlineSourceNamed('Launchpad Mini 4'));
-inputPort.addInputHandler(function (port, msg) {
-                          log('fussssssssssssssssssssssssssssssssssss')
-                          logObject(msg)
-                          })
+runTest('Node Context Characteristics', function () {
+    var description = objectDescription(process)
+    badValTestNamed('process : ' + description, description, 'objectDescription(process)')
 
-logObject(inputPort.inputHandlers)
+    description = objectDescription(console)
+    badValTestNamed('console : ' + description, description, 'objectDescription(console)')
+})

@@ -22,27 +22,18 @@
     return [[self alloc] initWithClient:(id)client];
 }
 
-- (instancetype)initWithInputPort:(MKInputPort *)inputPort outputPort:(MKOutputPort *)outputPort {
-    if(!(self = [super init])) return nil;
-    
-    _inputPort = inputPort;
-    _outputPort = outputPort;
-    _destinations = [NSMutableArray arrayWithCapacity:0];
-    self.client = inputPort.client;
-    
-    return self;
-}
-
 + (instancetype)connectionWithNewClient {
     return [[self alloc] init];
 }
 
-+ (instancetype)connectionWithInputPort:(MKInputPort *)inputPort outputPort:(MKOutputPort *)outputPort {
-    return [[self alloc] initWithInputPort:inputPort outputPort:outputPort];
-}
-
 - (instancetype)initWithClient:(MKClient *)client {
-    self = [self initWithInputPort:client.firstInputPort outputPort:client.firstOutputPort];
+    if(!(self = [super init])) return nil;
+
+    _destinations = [NSMutableArray arrayWithCapacity:0];
+    self.client = client;
+    self.inputPort = client.firstInputPort;
+    self.outputPort = client.firstOutputPort;
+
     return self;
 }
 
@@ -88,8 +79,9 @@
     return self;
 }
 
-- (void)sendMessage:(MKMessage *)message {
+- (instancetype)sendMessage:(MKMessage *)message {
     [self sendData:message.data];
+    return self;
 }
 
 - (void)sendMessages:(MKMessage *)message, ... {
@@ -101,12 +93,13 @@
     va_end(args);
 }
 
-- (void)sendMessageArray:(NSArray *)messages {
+- (instancetype)sendMessageArray:(NSArray *)messages {
     for(MKMessage *msg in messages) {
         if([msg isKindOfClass:[MKMessage class]]) {
             [self sendMessage:msg];
         }
     }
+    return self;
 }
 
 - (void)performBlock:(void (^)(MKConnection *connection))block {

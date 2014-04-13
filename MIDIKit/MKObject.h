@@ -9,11 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CoreMIDI/CoreMIDI.h>
 #import <JavaScriptCore/JavaScriptCore.h>
-#import "MKJavaScriptContext.h"
+#import "MKJavaScriptModule.h"
 
+@class MKJavaScriptContext;
 #pragma mark - -Mutual ObjC/JavaScript-
 
-@protocol MKObjectJS <JSExport>
+@protocol MKObjectJS <JSExport, NSObject>
 
 #pragma mark - -Init-
 + (instancetype)objectWithUniqueID:(MIDIUniqueID)uniqueID;

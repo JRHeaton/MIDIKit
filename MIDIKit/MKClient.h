@@ -6,7 +6,8 @@
 //  Copyright (c) 2014 John Heaton. All rights reserved.
 //
 
-#import "MKDevice.h"
+#import "MKObject.h"
+#import "MKEndpoint.h"
 
 #pragma mark - -Mutual ObjC/JavaScript-
 
@@ -16,7 +17,9 @@
  and this class has some convenience methods for other things also.
  */
 
-@class MKInputPort, MKOutputPort, MKVirtualSource, MKVirtualDestination;
+@class MKVirtualDestination, MKVirtualSource;
+@class MKInputPort, MKOutputPort;
+@class MKDevice, MKEntity;
 @protocol MKClientNotificationDelegate;
 
 @protocol MKClientJS <JSExport, MKObjectJS>
