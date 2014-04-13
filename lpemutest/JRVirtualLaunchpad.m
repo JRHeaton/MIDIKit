@@ -57,7 +57,15 @@
     vSource = [[MKVirtualSource alloc] initWithName:name client:client];
     vDest = [[MKVirtualDestination alloc] initWithName:name client:client];
     [vDest addDelegate:self];
-    
+
+    [vSource setTransmits:YES onChannel:1];
+    [vDest setReceives:YES onChannel:1];
+    [vDest setReceives:YES onChannel:3];
+    [vDest setReceivesNotes:YES];
+
+    vSource.online = YES;
+    vDest.online = YES;
+
     [self reset];
     
     return self;

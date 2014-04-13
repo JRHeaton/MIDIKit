@@ -32,15 +32,15 @@
 @property (nonatomic, assign) NSInteger driverVersion;
 
 #pragma mark Type
-@property (nonatomic, readonly, getter = isDrumMachine) BOOL drumMachine;
-@property (nonatomic, readonly, getter = isEffectUnit) BOOL effectUnit;
-@property (nonatomic, readonly, getter = isEmbeddedEntity) BOOL embeddedEntity;
-@property (nonatomic, readonly, getter = isMixer) BOOL mixer;
-@property (nonatomic, readonly, getter = isSampler) BOOL sampler;
+@property (nonatomic, assign, getter = isDrumMachine) BOOL drumMachine;
+@property (nonatomic, assign, getter = isEffectUnit) BOOL effectUnit;
+@property (nonatomic, assign, getter = isEmbeddedEntity) BOOL embeddedEntity;
+@property (nonatomic, assign, getter = isMixer) BOOL mixer;
+@property (nonatomic, assign, getter = isSampler) BOOL sampler;
 
 #pragma mark State
-@property (nonatomic, readonly, getter = isOnline) BOOL online;
-@property (nonatomic, readonly) BOOL isPrivate;
+@property (nonatomic, assign, getter = isOnline) BOOL online;
+@property (nonatomic, assign) BOOL isPrivate;
 
 #pragma mark Misc 
 @property (nonatomic, copy) NSString *iconImagePath;
@@ -74,6 +74,7 @@
 - (BOOL)transmitsOnChannel:(NSUInteger)channel;
 - (BOOL)receivesOnChannel:(NSUInteger)channel;
 - (instancetype)setTransmits:(BOOL)transmits onChannel:(NSInteger)channel;
+- (instancetype)setReceives:(BOOL)receives onChannel:(NSUInteger)channel;
 
 
 #pragma mark - -Cache Control-
@@ -107,6 +108,8 @@
 @protected
     MIDIObjectRef _MIDIRef;
 }
+
++ (void)evalOSStatus:(OSStatus)code name:(NSString *)name throw:(BOOL)throw;
 
 #pragma mark - -Init-
 + (instancetype)objectWithMIDIRef:(MIDIObjectRef)MIDIRef;

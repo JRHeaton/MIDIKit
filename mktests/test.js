@@ -46,7 +46,7 @@ runTest('Native Module (Bundle)', function () {
     badValTestNamed('require() return value : ' + bundle, bundle)
     log('----------------------------------------------------------');
     badValTestNamed('Second Module Class : ' + JRSecondModule, JRSecondModule)
-    badValTestNamed('Module function : ' + JRSecondModule.fart(), JRNativeBundle.fart, 'JRNativeBundle.fart()')
+    badValTestNamed('Module function : ' + JRSecondModule.fart(), JRSecondModule.fart, 'JRSecondModule.fart()')
 })
 
 runTest('Node Context Characteristics', function () {

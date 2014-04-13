@@ -18,7 +18,16 @@
 @implementation MKObject
 
 @synthesize useCaching=_useCaching;
-@dynamic valid;
+@dynamic valid, online, isPrivate, embeddedEntity;
+
++ (void)evalOSStatus:(OSStatus)code name:(NSString *)name throw:(BOOL)throw {
+    if(!code) return;
+
+    NSLog(@"[MIDI Error] %@ : %@", name, [NSError errorWithDomain:NSOSStatusErrorDomain code:code userInfo:nil]);
+    if(throw) {
+        [NSException raise:@"MKOSStatusEvaluationException" format:@"Error during operation: %@", name];
+    }
+}
 
 + (void)load {
 #if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
@@ -89,7 +98,7 @@ exception:
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ valid=%@, properties=%@", super.description, self.valid ? @"YES" : @"NO", self.allProperties];
+    return [NSString stringWithFormat:@"%@ MIDIRef=0x%x valid=%@, properties=%@", super.description, self.MIDIRef, self.valid ? @"YES" : @"NO", self.allProperties];
 }
 
 #pragma mark - MIDI Properties
@@ -181,6 +190,21 @@ exception:
     return (self.receiveChannelBits & (1 << (channel - 1))) >> (channel - 1);
 }
 
+- (instancetype)setReceives:(BOOL)receives onChannel:(NSUInteger)channel {
+    NSUInteger receivesBits = self.receiveChannelBits;
+    channel = [self channelInRange:channel];
+
+    UInt8 bit = (1 << (channel - 1));
+
+    switch ((UInt8)receives) {
+        case YES: receivesBits |= bit; break;
+        case NO: receivesBits &= ~bit;
+    }
+
+    self.receiveChannelBits = receivesBits;
+    return self;
+}
+
 - (instancetype)setTransmits:(BOOL)transmits onChannel:(NSInteger)channel {
     NSUInteger transmitsBits = self.transmitChannelBits;
     channel = [self channelInRange:channel];
@@ -248,15 +272,21 @@ exception:
     return ![self integerPropertyForKey:(__bridge NSString *)kMIDIPropertyOffline];
 }
 
+- (void)setOnline:(BOOL)online {
+    [self setIntegerProperty:!online forKey:(__bridge NSString *)kMIDIPropertyOffline];
+}
+
 - (BOOL)isValid {
     return self.MIDIRef != 0;
 }
 
 - (NSDictionary *)allProperties {
     CFPropertyListRef ret;
-    MIDIObjectGetProperties(self.MIDIRef, &ret, true);
-    if(ret) _propertyCache = [NSMutableDictionary dictionaryWithDictionary:(__bridge NSDictionary *)(ret)];
-    return (__bridge_transfer NSDictionary *)ret;
+    [MKObject evalOSStatus:MIDIObjectGetProperties(self.MIDIRef, &ret, true) name:@"Copy Object Properties" throw:NO];
+    
+    NSDictionary *properties = (__bridge_transfer NSDictionary *)ret;
+    if(ret) _propertyCache = [NSMutableDictionary dictionaryWithDictionary:properties];
+    return properties;
 }
 
 
@@ -271,6 +301,18 @@ return (type)[self propertyType##PropertyForKey:(__bridge NSString *)property]; 
 - (void)set##name:(type)val { \
 [self set##propertyType##Property:val forKey:(__bridge NSString *)property]; \
 }
+
+/*
+ @property (nonatomic, assign, getter = isDrumMachine) BOOL drumMachine;
+ @property (nonatomic, assign, getter = isEffectUnit) BOOL effectUnit;
+ @property (nonatomic, assign, getter = isEmbeddedEntity) BOOL embeddedEntity;
+ @property (nonatomic, assign, getter = isMixer) BOOL mixer;
+ @property (nonatomic, assign, getter = isSampler) BOOL sampler;
+
+ #pragma mark State
+ @property (nonatomic, assign, getter = isOnline) BOOL online;
+ @property (nonatomic, assign) BOOL isPrivate;
+ */
 
 SETTER(BOOL, DrumMachine, kMIDIPropertyIsDrumMachine, Integer)
 SETTER(BOOL, EffectUnit, kMIDIPropertyIsEffectUnit, Integer)
