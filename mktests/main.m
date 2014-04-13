@@ -42,7 +42,11 @@ int main(int argc, const char * argv[]){
         MKJavaScriptContext *c = [MKJavaScriptContext new];
         c[@"LPMessage"] = [LPMessage class];
 
+        c.exceptionHandler = ^(JSContext *context, JSValue *exception) {
+            NSLog(@"%@", exception);
+        };
         NSLog(@"%@", [c evaluateScript:[NSString stringWithContentsOfFile:@"/Users/John/Dropbox/Developer/projects/MIDIKit/mktests/test.js" encoding:NSUTF8StringEncoding error:nil]]);
+
 
         CFRunLoopRun();
     }
