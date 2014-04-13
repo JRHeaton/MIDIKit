@@ -13,6 +13,10 @@
 
 @protocol MKVirtualSourceJS <JSExport, MKObjectJS, MKEndpointJS>
 
+JSExportAs(virtualSourceNamed,
++ (instancetype)virtualSourceWithName:(NSString *)name client:(MKClient *)client);
+
+
 @end
 
 #pragma mark - -Virtual Source Endpoint Wrapper-
@@ -26,7 +30,6 @@
 
 #pragma mark - -Init-
 // Creates a new virtual source and adds it to the MIDI server
-+ (instancetype)virtualSourceWithName:(NSString *)name client:(MKClient *)client;
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
 
 

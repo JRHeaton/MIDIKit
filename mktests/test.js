@@ -1,18 +1,38 @@
-//var LPConnection = require('/Users/John/Dropbox/Developer/projects/MIDIKit/mktests/LPConnection.js')
-//var Launchpad = new LPConnection();
-//Launchpad.Reset()
+function runTest(name, imp) {
+    log('********** Running Test: \'' + name + '\' **********');
+    imp();
+    log('----------------------------------------------------------');
+}
 
-var native = require('./testNativeModule.dylib');
+function testBadValue(val) {
+    return (val === null || val === undefined) ? "FAIL" : "PASS";
+}
 
-console.log('LPMessage.reset: ' + LPMessage.reset);
+function badValTestNamed(name, val, tester) {
+    var logStr = '[' + testBadValue(val) + '] ' + '[<' + name + '>]';
+    if(tester) logStr = logStr + ' (tested with ' + tester + ')';
 
-console.log('native: ' + native)
-log(testNativeModule)
-log(testNativeModule.doThingy)
-log(testNativeModule.doThingy())
+    log(logStr);
+}
 
-log('Loading bundle.........');
-var bundle = require('./testNativeBundle.bundle');
+runTest('Multiple Inheritance', function () {
+    badValTestNamed('Double', MKVirtualSource.objectWithUniqueID, 'MKVirtualSource -> MKEndpoint -> MKObject.objectWithUniqueID');
+    badValTestNamed('Single', MKVirtualSource.numberOfSources, 'MKEndpoint -> MKObject.numberOfSources');
+    badValTestNamed('Direct', MKVirtualSource.virtualSourceNamed, 'MKVirtualSource.virtualSourceNamed');
+})
 
-log('bundle: ' + bundle);
-log('bundle class: ' + JRNativeBundle);
+runTest('Native Module (Dylib)', function () {
+    var dylib = require('./testNativeModule.dylib');
+
+    badValTestNamed('Module loads successfully', dylib, 'require(\'./testNativeModule.dylib\')');
+    badValTestNamed('Module class: ' + testNativeModule, dylib)
+    badValTestNamed('require() return value: ' + dylib, dylib)
+})
+
+runTest('Native Module (Bundle)', function () {
+    var bundle = require('./testNativeBundle.bundle');
+
+    badValTestNamed('Module loads successfully', bundle, 'require(\'./testNativeBundle.bundle\')');
+    badValTestNamed('Module class: ' + JRNativeBundle, bundle)
+    badValTestNamed('require() return value: ' + bundle, bundle)
+})
