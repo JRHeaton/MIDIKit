@@ -33,6 +33,9 @@
 		5240064818FB0A690030B46D /* MKVirtualSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EF318F7B65D00A5A5D3 /* MKVirtualSource.m */; };
 		5240064918FB0A6A0030B46D /* MKVirtualDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EF718F7B80900A5A5D3 /* MKVirtualDestination.m */; };
 		5240064A18FB0FE80030B46D /* LPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 522EA41E18FA98F000444217 /* LPMessage.m */; };
+		5240064D18FB15050030B46D /* MKThruConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 5240064B18FB15050030B46D /* MKThruConnection.h */; };
+		5240064E18FB15050030B46D /* MKThruConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5240064C18FB15050030B46D /* MKThruConnection.m */; };
+		5240064F18FB15050030B46D /* MKThruConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5240064C18FB15050030B46D /* MKThruConnection.m */; };
 		5273C6D818DE96A200A8CFD4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D718DE96A200A8CFD4 /* Cocoa.framework */; };
 		5273C6E218DE96A200A8CFD4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5273C6E018DE96A200A8CFD4 /* InfoPlist.strings */; };
 		5273C70418DE9A9800A8CFD4 /* MKObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C70218DE9A9800A8CFD4 /* MKObject.h */; };
@@ -194,6 +197,8 @@
 		5240061A18FB08220030B46D /* JRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JRAppDelegate.h; sourceTree = "<group>"; };
 		5240061B18FB08220030B46D /* JRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JRAppDelegate.m; sourceTree = "<group>"; };
 		5240061D18FB08220030B46D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		5240064B18FB15050030B46D /* MKThruConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKThruConnection.h; sourceTree = "<group>"; };
+		5240064C18FB15050030B46D /* MKThruConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKThruConnection.m; sourceTree = "<group>"; };
 		5273C6D418DE96A200A8CFD4 /* MIDIKit Framework (Mac).framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "MIDIKit Framework (Mac).framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5273C6D718DE96A200A8CFD4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		5273C6DA18DE96A200A8CFD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -343,6 +348,8 @@
 		524005D918FB041F0030B46D /* Wrappers */ = {
 			isa = PBXGroup;
 			children = (
+				5240064B18FB15050030B46D /* MKThruConnection.h */,
+				5240064C18FB15050030B46D /* MKThruConnection.m */,
 				5273C70218DE9A9800A8CFD4 /* MKObject.h */,
 				5273C70318DE9A9800A8CFD4 /* MKObject.m */,
 				524005D718FB03F10030B46D /* Client */,
@@ -623,6 +630,7 @@
 				52B22EF018F7A6C600A5A5D3 /* MKOutputPort.h in Headers */,
 				52B169D618F8AE4800EACDAE /* MKJavaScriptContext.h in Headers */,
 				52B22EF418F7B65D00A5A5D3 /* MKVirtualSource.h in Headers */,
+				5240064D18FB15050030B46D /* MKThruConnection.h in Headers */,
 				522EA42418FA9A9500444217 /* MKJavaScriptModule.h in Headers */,
 				52B22F0518F803E900A5A5D3 /* MKMessage.h in Headers */,
 				52B22EEC18F7A0EF00A5A5D3 /* MKInputPort.h in Headers */,
@@ -869,6 +877,7 @@
 				5240064618FB0A670030B46D /* MKEntity.m in Sources */,
 				5240064718FB0A680030B46D /* MKEndpoint.m in Sources */,
 				5240064918FB0A6A0030B46D /* MKVirtualDestination.m in Sources */,
+				5240064F18FB15050030B46D /* MKThruConnection.m in Sources */,
 				5240063F18FB0A5C0030B46D /* MKMessage.m in Sources */,
 				5240064018FB0A5E0030B46D /* MKJavaScriptContext.m in Sources */,
 				5240064818FB0A690030B46D /* MKVirtualSource.m in Sources */,
@@ -898,6 +907,7 @@
 				5273C70518DE9A9800A8CFD4 /* MKObject.m in Sources */,
 				52B22EF918F7B80900A5A5D3 /* MKVirtualDestination.m in Sources */,
 				52B22EF518F7B65D00A5A5D3 /* MKVirtualSource.m in Sources */,
+				5240064E18FB15050030B46D /* MKThruConnection.m in Sources */,
 				52B169D718F8AE4800EACDAE /* MKJavaScriptContext.m in Sources */,
 				52B22EFF18F7C86900A5A5D3 /* MKConnection.m in Sources */,
 				52B22EF118F7A6C600A5A5D3 /* MKOutputPort.m in Sources */,

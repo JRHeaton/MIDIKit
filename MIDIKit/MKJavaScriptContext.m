@@ -44,8 +44,11 @@
     void (^logBlock)(NSString *log) = ^(NSString *log) { [self printString:log]; };
     void (^logObjectBlock)(JSValue *val) = ^(JSValue *val) { [self printString:[val.toObject description]]; };
 
-    self[@"objectDescription"] = ^(JSValue *val) { return [val.toObject description]; };
+#if TARGET_OS_MAC
     self[@"_cwd"] = [NSFileManager defaultManager].currentDirectoryPath;
+#endif
+
+    self[@"objectDescription"] = ^(JSValue *val) { return [val.toObject description]; };
     __weak typeof(self) _self = self;
     self[@"require"] = ^JSValue *(NSString *name) {
         if(!name.isAbsolutePath) {
@@ -70,9 +73,9 @@
 #if TARGET_OS_MAC
                          @"exit" : ^(int code) { exit(code); },
                          @"chdir" : ^(NSString *dir) { _self[@"_cwd"] = dir; },
+                         @"cwd" : ^JSValue *() { return _self[@"_cwd"]; },
 #endif
                          @"execPath" : [NSBundle mainBundle].executablePath,
-                         @"cwd" : ^JSValue *() { return _self[@"_cwd"]; },
                          @"pid" : @(info.processIdentifier),
                          @"moduleLoadList" : @[],
                          @"env" : info.environment,
