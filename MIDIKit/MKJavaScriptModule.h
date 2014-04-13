@@ -11,4 +11,7 @@
 @class MKJavaScriptContext;
 @protocol MKJavaScriptModule <NSObject>
 
+@required
++ (NSArray *)classesToLoad;
+
 @end

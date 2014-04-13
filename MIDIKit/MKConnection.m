@@ -18,6 +18,10 @@
 @synthesize outputPort=_outputPort;
 @synthesize destinations=_destinations;
 
++ (NSArray *)classesToLoad {
+    return @[ self.class ];
+}
+
 + (instancetype)connectionWithClient:(MKClient *)client {
     return [[self alloc] initWithClient:(id)client];
 }

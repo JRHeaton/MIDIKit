@@ -24,6 +24,6 @@
 
 - (JSValue *)evaluateScriptAtPath:(NSString *)path;
 - (BOOL)loadNativeModuleAtPath:(NSString *)path;
-- (JSValue *)loadNativeModule:(Class<MKJavaScriptModule>)module;
+- (void)loadNativeModule:(Class<MKJavaScriptModule>)module;
 
 @end

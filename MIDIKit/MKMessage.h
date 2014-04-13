@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreMIDI/CoreMIDI.h>
 #import <JavaScriptCore/JavaScriptCore.h>
+#import "MKJavaScriptModule.h"
 
 // MKMessage is a data wrapper class which implements some basic MIDI
 // message protocol logic.
@@ -76,7 +77,7 @@ JSExportAs(messages,
 
 @end
 
-@interface MKMessage : NSObject <MKMessageJS>
+@interface MKMessage : NSObject <MKMessageJS, MKJavaScriptModule>
 
 + (instancetype)controlChangeMessageWithController:(UInt8)controller value:(UInt8)value;
 + (instancetype)noteOnMessageWithKey:(UInt8)key velocity:(UInt8)velocity;

@@ -40,13 +40,12 @@
 int main(int argc, const char * argv[]){
     @autoreleasepool {
         MKJavaScriptContext *c = [[MKJavaScriptContext alloc] init];
-        NSLog(@"loaded: %@", [c loadNativeModule:[LPMessage class]]);
+        [c loadNativeModule:[LPMessage class]];
 
         c.exceptionHandler = ^(JSContext *context, JSValue *exception) {
             NSLog(@"%@", exception);
         };
         NSLog(@"%@", [c evaluateScript:[NSString stringWithContentsOfFile:@"/Users/John/Dropbox/Developer/projects/MIDIKit/mktests/test.js" encoding:NSUTF8StringEncoding error:nil]]);
-
 
         CFRunLoopRun();
     }

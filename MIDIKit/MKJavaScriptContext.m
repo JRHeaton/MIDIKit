@@ -127,17 +127,18 @@
     return NO;
 }
 
-- (JSValue *)loadNativeModule:(Class<MKJavaScriptModule>)module {
-    NSString *className = NSStringFromClass(module);
-    if(![self[className] isUndefined]) return nil;
+- (void)loadNativeModule:(Class<MKJavaScriptModule>)module {
+    if(![(Class)module respondsToSelector:@selector(classesToLoad)]) return;
 
-    static NSString *script = @"process.moduleLoadList.push(\'NativeModule %@\');";
-    NSString *formatted = [NSString stringWithFormat:script, className];
+    for(Class cls in [module classesToLoad]) {
+        NSString *className = NSStringFromClass(cls);
+        if(![self[className] isUndefined]) continue; // already loaded
 
-    [self evaluateScript:formatted];
-    self[className] = module;
-
-    return self[className];
+        static NSString *script = @"process.moduleLoadList.push(\'NativeModule %@\');";
+        NSString *formatted = [NSString stringWithFormat:script, className];
+        [self evaluateScript:formatted];
+        self[className] = cls;
+    }
 }
 
 @end

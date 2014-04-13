@@ -16,6 +16,10 @@
 
 @dynamic type, key, controller, velocity, status, data1, data2;
 
++ (NSArray *)classesToLoad {
+    return @[ self.class ];
+}
+
 #pragma mark - Types
 
 + (MKMessageType)noteOnType {
@@ -45,7 +49,6 @@
 + (MKMessageType)pitchBendType {
     return kMKMessageTypePitchBend;
 }
-
 
 #pragma mark - Init
 
