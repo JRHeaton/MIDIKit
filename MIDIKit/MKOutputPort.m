@@ -18,9 +18,9 @@
     MIDIPortRef p;
 
     if(!client.valid) return nil;
-    if(MIDIOutputPortCreate(client.MIDIRef, (__bridge CFStringRef)(name), &p) != 0)
+    if([MKObject evalOSStatus:MIDIOutputPortCreate(client.MIDIRef, (__bridge CFStringRef)(name), &p) name:@"Creating an output port" throw:NO] != 0) {
         return nil;
-    if(!(self = [super initWithMIDIRef:p])) return nil;
+    }
 
     self.client = client;
     [self.client.outputPorts addObject:self];

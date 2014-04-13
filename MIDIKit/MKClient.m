@@ -139,7 +139,9 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
     CFStringRef cfName = (__bridge CFStringRef)(name);
 
     if(!name) return [self init];
-    if(MIDIClientCreate(cfName, _MKClientMIDINotifyProc, (__bridge void *)(self), &c) != 0) return nil;
+    if([MKObject evalOSStatus:MIDIClientCreate(cfName, _MKClientMIDINotifyProc, (__bridge void *)(self), &c) name:@"Creating a client" throw:NO] != 0) {
+        return nil;
+    }
 
     if(!(self = [super initWithMIDIRef:c])) return nil;
     

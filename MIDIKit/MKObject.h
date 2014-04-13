@@ -109,7 +109,7 @@
     MIDIObjectRef _MIDIRef;
 }
 
-+ (void)evalOSStatus:(OSStatus)code name:(NSString *)name throw:(BOOL)throw;
++ (OSStatus)evalOSStatus:(OSStatus)code name:(NSString *)name throw:(BOOL)throw;
 
 #pragma mark - -Init-
 + (instancetype)objectWithMIDIRef:(MIDIObjectRef)MIDIRef;

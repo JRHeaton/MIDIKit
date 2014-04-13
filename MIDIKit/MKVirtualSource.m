@@ -20,7 +20,7 @@
     MIDIEndpointRef e;
 
     if(!client.valid) return nil;
-    if(MIDISourceCreate(client.MIDIRef, (__bridge CFStringRef)(name), &e) != 0)
+    if([MKObject evalOSStatus:MIDISourceCreate(client.MIDIRef, (__bridge CFStringRef)(name), &e) name:@"Creating a virtual source" throw:NO] != 0)
         return nil;
     if(!(self = [super initWithMIDIRef:e])) return nil;
     

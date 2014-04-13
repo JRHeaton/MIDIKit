@@ -28,15 +28,15 @@
 }
 
 + (instancetype)firstDestinationMeetingCriteria:(BOOL (^)(MKEndpoint *candidate))block {
-
-    
-    return nil;
+    return [self enumerateDestinations:^BOOL(MKEndpoint *endpoint, NSUInteger index, BOOL *stop) {
+        return block(endpoint);
+    }];
 }
 
 + (instancetype)firstSourceMeetingCriteria:(BOOL (^)(MKEndpoint *candidate))block {
-
-    
-    return nil;
+    return [self enumerateSources:^BOOL(MKEndpoint *endpoint, NSUInteger index, BOOL *stop) {
+        return block(endpoint);
+    }];
 }
 
 + (instancetype)enumerateDestinations:(MKEndpointEnumerationHandler)block {

@@ -20,13 +20,15 @@
 @synthesize useCaching=_useCaching;
 @dynamic valid, online, isPrivate, embeddedEntity;
 
-+ (void)evalOSStatus:(OSStatus)code name:(NSString *)name throw:(BOOL)throw {
-    if(!code) return;
-
-    NSLog(@"[MIDI Error] %@ : %@", name, [NSError errorWithDomain:NSOSStatusErrorDomain code:code userInfo:nil]);
-    if(throw) {
-        [NSException raise:@"MKOSStatusEvaluationException" format:@"Error during operation: %@", name];
++ (OSStatus)evalOSStatus:(OSStatus)code name:(NSString *)name throw:(BOOL)throw {
+    if(code != 0) {
+        NSLog(@"[MIDI Error] %@ : %@", name, [NSError errorWithDomain:NSOSStatusErrorDomain code:code userInfo:nil]);
+        if(throw) {
+            [NSException raise:@"MKOSStatusEvaluationException" format:@"Error during operation: %@", name];
+        }
     }
+
+    return code;
 }
 
 + (void)load {
@@ -108,8 +110,8 @@ exception:
     NSString *dd;
     if(self.useCaching && (dd = _propertyCache[key]) != nil)
         return dd;
-    
-    MIDIObjectGetStringProperty(self.MIDIRef, (__bridge CFStringRef)(key), &ret);
+
+    [MKObject evalOSStatus:MIDIObjectGetStringProperty(self.MIDIRef, (__bridge CFStringRef)(key), &ret) name:[NSString stringWithFormat:@"Getting string property: \'%@\'", key] throw:NO];
     if(ret) _propertyCache[key] = dd = (__bridge_transfer NSString *)(ret);
     return dd;
 }
@@ -120,7 +122,7 @@ exception:
     if(self.useCaching && (dd = _propertyCache[key]) != nil)
         return dd.integerValue;
     
-    MIDIObjectGetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(key), &ret);
+    [MKObject evalOSStatus:MIDIObjectGetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(key), &ret) name:[NSString stringWithFormat:@"Getting integer property: \'%@\'", key] throw:NO];
     _propertyCache[key] = @(ret);
     return ret;
 }
@@ -131,7 +133,7 @@ exception:
     if(self.useCaching && (dd = _propertyCache[key]) != nil)
         return dd;
     
-    MIDIObjectGetDataProperty(self.MIDIRef, (__bridge CFStringRef)(key), &ret);
+    [MKObject evalOSStatus:MIDIObjectGetDataProperty(self.MIDIRef, (__bridge CFStringRef)(key), &ret) name:[NSString stringWithFormat:@"Getting data property: \'%@\'", key] throw:NO];
     if(ret) _propertyCache[key] = (__bridge NSData *)(ret);
     return (__bridge_transfer NSData *)ret;
 }
@@ -142,31 +144,31 @@ exception:
     if(self.useCaching && (dd = _propertyCache[key]) != nil)
         return dd;
     
-    MIDIObjectGetDictionaryProperty(self.MIDIRef, (__bridge CFStringRef)(key), &dict);
+    [MKObject evalOSStatus:MIDIObjectGetDictionaryProperty(self.MIDIRef, (__bridge CFStringRef)(key), &dict) name:[NSString stringWithFormat:@"Getting dictionary property: \'%@\'", key] throw:NO];
     if(dict) _propertyCache[key] = (__bridge NSDictionary *)(dict);
     return (__bridge_transfer NSDictionary *)dict;
 }
 
 - (instancetype)setStringProperty:(NSString *)value forKey:(NSString *)key {
-    MIDIObjectSetStringProperty(self.MIDIRef, (__bridge CFStringRef)(key), (__bridge CFStringRef)(value));
+    [MKObject evalOSStatus:MIDIObjectSetStringProperty(self.MIDIRef, (__bridge CFStringRef)(key), (__bridge CFStringRef)(value)) name:[NSString stringWithFormat:@"Setting string property: \'%@\'", key] throw:NO];
     
     _propertyCache[(key)] = value;
     return self;
 }
 
 - (instancetype)setIntegerProperty:(NSInteger)value forKey:(NSString *)key {
-    MIDIObjectSetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(key), (SInt32)value);
+    [MKObject evalOSStatus:MIDIObjectSetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(key), (SInt32)value) name:[NSString stringWithFormat:@"Setting integer property: \'%@\'", key] throw:NO];
     _propertyCache[(key)] = @(value);
     return self;
 }
 
 - (void)setDataProperty:(NSData *)value forKey:(NSString *)key {
-    MIDIObjectSetDataProperty(self.MIDIRef, (__bridge CFStringRef)(key), (__bridge CFDataRef)(value));
+    [MKObject evalOSStatus:MIDIObjectSetDataProperty(self.MIDIRef, (__bridge CFStringRef)(key), (__bridge CFDataRef)(value)) name:[NSString stringWithFormat:@"Setting data property: \'%@\'", key] throw:NO];
     _propertyCache[(key)] = value;
 }
 
 - (instancetype)setDictionaryProperty:(NSDictionary *)value forKey:(NSString *)key {
-    MIDIObjectSetDictionaryProperty(self.MIDIRef, (__bridge CFStringRef)(key), (__bridge CFDictionaryRef)(value));
+    [MKObject evalOSStatus:MIDIObjectSetDictionaryProperty(self.MIDIRef, (__bridge CFStringRef)(key), (__bridge CFDictionaryRef)(value)) name:[NSString stringWithFormat:@"Setting dictionary property: \'%@\'", key] throw:NO];
     _propertyCache[(key)] = value;
     return self;
 }
@@ -177,7 +179,8 @@ exception:
 
 - (void)removePropertyForKey:(NSString *)key {
     [self removeCachedPropertyForKey:key];
-    MIDIObjectRemoveProperty(self.MIDIRef, (__bridge CFStringRef)(key));
+
+    [MKObject evalOSStatus:MIDIObjectRemoveProperty(self.MIDIRef, (__bridge CFStringRef)(key)) name:[NSString stringWithFormat:@"Removing property: \'%@\'", key] throw:NO];
 }
 
 - (BOOL)transmitsOnChannel:(NSUInteger)channel {
@@ -282,7 +285,7 @@ exception:
 
 - (NSDictionary *)allProperties {
     CFPropertyListRef ret;
-    [MKObject evalOSStatus:MIDIObjectGetProperties(self.MIDIRef, &ret, true) name:@"Copy Object Properties" throw:NO];
+    [MKObject evalOSStatus:MIDIObjectGetProperties(self.MIDIRef, &ret, true) name:@"Copy object properties" throw:NO];
     
     NSDictionary *properties = (__bridge_transfer NSDictionary *)ret;
     if(ret) _propertyCache = [NSMutableDictionary dictionaryWithDictionary:properties];

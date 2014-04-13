@@ -13,7 +13,7 @@ function testBadValue(val) {
 }
 
 function badValTestNamed(name, val, tester) {
-    var logStr = '[' + testBadValue(val) + '] ' + ' ~ [<' + name + '>]';
+    var logStr = '[' + testBadValue(val) + '] ' + '~ [<' + name + '>]';
     if(tester) logStr = logStr + '\n\t-- (tested with ' + tester + ')';
 
     log(logStr);
