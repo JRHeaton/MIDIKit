@@ -122,7 +122,7 @@ static const UInt8 LPMsg[6][3] = {
         buf[1] = [self velocityForRed:r1 green:g1 clear:c1 copy:NO];
         buf[2] = [self velocityForRed:r2 green:g2 clear:c2 copy:NO];
         
-//        [ret addObject:[LPMessage messageWithData:[NSData dataWithBytes:buf length:3]]];
+        [ret addObject:[LPMessage messageWithData:[NSData dataWithBytes:buf length:3]]];
     }
     
     return ret;
