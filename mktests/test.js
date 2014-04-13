@@ -1,3 +1,7 @@
+// JavaScript unit tests for MIDIKit bridge
+// ----------------------------------------
+
+// Helpers
 function runTest(name, imp) {
     log('********** Running Test: \'' + name + '\' **********');
     imp();
@@ -15,6 +19,7 @@ function badValTestNamed(name, val, tester) {
     log(logStr);
 }
 
+// Tests
 runTest('Multiple Inheritance', function () {
     badValTestNamed('Double', MKVirtualSource.objectWithUniqueID, 'MKVirtualSource -> MKEndpoint -> MKObject.objectWithUniqueID');
     badValTestNamed('Single', MKVirtualSource.numberOfSources, 'MKEndpoint -> MKObject.numberOfSources');
@@ -40,3 +45,13 @@ runTest('Native Module (Bundle)', function () {
     badValTestNamed('Module instance: ' + JRNativeBundle.new(), JRNativeBundle.new, 'JRNativeBundle.new()')
     badValTestNamed('require() return value: ' + bundle, bundle)
 })
+
+var inputPort = MKClient.new().firstInputPort();
+logObject(inputPort)
+inputPort.connectSource(MKEndpoint.firstOnlineSourceNamed('Launchpad Mini 4'));
+inputPort.addInputHandler(function (port, msg) {
+                          log('fussssssssssssssssssssssssssssssssssss')
+                          logObject(msg)
+                          })
+
+logObject(inputPort.inputHandlers)

@@ -12,7 +12,6 @@
 #import "LPMessage.h"
 
 #import "MKJavaScriptContext.h"
-#import "NSString+JRExtensions.h"
 
 #define LP_ID 0xf0b43c3a
 

@@ -29,6 +29,16 @@
 - (void)dispose;
 
 
+#pragma mark - -I/O-
+JSExportAs(addInputHandler,
+- (instancetype)addInputHandlerJS:(JSValue *)handler);
+JSExportAs(removeInputHandler,
+- (instancetype)removeInputHandlerJS:(JSValue *)handler);
+- (instancetype)removeAllInputHandlers;
+
+@property (nonatomic, strong) NSMutableArray *inputHandlers;
+
+
 #pragma mark - -JavaScript ONLY input handler block-
 @property (nonatomic, strong) JSValue *inputHandler;
 
@@ -37,20 +47,27 @@
 
 #pragma mark - -Input Port Wrapper-
 @protocol MKInputPortDelegate;
-@interface MKInputPort : MKObject <MKClientDependentInstaniation, MKInputPortJS> {
-    NSMutableSet *_inputDelegates;
-}
+@interface MKInputPort : MKObject <MKClientDependentInstaniation, MKInputPortJS>
 
 #pragma mark - -Init-
 + (instancetype)inputPortWithName:(NSString *)name client:(MKClient *)client;
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
 
 
-#pragma mark - -Data Input Delegates-
+#pragma mark - -Data Input-
+
+#pragma mark Delegates
 // Adds an input delegate who is interested in receiving
 // input callbacks
 - (void)addInputDelegate:(id<MKInputPortDelegate>)delegate;
 - (void)removeInputDelegate:(id<MKInputPortDelegate>)delegate;
+- (void)removeAllInputDelegates;
+
+#pragma mark Blocks
+typedef void (^MKInputHandler)(MKInputPort *port, NSData *data);
+
+- (void)addInputHandler:(MKInputHandler)inputHandler;
+- (void)removeInputHandler:(MKInputHandler)inputHandler;
 
 @end
 

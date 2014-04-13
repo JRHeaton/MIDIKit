@@ -16,11 +16,18 @@
 
 static void _MKVirtualDestinationReadProc(const MIDIPacketList *pktlist, void *readProcRefCon, void *srcConnRefCon) {
     MKVirtualDestination *self = (__bridge MKVirtualDestination *)(readProcRefCon);
-    
-    for(id<MKVirtualDestinationDelegate> delegate in self->_delegates) {
-        if([delegate respondsToSelector:@selector(virtualDestination:receivedData:)]) {
-            [delegate virtualDestination:self receivedData:[NSData dataWithBytes:pktlist->packet[0].data length:pktlist->packet[0].length]];
+
+    MIDIPacket *packet = (MIDIPacket *)&pktlist->packet[0];
+    for (int i=0;i<pktlist->numPackets;++i) {
+        NSData *goodData = nil;
+
+        for(id<MKVirtualDestinationDelegate> delegate in self->_delegates) {
+            if([delegate respondsToSelector:@selector(virtualDestination:receivedData:)]) {
+                [delegate virtualDestination:self receivedData:(goodData = [NSData dataWithBytes:packet->data length:packet->length])];
+            }
         }
+
+        packet = MIDIPacketNext(packet);
     }
 }
 
@@ -44,13 +51,11 @@ static void _MKVirtualDestinationReadProc(const MIDIPacketList *pktlist, void *r
 }
 
 - (void)addDelegate:(id<MKVirtualDestinationDelegate>)delegate {
-    if(![_delegates containsObject:delegate])
-        [_delegates addObject:delegate];
+    [_delegates addObject:delegate];
 }
 
 - (void)removeDelegate:(id<MKVirtualDestinationDelegate>)delegate {
-    if([_delegates containsObject:delegate])
-        [_delegates removeObject:delegate];
+    [_delegates removeObject:delegate];
 }
 
 @end

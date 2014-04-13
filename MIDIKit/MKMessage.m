@@ -16,10 +16,6 @@
 
 @dynamic type, key, controller, velocity, status, data1, data2;
 
-+ (JSValue *)requireReturnValue:(MKJavaScriptContext *)context {
-    return ((JSContext *)context)[NSStringFromClass(self.class)];
-}
-
 #pragma mark - Types
 
 + (MKMessageType)noteOnType {

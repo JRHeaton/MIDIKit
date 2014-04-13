@@ -159,13 +159,11 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
 }
 
 - (void)addNotificationDelegate:(id<MKClientNotificationDelegate>)delegate {
-    if(![self.notificationDelegates containsObject:delegate])
-        [self.notificationDelegates addObject:delegate];
+    [self.notificationDelegates addObject:delegate];
 }
 
 - (void)removeNotificationDelegate:(id<MKClientNotificationDelegate>)delegate {
-    if([self.notificationDelegates containsObject:delegate])
-        [self.notificationDelegates removeObject:delegate];
+    [self.notificationDelegates removeObject:delegate];
 }
 
 - (MKVirtualSource *)createVirtualSource {
