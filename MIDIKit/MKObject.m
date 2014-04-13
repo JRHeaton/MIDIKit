@@ -59,7 +59,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ MIDI Properties=%@", super.description, self.allProperties];
+    return [NSString stringWithFormat:@"%@ valid=%@, properties=%@", super.description, self.valid ? @"YES" : @"NO", self.allProperties];
 }
 
 #pragma mark - MIDI Properties

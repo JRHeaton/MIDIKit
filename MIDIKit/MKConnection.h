@@ -28,6 +28,7 @@
 @protocol MKConnectionJS <JSExport>
 
 #pragma mark - -Init-
++ (instancetype)new;
 + (instancetype)connectionWithNewClient;
 + (instancetype)connectionWithClient:(MKClient *)client;
 

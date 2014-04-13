@@ -1,4 +1,5 @@
-var msg = require('/Users/John/Dropbox/Developer/projects/MIDIKit/mktests/msg.js')
+var LPConnection = require('/Users/John/Dropbox/Developer/projects/MIDIKit/mktests/LPConnection.js')
 
-var client = MKClient.new();
-client.firstOutputPort().sendMessage(msg.Reset(), MKEndpoint.firstOnlineDestinationNamed('Launchpad Mini 4'));
+var Launchpad = new LPConnection();
+
+Launchpad.Reset().Test()

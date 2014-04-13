@@ -28,12 +28,13 @@
     _inputPort = inputPort;
     _outputPort = outputPort;
     _destinations = [NSMutableArray arrayWithCapacity:0];
+    self.client = inputPort.client;
     
     return self;
 }
 
 + (instancetype)connectionWithNewClient {
-    return [self connectionWithClient:[MKClient new]];
+    return [[self alloc] init];
 }
 
 + (instancetype)connectionWithInputPort:(MKInputPort *)inputPort outputPort:(MKOutputPort *)outputPort {
@@ -42,8 +43,11 @@
 
 - (instancetype)initWithClient:(MKClient *)client {
     self = [self initWithInputPort:client.firstInputPort outputPort:client.firstOutputPort];
-    self.client = client;
     return self;
+}
+
+- (instancetype)init {
+    return [self initWithClient:[MKClient new]];
 }
 
 - (instancetype)addDestination:(MKEndpoint *)destination {
