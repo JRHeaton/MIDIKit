@@ -86,18 +86,18 @@
     self[@"log"] = logBlock;
     self[@"logObject"] = logObjectBlock;
 
-    for(NSString *className in @[ @"MKObject",
-                                  @"MKClient",
-                                  @"MKInputPort",
-                                  @"MKOutputPort",
-                                  @"MKDevice",
-                                  @"MKEntity",
-                                  @"MKEndpoint",
-                                  @"MKVirtualSource",
-                                  @"MKVirtualDestination",
-                                  @"MKConnection",
-                                  @"MKMessage" ]) {
-        [self loadNativeModule:NSClassFromString(className) withListName:@"InternalModule"];
+    for(Class cls in @[ MKObject.class,
+                        MKClient.class,
+                        MKInputPort.class,
+                        MKOutputPort.class,
+                        MKDevice.class,
+                        MKEntity.class,
+                        MKEndpoint.class,
+                        MKVirtualSource.class,
+                        MKVirtualDestination.class,
+                        MKConnection.class,
+                        MKMessage.class ]) {
+        [self loadNativeModule:cls withListName:@"InternalModule"];
     }
 }
 

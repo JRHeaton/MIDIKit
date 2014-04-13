@@ -8,14 +8,14 @@ module.exports = function (name) {
 
     this.connection.client.setTransmitsOnChannel(true, 5);
 
-    if(!name) name = 'Launchpad Mini 4';
+    if(!name) name = 'Launchpad';
     this.name = name;
 
     this.Find()
 }
 
 module.exports.prototype.Find = function () {
-    this.launchpad = MKEndpoint.firstOnlineDestinationNamed(this.name);
+    this.launchpad = MKEndpoint.firstDestinationContaining(this.name);
     this.connection.destinations = [];
     this.connection.addDestination(this.launchpad);
 }
