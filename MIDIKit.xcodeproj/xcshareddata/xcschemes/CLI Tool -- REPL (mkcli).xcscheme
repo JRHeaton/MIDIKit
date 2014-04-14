@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "52DDEDED18FB55400019BE98"
-               BuildableName = "mkcli"
+               BuildableName = "CLI Tool (mkcli)"
                BlueprintName = "CLI Tool (mkcli)"
                ReferencedContainer = "container:MIDIKit.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "52DDEDED18FB55400019BE98"
-            BuildableName = "mkcli"
+            BuildableName = "CLI Tool (mkcli)"
             BlueprintName = "CLI Tool (mkcli)"
             ReferencedContainer = "container:MIDIKit.xcodeproj">
          </BuildableReference>
@@ -55,7 +55,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "52DDEDED18FB55400019BE98"
-            BuildableName = "mkcli"
+            BuildableName = "CLI Tool (mkcli)"
             BlueprintName = "CLI Tool (mkcli)"
             ReferencedContainer = "container:MIDIKit.xcodeproj">
          </BuildableReference>
@@ -91,7 +91,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "52DDEDED18FB55400019BE98"
-            BuildableName = "mkcli"
+            BuildableName = "CLI Tool (mkcli)"
             BlueprintName = "CLI Tool (mkcli)"
             ReferencedContainer = "container:MIDIKit.xcodeproj">
          </BuildableReference>

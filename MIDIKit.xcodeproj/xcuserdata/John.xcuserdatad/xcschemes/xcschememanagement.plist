@@ -4,34 +4,34 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>CLI Tool -- REPL (mkcli).xcscheme</key>
+		<key>CLI Tool -- REPL (mkcli).xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
-		<key>CLI Tool -- Tests (mkcli).xcscheme</key>
+		<key>CLI Tool -- Tests (mkcli).xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
-		<key>MIDIKit (OS X).xcscheme</key>
+		<key>MIDIKit (OS X).xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-		<key>MIDIKit (iOS).xcscheme</key>
+		<key>MIDIKit (iOS).xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>Test Native Bundle.xcscheme</key>
+		<key>Test Native Bundle.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>isShown</key>
 			<true/>
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
-		<key>Test Native Dylib.xcscheme</key>
+		<key>Test Native Dylib.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>isShown</key>
 			<true/>
