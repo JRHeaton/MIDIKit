@@ -25,7 +25,6 @@
 		5240064E18FB15050030B46D /* MKThruConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5240064C18FB15050030B46D /* MKThruConnection.m */; };
 		5240064F18FB15050030B46D /* MKThruConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5240064C18FB15050030B46D /* MKThruConnection.m */; };
 		5273C6D818DE96A200A8CFD4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D718DE96A200A8CFD4 /* Cocoa.framework */; };
-		5273C6E218DE96A200A8CFD4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5273C6E018DE96A200A8CFD4 /* InfoPlist.strings */; };
 		5273C70418DE9A9800A8CFD4 /* MKObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C70218DE9A9800A8CFD4 /* MKObject.h */; };
 		5273C70518DE9A9800A8CFD4 /* MKObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C70318DE9A9800A8CFD4 /* MKObject.m */; };
 		5273C70818DE9E2500A8CFD4 /* MKClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C70618DE9E2500A8CFD4 /* MKClient.h */; };
@@ -51,6 +50,7 @@
 		528DCB7B18FAD2200090FFFB /* MKMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22F0318F803E900A5A5D3 /* MKMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		528DCB7C18FAD2260090FFFB /* MKJavaScriptContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B169D418F8AE4800EACDAE /* MKJavaScriptContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		528DCB7D18FAD2290090FFFB /* MKJavaScriptModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 522EA42318FA9A9500444217 /* MKJavaScriptModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		52A1E04F18FB86B800D7073F /* LPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A1E04E18FB86B800D7073F /* LPMessage.m */; };
 		52B169D618F8AE4800EACDAE /* MKJavaScriptContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B169D418F8AE4800EACDAE /* MKJavaScriptContext.h */; };
 		52B169D718F8AE4800EACDAE /* MKJavaScriptContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B169D518F8AE4800EACDAE /* MKJavaScriptContext.m */; };
 		52B22EEC18F7A0EF00A5A5D3 /* MKInputPort.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EEA18F7A0EF00A5A5D3 /* MKInputPort.h */; };
@@ -153,8 +153,6 @@
 		5273C6DB18DE96A200A8CFD4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		5273C6DC18DE96A200A8CFD4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		5273C6DF18DE96A200A8CFD4 /* MIDIKit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MIDIKit-Info.plist"; sourceTree = "<group>"; };
-		5273C6E118DE96A200A8CFD4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		5273C6E318DE96A200A8CFD4 /* MIDIKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MIDIKit-Prefix.pch"; sourceTree = "<group>"; };
 		5273C6EC18DE96A200A8CFD4 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		5273C70218DE9A9800A8CFD4 /* MKObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKObject.h; sourceTree = "<group>"; };
 		5273C70318DE9A9800A8CFD4 /* MKObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKObject.m; sourceTree = "<group>"; };
@@ -169,6 +167,8 @@
 		5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKEndpoint.m; sourceTree = "<group>"; };
 		528DCB3418FAB3E50090FFFB /* testNativeModule.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = testNativeModule.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		528DCB5C18FABF870090FFFB /* testNativeBundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = testNativeBundle.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		52A1E04D18FB86B800D7073F /* LPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPMessage.h; path = Examples/mkcli/LPMessage.h; sourceTree = SOURCE_ROOT; };
+		52A1E04E18FB86B800D7073F /* LPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPMessage.m; path = Examples/mkcli/LPMessage.m; sourceTree = SOURCE_ROOT; };
 		52B169D418F8AE4800EACDAE /* MKJavaScriptContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKJavaScriptContext.h; sourceTree = "<group>"; };
 		52B169D518F8AE4800EACDAE /* MKJavaScriptContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKJavaScriptContext.m; sourceTree = "<group>"; };
 		52B22EEA18F7A0EF00A5A5D3 /* MKInputPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKInputPort.h; sourceTree = "<group>"; };
@@ -410,8 +410,6 @@
 			isa = PBXGroup;
 			children = (
 				5273C6DF18DE96A200A8CFD4 /* MIDIKit-Info.plist */,
-				5273C6E018DE96A200A8CFD4 /* InfoPlist.strings */,
-				5273C6E318DE96A200A8CFD4 /* MIDIKit-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			path = MIDIKit;
@@ -451,6 +449,8 @@
 		52DDEDF018FB55400019BE98 /* CLI Tool (mkcli) */ = {
 			isa = PBXGroup;
 			children = (
+				52A1E04D18FB86B800D7073F /* LPMessage.h */,
+				52A1E04E18FB86B800D7073F /* LPMessage.m */,
 				52DDEDFF18FB56390019BE98 /* scripts */,
 				52DDEDFA18FB55640019BE98 /* main.m */,
 			);
@@ -653,7 +653,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5273C6E218DE96A200A8CFD4 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -729,6 +728,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52DDEDFB18FB55640019BE98 /* main.m in Sources */,
+				52A1E04F18FB86B800D7073F /* LPMessage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -761,17 +761,6 @@
 			targetProxy = 52DDEDFC18FB55870019BE98 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		5273C6E018DE96A200A8CFD4 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5273C6E118DE96A200A8CFD4 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		5240060218FB06CD0030B46D /* Debug */ = {

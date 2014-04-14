@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MIDIKit.h"
+#import "LPMessage.h"
 #import <readline/readline.h>
 
 void runTestScript(MKJavaScriptContext *c, NSString *name) {
@@ -30,6 +31,7 @@ int main(int argc, const char * argv[]) {
             c.currentEvaluatingScriptPath = [[NSString stringWithUTF8String:SRCROOT] stringByAppendingPathComponent:@"Examples/mkcli/scripts"];
         }
 
+        [c loadNativeModule:[LPMessage class]];
         __weak typeof(c) _c = c;
         c[@"unitTests"] = ^{ runTestScript(_c, @"unitTest.js"); };
         c[@"launchpad"] = ^{ runTestScript(_c, @"launchpad.js"); };
