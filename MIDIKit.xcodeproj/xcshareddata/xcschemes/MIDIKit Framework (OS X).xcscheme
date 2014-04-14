@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5273C6D318DE96A200A8CFD4"
                BuildableName = "MIDIKit.framework"
-               BlueprintName = "MIDIKit Framework (Mac)"
+               BlueprintName = "MIDIKit Framework (OS X)"
                ReferencedContainer = "container:MIDIKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "524005F018FB06CD0030B46D"
+               BlueprintIdentifier = "52A1E05F18FB876900D7073F"
                BuildableName = "MIDIKitTests.xctest"
                BlueprintName = "MIDIKitTests"
                ReferencedContainer = "container:MIDIKit.xcodeproj">

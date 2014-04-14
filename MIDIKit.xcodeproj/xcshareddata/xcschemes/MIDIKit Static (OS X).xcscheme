@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "52DDEDED18FB55400019BE98"
-               BuildableName = "mkcli"
-               BlueprintName = "CLI Tool (mkcli)"
+               BlueprintIdentifier = "52A1E05318FB876900D7073F"
+               BuildableName = "libMIDIKit Static Lib (OS X).a"
+               BlueprintName = "MIDIKit Static Lib (OS X)"
                ReferencedContainer = "container:MIDIKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,15 +29,6 @@
       buildConfiguration = "Debug">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "52DDEDED18FB55400019BE98"
-            BuildableName = "mkcli"
-            BlueprintName = "CLI Tool (mkcli)"
-            ReferencedContainer = "container:MIDIKit.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -48,15 +39,6 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "52DDEDED18FB55400019BE98"
-            BuildableName = "mkcli"
-            BlueprintName = "CLI Tool (mkcli)"
-            ReferencedContainer = "container:MIDIKit.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -66,15 +48,6 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "52DDEDED18FB55400019BE98"
-            BuildableName = "mkcli"
-            BlueprintName = "CLI Tool (mkcli)"
-            ReferencedContainer = "container:MIDIKit.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

@@ -6,21 +6,20 @@
 //  Copyright (c) 2014 John Heaton. All rights reserved.
 //
 
+#import "MKClient.h"
 #import "MKConnection.h"
-#import "MKMessage.h"
-
+#import "MKDevice.h"
+#import "MKEndpoint.h"
+#import "MKEntity.h"
+#import "MKInputPort.h"
 #import "MKJavaScriptContext.h"
 #import "MKJavaScriptModule.h"
-
+#import "MKMessage.h"
 #import "MKObject.h"
-#import "MKClient.h"
-#import "MKInputPort.h"
 #import "MKOutputPort.h"
-#import "MKDevice.h"
-#import "MKEntity.h"
-#import "MKEndpoint.h"
-#import "MKVirtualSource.h"
+#import "MKThruConnection.h"
 #import "MKVirtualDestination.h"
+#import "MKVirtualSource.h"
 
 #define kMIDIKitVersionMajor 0
 #define kMIDIKitVersionMinor 2

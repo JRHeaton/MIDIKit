@@ -100,7 +100,7 @@ exception:
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ MIDIRef=0x%x valid=%@, properties=%@", super.description, self.MIDIRef, self.valid ? @"YES" : @"NO", self.allProperties];
+    return [NSString stringWithFormat:@"%@ MIDIRef=0x%x valid=%@, properties=%@", super.description, (int)self.MIDIRef, self.valid ? @"YES" : @"NO", self.allProperties];
 }
 
 #pragma mark - MIDI Properties
