@@ -8,11 +8,11 @@ Throughout this document, I will provide very concise examples of key features t
 
 #Table Of Contents
 - ###[Examples](#examples)
-  - [Objective-C](#objective)
+  - [Objective-C](#objective-c)
   - [JavaScript](#javascript)
 
 
-- ###[Features](#features)
+- ###[Features](#features-1)
 - ###[Classes & Concepts](#classes)
 
 ##Examples

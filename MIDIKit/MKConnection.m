@@ -38,7 +38,7 @@
 }
 
 - (instancetype)init {
-    return [self initWithClient:[MKClient new]];
+    return [self initWithClient:[MKClient global]];
 }
 
 - (instancetype)addDestination:(MKEndpoint *)destination {
@@ -100,6 +100,10 @@
         }
     }
     return self;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ inputPort=%@, outputPort=%@, client=%@, destinations=%@", super.description, self.inputPort, self.outputPort, self.client, self.destinations];
 }
 
 - (void)performBlock:(void (^)(MKConnection *connection))block {
