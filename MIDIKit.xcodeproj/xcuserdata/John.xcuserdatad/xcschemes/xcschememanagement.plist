@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Command Line Tool (mkcli).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>MIDIKit (OS X).xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,32 +17,21 @@
 		<key>MIDIKit (iOS).xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>5</integer>
-		</dict>
-		<key>iOSMIDITests.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
-		</dict>
-		<key>lpemutest.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
-		</dict>
-		<key>mktests.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>testNativeBundle.xcscheme</key>
+		<key>Test Native Bundle.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
-		</dict>
-		<key>testNativeModule.xcscheme</key>
-		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>3</integer>
+		</dict>
+		<key>Test Native Dylib.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<true/>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -103,6 +97,16 @@
 			<true/>
 		</dict>
 		<key>52B22F0A18F858E500A5A5D3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>52DDEDDD18FB549E0019BE98</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>52DDEDED18FB55400019BE98</key>
 		<dict>
 			<key>primary</key>
 			<true/>

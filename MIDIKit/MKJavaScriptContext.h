@@ -26,10 +26,14 @@
 - (JSValue *)loadNativeModuleAtPath:(NSString *)path;
 - (JSValue *)loadNativeModule:(Class<MKJavaScriptModule>)module;
 
+- (JSValue *)require:(NSString *)path;
+
 - (void)loadClass:(Class)c;
 - (BOOL)classIsLoaded:(Class)c;
 
 - (JSValue *)objectForKeyedSubscript:(id)key;
 - (void)setObject:(id)object forKeyedSubscript:(NSObject <NSCopying> *)key;
+
+@property (nonatomic, copy) NSString *currentEvaluatingScriptPath;
 
 @end

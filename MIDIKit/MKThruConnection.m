@@ -7,7 +7,7 @@
 //
 
 #import "MKThruConnection.h"
-
-@implementation MKThruConnection
-
-@end
+//
+//@implementation MKThruConnection
+//
+//@end

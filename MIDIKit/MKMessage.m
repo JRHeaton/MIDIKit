@@ -46,6 +46,10 @@
     return kMKMessageTypePitchBend;
 }
 
++ (MKMessageType)sysexType {
+    return kMKMessageTypeSysex;
+}
+
 #pragma mark - Init
 
 - (instancetype)init {

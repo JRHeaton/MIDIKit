@@ -1,29 +1,97 @@
 MIDIKit
 =======
 
-This framework aims to be a convenience/wrapper framework around CoreMIDI, a lower-level C API for MIDI I/O on Mac OS X. This framework provides a lightweight and convenient way to wrap CoreMIDI objects, but can also be used with little to no knowledge of CoreMIDI itself.
+This framework aims to take the fuss out of dealing with a C-based, lower-level API (CoreMIDI), and gives you a rich, powerful, object-oriented layer on top, removing the hassle of needing to know the nitty gritty of MIDI (teehee), and letting you transparently interact with the MIDI objects available in an intuitive manner.
 
-##To Do
-Name| Status
-----|-------
-MIDI File Parsing | Incomplete
+###Document Structure
+Throughout this document, I will provide very concise examples of key features to whet your appetite and show you the ease and power of `MIDIKit`.
 
-##What works
-- Enumerating devices, sources, destinations, and entities.
-- Creating and disposing wrappers for all CoreMIDI object types
-- Input/Output to MIDI devices via ports (or connections)
-- Creating and using virtual endpoints
-- Receiving updates about the MIDI system state
+#Table Of Contents
+- ###[Examples](#examples)
+  - [Objective-C](#objective)
+  - [JavaScript](#javascript)
 
-#Concepts
-- `Object(MKObject.h)` - The main, base wrapper class around CoreMIDI types.
-- `Client(MKClient.h)` - The important one. You *must* create a client to use this framework.
-- `Endpoint(MKEndpoint.h)` - A unidirectional endpoint, either source or destination.
-- `Entity(MKEntity.h)` - Contains a set of endpoints
-- `Device(MKDevice.h)` - A device, which contains a set of entities.
-- `Port(MK{Input/Output}Port.h)` - A client-owned port through which you communicate with a source or destination.
-- `Message(MKMessage.h)` - Essentially a data wrapper class that implements logic for MIDI messages. Subclass this for specific devices.
-- `Connection(MKConnection.h)` - A high level convenience class for I/O to multiple sources/destinations.
+
+- ###[Features](#features)
+- ###[Classes & Concepts](#classes)
+
+##Examples
+I won't go into great depth here; these examples will be fairly brief. However, they should be enough to whet your appetite, and get you playing around with MIDIKit/reading more of the docs.
+
+###Objective-C
+
+```
+
+```
+
+###JavaScript
+
+##Features
+- ###**Advanced Objects & I/O, Simplified**
+  MIDIKit provides methods for enumerating devices, entities, sources, and destinations, with filtering restrictions, and high-level wrapper classes for every CoreMIDI object type.
+
+- ###**Virtual Endpoints**
+It's a breeze to create and utilize virtual sources and destinations with MIDIKit. It is an ideal choice if you're wanting to emulate a MIDI device in software, or create more advanced thru-connections.
+
+- ###**Dynamic, Smart & Hassle-free**
+All wrapper objects cache accessed MIDI properties by default. This can be permanently or temporarily disabled, but when it's on, objects automatically invalidate cached properties the instant the MIDI server distributes a notification about it, ensuring every one of your objects is always giving you accurate data.
+
+- ###**Full JavaScript support.**
+Yes, this entire framework has been built from the ground up with `JavaScriptCore` at its side. Not only is `MIDIKit` a delight to use in Objective-C, you can take it one step further as to script your own tools for MIDI operations, or even provide that functionality to your users, allowing them and you to create modules which are loaded into the JavaScript runtime. The possibilities are **amazing**.
+
+- ###**Built-In MIDI Parsing & Logic.**
+MIDIKit does most of the heavy lifting when it comes to creating data for sending, or parsing data you've received, based on/into something *meaningful*.
+
+```objc
+[MKMessage messageWithType:[MKMessage noteOnType]]
+```
+
+##Classes & Concepts
+
+###Wrapper
+####`Object (MKObject.h)`
+
+  - The main, base wrapper class around CoreMIDI types.
+  - Contains native, dynamic getters/setters for all MIDI properties, and methods for custom ones.
+  - *Rarely* **ever** will you find yourself instantiating an `MKObject` directly. If you do though, it must be with a unique identifier or CoreMIDI object.
+
+
+####`Client (MKClient.h)`
+  - The important one. You *must* create a client to use this framework.
+  - Clients are the parent to ports, which are your pipes for communication.
+  - MIDIKit provides the `+[MKClient global]` method which returns a static client, whose name is derivative of the running process information. Typically, however, *it is best practice* to use `+[MKClient clientWithName:]` when possible.
+
+
+####`Endpoint (MKEndpoint.h)`
+  - A unidirectional endpoint, either source or destination.
+  - As expected, sources are for receiving input data, destinations are for sending output data.
+  - You can create `'virtual'` endpoints which appear on the system exactly like a hardware-representative endpoint would. This is really cool for things like emulating MIDI devices in software.
+
+
+####`Entity (MKEntity.h)`
+  - A device-owned object that contains a set of endpoints
+  - You will *rarely* interface with MKEntity to any great extent.
+
+
+####`Device (MKDevice.h)`
+   - A device object, which contains a set of entities.
+   - This is the `'root'` object type of hardware components (device owns entities own endpoints).
+
+
+####`Port(MKInputPort.h, MKOutputPort.h)`
+  - A client-owned port through which you communicate with a source or destination.
+  - Input ports provide interfaces for delegation AND block-based input callbacks.
+
+---
+###MIDIKit I/O Classes
+####`Message(MKMessage.h)`
+  - A data wrapper class that provides you with a way to construct that data with very little knowledge of how MIDI messages work.
+  - Can be subclassed for creating, for example, command messages for a specific device. In my case, I did it for the Novation Launchpad.
+
+
+####`Connection(MKConnection.h)`
+  - A high level convenience I/O session class.
+  - Provides unified input/output to multiple sources/destinations.
 
 Before we get technical, let's dive into a quick example.
 ```objc

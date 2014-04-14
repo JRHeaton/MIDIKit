@@ -27,7 +27,7 @@ runTest('Multiple Inheritance', function () {
 })
 
 runTest('Native Module (Dylib)', function () {
-    var dylib = require('./testNativeModule.dylib');
+    var dylib = require('../../../DerivedData/MIDIKit/Build/Products/Debug/testNativeModule.dylib');
 
     badValTestNamed('Module loads successfully', dylib, 'require(\'./testNativeModule.dylib\')');
     badValTestNamed('Module class : ' + testNativeModule, dylib)
@@ -37,7 +37,7 @@ runTest('Native Module (Dylib)', function () {
 })
 
 runTest('Native Module (Bundle)', function () {
-    var bundle = require('./testNativeBundle.bundle');
+    var bundle = require('../../../DerivedData/MIDIKit/Build/Products/Debug/testNativeBundle.bundle');
 
     badValTestNamed('Module loads successfully', bundle, 'require(\'./testNativeBundle.bundle\')');
     badValTestNamed('Module class : ' + JRNativeBundle, bundle)

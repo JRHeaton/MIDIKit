@@ -54,6 +54,7 @@ JSExportAs(messages,
 + (MKMessageType)programChangeType;
 + (MKMessageType)channelAfterTouchType;
 + (MKMessageType)pitchBendType;
++ (MKMessageType)sysexType;
 
 // Shortcut for data.length
 - (NSUInteger)length;

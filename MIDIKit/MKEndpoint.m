@@ -29,13 +29,13 @@
 
 + (instancetype)firstDestinationMeetingCriteria:(BOOL (^)(MKEndpoint *candidate))block {
     return [self enumerateDestinations:^BOOL(MKEndpoint *endpoint, NSUInteger index, BOOL *stop) {
-        return block(endpoint);
+        return endpoint.online && block(endpoint);
     }];
 }
 
 + (instancetype)firstSourceMeetingCriteria:(BOOL (^)(MKEndpoint *candidate))block {
     return [self enumerateSources:^BOOL(MKEndpoint *endpoint, NSUInteger index, BOOL *stop) {
-        return block(endpoint);
+        return endpoint.online && block(endpoint);
     }];
 }
 

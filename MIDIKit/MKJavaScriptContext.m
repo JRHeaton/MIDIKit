@@ -16,6 +16,8 @@
 @implementation MKJavaScriptContext {
     BOOL _initialized;
     NSMutableSet *loadedModules;
+
+    JSValue *(^_requireBlock)(NSString *name);
 }
 
 - (instancetype)init {
@@ -40,9 +42,17 @@
     }
 }
 
+- (void)setCurrentEvaluatingScriptPath:(NSString *)currentEvaluatingScriptPath {
+    _currentEvaluatingScriptPath = currentEvaluatingScriptPath;
+    self[@"__dirname"] = currentEvaluatingScriptPath;
+}
+
+- (JSValue *)require:(NSString *)path {
+    return _requireBlock(path);
+}
+
 - (void)_setupFancyPantsContext {
-    void (^logBlock)(NSString *log) = ^(NSString *log) { [self printString:log]; };
-    void (^logObjectBlock)(JSValue *val) = ^(JSValue *val) { [self printString:[val.toObject description]]; };
+    void (^logBlock)(NSString *log) = ^(id arg) { [self printString:[arg isKindOfClass:[JSValue class]] ? [[arg toObject] description] : [arg description]]; };
 
 #if TARGET_OS_MAC
     self[@"_cwd"] = [NSFileManager defaultManager].currentDirectoryPath;
@@ -50,12 +60,16 @@
 
     self[@"objectDescription"] = ^(JSValue *val) { return [val.toObject description]; };
     __weak typeof(self) _self = self;
-    self[@"require"] = ^JSValue *(NSString *name) {
-        if(!name.isAbsolutePath) {
-            name = [_self[@"_cwd"].toString stringByAppendingPathComponent:name];
-        }
+    self[@"require"] = _requireBlock = ^JSValue *(NSString *name) {
 
         BOOL isScript = [name hasSuffix:@".js"];
+        if([name hasPrefix:@"./"] || !name.isAbsolutePath) {
+            name = [_self.currentEvaluatingScriptPath stringByAppendingPathComponent:name];
+        } else {
+            _self.currentEvaluatingScriptPath = [name substringToIndex:(name.length - [name lastPathComponent].length)];
+        }
+
+
 
         if(isScript) {
             return [_self evaluateScriptAtPath:name];
@@ -84,10 +98,8 @@
                          };
     self[@"console"] = @{
                          @"log" : logBlock,
-                         @"logObject" : logObjectBlock
                          };
     self[@"log"] = logBlock;
-    self[@"logObject"] = logObjectBlock;
 
     for(Class cls in @[ MKObject.class,
                         MKClient.class,
@@ -115,7 +127,14 @@
         case YES: {
 
             NSError *e;
-            static NSString *evalFmt = @"(function (){ var module = {exports:{}}; var exports = module.exports; var obj = (function (){ %@ })(); return module.exports; })()";
+            self[@"exports"] = self[@"module"] = @{ @"exports" : @{} };
+
+            static NSString *evalFmt =
+            @"(function () { "
+                "var obj = (function () { "
+                    "%@ "
+                "})(); "
+            "return module.exports; })()";
             NSString *eval = [NSString stringWithFormat:evalFmt, [NSString stringWithContentsOfFile:name encoding:NSUTF8StringEncoding error:&e]];
 
             if(e) {
@@ -124,8 +143,8 @@
             }
             JSValue *val = [_self evaluateScript:eval];
 
-            static NSString *clearModule = @"delete module";
-            [_self evaluateScript:clearModule];
+//            static NSString *clearModule = @"delete module";
+//            [_self evaluateScript:clearModule];
 
             if(!val) {
                 [_self printString:[NSString stringWithFormat:@"Error evaluating script: \'%@\', error = %@", name, e]];

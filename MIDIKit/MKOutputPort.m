@@ -15,10 +15,8 @@
 @synthesize client=_client;
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client {
-    MIDIPortRef p;
-
     if(!client.valid) return nil;
-    if([MKObject evalOSStatus:MIDIOutputPortCreate(client.MIDIRef, (__bridge CFStringRef)(name), &p) name:@"Creating an output port" throw:NO] != 0) {
+    if([MKObject evalOSStatus:MIDIOutputPortCreate(client.MIDIRef, (__bridge CFStringRef)(name), &_MIDIRef) name:@"Creating an output port" throw:NO] != 0) {
         return nil;
     }
 
