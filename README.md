@@ -13,7 +13,7 @@ Throughout this document, I will provide very concise examples of key features t
 
 
 - ###[Features](#features-1)
-- ###[Classes & Concepts](#classes)
+- ###[Classes and Concepts](#classes)
 
 ##Examples
 I won't go into great depth here; these examples will be fairly brief. However, they should be enough to whet your appetite, and get you playing around with MIDIKit/reading more of the docs.

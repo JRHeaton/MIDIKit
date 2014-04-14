@@ -986,7 +986,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = mkcli;
 			};
 			name = Debug;
 		};
@@ -995,7 +995,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = mkcli;
 			};
 			name = Release;
 		};

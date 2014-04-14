@@ -62,7 +62,7 @@
       </MacroExpansion>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "${BUILT_PRODUCTS_DIR}/${TARGET_NAME}"
+            argument = "${BUILT_PRODUCTS_DIR}/mkcli"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
@@ -70,11 +70,6 @@
          <EnvironmentVariable
             key = "REPL"
             value = "1"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "SOURCE_ROOT"
-            value = "${SOURCE_ROOT}"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
