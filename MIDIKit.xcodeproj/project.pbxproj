@@ -440,17 +440,9 @@
 			children = (
 				52DDEDD318FB525C0019BE98 /* testNativeModule.h */,
 				52DDEDD418FB525C0019BE98 /* testNativeModule.m */,
-				528DCB3718FAB3E50090FFFB /* Supporting Files */,
 			);
 			name = "Example Native Dylib";
 			path = testNativeModule;
-			sourceTree = "<group>";
-		};
-		528DCB3718FAB3E50090FFFB /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		528DCB5E18FABF870090FFFB /* Example Native Bundle */ = {
@@ -949,7 +941,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Examples/testNativeModule/testNativeModule-Prefix.pch";
+				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -966,7 +958,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Examples/testNativeModule/testNativeModule-Prefix.pch";
+				GCC_PREFIX_HEADER = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
