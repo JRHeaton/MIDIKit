@@ -36,11 +36,15 @@ int main(int argc, const char * argv[]) {
         c[@"unitTests"] = ^{ runTestScript(_c, @"unitTest.js"); };
         c[@"launchpad"] = ^{ runTestScript(_c, @"launchpad.js"); };
 
+        c[@"local"] = ^{ _c[@"__dirname"] = [_c evaluateScript:@"process.cwd()"]; };
         if(![NSProcessInfo processInfo].environment[@"REPL"]) {
             printf("to run in REPL mode, set env var REPL=1\n");
             // standard exec
             return 0;
         }
+
+        __block BOOL showEval = YES;
+        c[@"showEval"] = ^(BOOL show) { showEval = show; };
 
         c.exceptionHandler = ^(JSContext *context, JSValue *exception) {
             printf("> %s\n", exception.description.UTF8String);
@@ -49,7 +53,11 @@ int main(int argc, const char * argv[]) {
             const char *buf = readline("] ");
 
             if(!buf || !strlen(buf)) continue;
-            printf("> %s\n", [[c evaluateScript:[NSString stringWithUTF8String:buf]].toObject description].UTF8String);
+            add_history(buf);
+
+            JSValue *val = [c evaluateScript:[NSString stringWithUTF8String:buf]];
+            if(showEval)
+                printf("> %s\n", [val.toObject description].UTF8String);
         }
 
 //        runTestScript(c, @"unitTest.js");

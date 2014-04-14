@@ -28,10 +28,6 @@ typedef NS_ENUM(UInt8, LPColorBrightness) {
 + (instancetype)enableAutoSwitching;
 + (instancetype)disableAutoSwitching;
 
-@end
-
-@interface LPMessage : MKMessage <LPMessageJS>
-
 + (instancetype)bufferMessageWithDisplayBuffer:(NSUInteger)displayBuffer
                                 updatingBuffer:(NSUInteger)updatingBuffer
                       copyNewDisplayToUpdating:(BOOL)copyToUpdating;
@@ -47,6 +43,10 @@ typedef NS_ENUM(UInt8, LPColorBrightness) {
 + (instancetype)greenFullAtX:(NSUInteger)x Y:(NSUInteger)y;
 + (instancetype)greenAtX:(NSUInteger)x Y:(NSUInteger)y brightness:(LPColorBrightness)brightness clear:(BOOL)clear;
 + (instancetype)redAtX:(NSUInteger)x Y:(NSUInteger)y brightness:(LPColorBrightness)brightness clear:(BOOL)clear;
+
+@end
+
+@interface LPMessage : MKMessage <LPMessageJS>
 
 + (NSArray *)rapidUpdateMessages:(void (^)(UInt8 index, LPColorBrightness *red, LPColorBrightness *green, BOOL *clear))block;
 

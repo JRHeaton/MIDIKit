@@ -43,8 +43,11 @@
 }
 
 - (void)setCurrentEvaluatingScriptPath:(NSString *)currentEvaluatingScriptPath {
-    _currentEvaluatingScriptPath = currentEvaluatingScriptPath;
     self[@"__dirname"] = currentEvaluatingScriptPath;
+}
+
+- (NSString *)currentEvaluatingScriptPath {
+    return [self[@"__dirname"] toString];
 }
 
 - (JSValue *)require:(NSString *)path {
