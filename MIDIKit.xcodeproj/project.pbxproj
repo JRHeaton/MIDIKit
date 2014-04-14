@@ -984,7 +984,7 @@
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
-					"$(inherited)",
+					"SRCROOT=\"\\\"$(SRCROOT)\\\"\"",
 				);
 				PRODUCT_NAME = mkcli;
 			};

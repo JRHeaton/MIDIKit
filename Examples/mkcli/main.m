@@ -21,10 +21,14 @@ int main(int argc, const char * argv[]) {
         NSString *execPath = [NSBundle mainBundle].executablePath;
         execPath = [execPath substringToIndex:execPath.length - execPath.lastPathComponent.length];
 
-        if(argc > 2)
+        if(argc > 2) {
+            NSLog(@"using argv[1]...");
+
             c.currentEvaluatingScriptPath = [NSString stringWithUTF8String:argv[1]];
-        else
-            c.currentEvaluatingScriptPath = [execPath stringByAppendingPathComponent:@"../../../../../Examples/mkcli/scripts"];
+        } else {
+            NSLog(@"using SRCROOT...");
+            c.currentEvaluatingScriptPath = [[NSString stringWithUTF8String:SRCROOT] stringByAppendingPathComponent:@"Examples/mkcli/scripts"];
+        }
 
         __weak typeof(c) _c = c;
         c[@"unitTests"] = ^{ runTestScript(_c, @"unitTest.js"); };

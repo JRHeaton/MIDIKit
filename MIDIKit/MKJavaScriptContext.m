@@ -65,9 +65,10 @@
         BOOL isScript = [name hasSuffix:@".js"];
         if([name hasPrefix:@"./"] || !name.isAbsolutePath) {
             name = [_self.currentEvaluatingScriptPath stringByAppendingPathComponent:name];
-        } else {
-            _self.currentEvaluatingScriptPath = [name substringToIndex:(name.length - [name lastPathComponent].length)];
         }
+//        else {
+//            _self.currentEvaluatingScriptPath = [name substringToIndex:(name.length - [name lastPathComponent].length)];
+//        }
 
 
 
@@ -175,11 +176,12 @@ static JSValue *_MKJavaScriptContextRequireHook(Class self, SEL _cmd, MKJavaScri
 #if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
     // IPHONE CANNOT LOAD CODE
     [NSException raise:@"MKInvalidFeatureException" format:@"iOS cannot load code dynamically"];
-
+    return nil;
 #else
+
     BOOL isDir;
     if(![[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir]) {
-        return NO;
+        return nil;
     }
 
     if(isDir) {
