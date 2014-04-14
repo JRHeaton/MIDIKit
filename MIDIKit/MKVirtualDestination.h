@@ -11,7 +11,7 @@
 
 #pragma mark - -Mutual ObjC/JavaScript-
 
-@protocol MKVirtualDestinationS <JSExport, MKObjectJS, MKEndpointJS>
+@protocol MKVirtualDestinationS <JSExport, MKEndpointJS>
 
 @end
 

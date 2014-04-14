@@ -6,9 +6,7 @@
 //  Copyright (c) 2014 John Heaton. All rights reserved.
 //
 
-#import "MKOutputPort.h"
-#import "MKObject.h"
-#import "MKMessage.h"
+#import "MIDIKit.h"
 
 @implementation MKOutputPort
 

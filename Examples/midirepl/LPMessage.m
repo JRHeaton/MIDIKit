@@ -19,6 +19,14 @@ static const UInt8 LPMsg[6][3] = {
 
 @implementation LPMessage
 
+- (NSUInteger)row {
+    return (self.key / 8);
+}
+
+- (NSUInteger)column {
+    return (self.key % 8);
+}
+
 + (instancetype)_staticMessageAtIndex:(NSUInteger)index {
     return [[self alloc] initWithData:[NSData dataWithBytes:LPMsg[index] length:3]];
 }
@@ -126,6 +134,10 @@ static const UInt8 LPMsg[6][3] = {
     }
     
     return ret;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@, row=%lu, column=%lu", super.description, self.row, self.column];
 }
 
 // Helper

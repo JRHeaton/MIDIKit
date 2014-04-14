@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "524005E318FB06CD0030B46D"
-               BuildableName = "libMIDIKit.a"
+               BuildableName = "libMIDIKitiOS.a"
                BlueprintName = "MIDIKit Static Lib (iOS)"
                ReferencedContainer = "container:MIDIKit.xcodeproj">
             </BuildableReference>

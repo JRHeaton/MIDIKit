@@ -6,12 +6,7 @@
 //  Copyright (c) 2014 John Heaton. All rights reserved.
 //
 
-#import "MKClient.h"
-#import "MKInputPort.h"
-#import "MKOutputPort.h"
-#import "MKVirtualSource.h"
-#import "MKVirtualDestination.h"
-#import "MKDevice.h"
+#import "MIDIKit.h"
 
 NSString *MKObjectPropertyChangedNotification = @"MKObjectPropertyChangedNotification";
 NSString *MKUserInfoPropertyNameKey = @"MKUserInfoPropertyNameKey";
@@ -37,8 +32,8 @@ static Class _MKClassForType(MIDIObjectType type, NSString **objectTypeName) {
     NSString *n;
     switch(type & ~kMIDIObjectType_ExternalMask) {
         case kMIDIObjectType_Device: c = [MKDevice class]; n = @"device"; break;
-        case kMIDIObjectType_Destination: c = [MKEndpoint class]; n = @"destination"; break;
-        case kMIDIObjectType_Source: c = [MKEndpoint class]; n = @"source"; break;
+        case kMIDIObjectType_Destination: c = [MKDestination class]; n = @"destination"; break;
+        case kMIDIObjectType_Source: c = [MKSource class]; n = @"source"; break;
         case kMIDIObjectType_Entity: c = [MKEntity class]; n = @"entity"; break;
         default: c = [MKObject class]; n = @"object"; break;
     }
@@ -122,8 +117,8 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
 + (void)startSendingNotifications {
     _MKClientShouldPostNotifications = YES;
 
-    // ensure this is allocated
-    (void)[[self alloc] init];
+    // ensure this is allocated, so a MIDINotifyProc is registered w/ the server
+    (void)[self global];
 }
 
 + (void)stopSendingNotifications {
@@ -155,12 +150,11 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
 }
 
 + (instancetype)global {
-    return [[self alloc] init];
-}
-
-- (instancetype)init {
     static MKClient *global;
-    if(!global) global = [self initWithName:[NSString stringWithFormat:@"%@-%d-Client", [NSProcessInfo processInfo].processName, [NSProcessInfo processInfo].processIdentifier]];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        global = [self clientWithName:[NSString stringWithFormat:@"%@-%d-Client", [NSProcessInfo processInfo].processName, [NSProcessInfo processInfo].processIdentifier]];
+    });
 
     return global;
 }

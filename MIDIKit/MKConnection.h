@@ -55,7 +55,7 @@ JSExportAs(send, - (instancetype)sendNumberArray:(NSArray *)array);
 
 
 #pragma mark - -Connection Helper Class-
-@interface MKConnection : NSObject <MKConnectionJS, MKJavaScriptModule>
+@interface MKConnection : NSObject <MKConnectionJS>
 
 #pragma mark - -Init-
 // NOTE: instantiation with a client will automatically

@@ -105,19 +105,7 @@
                          };
     self[@"log"] = logBlock;
 
-    for(Class cls in @[ MKObject.class,
-                        MKClient.class,
-                        MKInputPort.class,
-                        MKOutputPort.class,
-                        MKDevice.class,
-                        MKEntity.class,
-                        MKEndpoint.class,
-                        MKVirtualSource.class,
-                        MKVirtualDestination.class,
-                        MKConnection.class,
-                        MKMessage.class ]) {
-        [self loadNativeModule:cls withListName:@"InternalModule"];
-    }
+    MKInstallIntoContext(self);
 }
 
 - (JSValue *)evaluateScriptAtPath:(NSString *)name {
@@ -153,7 +141,7 @@
             if(!val) {
                 [_self printString:[NSString stringWithFormat:@"Error evaluating script: \'%@\', error = %@", name, e]];
             } else {
-                [_self evaluateScript:[NSString stringWithFormat:@"process.moduleLoadList.push(\'Script %@\');", name.lastPathComponent]];
+                [_self evaluateScript:[NSString stringWithFormat:@"process.moduleLoadList.push(\'ScriptModule %@\');", name.lastPathComponent]];
             }
 
             return val;

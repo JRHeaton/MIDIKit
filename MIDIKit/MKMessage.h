@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <CoreMIDI/CoreMIDI.h>
 #import <JavaScriptCore/JavaScriptCore.h>
-#import "MKJavaScriptModule.h"
 
 // MKMessage is a data wrapper class which implements some basic MIDI
 // message protocol logic.
@@ -31,15 +30,27 @@ typedef NS_ENUM(UInt8, MKMessageType) {
     kMKMessageTypeSysex                             = 0xF0
 };
 
+@class MKMessage;
 @protocol MKMessageJS <JSExport>
 
 + (instancetype)new;
 + (instancetype)messageWithType:(MKMessageType)type;
 
+// Convnenience for converting from one class to another
+// Usually, this is done because a subclass of MKMessage is
+// implementing logic.
++ (instancetype)subclass:(MKMessage *)message;
++ (instancetype)copy:(MKMessage *)message;
++ (instancetype)messageWithMessage:(MKMessage *)message;
+
 // Cleaner syntax for variable-length messages: MKMessage.message(0xf0, 0xa, 0xb, 0xc, 0xd, 0xf7)
 JSExportAs(message,
 + (instancetype)messageJS:(JSValue *)val
 );
+
+@optional
++ (instancetype)messageJS:(JSValue *)val __JS_EXPORT_AS__msg:(id)argument;
++ (instancetype)messageJS:(JSValue *)val __JS_EXPORT_AS__m:(id)argument;
 
 // Same, but for many messages in one stream of arguments
 JSExportAs(messages,
@@ -78,7 +89,7 @@ JSExportAs(messages,
 
 @end
 
-@interface MKMessage : NSObject <MKMessageJS, MKJavaScriptModule>
+@interface MKMessage : NSObject <MKMessageJS>
 
 + (instancetype)controlChangeMessageWithController:(UInt8)controller value:(UInt8)value;
 + (instancetype)noteOnMessageWithKey:(UInt8)key velocity:(UInt8)velocity;

@@ -4,16 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>CLI Tool -- REPL (mkcli).xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
-		</dict>
-		<key>CLI Tool -- Tests (mkcli).xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>5</integer>
-		</dict>
 		<key>MIDIKit Framework (OS X).xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -29,19 +19,15 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>Test Native Bundle.xcscheme_^#shared#^_</key>
+		<key>midirepl -- terminal.xcscheme_^#shared#^_</key>
 		<dict>
-			<key>isShown</key>
-			<true/>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>4</integer>
 		</dict>
-		<key>Test Native Dylib.xcscheme_^#shared#^_</key>
+		<key>midirepl.xcscheme_^#shared#^_</key>
 		<dict>
-			<key>isShown</key>
-			<true/>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>5</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>

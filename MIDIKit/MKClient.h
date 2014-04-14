@@ -7,7 +7,12 @@
 //
 
 #import "MKObject.h"
-#import "MKEndpoint.h"
+
+@class MKVirtualDestination, MKVirtualSource;
+@class MKInputPort, MKOutputPort;
+@class MKDevice, MKEntity, MKDestination, MKSource;
+@protocol MKClientNotificationDelegate;
+
 
 #pragma mark - -Mutual ObjC/JavaScript-
 
@@ -16,11 +21,6 @@
  It 'owns' or manages any created ports or endpoints,
  and this class has some convenience methods for other things also.
  */
-
-@class MKVirtualDestination, MKVirtualSource;
-@class MKInputPort, MKOutputPort;
-@class MKDevice, MKEntity;
-@protocol MKClientNotificationDelegate;
 
 @protocol MKClientJS <JSExport, MKObjectJS>
 
@@ -78,7 +78,7 @@
 
 
 #pragma mark - -Client Wrapper-
-@interface MKClient : MKObject <MKClientJS, MKObjectJS>
+@interface MKClient : MKObject <MKClientJS>
 
 
 #pragma mark - -Global Notificadtion Delegates-
@@ -109,12 +109,13 @@
 - (void)midiClient:(MKClient *)client entityRemoved:(MKEntity *)entity;
 
 #pragma mark Sources
-- (void)midiClient:(MKClient *)client sourceAdded:(MKEndpoint *)source;
-- (void)midiClient:(MKClient *)client sourceRemoved:(MKEndpoint *)source;
+- (void)midiClient:(MKClient *)client sourceAdded:(MKSource *)source;
+- (void)midiClient:(MKClient *)client sourceRemoved:(MKSource *)source;
 
 #pragma mark Destinations
-- (void)midiClient:(MKClient *)client destinationAdded:(MKEndpoint *)destination;
-- (void)midiClient:(MKClient *)client destinationRemoved:(MKEndpoint *)destination;
+- (void)midiClient:(MKClient *)client destinationAdded:(MKDestination *)destination;
+- (void)midiClient:(MKClient *)client destinationRemoved:(MKDestination *)destination;
+
 
 #pragma mark - -Updates & Errors-
 - (void)midiClient:(MKClient *)client object:(MKObject *)object changedValueOfPropertyForKey:(CFStringRef)key;
@@ -140,7 +141,7 @@ extern NSString *MKUserInfoObjectInstanceKey;
 #pragma mark - -Client Reference Protocol-
 // ---------------------------------------------------
 // Protocols used for instaniation/reference to client
-@protocol MKClientReference <NSObject, JSExport>
+@protocol MKClientReference <JSExport>
 
 @property (nonatomic, weak) MKClient *client;
 

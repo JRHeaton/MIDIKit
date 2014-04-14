@@ -6,10 +6,9 @@
 //  Copyright (c) 2014 John Heaton. All rights reserved.
 //
 
-#import "MKObject.h"
+#import "MIDIKit.h"
 #import <dlfcn.h>
 #import <objc/runtime.h>
-#import "MKClient.h"
 
 @interface MKObject ()
 @property (nonatomic, strong) NSMutableDictionary *propertyCache;
@@ -65,20 +64,20 @@ exception:
     return self;
 }
 
+- (instancetype)initWithUniqueID:(MIDIUniqueID)uniqueID {
+    if(!(self = [super init])) return nil;
+
+    MIDIObjectType type;
+    MIDIObjectFindByUniqueID(uniqueID, &_MIDIRef, &type);
+    [self commonInit];
+
+    return self;
+}
+
 - (instancetype)init {
     [NSException raise:NSInvalidArgumentException format:@"You must initialize MKObject with a unique ID or CoreMIDI object"];
 
     return nil;
-}
-
-- (instancetype)initWithUniqueID:(MIDIUniqueID)uniqueID {
-    if(!(self = [super init])) return nil;
-    
-    MIDIObjectType type;
-    MIDIObjectFindByUniqueID(uniqueID, &_MIDIRef, &type);
-    [self commonInit];
-    
-    return self;
 }
 
 - (void)commonInit {
@@ -96,92 +95,95 @@ exception:
 - (void)propertyWasUpdated:(NSNotification *)notif {
     NSString *propertyName = notif.userInfo[MKUserInfoPropertyNameKey];
 
-    [self removeCachedPropertyForKey:propertyName];
+    [self removeCachedProperty:propertyName];
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ MIDIRef=0x%x valid=%@, properties=%@", super.description, (int)self.MIDIRef, self.valid ? @"YES" : @"NO", self.allProperties];
+    NSMutableString *desc = [NSMutableString stringWithFormat:@"%@ valid=%@, MIDIRef=0x%x", [super description], self.valid ? @"YES" : @"NO", self.MIDIRef];
+    if([[self class] hasUniqueID]) {
+        [desc appendFormat:@", uniqueID=0x%x", self.uniqueID];
+    }
+    if([MIDIKit descriptionsIncludeProperties]) {
+        [desc appendFormat:@", properties=%@", self.allProperties];
+    }
+
+    return desc;
 }
 
 #pragma mark - MIDI Properties
 
-- (NSString *)stringPropertyForKey:(NSString *)key {
-    CFStringRef ret;
-    NSString *dd;
-    if(self.useCaching && (dd = _propertyCache[key]) != nil)
-        return dd;
-
-    [MKObject evalOSStatus:MIDIObjectGetStringProperty(self.MIDIRef, (__bridge CFStringRef)(key), &ret) name:[NSString stringWithFormat:@"Getting string property: \'%@\'", key] throw:NO];
-    if(ret) _propertyCache[key] = dd = (__bridge_transfer NSString *)(ret);
-    return dd;
+#define CACHED_PROP_GETTER(upper, lower) \
+- (NS##upper *)lower##ForProperty:(NS##upper *)key { \
+    CF##upper##Ref cfVal; \
+    NS##upper *nsVal; \
+    if(self.useCaching && (nsVal = _propertyCache[key]) != nil) \
+        return nsVal; \
+\
+    [MKObject evalOSStatus: \
+        MIDIObjectGet##upper##Property(self.MIDIRef, (__bridge CFStringRef)(key), &cfVal) \
+        name:[NSString stringWithFormat:@"Getting " #lower " property: \'%@\'", key] \
+        throw:NO]; \
+\
+    if(cfVal) \
+        _propertyCache[key] = nsVal = (__bridge NS##upper *)(cfVal); \
+\
+    return nsVal; \
 }
 
-- (NSInteger)integerPropertyForKey:(NSString *)key {
+CACHED_PROP_GETTER(Dictionary, dictionary)
+CACHED_PROP_GETTER(String, string)
+CACHED_PROP_GETTER(Data, data)
+
+#define CACHED_PROP_SETTER_BASE(upper, lower, ret) \
+- (ret)set##upper:(NS##upper *)value forProperty:(NSString *)key { \
+    [MKObject evalOSStatus: \
+        MIDIObjectSet##upper##Property(self.MIDIRef, (__bridge CFStringRef)(key), (__bridge CF##upper##Ref)(value)) \
+        name:[NSString stringWithFormat:@"Setting " #lower " property: \'%@\'", key] \
+        throw:NO]; \
+\
+    _propertyCache[(key)] = value;
+
+#define END_RET return self; }
+#define END return; }
+
+CACHED_PROP_SETTER_BASE(String, string, instancetype) END_RET
+CACHED_PROP_SETTER_BASE(Dictionary, dictionary, instancetype) END_RET
+CACHED_PROP_SETTER_BASE(Data, data, void) END
+
+#undef CACHED_PROP_SETTER_BASE
+#undef CACHED_PROP_GETTER
+#undef END_RET
+#undef END
+
+- (NSInteger)integerForProperty:(NSString *)key {
     SInt32 ret;
     NSNumber *dd;
     if(self.useCaching && (dd = _propertyCache[key]) != nil)
         return dd.integerValue;
-    
+
     [MKObject evalOSStatus:MIDIObjectGetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(key), &ret) name:[NSString stringWithFormat:@"Getting integer property: \'%@\'", key] throw:NO];
     _propertyCache[key] = @(ret);
     return ret;
 }
 
-- (NSData *)dataPropertyForKey:(NSString *)key {
-    CFDataRef ret;
-    NSData *dd;
-    if(self.useCaching && (dd = _propertyCache[key]) != nil)
-        return dd;
-    
-    [MKObject evalOSStatus:MIDIObjectGetDataProperty(self.MIDIRef, (__bridge CFStringRef)(key), &ret) name:[NSString stringWithFormat:@"Getting data property: \'%@\'", key] throw:NO];
-    if(ret) _propertyCache[key] = (__bridge NSData *)(ret);
-    return (__bridge_transfer NSData *)ret;
-}
-
-- (NSDictionary *)dictionaryPropertyForKey:(NSString *)key {
-    CFDictionaryRef dict;
-    NSDictionary *dd;
-    if(self.useCaching && (dd = _propertyCache[key]) != nil)
-        return dd;
-    
-    [MKObject evalOSStatus:MIDIObjectGetDictionaryProperty(self.MIDIRef, (__bridge CFStringRef)(key), &dict) name:[NSString stringWithFormat:@"Getting dictionary property: \'%@\'", key] throw:NO];
-    if(dict) _propertyCache[key] = (__bridge NSDictionary *)(dict);
-    return (__bridge_transfer NSDictionary *)dict;
-}
-
-- (instancetype)setStringProperty:(NSString *)value forKey:(NSString *)key {
-    [MKObject evalOSStatus:MIDIObjectSetStringProperty(self.MIDIRef, (__bridge CFStringRef)(key), (__bridge CFStringRef)(value)) name:[NSString stringWithFormat:@"Setting string property: \'%@\'", key] throw:NO];
-    
-    _propertyCache[(key)] = value;
-    return self;
-}
-
-- (instancetype)setIntegerProperty:(NSInteger)value forKey:(NSString *)key {
+- (instancetype)setInteger:(NSInteger)value forProperty:(NSString *)key {
     [MKObject evalOSStatus:MIDIObjectSetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(key), (SInt32)value) name:[NSString stringWithFormat:@"Setting integer property: \'%@\'", key] throw:NO];
     _propertyCache[(key)] = @(value);
     return self;
 }
 
-- (void)setDataProperty:(NSData *)value forKey:(NSString *)key {
-    [MKObject evalOSStatus:MIDIObjectSetDataProperty(self.MIDIRef, (__bridge CFStringRef)(key), (__bridge CFDataRef)(value)) name:[NSString stringWithFormat:@"Setting data property: \'%@\'", key] throw:NO];
-    _propertyCache[(key)] = value;
-}
-
-- (instancetype)setDictionaryProperty:(NSDictionary *)value forKey:(NSString *)key {
-    [MKObject evalOSStatus:MIDIObjectSetDictionaryProperty(self.MIDIRef, (__bridge CFStringRef)(key), (__bridge CFDictionaryRef)(value)) name:[NSString stringWithFormat:@"Setting dictionary property: \'%@\'", key] throw:NO];
-    _propertyCache[(key)] = value;
-    return self;
-}
-
-- (void)removeCachedPropertyForKey:(NSString *)key {
+- (void)removeCachedProperty:(NSString *)key {
     [self.propertyCache removeObjectForKey:key];
 }
 
-- (void)removePropertyForKey:(NSString *)key {
-    [self removeCachedPropertyForKey:key];
+- (void)removeProperty:(NSString *)key {
+    [self removeCachedProperty:key];
 
     [MKObject evalOSStatus:MIDIObjectRemoveProperty(self.MIDIRef, (__bridge CFStringRef)(key)) name:[NSString stringWithFormat:@"Removing property: \'%@\'", key] throw:NO];
 }
+
+
+#pragma mark - Property Logic
 
 - (BOOL)transmitsOnChannel:(NSUInteger)channel {
     channel = [self channelInRange:channel];
@@ -266,21 +268,46 @@ exception:
 
 #pragma mark - Dynamic Getters/Setters
 
+- (void)setUniqueID:(MIDIUniqueID)uniqueID {
+    if(self.shouldHaveUniqueID) {
+        [self setInteger:uniqueID forProperty:(__bridge NSString *)kMIDIPropertyUniqueID];
+    }
+}
+
+- (MIDIUniqueID)uniqueID {
+    return (MIDIUniqueID)[self integerForProperty:(__bridge NSString *)kMIDIPropertyUniqueID];
+}
+
 - (void)setMIDIRef:(MIDIObjectRef)MIDIRef {
     _MIDIRef = MIDIRef;
     [self purgeCache];
 }
 
 - (BOOL)isOnline {
-    return ![self integerPropertyForKey:(__bridge NSString *)kMIDIPropertyOffline];
+    return ![self integerForProperty:(__bridge NSString *)kMIDIPropertyOffline];
 }
 
 - (void)setOnline:(BOOL)online {
-    [self setIntegerProperty:!online forKey:(__bridge NSString *)kMIDIPropertyOffline];
+    [self setInteger:!online forProperty:(__bridge NSString *)kMIDIPropertyOffline];
+}
+
+- (BOOL)shouldHaveUniqueID {
+    return [[self class] hasUniqueID];
+}
+
++ (BOOL)hasUniqueID {
+    return [self isSubclassOfClass:[MKEndpoint class]]
+        || [self isSubclassOfClass:[MKEntity class]]
+        || [self isSubclassOfClass:[MKDevice class]];
 }
 
 - (BOOL)isValid {
-    return self.MIDIRef != 0;
+    BOOL valid = self.MIDIRef != 0;
+    if([[self class] hasUniqueID]) {
+        valid = valid && self.uniqueID != kMIDIInvalidUniqueID; // only these types have one
+    }
+
+    return valid;
 }
 
 - (NSDictionary *)allProperties {
@@ -297,25 +324,13 @@ exception:
 
 #define GETTER(type, name, property, propertyType) \
 - (type)name { \
-return (type)[self propertyType##PropertyForKey:(__bridge NSString *)property]; \
+    return (type)[self propertyType##ForProperty:(__bridge NSString *)property]; \
 }
 
 #define SETTER(type, name, property, propertyType) \
 - (void)set##name:(type)val { \
-[self set##propertyType##Property:val forKey:(__bridge NSString *)property]; \
+    [self set##propertyType:val forProperty:(__bridge NSString *)property]; \
 }
-
-/*
- @property (nonatomic, assign, getter = isDrumMachine) BOOL drumMachine;
- @property (nonatomic, assign, getter = isEffectUnit) BOOL effectUnit;
- @property (nonatomic, assign, getter = isEmbeddedEntity) BOOL embeddedEntity;
- @property (nonatomic, assign, getter = isMixer) BOOL mixer;
- @property (nonatomic, assign, getter = isSampler) BOOL sampler;
-
- #pragma mark State
- @property (nonatomic, assign, getter = isOnline) BOOL online;
- @property (nonatomic, assign) BOOL isPrivate;
- */
 
 SETTER(BOOL, DrumMachine, kMIDIPropertyIsDrumMachine, Integer)
 SETTER(BOOL, EffectUnit, kMIDIPropertyIsEffectUnit, Integer)
@@ -352,7 +367,6 @@ SETTER(BOOL, TransmitsMTC, kMIDIPropertyTransmitsMTC, Integer)
 SETTER(BOOL, TransmitsClock, kMIDIPropertyTransmitsClock, Integer)
 SETTER(BOOL, TransmitsNotes, kMIDIPropertyTransmitsNotes, Integer)
 SETTER(BOOL, ReceivesProgramChanges, kMIDIPropertyReceivesProgramChanges, Integer)
-SETTER(MIDIUniqueID, UniqueID, kMIDIPropertyUniqueID, Integer)
 
 GETTER(NSString *, manufacturer, kMIDIPropertyManufacturer, string)
 GETTER(NSString *, name, kMIDIPropertyName, string)
@@ -375,7 +389,6 @@ GETTER(BOOL, transmitsMTC, kMIDIPropertyTransmitsMTC, integer)
 GETTER(BOOL, transmitsClock, kMIDIPropertyTransmitsClock, integer)
 GETTER(BOOL, transmitsNotes, kMIDIPropertyTransmitsNotes, integer)
 GETTER(BOOL, receivesProgramChanges, kMIDIPropertyReceivesProgramChanges, integer)
-GETTER(MIDIUniqueID, uniqueID, kMIDIPropertyUniqueID, integer)
 
 #undef GETTER
 #undef SETTER

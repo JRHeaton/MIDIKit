@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <CoreMIDI/CoreMIDI.h>
 #import <JavaScriptCore/JavaScriptCore.h>
-#import "MKJavaScriptModule.h"
 
 @class MKJavaScriptContext;
 #pragma mark - -Mutual ObjC/JavaScript-
@@ -17,7 +16,8 @@
 @protocol MKObjectJS <JSExport, NSObject>
 
 #pragma mark - -Init-
-+ (instancetype)objectWithUniqueID:(MIDIUniqueID)uniqueID;
+JSExportAs(newWithUniqueID, + (instancetype)objectWithUniqueID:(MIDIUniqueID)uniqueID);
+JSExportAs(newWithMIDIRef, + (instancetype)objectWithMIDIRef:(MIDIObjectRef)MIDIRef);
 
 #pragma mark - -Properties-
 
@@ -27,9 +27,12 @@
 @property (nonatomic, copy) NSString *model;
 @property (nonatomic, copy) NSString *displayName;
 @property (nonatomic, copy) NSString *driverOwner;
-@property (nonatomic, assign) MIDIUniqueID uniqueID;
 @property (nonatomic, assign) NSInteger deviceID;
 @property (nonatomic, assign) NSInteger driverVersion;
+
+@property (nonatomic, assign) MIDIUniqueID uniqueID;
+@property (nonatomic, readonly) BOOL shouldHaveUniqueID; // returns +hasUniqueID
++ (BOOL)hasUniqueID; // only entities, devices, endpoints
 
 #pragma mark Type
 @property (nonatomic, assign, getter = isDrumMachine) BOOL drumMachine;
@@ -61,14 +64,14 @@
 @property (nonatomic, assign) BOOL receivesProgramChanges;
 
 #pragma mark Setters
-- (instancetype)setStringProperty:(NSString *)value forKey:(NSString *)key;
-- (instancetype)setIntegerProperty:(NSInteger)value forKey:(NSString *)key;
-- (instancetype)setDictionaryProperty:(NSDictionary *)value forKey:(NSString *)key;
+- (instancetype)setString:(NSString *)value forProperty:(NSString *)propName;
+- (instancetype)setInteger:(NSInteger)value forProperty:(NSString *)propName;
+- (instancetype)setDictionary:(NSDictionary *)value forProperty:(NSString *)propName;
 
 #pragma mark Getters
-- (NSString *)stringPropertyForKey:(NSString *)key;
-- (NSInteger)integerPropertyForKey:(NSString *)key;
-- (NSDictionary *)dictionaryPropertyForKey:(NSString *)key;
+- (NSString *)stringForProperty:(NSString *)propName;
+- (NSInteger)integerForProperty:(NSString *)propName;
+- (NSDictionary *)dictionaryForProperty:(NSString *)propName;
 
 #pragma mark Transmission Capabilities
 - (BOOL)transmitsOnChannel:(NSUInteger)channel;
@@ -104,7 +107,7 @@
  */
 
 #pragma mark - -Base Object Wrapper-
-@interface MKObject : NSObject <MKObjectJS, MKJavaScriptModule> {
+@interface MKObject : NSObject <MKObjectJS> {
 @protected
     MIDIObjectRef _MIDIRef;
 }
@@ -112,7 +115,6 @@
 + (OSStatus)evalOSStatus:(OSStatus)code name:(NSString *)name throw:(BOOL)throw;
 
 #pragma mark - -Init-
-+ (instancetype)objectWithMIDIRef:(MIDIObjectRef)MIDIRef;
 - (instancetype)initWithMIDIRef:(MIDIObjectRef)MIDIRef;
 - (instancetype)initWithUniqueID:(MIDIUniqueID)uniqueID;
 
@@ -125,14 +127,14 @@
 #pragma mark - -Properties-
 
 #pragma mark Getters
-- (NSData *)dataPropertyForKey:(NSString *)key;
+- (NSData *)dataForProperty:(NSString *)key;
 
 #pragma mark Setters
-- (void)setDataProperty:(NSData *)value forKey:(NSString *)key;
+- (void)setData:(NSData *)value forProperty:(NSString *)propName;
 
 #pragma mark Removal
-- (void)removePropertyForKey:(NSString *)key;
-- (void)removeCachedPropertyForKey:(NSString *)key;
+- (void)removeProperty:(NSString *)key;
+- (void)removeCachedProperty:(NSString *)key;
 
 #pragma mark Copying All Properties
 // This will copy the entire dict. This is called in -description,

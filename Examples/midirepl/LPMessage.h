@@ -44,6 +44,8 @@ typedef NS_ENUM(UInt8, LPColorBrightness) {
 + (instancetype)greenAtX:(NSUInteger)x Y:(NSUInteger)y brightness:(LPColorBrightness)brightness clear:(BOOL)clear;
 + (instancetype)redAtX:(NSUInteger)x Y:(NSUInteger)y brightness:(LPColorBrightness)brightness clear:(BOOL)clear;
 
+@property (nonatomic, readonly) NSUInteger row, column;
+
 @end
 
 @interface LPMessage : MKMessage <LPMessageJS>

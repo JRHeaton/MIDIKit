@@ -78,6 +78,18 @@
     return [[self alloc] initWithType:type];
 }
 
++ (instancetype)messageWithMessage:(MKMessage *)message {
+    return [[self alloc] initWithData:message.data];
+}
+
++ (instancetype)subclass:(MKMessage *)message {
+    return [self messageWithMessage:message];
+}
+
++ (instancetype)copy:(MKMessage *)message {
+    return [self messageWithMessage:message];
+}
+
 - (instancetype)initWithType:(MKMessageType)type {
     if(!(self = [self init])) return nil;
 
