@@ -142,7 +142,6 @@
 		522EA3FD18FA6B0400444217 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		522EA42318FA9A9500444217 /* MKJavaScriptModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKJavaScriptModule.h; sourceTree = "<group>"; };
 		524005E418FB06CD0030B46D /* libMIDIKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMIDIKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		524005E818FB06CD0030B46D /* MIDIKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MIDIKit-Prefix.pch"; sourceTree = "<group>"; };
 		524005F418FB06CD0030B46D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		5240060718FB073D0030B46D /* MIDIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MIDIKit.h; sourceTree = "<group>"; };
 		5240060E18FB08220030B46D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -343,22 +342,6 @@
 			name = "MIDIKit Framework (Mac)";
 			sourceTree = "<group>";
 		};
-		524005E618FB06CD0030B46D /* MIDIKit */ = {
-			isa = PBXGroup;
-			children = (
-				524005E718FB06CD0030B46D /* Supporting Files */,
-			);
-			path = MIDIKit;
-			sourceTree = "<group>";
-		};
-		524005E718FB06CD0030B46D /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				524005E818FB06CD0030B46D /* MIDIKit-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		5273C6CA18DE96A200A8CFD4 = {
 			isa = PBXGroup;
 			children = (
@@ -366,8 +349,7 @@
 				524005DF18FB068D0030B46D /* MIDIKit Framework (Mac) */,
 				528DCB3618FAB3E50090FFFB /* Example Native Dylib */,
 				528DCB5E18FABF870090FFFB /* Example Native Bundle */,
-				524005E618FB06CD0030B46D /* MIDIKit */,
-				52DDEDF018FB55400019BE98 /* mkcli */,
+				52DDEDF018FB55400019BE98 /* CLI Tool (mkcli) */,
 				5273C6D618DE96A200A8CFD4 /* Frameworks */,
 				5273C6D518DE96A200A8CFD4 /* Products */,
 			);
@@ -466,12 +448,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		52DDEDF018FB55400019BE98 /* mkcli */ = {
+		52DDEDF018FB55400019BE98 /* CLI Tool (mkcli) */ = {
 			isa = PBXGroup;
 			children = (
 				52DDEDFF18FB56390019BE98 /* scripts */,
 				52DDEDFA18FB55640019BE98 /* main.m */,
 			);
+			name = "CLI Tool (mkcli)";
 			path = mkcli;
 			sourceTree = "<group>";
 		};
@@ -615,9 +598,9 @@
 			productReference = 528DCB5C18FABF870090FFFB /* testNativeBundle.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
-		52DDEDED18FB55400019BE98 /* mkcli */ = {
+		52DDEDED18FB55400019BE98 /* CLI Tool (mkcli) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 52DDEDF718FB55400019BE98 /* Build configuration list for PBXNativeTarget "mkcli" */;
+			buildConfigurationList = 52DDEDF718FB55400019BE98 /* Build configuration list for PBXNativeTarget "CLI Tool (mkcli)" */;
 			buildPhases = (
 				52DDEDEA18FB55400019BE98 /* Sources */,
 				52DDEDEB18FB55400019BE98 /* Frameworks */,
@@ -630,7 +613,7 @@
 				529D5B5A18FB748A00A563B3 /* PBXTargetDependency */,
 				529D5B5C18FB748B00A563B3 /* PBXTargetDependency */,
 			);
-			name = mkcli;
+			name = "CLI Tool (mkcli)";
 			productName = mkcli;
 			productReference = 52DDEDEE18FB55400019BE98 /* mkcli */;
 			productType = "com.apple.product-type.tool";
@@ -660,7 +643,7 @@
 				524005E318FB06CD0030B46D /* MIDIKit Static Lib (iOS) */,
 				528DCB3318FAB3E50090FFFB /* testNativeModule */,
 				528DCB5B18FABF870090FFFB /* testNativeBundle */,
-				52DDEDED18FB55400019BE98 /* mkcli */,
+				52DDEDED18FB55400019BE98 /* CLI Tool (mkcli) */,
 			);
 		};
 /* End PBXProject section */
@@ -796,7 +779,7 @@
 			buildSettings = {
 				DSTROOT = /tmp/MIDIKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MIDIKit/MIDIKit-Prefix.pch";
+				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				INSTALL_PATH = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
@@ -812,7 +795,7 @@
 			buildSettings = {
 				DSTROOT = /tmp/MIDIKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MIDIKit/MIDIKit-Prefix.pch";
+				GCC_PREFIX_HEADER = "";
 				INSTALL_PATH = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				OTHER_LDFLAGS = "-ObjC";
@@ -901,7 +884,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MIDIKit/MIDIKit-Prefix.pch";
+				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -922,7 +905,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MIDIKit/MIDIKit-Prefix.pch";
+				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -1064,7 +1047,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		52DDEDF718FB55400019BE98 /* Build configuration list for PBXNativeTarget "mkcli" */ = {
+		52DDEDF718FB55400019BE98 /* Build configuration list for PBXNativeTarget "CLI Tool (mkcli)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				52DDEDF818FB55400019BE98 /* Debug */,
