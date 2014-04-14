@@ -93,6 +93,20 @@
 			remoteGlobalIDString = 5273C6D318DE96A200A8CFD4;
 			remoteInfo = MIDIKit;
 		};
+		529D5B5918FB748A00A563B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5273C6CB18DE96A200A8CFD4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 528DCB3318FAB3E50090FFFB;
+			remoteInfo = testNativeModule;
+		};
+		529D5B5B18FB748B00A563B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5273C6CB18DE96A200A8CFD4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 528DCB5B18FABF870090FFFB;
+			remoteInfo = testNativeBundle;
+		};
 		52DDEDFC18FB55870019BE98 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5273C6CB18DE96A200A8CFD4 /* Project object */;
@@ -621,6 +635,8 @@
 			);
 			dependencies = (
 				52DDEDFD18FB55870019BE98 /* PBXTargetDependency */,
+				529D5B5A18FB748A00A563B3 /* PBXTargetDependency */,
+				529D5B5C18FB748B00A563B3 /* PBXTargetDependency */,
 			);
 			name = mkcli;
 			productName = mkcli;
@@ -753,6 +769,16 @@
 			isa = PBXTargetDependency;
 			target = 5273C6D318DE96A200A8CFD4 /* MIDIKit Framework (Mac) */;
 			targetProxy = 528DCB6A18FABFA00090FFFB /* PBXContainerItemProxy */;
+		};
+		529D5B5A18FB748A00A563B3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 528DCB3318FAB3E50090FFFB /* testNativeModule */;
+			targetProxy = 529D5B5918FB748A00A563B3 /* PBXContainerItemProxy */;
+		};
+		529D5B5C18FB748B00A563B3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 528DCB5B18FABF870090FFFB /* testNativeBundle */;
+			targetProxy = 529D5B5B18FB748B00A563B3 /* PBXContainerItemProxy */;
 		};
 		52DDEDFD18FB55870019BE98 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1053,6 +1079,7 @@
 				52DDEDF918FB55400019BE98 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
