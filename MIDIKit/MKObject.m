@@ -16,10 +16,6 @@
 
 @implementation MKObject
 
-+ (void)poop {
-    NSLog(@"yay it works");
-}
-
 @synthesize useCaching=_useCaching;
 @dynamic valid, online, isPrivate, embeddedEntity;
 

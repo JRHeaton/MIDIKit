@@ -11,6 +11,4 @@
 
 @protocol MKObjectProperties <JSExport>
 
-+ (void)poop;
-
 @end
