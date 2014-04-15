@@ -52,6 +52,9 @@ MIDIKit does most of the heavy lifting when it comes to creating data for sendin
 
 ##Classes & Concepts
 
+###MIDI Objects
+![MIDIObjects](https://i.cloudup.com/_cMX7Bejwh.png)
+
 ###Wrapper
 ####`Object (MKObject.h)`
 
