@@ -39,7 +39,7 @@
     return nil;
 }
 
-+ (instancetype)firstOnlineDeviceNamed:(NSString *)name {
++ (instancetype)firstDeviceNamed:(NSString *)name {
     return [self firstDeviceMeetingCriteria:^BOOL(MKDevice *candidate) {
         return candidate.online && [candidate.name isEqualToString:name];
     }];

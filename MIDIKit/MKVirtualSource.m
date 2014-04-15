@@ -17,6 +17,15 @@
 
 @synthesize client=_client;
 
+static NSMapTable *_MKVirtualSourceNameMap = nil;
+
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _MKVirtualSourceNameMap = [NSMapTable strongToWeakObjectsMapTable];
+    });
+}
+
 + (BOOL)hasUniqueID {
     return YES;
 }
@@ -27,11 +36,15 @@
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client {
     MIDIEndpointRef e;
+    MKVirtualSource *ret;
 
+    if((ret = [_MKVirtualSourceNameMap objectForKey:name]) != nil) return self = ret;
     if(!client.valid) return nil;
     if([MIDIKit evalOSStatus:MIDISourceCreate(client.MIDIRef, (__bridge CFStringRef)(name), &e) name:@"Creating a virtual source"] != 0)
         return nil;
     if(!(self = [super initWithMIDIRef:e])) return nil;
+
+    [_MKVirtualSourceNameMap setObject:self forKey:name];
     
     self.client = client;
     [self.client.virtualSources addObject:self];

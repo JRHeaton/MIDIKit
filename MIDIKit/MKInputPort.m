@@ -18,6 +18,8 @@
 @synthesize inputHandler=_inputHandler;
 @synthesize inputHandlers=_inputHandlers;
 
+static NSMapTable *_MKInputPortNameMap = nil;
+
 static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRefCon, void *srcConnRefCon) {
     MKInputPort *self = (__bridge MKInputPort *)(readProcRefCon);
     MKSource *source = (__bridge MKSource *)(srcConnRefCon);
@@ -54,19 +56,30 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
     }
 }
 
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _MKInputPortNameMap = [NSMapTable strongToWeakObjectsMapTable];
+    });
+}
+
 + (instancetype)inputPortWithName:(NSString *)name client:(MKClient *)client {
     return [[self alloc] initWithName:name client:client];
 }
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client {
     MIDIPortRef p;
+    MKInputPort *ret;
 
+    if((ret = [_MKInputPortNameMap objectForKey:name]) != nil) return self = ret;
     if(!client.valid) return nil;
     if([MIDIKit evalOSStatus:MIDIInputPortCreate(client.MIDIRef, (__bridge CFStringRef)(name), _MKInputPortReadProc, (__bridge void *)(self), &p) name:@"Creating an input port"] != 0) {
         return nil;
     }
 
     if(!(self = [super initWithMIDIRef:p])) return nil;
+
+    [_MKInputPortNameMap setObject:self forKey:name];
     
     self.client = client;
     [self.client.inputPorts addObject:self];

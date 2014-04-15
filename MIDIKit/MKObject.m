@@ -14,6 +14,8 @@
 @property (nonatomic, strong) NSMutableDictionary *propertyCache;
 @end
 
+static NSMapTable *_MKObjectMap = nil;
+
 @implementation MKObject
 
 @synthesize useCaching=_useCaching;
@@ -28,8 +30,12 @@
         goto exception;
     }
 #endif
-
-ret: return;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _MKObjectMap = [NSMapTable strongToWeakObjectsMapTable];
+    });
+    
+    return;
 
 exception:
     [NSException raise:@"MKMissingDependencyException" format:@"CoreMIDI.framework is required to be linked in order for MIDIKit to work"];
@@ -44,19 +50,32 @@ exception:
 }
 
 - (instancetype)initWithMIDIRef:(MIDIObjectRef)MIDIRef {
+    MKObject *ret;
+    if((ret = [_MKObjectMap objectForKey:@(MIDIRef)]) != nil) {
+        self = ret;
+        [self purgeCache];
+        return self;
+    }
     if(!(self = [super init])) return nil;
     
-    _MIDIRef = MIDIRef;
+    self.MIDIRef = MIDIRef;
     [self commonInit];
     
     return self;
 }
 
 - (instancetype)initWithUniqueID:(MIDIUniqueID)uniqueID {
+    MIDIObjectType type;
+    MIDIObjectRef obj;
+    if([MIDIKit evalOSStatus:MIDIObjectFindByUniqueID(uniqueID, &obj, &type) name:@"Find by unique id"] != 0) return nil;
+
+    if((self = [_MKObjectMap objectForKey:@(obj)]) != nil) {
+        [self purgeCache];
+        return self;
+    }
     if(!(self = [super init])) return nil;
 
-    MIDIObjectType type;
-    MIDIObjectFindByUniqueID(uniqueID, &_MIDIRef, &type);
+    self.MIDIRef = obj;
     [self commonInit];
 
     return self;
@@ -91,7 +110,7 @@ exception:
     if([[self class] hasUniqueID]) {
         [desc appendFormat:@", uniqueID=%d", (int)self.uniqueID];
     }
-    if([MIDIKit descriptionsIncludeProperties]) {
+    if([MIDIKit descriptionsIncludeProperties] && self.valid) {
         [desc appendFormat:@", properties=%@", self.allProperties];
     }
 
@@ -239,6 +258,9 @@ CACHED_PROP_PROPERTY_BASE(Data, data, instancetype) END_RET
 }
 
 - (void)setMIDIRef:(MIDIObjectRef)MIDIRef {
+    [_MKObjectMap removeObjectForKey:@(_MIDIRef)];
+    [_MKObjectMap setObject:self forKey:@(MIDIRef)];
+
     _MIDIRef = MIDIRef;
     [self purgeCache];
 }

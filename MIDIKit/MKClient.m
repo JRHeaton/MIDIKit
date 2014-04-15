@@ -12,6 +12,8 @@ NSString *MKObjectPropertyChangedNotification = @"MKObjectPropertyChangedNotific
 NSString *MKUserInfoPropertyNameKey = @"MKUserInfoPropertyNameKey";
 NSString *MKUserInfoObjectInstanceKey = @"MKUserInfoObjectInstanceKey";
 
+static NSMapTable *_MKClientNameMap = nil;
+
 @interface MKClient ()
 
 @property (nonatomic, strong) NSMutableSet *notificationDelegates;
@@ -98,6 +100,13 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
     }
 }
 
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _MKClientNameMap = [NSMapTable strongToWeakObjectsMapTable];
+    });
+}
+
 - (void)dispatchNotificationSelector:(SEL)selector withArguments:(NSArray *)arguments {
     if(!self.notificationDelegates.count) return;
 
@@ -134,13 +143,17 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
 - (instancetype)initWithName:(NSString *)name {
     MIDIClientRef c;
     CFStringRef cfName = (__bridge CFStringRef)(name);
+    MKClient *ret;
 
+    if((ret = [_MKClientNameMap objectForKey:name]) != nil) return self = ret;
     if(!name) return [self init];
     if([MIDIKit evalOSStatus:MIDIClientCreate(cfName, _MKClientMIDINotifyProc, (__bridge void *)(self), &c) name:@"Creating a client"] != 0) {
         return nil;
     }
 
     if(!(self = [super initWithMIDIRef:c])) return nil;
+
+    [_MKClientNameMap setObject:self forKey:name];
     
     _inputPorts = [NSMutableArray arrayWithCapacity:0];
     _outputPorts = [NSMutableArray arrayWithCapacity:0];

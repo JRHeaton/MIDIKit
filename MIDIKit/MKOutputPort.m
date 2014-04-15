@@ -13,15 +13,29 @@
 
 @synthesize client=_client;
 
+static NSMapTable *_MKOutputPortNameMap = nil;
+
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _MKOutputPortNameMap = [NSMapTable strongToWeakObjectsMapTable];
+    });
+}
+
 + (instancetype)outputPortWithName:(NSString *)name client:(MKClient *)client {
     return [[self alloc] initWithName:name client:client];
 }
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client {
+    MKOutputPort *ret;
+
+    if((ret = [_MKOutputPortNameMap objectForKey:name]) != nil) return self = ret;
     if(!client.valid) return nil;
     if([MIDIKit evalOSStatus:MIDIOutputPortCreate(client.MIDIRef, (__bridge CFStringRef)(name), (void *)&_MIDIRef) name:@"Creating an output port"] != 0) {
         return nil;
     }
+
+    [_MKOutputPortNameMap setObject:self forKey:name];
 
     self.client = client;
     [self.client.outputPorts addObject:self];

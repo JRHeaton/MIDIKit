@@ -18,6 +18,8 @@
 
 @synthesize client=_client;
 
+static NSMapTable *_MKVirtualDestinationNameMap = nil;
+
 static void _MKVirtualDestinationReadProc(const MIDIPacketList *pktlist, void *readProcRefCon, void *srcConnRefCon) {
     MKVirtualDestination *self = (__bridge MKVirtualDestination *)(readProcRefCon);
 
@@ -47,6 +49,13 @@ static void _MKVirtualDestinationReadProc(const MIDIPacketList *pktlist, void *r
     }
 }
 
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _MKVirtualDestinationNameMap = [NSMapTable strongToWeakObjectsMapTable];
+    });
+}
+
 + (BOOL)hasUniqueID {
     return YES;
 }
@@ -57,11 +66,15 @@ static void _MKVirtualDestinationReadProc(const MIDIPacketList *pktlist, void *r
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client {
     MIDIEndpointRef e;
+    MKVirtualDestination *ret;
 
+    if((ret = [_MKVirtualDestinationNameMap objectForKey:name]) != nil) return self = ret;
     if(!client.valid) return nil;
     if([MIDIKit evalOSStatus:MIDIDestinationCreate(client.MIDIRef, (__bridge CFStringRef)(name), _MKVirtualDestinationReadProc, (__bridge void *)(self), (void *)&e) name:@"Creating a virtual destination"] != 0)
         return nil;
     if(!(self = [super initWithMIDIRef:e])) return nil;
+
+    [_MKVirtualDestinationNameMap setObject:self forKey:name];
     
     self.client = client;
     [self.client.virtualDestinations addObject:self];

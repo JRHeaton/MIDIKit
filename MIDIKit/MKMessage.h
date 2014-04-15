@@ -87,6 +87,7 @@ JSExportAs(messages,
 // velocity for note messages
 @property (nonatomic, assign) UInt8 velocity, pressure, value, data2;
 
+
 JSExportAs(setChannel, - (instancetype)setChannelReturn:(UInt8)channel);
 JSExportAs(setType, - (instancetype)setTypeReturn:(MKMessageType)type);
 JSExportAs(setStatus, - (instancetype)setStatusReturn:(UInt8)status);

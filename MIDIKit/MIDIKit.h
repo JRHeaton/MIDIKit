@@ -33,7 +33,7 @@ extern void MKInstallIntoContext(JSContext *c);
 // Global settings
 // -------------------
 //
-// Whether or not to include properties in -description of MKObject.
+// Whether or not to include all properties in -description of MKObject classes.
 // This is handy to set to YES when inspecting objects
 extern BOOL MKSettingDescriptionsIncludeProperties; // default: NO
 
