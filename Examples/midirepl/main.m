@@ -61,10 +61,10 @@ int main(int argc, const char * argv[]) {
         c[@"showEval"] = ^(BOOL show) { showEval = show; };
 
         c.exceptionHandler = ^(JSContext *context, JSValue *exception) {
-            printf("~> %s\n", exception.description.UTF8String);
+            printf("\033[1;32m~> \033[1;31m%s\033[0m\n", exception.description.UTF8String);
         };
         while(1) {
-            const char *buf = readline("] ");
+            const char *buf = readline("\033[1;34m] \033[0m");
 
             if(!buf || !strlen(buf)) continue;
             add_history(buf);
@@ -87,7 +87,7 @@ int main(int argc, const char * argv[]) {
                             print = [objVal description].UTF8String;
                         }
                     }
-                    printf("~> %s\n", print);
+                    printf("\033[1;32m~> \033[0;36m%s\n\033[0m", print);
                 }
             }
             @catch (NSException *exception) {
