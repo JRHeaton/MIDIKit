@@ -9,7 +9,7 @@
 #import "MKMessage.h"
 
 @interface MKMessage ()
-@property (nonatomic, readonly) NSMutableData *mutableData;
+@property (nonatomic, strong) NSMutableData *mutableData;
 @end
 
 @implementation MKMessage
@@ -59,15 +59,17 @@
 }
 
 + (instancetype)controlChangeMessageWithController:(UInt8)controller value:(UInt8)value {
-    return [[self alloc] initWithStatus:kMKMessageTypeControlChange :controller :value];
+    return [self messageWithStatus:kMKMessageTypeControlChange :controller :value];
 }
 
 + (instancetype)noteOnMessageWithKey:(UInt8)key velocity:(UInt8)velocity {
-    return [[self alloc] initWithStatus:kMKMessageTypeNoteOn :key :velocity];
+    return [self messageWithStatus:kMKMessageTypeNoteOn :key :velocity];
 }
 
 + (instancetype)messageWithData:(NSData *)data {
-    return [[self alloc] initWithData:data];
+    MKMessage *ret = [[self alloc] init];
+    ret.mutableData = data ? ([data isKindOfClass:[NSMutableData class]] ? data : data.mutableCopy) : [NSMutableData dataWithCapacity:0];
+    return ret;
 }
 
 + (instancetype)messageWithPacket:(MIDIPacket *)packet {
@@ -75,11 +77,21 @@
 }
 
 + (instancetype)messageWithType:(MKMessageType)type {
-    return [[self alloc] initWithType:type];
+    MKMessage *ret = [[self alloc] init];
+    ret.type = type;
+    return ret;
 }
 
 + (instancetype)messageWithMessage:(MKMessage *)message {
     return [[self alloc] initWithData:message.data];
+}
+
++ (instancetype)messageWithStatus:(UInt8)status :(UInt8)data1 :(UInt8)data2 {
+    MKMessage *ret = [[self alloc] init];
+    ret.status = status;
+    ret.data1 = data1;
+    ret.data2 = data2;
+    return ret;
 }
 
 + (instancetype)subclass:(MKMessage *)message {
@@ -90,12 +102,17 @@
     return [self messageWithMessage:message];
 }
 
-- (instancetype)initWithType:(MKMessageType)type {
+- (instancetype)initWithPacket:(MIDIPacket *)packet {
     if(!(self = [self init])) return nil;
 
-    self.type = type;
+    [self.mutableData setLength:packet->length];
+    memcpy(self.bytes, packet->data, packet->length);
 
     return self;
+}
+
++ (instancetype):(UInt8)status :(UInt8)data1 :(UInt8)data2 {
+    return [self messageWithStatus:status :data1 :data2];
 }
 
 + (NSMutableData *)_dataFromJSArray:(NSArray *)array {
@@ -187,35 +204,6 @@
     }
 
     return ret.count ? ret.copy : nil;
-}
-
-- (instancetype)initWithData:(NSData *)data {
-    if(!(self = [self init])) return nil;
-    _mutableData = data ? ([data isKindOfClass:[NSMutableData class]] ? data : data.mutableCopy) : [NSMutableData dataWithCapacity:0];
-    return self;
-}
-
-- (instancetype)initWithPacket:(MIDIPacket *)packet {
-    if(!(self = [self init])) return nil;
-    
-    [self.mutableData setLength:packet->length];
-    memcpy(self.bytes, packet->data, packet->length);
-    
-    return self;
-}
-
-- (instancetype)initWithStatus:(UInt8)status :(UInt8)data1 :(UInt8)data2 {
-    if(!(self = [self init])) return nil;
-
-    self.status = status;
-    self.data1 = data1;
-    self.data2 = data2;
-
-    return self;
-}
-
-+ (instancetype):(UInt8)status :(UInt8)data1 :(UInt8)data2 {
-    return [[self alloc] initWithStatus:status :data1 :data2];
 }
 
 - (NSString *)_hexStringForData:(NSData *)data maxByteCount:(NSUInteger)max {

@@ -34,7 +34,8 @@ typedef NS_ENUM(UInt8, MKMessageType) {
 @protocol MKMessageJS <JSExport>
 
 + (instancetype)new;
-+ (instancetype)messageWithType:(MKMessageType)type;
+JSExportAs(withType, + (instancetype)messageWithType:(MKMessageType)type);
+JSExportAs(withStatus, + (instancetype)messageWithStatus:(UInt8)status :(UInt8)data1 :(UInt8)data2);
 
 JSExportAs(controlChange, + (instancetype)controlChangeMessageWithController:(UInt8)controller value:(UInt8)value);
 JSExportAs(noteOn, + (instancetype)noteOnMessageWithKey:(UInt8)key velocity:(UInt8)velocity);
@@ -44,7 +45,7 @@ JSExportAs(noteOn, + (instancetype)noteOnMessageWithKey:(UInt8)key velocity:(UIn
 // implementing logic.
 + (instancetype)subclass:(MKMessage *)message;
 + (instancetype)copy:(MKMessage *)message;
-+ (instancetype)messageWithMessage:(MKMessage *)message;
+JSExportAs(withMessage, + (instancetype)messageWithMessage:(MKMessage *)message);
 
 // Cleaner syntax for variable-length messages: MKMessage.message(0xf0, 0xa, 0xb, 0xc, 0xd, 0xf7)
 JSExportAs(message,
@@ -90,8 +91,6 @@ JSExportAs(messages,
 
 @interface MKMessage : NSObject <MKMessageJS>
 
-- (instancetype)initWithType:(MKMessageType)type;
-
 + (instancetype)messageWithData:(NSData *)data;
 + (instancetype)messageWithPacket:(MIDIPacket *)packet;
 
@@ -99,11 +98,6 @@ JSExportAs(messages,
 + (NSArray *)messagesWithPacket:(MIDIPacket *)packet;
 + (NSArray *)messagesWithPacketList:(MIDIPacketList *)list;
 
-- (instancetype)initWithData:(NSData *)data;
-- (instancetype)initWithPacket:(MIDIPacket *)packet;
-
-// same as -[MKMessage :status :data1 :data2]
-- (instancetype)initWithStatus:(UInt8)status :(UInt8)data1 :(UInt8)data2;
 + (instancetype):(UInt8)status :(UInt8)data1 :(UInt8)data2;
 
 // Messages stay mutable for performance reasons
