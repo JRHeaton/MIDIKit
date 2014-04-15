@@ -16,15 +16,16 @@
 #import <AppKit/AppKit.h>
 #endif
 
+#ifdef DEBUG
+BOOL MKSettingDescriptionsIncludeProperties = YES;
+BOOL MKSettingOSStatusEvaluationLogErrors = YES;
+#else
 BOOL MKSettingDescriptionsIncludeProperties = NO;
+BOOL MKSettingOSStatusEvaluationLogErrors = NO;
+#endif
+
 BOOL MKSettingOSStatusEvaluationThrowsOnError = NO;
 
-BOOL MKSettingOSStatusEvaluationLogErrors =
-#if DEBUG == 1
-NO;
-#else
-YES;
-#endif
 
 NSArray *MKClassList() {
     static NSArray *_MKClassList = nil;

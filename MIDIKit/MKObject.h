@@ -45,6 +45,7 @@ JSExportAs(withMIDIRef, + (instancetype)objectWithMIDIRef:(MIDIObjectRef)MIDIRef
 @property (nonatomic, readonly, getter = isValid) BOOL valid;
 
 - (BOOL)isEqualToObject:(id<MKObjectJS>)object;
+- (NSString *)description;
 
 @end
 

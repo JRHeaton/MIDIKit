@@ -34,7 +34,7 @@ extern void MKInstallIntoContext(JSContext *c);
 //
 // Whether or not to include properties in -description of MKObject.
 // This is handy to set to YES when inspecting objects
-extern BOOL MKSettingDescriptionsIncludeProperties; // default: NO
+extern BOOL MKSettingDescriptionsIncludeProperties; // default: YES on debug build, NO on release
 
 // Whether +evalOSStatus:name:throw: will throw an exception on error
 extern BOOL MKSettingOSStatusEvaluationThrowsOnError; // default: NO
