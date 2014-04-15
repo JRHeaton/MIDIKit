@@ -9,10 +9,13 @@
 #import "MKDevice.h"
 #import "MKClient.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-protocol-property-synthesis"
+#pragma clang diagnostic ignored "-Wprotocol"
+
 @implementation MKDevice
 
-@dynamic numberOfEntities;
-@dynamic entities;
+@dynamic iconImagePath, numberOfEntities, entities, driverDeviceEditorApp, singleRealtimeEntity;
 
 + (BOOL)hasUniqueID {
     return YES;
@@ -72,3 +75,5 @@
 }
 
 @end
+
+#pragma clang diagnostic pop

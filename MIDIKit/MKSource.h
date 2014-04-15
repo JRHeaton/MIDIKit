@@ -7,7 +7,6 @@
 //
 
 #import "MKObject.h"
-#import "MKEndpointProperties.h"
 
 @class MKEntity;
 @protocol MKSourceJS <JSExport>

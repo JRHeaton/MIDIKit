@@ -9,6 +9,10 @@
 #import "MIDIKit.h"
 #import "MKPrivate.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-protocol-property-synthesis"
+#pragma clang diagnostic ignored "-Wprotocol"
+
 @implementation MKVirtualSource
 
 @synthesize client=_client;
@@ -58,3 +62,5 @@
 }
 
 @end
+
+#pragma clang diagnostic pop

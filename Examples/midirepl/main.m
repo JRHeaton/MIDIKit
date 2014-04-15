@@ -61,22 +61,29 @@ int main(int argc, const char * argv[]) {
             if(!buf || !strlen(buf)) continue;
             add_history(buf);
 
-            JSValue *val = [c evaluateScript:[NSString stringWithUTF8String:buf]];
-            if(showEval) {
-                const char *print = NULL;
+            JSValue *val;
+            @try {
+                val = [c evaluateScript:[NSString stringWithUTF8String:buf]];
 
-                BOOL isBadVal = (val.isUndefined || val.isNull);
-                if(isBadVal) {
-                    print = val.isUndefined ? "<<undefined>>" : "<<null>>";
-                } else {
-                    id objVal = val.toObject;
-                    if([objVal isKindOfClass:[NSDictionary class]] && ![(NSDictionary *)objVal count]) {
-                        print = [val description].UTF8String;
+                if(showEval) {
+                    const char *print = NULL;
+
+                    BOOL isBadVal = (val.isUndefined || val.isNull);
+                    if(isBadVal) {
+                        print = val.isUndefined ? "<<undefined>>" : "<<null>>";
                     } else {
-                        print = [objVal description].UTF8String;
+                        id objVal = val.toObject;
+                        if([objVal isKindOfClass:[NSDictionary class]] && ![(NSDictionary *)objVal count]) {
+                            print = [val description].UTF8String;
+                        } else {
+                            print = [objVal description].UTF8String;
+                        }
                     }
+                    printf("> %s\n", print);
                 }
-                printf("> %s\n", print);
+            }
+            @catch (NSException *exception) {
+                NSLog(@"ObjC exception thrown: %@", exception);
             }
         }
 

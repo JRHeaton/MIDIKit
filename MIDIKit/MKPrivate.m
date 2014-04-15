@@ -26,7 +26,7 @@ MIDIPacketList *MKPacketListFromData(NSData *data) {
         packet = MIDIPacketListAdd(list, self.length, packet, 0, MAX_PACKET_LEN, &self.bytes[i * MAX_PACKET_LEN]);
     }
     if(remainder) {
-        packet = MIDIPacketListAdd(list, sizeof(MIDIPacketList) + self.length, packet, 0, remainder, self.bytes);
+        MIDIPacketListAdd(list, sizeof(MIDIPacketList) + self.length, packet, 0, remainder, self.bytes);
     }
 
 #undef  MAX_PACKET_LEN

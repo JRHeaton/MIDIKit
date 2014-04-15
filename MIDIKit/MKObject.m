@@ -17,7 +17,6 @@
 @implementation MKObject
 
 @synthesize useCaching=_useCaching;
-@dynamic valid, online, isPrivate, embeddedEntity;
 
 + (void)load {
 #if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
@@ -273,6 +272,14 @@ CACHED_PROP_PROPERTY_BASE(Data, data, instancetype) END_RET
     return valid;
 }
 
+//
+// It _REALLY_ sucks that ObjC doesn't have a nice way to let me mutualize these property implementations
+// to more classes without having an empty abstract superclass.
+//
+// For now, these will stay implemented in every MKObject, but only exported to JS/visible publicly to
+// the correct classes, via the MKObjectProperties.h protocols.
+//
+
 #define BITFIELD_PROP(upper, lower) \
 - (instancetype)set##upper:(BOOL)val onChannel:(NSUInteger)channel {\
     NSUInteger bits = self.lower##ChannelBits;\
@@ -290,6 +297,7 @@ CACHED_PROP_PROPERTY_BASE(Data, data, instancetype) END_RET
 \
 - (BOOL)lower##sOnChannel:(NSUInteger)channel { \
     channel = [self channelInRange:channel]; \
+    channel = MAX(0, channel - 1); \
     return (self.lower##ChannelBits & (1 << (channel - 1))) >> (channel - 1);\
 }
 

@@ -21,49 +21,6 @@ JSExportAs(newWithUniqueID, + (instancetype)objectWithUniqueID:(MIDIUniqueID)uni
 JSExportAs(newWithMIDIRef, + (instancetype)objectWithMIDIRef:(MIDIObjectRef)MIDIRef);
 
 #pragma mark - -Properties-
-
-#pragma mark Identity
-@property (nonatomic, copy) NSString *manufacturer;
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *model;
-@property (nonatomic, copy) NSString *displayName;
-@property (nonatomic, copy) NSString *driverOwner;
-@property (nonatomic, assign) NSInteger deviceID;
-@property (nonatomic, assign) NSInteger driverVersion;
-
-@property (nonatomic, assign) MIDIUniqueID uniqueID;
-@property (nonatomic, readonly) BOOL shouldHaveUniqueID; // returns +hasUniqueID
-+ (BOOL)hasUniqueID; // only entities, devices, endpoints
-
-#pragma mark Type
-@property (nonatomic, assign, getter = isDrumMachine) BOOL drumMachine;
-@property (nonatomic, assign, getter = isEffectUnit) BOOL effectUnit;
-@property (nonatomic, assign, getter = isEmbeddedEntity) BOOL embeddedEntity;
-@property (nonatomic, assign, getter = isMixer) BOOL mixer;
-@property (nonatomic, assign, getter = isSampler) BOOL sampler;
-
-#pragma mark State
-@property (nonatomic, assign, getter = isOnline) BOOL online;
-@property (nonatomic, assign) BOOL isPrivate;
-
-#pragma mark Misc 
-@property (nonatomic, copy) NSString *iconImagePath;
-@property (nonatomic, assign) BOOL panDisruptsStereo;
-
-#pragma mark Capabilities
-@property (nonatomic, assign) NSInteger maxReceiveChannels;
-@property (nonatomic, assign) NSInteger maxSysexSpeed;
-@property (nonatomic, assign) NSInteger maxTransmitChannels;
-@property (nonatomic, assign) NSUInteger receiveChannelBits;
-@property (nonatomic, assign) NSUInteger transmitChannelBits;
-@property (nonatomic, assign) BOOL receivesClock;
-@property (nonatomic, assign) BOOL receivesMTC;
-@property (nonatomic, assign) BOOL receivesNotes;
-@property (nonatomic, assign) BOOL transmitsClock;
-@property (nonatomic, assign) BOOL transmitsMTC;
-@property (nonatomic, assign) BOOL transmitsNotes;
-@property (nonatomic, assign) BOOL receivesProgramChanges;
-
 #pragma mark Setters
 - (instancetype)setString:(NSString *)value forProperty:(NSString *)propName;
 - (instancetype)setInteger:(NSInteger)value forProperty:(NSString *)propName;
@@ -73,12 +30,6 @@ JSExportAs(newWithMIDIRef, + (instancetype)objectWithMIDIRef:(MIDIObjectRef)MIDI
 - (NSString *)stringForProperty:(NSString *)propName;
 - (NSInteger)integerForProperty:(NSString *)propName;
 - (NSDictionary *)dictionaryForProperty:(NSString *)propName;
-
-#pragma mark Transmission Capabilities
-- (BOOL)transmitsOnChannel:(NSUInteger)channel;
-- (BOOL)receivesOnChannel:(NSUInteger)channel;
-- (instancetype)setTransmits:(BOOL)transmits onChannel:(NSUInteger)channel;
-- (instancetype)setReceives:(BOOL)receives onChannel:(NSUInteger)channel;
 
 
 #pragma mark - -Cache Control-
@@ -108,7 +59,7 @@ JSExportAs(newWithMIDIRef, + (instancetype)objectWithMIDIRef:(MIDIObjectRef)MIDI
  */
 
 #pragma mark - -Base Object Wrapper-
-@interface MKObject : NSObject <MKObjectJS, MKObjectProperties> {
+@interface MKObject : NSObject <MKObjectJS> {
 @protected
     MIDIObjectRef _MIDIRef;
 }

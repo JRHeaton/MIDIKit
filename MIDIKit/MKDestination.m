@@ -9,7 +9,13 @@
 #import "MKDestination.h"
 #import "MKPrivate.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-protocol-property-synthesis"
+#pragma clang diagnostic ignored "-Wprotocol"
+
 @implementation MKDestination
+
+@dynamic name;
 
 + (BOOL)hasUniqueID {
     return YES;
@@ -44,6 +50,7 @@
 
     return nil;
 }
+
 + (instancetype)firstDestinationContaining:(NSString *)namePart {
     return [self enumerateDestinations:^BOOL(MKDestination *endpoint, NSUInteger index, BOOL *stop) {
         return endpoint.online && [endpoint.name rangeOfString:namePart].location != NSNotFound;
@@ -61,3 +68,5 @@
 }
 
 @end
+
+#pragma clang diagnostic pop

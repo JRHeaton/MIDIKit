@@ -7,7 +7,7 @@
 //
 
 #import "MKObject.h"
-#import "MKClientProperties.h"
+#import "MKObjectProperties.h"
 
 @class MKVirtualDestination, MKVirtualSource;
 @class MKInputPort, MKOutputPort;

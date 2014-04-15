@@ -8,6 +8,10 @@
 
 #import "MIDIKit.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-protocol-property-synthesis"
+#pragma clang diagnostic ignored "-Wprotocol"
+
 @implementation MKVirtualDestination {
     NSMutableSet *_delegates;
 }
@@ -43,7 +47,7 @@ static void _MKVirtualDestinationReadProc(const MIDIPacketList *pktlist, void *r
     MIDIEndpointRef e;
 
     if(!client.valid) return nil;
-    if([MIDIKit evalOSStatus:MIDIDestinationCreate(client.MIDIRef, (__bridge CFStringRef)(name), _MKVirtualDestinationReadProc, (__bridge void *)(self), (void *)&_MIDIRef) name:@"Creating a virtual destination" throw:NO] != 0)
+    if([MIDIKit evalOSStatus:MIDIDestinationCreate(client.MIDIRef, (__bridge CFStringRef)(name), _MKVirtualDestinationReadProc, (__bridge void *)(self), (void *)&e) name:@"Creating a virtual destination" throw:NO] != 0)
         return nil;
     if(!(self = [super initWithMIDIRef:e])) return nil;
     
@@ -65,3 +69,5 @@ static void _MKVirtualDestinationReadProc(const MIDIPacketList *pktlist, void *r
 }
 
 @end
+
+#pragma clang diagnostic pop

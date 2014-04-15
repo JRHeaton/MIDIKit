@@ -9,6 +9,10 @@
 #import "MKEntity.h"
 #import "MKDevice.h"
 
+#pragma clang diagnostic push 
+#pragma clang diagnostic ignored "-Wobjc-protocol-property-synthesis"
+#pragma clang diagnostic ignored "-Wprotocol"
+
 @implementation MKEntity
 
 + (BOOL)hasUniqueID {
@@ -52,3 +56,5 @@
 }
 
 @end
+
+#pragma clang diagnostic pop

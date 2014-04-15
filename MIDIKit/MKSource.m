@@ -9,6 +9,10 @@
 #import "MKSource.h"
 #import "MKPrivate.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-protocol-property-synthesis"
+#pragma clang diagnostic ignored "-Wprotocol"
+
 @implementation MKSource
 
 + (BOOL)hasUniqueID {
@@ -63,3 +67,5 @@
 }
 
 @end
+
+#pragma clang diagnostic pop

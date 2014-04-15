@@ -8,7 +8,7 @@
 
 #import "MKSource.h"
 #import "MKDestination.h"
-#import "MKEntityProperties.h"
+#import "MKObjectProperties.h"
 
 #pragma mark - -Mutual ObjC/JavaScript-
 

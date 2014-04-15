@@ -7,7 +7,6 @@
 //
 
 #import "MKClient.h"
-#import "MKEndpointProperties.h"
 
 #pragma mark - -Mutual ObjC/JavaScript-
 

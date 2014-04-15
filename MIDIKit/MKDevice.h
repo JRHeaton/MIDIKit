@@ -8,7 +8,6 @@
 
 #import "MKObject.h"
 #import "MKEntity.h"
-#import "MKDeviceProperties.h"
 
 #pragma mark - -Mutual ObjC/JavaScript-
 
@@ -27,17 +26,16 @@
 #pragma mark Entities
 // Index-access to child entities
 - (MKEntity *)entityAtIndex:(NSUInteger)index;
-// Zero-index objects
-- (MKEntity *)firstEntity;
 
 @property (nonatomic, readonly) NSUInteger numberOfEntities;
 
 // This is dynamic, and will create all new wrappers (expensive)
 @property (nonatomic, readonly) NSArray *entities;
 
-#pragma mark Root Destination/Source
-- (MKDestination *)rootDestination;
-- (MKSource *)rootSource;
+// Zero-index objects
+@property (nonatomic, readonly) MKEntity *firstEntity;
+@property (nonatomic, readonly) MKDestination *rootDestination;
+@property (nonatomic, readonly) MKSource *rootSource;
 
 @end
 

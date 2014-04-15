@@ -96,7 +96,6 @@
                          @"execPath" : [NSBundle mainBundle].executablePath,
                          @"pid" : @(info.processIdentifier),
                          @"moduleLoadList" : @[],
-                         @"argv" : info.arguments,
                          @"version" : [NSString stringWithFormat:@"%u.%u.%u", kMIDIKitVersionMajor, kMIDIKitVersionMinor, kMIDIKitVersionPatch]
                          };
     self[@"console"] = @{
@@ -104,6 +103,9 @@
                          };
     if(info.environment) {
         self[@"process"][@"env"] = info.environment;
+    }
+    if(info.arguments) {
+        self[@"process"][@"argv"] = info.arguments;
     }
     self[@"log"] = logBlock;
 

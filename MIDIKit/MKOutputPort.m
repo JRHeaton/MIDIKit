@@ -88,9 +88,10 @@
     list->numPackets = 1;
     memcpy(&list->packet[0], packet, sizeof(MIDIPacket));
 
-    (void)[self sendPacketList:list toDestination:destination];
+    id ret = [self sendPacketList:list toDestination:destination];
+    free(list);
 
-    return self;
+    return ret;
 }
 
 - (instancetype)sendPacketList:(MIDIPacketList *)packetList toDestination:(MKDestination *)destination {

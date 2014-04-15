@@ -20,6 +20,8 @@ NSString *MKUserInfoObjectInstanceKey = @"MKUserInfoObjectInstanceKey";
 
 @implementation MKClient
 
+@dynamic maxSysExSpeed, name, advanceScheduleTimeMuSec;
+
 static BOOL _MKClientShouldPostNotifications = NO;
 
 @synthesize inputPorts=_inputPorts;

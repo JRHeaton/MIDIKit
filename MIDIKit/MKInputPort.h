@@ -8,7 +8,6 @@
 
 #import "MKEntity.h"
 #import "MKClient.h"
-#import "MKPortProperties.h"
 
 #pragma mark - -Mutual ObjC/JavaScript-
 
@@ -47,7 +46,7 @@ JSExportAs(removeInputHandler,
 
 #pragma mark - -Input Port Wrapper-
 @protocol MKInputPortDelegate;
-@interface MKInputPort : MKObject <MKClientDependentInstaniation, MKInputPortJS, MKPortProperties>
+@interface MKInputPort : MKObject <MKClientDependentInstaniation, MKInputPortJS>
 
 #pragma mark - -Init-
 + (instancetype)inputPortWithName:(NSString *)name client:(MKClient *)client;
