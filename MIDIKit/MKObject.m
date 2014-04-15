@@ -312,6 +312,15 @@ BITFIELD_PROP(Transmits, transmit)
     [self set##propertyTypeUpper:val forProperty:(__bridge NSString *)propSymbol]; \
 }
 
+PROPERTY(NSUInteger, advanceScheduleTimeMuSec, advanceScheduleTimeMuSec, kMIDIPropertyAdvanceScheduleTimeMuSec, Integer, integer)
+PROPERTY(NSInteger, connectionUniqueID, connectionUniqueID, kMIDIPropertyConnectionUniqueID, Integer, integer)
+PROPERTY(BOOL, Broadcast, isBroadcast, kMIDIPropertyIsBroadcast, Integer, integer)
+PROPERTY(BOOL, SupportsGeneralMIDI, supportsGeneralMIDI, kMIDIPropertySupportsGeneralMIDI, Integer, integer)
+PROPERTY(BOOL, SupportsMMC, supportsMMC, kMIDIPropertySupportsMMC, Integer, integer)
+PROPERTY(BOOL, CanRoute, canRoute, kMIDIPropertyCanRoute, Integer, integer)
+PROPERTY(BOOL, TransmitsBankSelectMSB, transmitsBankSelectMSB, kMIDIPropertyTransmitsBankSelectMSB, Integer, integer)
+PROPERTY(BOOL, TransmitsBankSelectLSB, transmitsBankSelectLSB, kMIDIPropertyTransmitsBankSelectLSB, Integer, integer)
+PROPERTY(BOOL, SupportsShowControl, supportsShowControl, kMIDIPropertySupportsShowControl, Integer, integer)
 PROPERTY(BOOL, DrumMachine, isDrumMachine, kMIDIPropertyIsDrumMachine, Integer, integer)
 PROPERTY(BOOL, EffectUnit, isEffectUnit, kMIDIPropertyIsEffectUnit, Integer, integer)
 PROPERTY(BOOL, EmbeddedEntity, isEmbeddedEntity, kMIDIPropertyIsEmbeddedEntity, Integer, integer)
@@ -327,6 +336,7 @@ PROPERTY(NSString *, DisplayName, displayName, kMIDIPropertyDisplayName, String,
 PROPERTY(NSString *, DriverOwner, driverOwner, kMIDIPropertyDriverOwner, String, string)
 PROPERTY(NSInteger, DriverVersion, driverVersion, kMIDIPropertyDriverVersion, Integer, integer)
 PROPERTY(NSString *, IconImagePath, iconImagePath, kMIDIPropertyImage, String, string)
+PROPERTY(NSString *, DriverDeviceEditorApp, driverDeviceEditorApp, kMIDIPropertyDriverDeviceEditorApp, String, string)
 PROPERTY(NSInteger, MaxReceiveChannels, maxReceiveChannels, kMIDIPropertyMaxReceiveChannels, Integer, integer)
 PROPERTY(NSInteger, MaxSysexSpeed, maxSysexSpeed, kMIDIPropertyMaxSysExSpeed, Integer, integer)
 PROPERTY(NSInteger, MaxTransmitChannels, maxTransmitChannels, kMIDIPropertyMaxTransmitChannels, Integer, integer)
@@ -340,6 +350,7 @@ PROPERTY(BOOL, TransmitsMTC, transmitsMTC, kMIDIPropertyTransmitsMTC, Integer, i
 PROPERTY(BOOL, TransmitsClock, transmitsClock, kMIDIPropertyTransmitsClock, Integer, integer)
 PROPERTY(BOOL, TransmitsNotes, transmitsNotes, kMIDIPropertyTransmitsNotes, Integer, integer)
 PROPERTY(BOOL, ReceivesProgramChanges, receivesProgramChanges, kMIDIPropertyReceivesProgramChanges, Integer, integer)
+PROPERTY(NSInteger, SingleRealtimeEntity, singleRealtimeEntity, kMIDIPropertySingleRealtimeEntity, Integer, integer)
 
 #undef PROPERTY
 #undef PROPERTY

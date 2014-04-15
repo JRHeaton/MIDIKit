@@ -16,6 +16,10 @@ JSValue *runTestScript(MKJavaScriptContext *c, NSString *name) {
     return [c require:name];
 }
 
+void sigg(int sig) {
+    printf("\033[1;32m~>> use process.exit() to close\033[0;m\n");
+}
+
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         MKJavaScriptContext *c = [MKJavaScriptContext new];
@@ -46,11 +50,13 @@ int main(int argc, const char * argv[]) {
         c[@"launchpad"] = ^{ runTestScript(_c, @"launchpad.js"); };
         c[@"setPath"] = ^(NSString *path) { _c[@"__dirname"] = path; };
         c[@"help"] = ^{ printf("%s\n",
-        "require(path)   -- evaluate a script\n"
-        "local()         -- set relative path for require() calls\n"
-        "showEval(bool)  -- set whether return values should be printed\n"
-        "process         -- global process object\n"
-        "setCwd(path)    -- sets the relative path for relative path require() calls"); };
+                               "require(path)   -- evaluate a script\n"
+                               "local()         -- set relative path for require() calls\n"
+                               "showEval(bool)  -- set whether return values should be printed\n"
+                               "process         -- global process object\n"
+                               "setCwd(path)    -- sets the relative path for relative path require() calls\n"
+                               "MIDIRestart()   -- for when you kill the server with bad code");
+        };
 
         c[@"require"] = ^JSValue *(NSString *path) {
             NSString *evalPath = [_c[@"__dirname"] toString];
@@ -104,10 +110,7 @@ int main(int argc, const char * argv[]) {
 
         using_history();
 #define hist [@"~/.midirepl_history" stringByExpandingTildeInPath].UTF8String
-        signal(SIGINT, [](int) -> void {
-            write_history(hist);
-            exit(0);
-        });
+        signal(SIGINT, sigg);
 
         read_history(hist);
 
@@ -141,6 +144,8 @@ int main(int argc, const char * argv[]) {
             @catch (NSException *exception) {
                 NSLog(@"ObjC exception thrown: %@", exception);
             }
+
+            write_history(hist);
         }
 
 //        CFRunLoopRun();

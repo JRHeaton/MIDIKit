@@ -49,8 +49,6 @@ MKIntegerProperty(driverVersion);
 MKBoolGetterProperty(offline, isOffline);
 MKBoolGetterProperty(online, isOnline);
 MKBoolProperty(isPrivate);
-MKDataProperty(patchNameFile);
-MKDataProperty(userPatchNameFile);
 
 @end
 // ---------------------------------------------------------

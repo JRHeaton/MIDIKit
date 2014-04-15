@@ -266,7 +266,6 @@
 				5273C70718DE9E2500A8CFD4 /* MKClient.m */,
 				524005DA18FB04300030B46D /* Ports */,
 				524005DB18FB04370030B46D /* Device */,
-				524005DC18FB043D0030B46D /* Entity */,
 			);
 			name = Client;
 			sourceTree = "<group>";
@@ -299,6 +298,7 @@
 			children = (
 				5273C73518DEAD5700A8CFD4 /* MKDevice.h */,
 				5273C73618DEAD5700A8CFD4 /* MKDevice.m */,
+				524005DC18FB043D0030B46D /* Entity */,
 			);
 			name = Device;
 			sourceTree = "<group>";
