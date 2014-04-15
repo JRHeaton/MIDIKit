@@ -22,6 +22,15 @@
 		5240064D18FB15050030B46D /* MKThruConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 5240064B18FB15050030B46D /* MKThruConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5240064E18FB15050030B46D /* MKThruConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5240064C18FB15050030B46D /* MKThruConnection.m */; };
 		5240064F18FB15050030B46D /* MKThruConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5240064C18FB15050030B46D /* MKThruConnection.m */; };
+		526F3B8A18FD9B9800451D4C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D718DE96A200A8CFD4 /* Cocoa.framework */; };
+		526F3BC318FD9BC600451D4C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 526F3BB718FD9BC600451D4C /* MainMenu.xib */; };
+		526F3BC418FD9BC600451D4C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 526F3BB918FD9BC600451D4C /* Images.xcassets */; };
+		526F3BC518FD9BC600451D4C /* VLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 526F3BBB18FD9BC600451D4C /* VLAppDelegate.m */; };
+		526F3BC718FD9BC600451D4C /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 526F3BBE18FD9BC600451D4C /* Credits.rtf */; };
+		526F3BC818FD9BC600451D4C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 526F3BC018FD9BC600451D4C /* InfoPlist.strings */; };
+		526F3BC918FD9BC600451D4C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 526F3BC218FD9BC600451D4C /* main.m */; };
+		526F3BCF18FD9D3600451D4C /* VLVirtualLaunchpad.m in Sources */ = {isa = PBXBuildFile; fileRef = 526F3BCE18FD9D3600451D4C /* VLVirtualLaunchpad.m */; };
+		526F3BD018FDA01C00451D4C /* libMIDIKitOSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A1E05418FB876900D7073F /* libMIDIKitOSX.a */; };
 		5273C6D818DE96A200A8CFD4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D718DE96A200A8CFD4 /* Cocoa.framework */; };
 		5273C70418DE9A9800A8CFD4 /* MKObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C70218DE9A9800A8CFD4 /* MKObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5273C70518DE9A9800A8CFD4 /* MKObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C70318DE9A9800A8CFD4 /* MKObject.m */; };
@@ -49,6 +58,11 @@
 		528C945B18FC919800A7B960 /* MIDIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 528C945A18FC919800A7B960 /* MIDIKit.m */; };
 		528C945C18FC919800A7B960 /* MIDIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 528C945A18FC919800A7B960 /* MIDIKit.m */; };
 		528C945D18FC919800A7B960 /* MIDIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 528C945A18FC919800A7B960 /* MIDIKit.m */; };
+		529BF7FE18FDACED001C0BB7 /* MKServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 529BF7FC18FDACED001C0BB7 /* MKServer.h */; };
+		529BF7FF18FDACED001C0BB7 /* MKServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 529BF7FC18FDACED001C0BB7 /* MKServer.h */; };
+		529BF80018FDACED001C0BB7 /* MKServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 529BF7FD18FDACED001C0BB7 /* MKServer.m */; };
+		529BF80118FDACED001C0BB7 /* MKServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 529BF7FD18FDACED001C0BB7 /* MKServer.m */; };
+		529BF80218FDACED001C0BB7 /* MKServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 529BF7FD18FDACED001C0BB7 /* MKServer.m */; };
 		52A1E05518FB876900D7073F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D718DE96A200A8CFD4 /* Cocoa.framework */; };
 		52A1E07718FB88E200D7073F /* libMIDIKitOSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A1E05418FB876900D7073F /* libMIDIKitOSX.a */; };
 		52A1E07918FB88FE00D7073F /* MKThruConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5240064C18FB15050030B46D /* MKThruConnection.m */; };
@@ -80,6 +94,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		526F3BCB18FD9C3E00451D4C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5273C6CB18DE96A200A8CFD4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52A1E05318FB876900D7073F;
+			remoteInfo = "MIDIKit Static Lib (OS X)";
+		};
 		52A1E07418FB87C400D7073F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5273C6CB18DE96A200A8CFD4 /* Project object */;
@@ -120,6 +141,17 @@
 		5240060E18FB08220030B46D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		5240064B18FB15050030B46D /* MKThruConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKThruConnection.h; sourceTree = "<group>"; };
 		5240064C18FB15050030B46D /* MKThruConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKThruConnection.m; sourceTree = "<group>"; };
+		526F3B8918FD9B9800451D4C /* Virtual Launchpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Virtual Launchpad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		526F3BB818FD9BC600451D4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		526F3BB918FD9BC600451D4C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		526F3BBA18FD9BC600451D4C /* VLAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLAppDelegate.h; sourceTree = "<group>"; };
+		526F3BBB18FD9BC600451D4C /* VLAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLAppDelegate.m; sourceTree = "<group>"; };
+		526F3BBC18FD9BC600451D4C /* Virtual Launchpad-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Virtual Launchpad-Info.plist"; sourceTree = "<group>"; };
+		526F3BBF18FD9BC600451D4C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		526F3BC118FD9BC600451D4C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		526F3BC218FD9BC600451D4C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		526F3BCD18FD9D3600451D4C /* VLVirtualLaunchpad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLVirtualLaunchpad.h; sourceTree = "<group>"; };
+		526F3BCE18FD9D3600451D4C /* VLVirtualLaunchpad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLVirtualLaunchpad.m; sourceTree = "<group>"; };
 		5273C6D418DE96A200A8CFD4 /* MIDIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MIDIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5273C6D718DE96A200A8CFD4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		5273C6DA18DE96A200A8CFD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -145,13 +177,12 @@
 		528C944A18FC8FD900A7B960 /* LPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPMessage.h; path = Examples/midirepl/LPMessage.h; sourceTree = SOURCE_ROOT; };
 		528C944B18FC8FD900A7B960 /* LPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPMessage.m; path = Examples/midirepl/LPMessage.m; sourceTree = SOURCE_ROOT; };
 		528C944C18FC8FD900A7B960 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = Examples/midirepl/main.mm; sourceTree = SOURCE_ROOT; };
-		528C945018FC8FE500A7B960 /* LPConnection.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = LPConnection.js; sourceTree = "<group>"; };
-		528C945118FC8FE500A7B960 /* launchpad.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = launchpad.js; sourceTree = "<group>"; };
-		528C945218FC8FE500A7B960 /* unitTest.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = unitTest.js; sourceTree = "<group>"; };
 		528C945618FC90B400A7B960 /* MKJavaScriptContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKJavaScriptContext.h; path = Examples/midirepl/MKJavaScriptContext.h; sourceTree = SOURCE_ROOT; };
 		528C945718FC90B400A7B960 /* MKJavaScriptModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKJavaScriptModule.h; path = Examples/midirepl/MKJavaScriptModule.h; sourceTree = SOURCE_ROOT; };
 		528C945818FC90B400A7B960 /* MKJavaScriptContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKJavaScriptContext.m; path = Examples/midirepl/MKJavaScriptContext.m; sourceTree = SOURCE_ROOT; };
 		528C945A18FC919800A7B960 /* MIDIKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIDIKit.m; sourceTree = "<group>"; };
+		529BF7FC18FDACED001C0BB7 /* MKServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKServer.h; sourceTree = "<group>"; };
+		529BF7FD18FDACED001C0BB7 /* MKServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKServer.m; sourceTree = "<group>"; };
 		52A1E05418FB876900D7073F /* libMIDIKitOSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMIDIKitOSX.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		52A1E07618FB883000D7073F /* MIDIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MIDIKit.h; sourceTree = "<group>"; };
 		52A786BE18FCE5E60064E313 /* MKObjectProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKObjectProperties.h; sourceTree = "<group>"; };
@@ -178,6 +209,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				524005E518FB06CD0030B46D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		526F3B8618FD9B9800451D4C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				526F3B8A18FD9B9800451D4C /* Cocoa.framework in Frameworks */,
+				526F3BD018FDA01C00451D4C /* libMIDIKitOSX.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +341,44 @@
 			name = "MIDIKit Framework (OS X)";
 			sourceTree = "<group>";
 		};
+		526F3B8418FD936100451D4C /* JS Stuff */ = {
+			isa = PBXGroup;
+			children = (
+				528C945618FC90B400A7B960 /* MKJavaScriptContext.h */,
+				528C945718FC90B400A7B960 /* MKJavaScriptModule.h */,
+				528C945818FC90B400A7B960 /* MKJavaScriptContext.m */,
+				528C944A18FC8FD900A7B960 /* LPMessage.h */,
+				528C944B18FC8FD900A7B960 /* LPMessage.m */,
+			);
+			name = "JS Stuff";
+			sourceTree = "<group>";
+		};
+		526F3BB618FD9BC600451D4C /* Virtual Launchpad */ = {
+			isa = PBXGroup;
+			children = (
+				526F3BBA18FD9BC600451D4C /* VLAppDelegate.h */,
+				526F3BBB18FD9BC600451D4C /* VLAppDelegate.m */,
+				526F3BCD18FD9D3600451D4C /* VLVirtualLaunchpad.h */,
+				526F3BCE18FD9D3600451D4C /* VLVirtualLaunchpad.m */,
+				526F3BCA18FD9BE700451D4C /* Files */,
+				526F3BC218FD9BC600451D4C /* main.m */,
+			);
+			name = "Virtual Launchpad";
+			path = "Examples/Virtual Launchpad";
+			sourceTree = "<group>";
+		};
+		526F3BCA18FD9BE700451D4C /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				526F3BB718FD9BC600451D4C /* MainMenu.xib */,
+				526F3BB918FD9BC600451D4C /* Images.xcassets */,
+				526F3BBC18FD9BC600451D4C /* Virtual Launchpad-Info.plist */,
+				526F3BBE18FD9BC600451D4C /* Credits.rtf */,
+				526F3BC018FD9BC600451D4C /* InfoPlist.strings */,
+			);
+			name = Files;
+			sourceTree = "<group>";
+		};
 		5273C6CA18DE96A200A8CFD4 = {
 			isa = PBXGroup;
 			children = (
@@ -309,6 +387,7 @@
 				5273C6DD18DE96A200A8CFD4 /* MIDIKit Source (Shared) */,
 				524005DF18FB068D0030B46D /* MIDIKit Framework (OS X) */,
 				52DDEDF018FB55400019BE98 /* CLI Tool (mkcli) */,
+				526F3BB618FD9BC600451D4C /* Virtual Launchpad */,
 				5273C6D618DE96A200A8CFD4 /* Frameworks */,
 				5273C6D518DE96A200A8CFD4 /* Products */,
 			);
@@ -321,6 +400,7 @@
 				524005E418FB06CD0030B46D /* libMIDIKitiOS.a */,
 				52DDEDEE18FB55400019BE98 /* midirepl */,
 				52A1E05418FB876900D7073F /* libMIDIKitOSX.a */,
+				526F3B8918FD9B9800451D4C /* Virtual Launchpad.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -357,6 +437,8 @@
 			children = (
 				52A1E07618FB883000D7073F /* MIDIKit.h */,
 				528C945A18FC919800A7B960 /* MIDIKit.m */,
+				529BF7FC18FDACED001C0BB7 /* MKServer.h */,
+				529BF7FD18FDACED001C0BB7 /* MKServer.m */,
 				52EAA53918FCE05600094EEF /* MIDI Property Availability */,
 				524005DE18FB045D0030B46D /* Useful Abstractions */,
 				524005D918FB041F0030B46D /* Wrappers */,
@@ -406,27 +488,11 @@
 			name = Destinations;
 			sourceTree = "<group>";
 		};
-		528C944F18FC8FE500A7B960 /* scripts */ = {
-			isa = PBXGroup;
-			children = (
-				528C945018FC8FE500A7B960 /* LPConnection.js */,
-				528C945118FC8FE500A7B960 /* launchpad.js */,
-				528C945218FC8FE500A7B960 /* unitTest.js */,
-			);
-			name = scripts;
-			path = Examples/midirepl/scripts;
-			sourceTree = SOURCE_ROOT;
-		};
 		52DDEDF018FB55400019BE98 /* CLI Tool (mkcli) */ = {
 			isa = PBXGroup;
 			children = (
-				528C945618FC90B400A7B960 /* MKJavaScriptContext.h */,
-				528C945718FC90B400A7B960 /* MKJavaScriptModule.h */,
-				528C945818FC90B400A7B960 /* MKJavaScriptContext.m */,
-				528C944A18FC8FD900A7B960 /* LPMessage.h */,
-				528C944B18FC8FD900A7B960 /* LPMessage.m */,
 				528C944C18FC8FD900A7B960 /* main.mm */,
-				528C944F18FC8FE500A7B960 /* scripts */,
+				526F3B8418FD936100451D4C /* JS Stuff */,
 			);
 			name = "CLI Tool (mkcli)";
 			path = mkcli;
@@ -458,6 +524,7 @@
 				52B22F0518F803E900A5A5D3 /* MKMessage.h in Headers */,
 				52B22EEC18F7A0EF00A5A5D3 /* MKInputPort.h in Headers */,
 				5273C73B18DEADB800A8CFD4 /* MKEntity.h in Headers */,
+				529BF7FE18FDACED001C0BB7 /* MKServer.h in Headers */,
 				5273C70418DE9A9800A8CFD4 /* MKObject.h in Headers */,
 				5273C70818DE9E2500A8CFD4 /* MKClient.h in Headers */,
 			);
@@ -468,6 +535,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				528C944218FC7FC000A7B960 /* MKSource.h in Headers */,
+				529BF7FF18FDACED001C0BB7 /* MKServer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +558,24 @@
 			productName = MIDIKit;
 			productReference = 524005E418FB06CD0030B46D /* libMIDIKitiOS.a */;
 			productType = "com.apple.product-type.library.static";
+		};
+		526F3B8818FD9B9800451D4C /* Virtual Launchpad */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 526F3BB018FD9B9800451D4C /* Build configuration list for PBXNativeTarget "Virtual Launchpad" */;
+			buildPhases = (
+				526F3B8518FD9B9800451D4C /* Sources */,
+				526F3B8618FD9B9800451D4C /* Frameworks */,
+				526F3B8718FD9B9800451D4C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				526F3BCC18FD9C3E00451D4C /* PBXTargetDependency */,
+			);
+			name = "Virtual Launchpad";
+			productName = "Virtual Launchpad";
+			productReference = 526F3B8918FD9B9800451D4C /* Virtual Launchpad.app */;
+			productType = "com.apple.product-type.application";
 		};
 		5273C6D318DE96A200A8CFD4 /* MIDIKit Framework (OS X) */ = {
 			isa = PBXNativeTarget;
@@ -559,6 +645,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 5273C6CA18DE96A200A8CFD4;
 			productRefGroup = 5273C6D518DE96A200A8CFD4 /* Products */;
@@ -569,11 +656,23 @@
 				52A1E05318FB876900D7073F /* MIDIKit Static Lib (OS X) */,
 				524005E318FB06CD0030B46D /* MIDIKit Static Lib (iOS) */,
 				52DDEDED18FB55400019BE98 /* CLI Tool (midirepl) */,
+				526F3B8818FD9B9800451D4C /* Virtual Launchpad */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		526F3B8718FD9B9800451D4C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				526F3BC718FD9BC600451D4C /* Credits.rtf in Resources */,
+				526F3BC318FD9BC600451D4C /* MainMenu.xib in Resources */,
+				526F3BC418FD9BC600451D4C /* Images.xcassets in Resources */,
+				526F3BC818FD9BC600451D4C /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5273C6D218DE96A200A8CFD4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -593,6 +692,7 @@
 				5240064218FB0A620030B46D /* MKClient.m in Sources */,
 				5240063E18FB0A5B0030B46D /* MKConnection.m in Sources */,
 				5240064318FB0A640030B46D /* MKInputPort.m in Sources */,
+				529BF80218FDACED001C0BB7 /* MKServer.m in Sources */,
 				528C945D18FC919800A7B960 /* MIDIKit.m in Sources */,
 				5240064518FB0A660030B46D /* MKDevice.m in Sources */,
 				5240064418FB0A650030B46D /* MKOutputPort.m in Sources */,
@@ -607,6 +707,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		526F3B8518FD9B9800451D4C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				526F3BC518FD9BC600451D4C /* VLAppDelegate.m in Sources */,
+				526F3BC918FD9BC600451D4C /* main.m in Sources */,
+				526F3BCF18FD9D3600451D4C /* VLVirtualLaunchpad.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5273C6CF18DE96A200A8CFD4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -615,6 +725,7 @@
 				5273C73818DEAD5700A8CFD4 /* MKDevice.m in Sources */,
 				52B22F0618F803E900A5A5D3 /* MKMessage.m in Sources */,
 				528C945B18FC919800A7B960 /* MIDIKit.m in Sources */,
+				529BF80018FDACED001C0BB7 /* MKServer.m in Sources */,
 				5273C73C18DEADB800A8CFD4 /* MKEntity.m in Sources */,
 				52B22EED18F7A0EF00A5A5D3 /* MKInputPort.m in Sources */,
 				5273C70518DE9A9800A8CFD4 /* MKObject.m in Sources */,
@@ -637,6 +748,7 @@
 				52A1E07918FB88FE00D7073F /* MKThruConnection.m in Sources */,
 				52A1E08418FB891500D7073F /* MKMessage.m in Sources */,
 				52A1E08318FB891300D7073F /* MKConnection.m in Sources */,
+				529BF80118FDACED001C0BB7 /* MKServer.m in Sources */,
 				528C945C18FC919800A7B960 /* MIDIKit.m in Sources */,
 				52A1E07D18FB890600D7073F /* MKOutputPort.m in Sources */,
 				52A1E07C18FB890500D7073F /* MKInputPort.m in Sources */,
@@ -664,12 +776,44 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		526F3BCC18FD9C3E00451D4C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52A1E05318FB876900D7073F /* MIDIKit Static Lib (OS X) */;
+			targetProxy = 526F3BCB18FD9C3E00451D4C /* PBXContainerItemProxy */;
+		};
 		52A1E07518FB87C400D7073F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 52A1E05318FB876900D7073F /* MIDIKit Static Lib (OS X) */;
 			targetProxy = 52A1E07418FB87C400D7073F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		526F3BB718FD9BC600451D4C /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				526F3BB818FD9BC600451D4C /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		526F3BBE18FD9BC600451D4C /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				526F3BBF18FD9BC600451D4C /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		526F3BC018FD9BC600451D4C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				526F3BC118FD9BC600451D4C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		5240060218FB06CD0030B46D /* Debug */ = {
@@ -701,6 +845,36 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		526F3BB118FD9B9800451D4C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Examples/Virtual Launchpad/Virtual Launchpad-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		526F3BB218FD9B9800451D4C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "$(SRCROOT)/Examples/Virtual Launchpad/Virtual Launchpad-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -868,6 +1042,15 @@
 			buildConfigurations = (
 				5240060218FB06CD0030B46D /* Debug */,
 				5240060318FB06CD0030B46D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		526F3BB018FD9B9800451D4C /* Build configuration list for PBXNativeTarget "Virtual Launchpad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				526F3BB118FD9B9800451D4C /* Debug */,
+				526F3BB218FD9B9800451D4C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

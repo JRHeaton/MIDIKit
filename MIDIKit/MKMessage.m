@@ -197,8 +197,9 @@
 
     MIDIPacket *packet = &list->packet[0];
     for (int i=0;i<list->numPackets;++i) {
-        packet = MIDIPacketNext(packet);
         [ret addObjectsFromArray:[self messagesWithPacket:packet]];
+
+        packet = MIDIPacketNext(packet);
     }
 
     return ret.count ? ret.copy : nil;

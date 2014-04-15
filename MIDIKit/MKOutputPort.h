@@ -18,7 +18,7 @@
 
 JSExportAs(named, + (instancetype)outputPortWithName:(NSString *)name client:(MKClient *)client);
 
-JSExportAs(send, - (instancetype)sendJS:(JSValue *)dataArray toDestination:(MKDestination *)destination);
+//JSExportAs(send, - (instancetype)sendJS:(JSValue *)dataArray toDestination:(MKDestination *)destination);
 JSExportAs(sendMessage, - (instancetype)sendMessage:(MKMessage *)msg toDestination:(MKDestination *)destination);
 JSExportAs(sendMessages, - (instancetype)sendMessages:(NSArray *)messages toDestination:(MKDestination *)destination);
 

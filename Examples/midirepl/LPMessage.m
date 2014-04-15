@@ -20,11 +20,11 @@ static const UInt8 LPMsg[6][3] = {
 @implementation LPMessage
 
 - (NSUInteger)row {
-    return (self.key / 8);
+    return (self.key / 0x10);
 }
 
 - (NSUInteger)column {
-    return (self.key % 8);
+    return (self.key % 0x10);
 }
 
 + (instancetype)_staticMessageAtIndex:(NSUInteger)index {

@@ -19,6 +19,7 @@
 #import "MKVirtualSource.h"
 #import "MKSource.h"
 #import "MKDestination.h"
+#import "MKServer.h"
 
 #define kMIDIKitVersionMajor 0
 #define kMIDIKitVersionMinor 2
@@ -40,7 +41,7 @@ extern BOOL MKSettingDescriptionsIncludeProperties; // default: NO
 extern BOOL MKSettingOSStatusEvaluationThrowsOnError; // default: NO
 
 // Whether to suppress logs/exceptions from +evalOSStatus:name:throw:
-extern BOOL MKSettingOSStatusEvaluationLogErrors; // default: NO if debug build, else YES
+extern BOOL MKSettingOSStatusEvaluationLogErrors; // default: YES if debug build, NO elsewise
 
 
 // ------------------------------------------------------------------

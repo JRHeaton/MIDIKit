@@ -43,7 +43,8 @@ NSArray *MKClassList() {
                          [MKSource class],
                          [MKEntity class],
                          [MKVirtualDestination class],
-                         [MKVirtualSource class]
+                         [MKVirtualSource class],
+                         [MKServer class]
                          ];
     });
 

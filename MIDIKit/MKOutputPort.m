@@ -46,13 +46,30 @@
 
 - (instancetype)sendJS:(JSValue *)dataArray toDestination:(MKDestination *)destination {
     NSArray *array = dataArray.toArray;
-    NSMutableData *data = [NSMutableData dataWithLength:array.count];
-
-    for(int i=0;i<array.count;++i) {
-        ((UInt8 *)data.mutableBytes)[i] = [array[i] unsignedCharValue];
+    if(!array.count && [[JSContext currentArguments].firstObject isKindOfClass:[MKMessage class]]) {
+        NSLog(@"msgggggggggggg");
+        return [self sendMessage:[JSContext currentArguments].firstObject toDestination:destination];
     }
 
-    [self sendData:data toDestination:destination];
+    NSLog(@"zoob");
+    id thing = array.firstObject;
+    if(!thing) return self;
+
+    if([thing isKindOfClass:[NSNumber class]]) {
+        // we got a byte list
+        NSMutableData *data = [NSMutableData dataWithLength:array.count];
+        NSLog(@"dataaaaa");
+
+        for(int i=0;i<array.count;++i) {
+            ((UInt8 *)data.mutableBytes)[i] = [array[i] unsignedCharValue];
+        }
+
+        [self sendData:data toDestination:destination];
+    } else if([thing isKindOfClass:[MKMessage class]]) {
+        NSLog(@"array");
+        for(MKMessage *msg in array)
+            [self sendMessage:msg toDestination:destination];
+    }
 
     return self;
 }

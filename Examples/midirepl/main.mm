@@ -35,10 +35,13 @@ int main(int argc, const char * argv[]) {
             NSLog(@"using argv[1]...");
 
             c.currentEvaluatingScriptPath = [NSString stringWithUTF8String:argv[1]];
-        } else {
+        } else if([[NSProcessInfo processInfo].environment[@"USE_SRCROOT"] boolValue] == YES) {
             NSLog(@"using SRCROOT..."); // defined by -DSRCROOT="\"${SRCROOT}\"" in build settings
             c.currentEvaluatingScriptPath = [[NSString stringWithUTF8String:SRCROOT] stringByAppendingPathComponent:@"Example JavaScript"];
+        } else {
+            _c[@"__dirname"] = [NSFileManager defaultManager].currentDirectoryPath;
         }
+
         c[@"unitTests"] = ^{ runTestScript(_c, @"unitTest.js"); };
         c[@"launchpad"] = ^{ runTestScript(_c, @"launchpad.js"); };
         c[@"setPath"] = ^(NSString *path) { _c[@"__dirname"] = path; };
@@ -88,8 +91,6 @@ int main(int argc, const char * argv[]) {
             printf("to run in REPL mode, set env var REPL=1\n");
             // standard exec
 
-            NSLog(@"%@", [c evaluateScript:@"require('asd')"]);
-
             return 0;
         }
 
@@ -101,8 +102,9 @@ int main(int argc, const char * argv[]) {
         });
 
         read_history(hist);
+
         while(1) {
-            const char *buf = readline("\033[1;34m|> \033[0m");
+            const char *buf = readline("|> ");
 
             if(!buf || !strlen(buf)) continue;
             add_history(buf);

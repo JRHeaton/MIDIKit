@@ -33,8 +33,9 @@ JSExportAs(named, + (instancetype)virtualDestinationWithName:(NSString *)name cl
 
 @protocol MKVirtualDestinationDelegate <NSObject>
 
+@optional
 // Called when a packet is received
-- (void)virtualDestination:(MKVirtualDestination *)virtualDestination
-              receivedData:(NSData *)data;
+- (void)virtualDestination:(MKVirtualDestination *)virtualDestination receivedData:(NSData *)data;
+- (void)virtualDestination:(MKVirtualDestination *)virtualDestination receivedMessage:(MKMessage *)message;
 
 @end
