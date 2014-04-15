@@ -13,6 +13,10 @@
 
 @synthesize client=_client;
 
++ (instancetype)outputPortWithName:(NSString *)name client:(MKClient *)client {
+    return [[self alloc] initWithName:name client:client];
+}
+
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client {
     if(!client.valid) return nil;
     if([MIDIKit evalOSStatus:MIDIOutputPortCreate(client.MIDIRef, (__bridge CFStringRef)(name), (void *)&_MIDIRef) name:@"Creating an output port" throw:NO] != 0) {

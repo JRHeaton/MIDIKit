@@ -17,6 +17,8 @@
 
 @protocol MKOutputPortJS <JSExport, MKObjectJS>
 
+JSExportAs(named, + (instancetype)outputPortWithName:(NSString *)name client:(MKClient *)client);
+
 #pragma mark - -Sending MIDI Data-
 
 JSExportAs(send, - (instancetype)sendJS:(JSValue *)dataArray toDestination:(MKDestination *)destination);
