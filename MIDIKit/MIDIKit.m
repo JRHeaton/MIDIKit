@@ -18,6 +18,13 @@
 
 BOOL MKSettingDescriptionsIncludeProperties = NO;
 
+BOOL MKSettingShouldPrintOSStatusEvaluationErrors =
+#if DEBUG == 1
+NO;
+#else
+YES;
+#endif
+
 NSArray *MKClassList() {
     static NSArray *_MKClassList = nil;
     static dispatch_once_t onceToken;
@@ -57,6 +64,7 @@ void MKInstallIntoContext(JSContext *c) {
 + (BOOL)getter { return var; }
 
 GLOBAL(setDescriptionsIncludeProperties, descriptionsIncludeProperties, MKSettingDescriptionsIncludeProperties)
+GLOBAL(setShouldPrintOSStatusEvaluationErrors, shouldPrintOSStatusEvaluationErrors, MKSettingShouldPrintOSStatusEvaluationErrors)
 
 + (void)openGitHub {
     static NSString *_MKGitHubURL = @"http://github.com/JRHeaton/MIDIKit";

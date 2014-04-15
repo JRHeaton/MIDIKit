@@ -30,7 +30,15 @@ extern void MKInstallIntoContext(JSContext *c);
 
 // -------------------
 // Global settings
+// -------------------
+//
+// Whether or not to include properties in -description of MKObject.
+// This is handy to set to YES when inspecting objects
 extern BOOL MKSettingDescriptionsIncludeProperties; // default: NO
+
+// Whether to suppress logs/exceptions from +evalOSStatus:name:throw:
+extern BOOL MKSettingShouldIgnoreOSStatusEvaluationErrors; // default: NO if debug build, else YES
+
 
 // ------------------------------------------------------------------
 // Convenience class methods for setting GLOBAL framework settings
@@ -43,6 +51,9 @@ extern BOOL MKSettingDescriptionsIncludeProperties; // default: NO
 
 JSExportAs(showProperties, + (BOOL)setDescriptionsIncludeProperties:(BOOL)val);
 + (BOOL)descriptionsIncludeProperties;
+
+JSExportAs(printErrors, + (BOOL)setShouldPrintOSStatusEvaluationErrors:(BOOL)val);
++ (BOOL)shouldPrintOSStatusEvaluationErrors;
 
 + (void)openGitHub;
 
