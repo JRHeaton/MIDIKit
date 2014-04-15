@@ -6,11 +6,16 @@
 //  Copyright (c) 2014 John Heaton. All rights reserved.
 //
 
-#import "MKVirtualSource.h"
+#import "MIDIKit.h"
+#import "MKPrivate.h"
 
 @implementation MKVirtualSource
 
 @synthesize client=_client;
+
++ (BOOL)hasUniqueID {
+    return YES;
+}
 
 + (instancetype)virtualSourceWithName:(NSString *)name client:(MKClient *)client {
     return [[self alloc] initWithName:name client:client];
@@ -20,7 +25,7 @@
     MIDIEndpointRef e;
 
     if(!client.valid) return nil;
-    if([MKObject evalOSStatus:MIDISourceCreate(client.MIDIRef, (__bridge CFStringRef)(name), &e) name:@"Creating a virtual source" throw:NO] != 0)
+    if([MIDIKit evalOSStatus:MIDISourceCreate(client.MIDIRef, (__bridge CFStringRef)(name), &e) name:@"Creating a virtual source" throw:NO] != 0)
         return nil;
     if(!(self = [super initWithMIDIRef:e])) return nil;
     
@@ -30,18 +35,26 @@
     return self;
 }
 
-- (void)receivedData:(NSData *)data {
-    if(data.length <= 256) {
-        MIDIPacketList list;
-        list.numPackets = 1;
-        list.packet[0].timeStamp = 0;
-        list.packet[0].length = data.length;
-        memcpy(list.packet[0].data, data.bytes, data.length);
-        
-        MIDIReceived(self.MIDIRef, &list);
-    } else {
-        [NSException raise:@"Data is too large" format:@"I need to implement this"];
+- (instancetype)receivedData:(NSData *)data {
+    [self.receiveQueue addOperationWithBlock:^{
+        MIDIPacketList *list = MKPacketListFromData(data);
+        if([MIDIKit evalOSStatus:MIDIReceived(self.MIDIRef, list) name:@"Virtual receive" throw:NO] != 0) {
+            // TODO: handle error
+        }
+
+        free(list);
+    }];
+
+    return self;
+}
+
+- (NSOperationQueue *)receiveQueue {
+    static NSOperationQueue *queue = nil;
+    if(!queue) {
+        queue = [NSOperationQueue new];
     }
+
+    return queue;
 }
 
 @end

@@ -332,10 +332,11 @@ FORWARD(velocity, data2, setVelocity, setData2)
     return self;
 }
 
-- (void)setObject:(id)object atIndexedSubscript:(NSUInteger)idx {
+- (instancetype)setObject:(id)object atIndexedSubscript:(NSUInteger)idx {
     if([object isKindOfClass:[NSNumber class]]) {
         [self setByte:((NSNumber *)object).unsignedCharValue atIndex:idx];
     }
+    return self;
 }
 
 - (BOOL)isEqual:(id)object {

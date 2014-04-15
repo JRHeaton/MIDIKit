@@ -9,7 +9,6 @@
 #import "MKClient.h"
 #import "MKConnection.h"
 #import "MKDevice.h"
-#import "MKEndpoint.h"
 #import "MKEntity.h"
 #import "MKInputPort.h"
 #import "MKMessage.h"
@@ -28,6 +27,7 @@
 // Use to put constructors for all MIDIKit classes into a JavaScript context
 extern void MKInstallIntoContext(JSContext *c);
 
+
 // -------------------
 // Global settings
 extern BOOL MKSettingDescriptionsIncludeProperties; // default: NO
@@ -44,7 +44,12 @@ extern BOOL MKSettingDescriptionsIncludeProperties; // default: NO
 JSExportAs(showProperties, + (BOOL)setDescriptionsIncludeProperties:(BOOL)val);
 + (BOOL)descriptionsIncludeProperties;
 
++ (void)openGitHub;
+
 @end
 
 @interface MIDIKit : NSObject <MIDIKitJS>
+
++ (OSStatus)evalOSStatus:(OSStatus)code name:(NSString *)name throw:(BOOL)shouldThrow;
+
 @end

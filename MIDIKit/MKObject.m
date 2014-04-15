@@ -19,17 +19,6 @@
 @synthesize useCaching=_useCaching;
 @dynamic valid, online, isPrivate, embeddedEntity;
 
-+ (OSStatus)evalOSStatus:(OSStatus)code name:(NSString *)name throw:(BOOL)throw {
-    if(code != 0) {
-        NSLog(@"[MIDI Error] %@ : %@", name, [NSError errorWithDomain:NSOSStatusErrorDomain code:code userInfo:nil]);
-        if(throw) {
-            [NSException raise:@"MKOSStatusEvaluationException" format:@"Error during operation: %@", name];
-        }
-    }
-
-    return code;
-}
-
 + (void)load {
 #if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
     if(!objc_getClass("MIDINetworkSession")) {
@@ -99,6 +88,9 @@ exception:
 }
 
 - (NSString *)description {
+    if([JSContext currentContext])
+        NSLog(@"%@", [JSContext currentContext]);
+
     NSMutableString *desc = [NSMutableString stringWithFormat:@"%@ valid=%@, MIDIRef=0x%x", [super description], self.valid ? @"YES" : @"NO", self.MIDIRef];
     if([[self class] hasUniqueID]) {
         [desc appendFormat:@", uniqueID=0x%x", self.uniqueID];
@@ -119,7 +111,7 @@ exception:
     if(self.useCaching && (nsVal = _propertyCache[key]) != nil) \
         return nsVal; \
 \
-    [MKObject evalOSStatus: \
+    [MIDIKit evalOSStatus: \
         MIDIObjectGet##upper##Property(self.MIDIRef, (__bridge CFStringRef)(key), &cfVal) \
         name:[NSString stringWithFormat:@"Getting " #lower " property: \'%@\'", key] \
         throw:NO]; \
@@ -136,7 +128,7 @@ CACHED_PROP_GETTER(Data, data)
 
 #define CACHED_PROP_SETTER_BASE(upper, lower, ret) \
 - (ret)set##upper:(NS##upper *)value forProperty:(NSString *)key { \
-    [MKObject evalOSStatus: \
+    [MIDIKit evalOSStatus: \
         MIDIObjectSet##upper##Property(self.MIDIRef, (__bridge CFStringRef)(key), (__bridge CF##upper##Ref)(value)) \
         name:[NSString stringWithFormat:@"Setting " #lower " property: \'%@\'", key] \
         throw:NO]; \
@@ -148,7 +140,7 @@ CACHED_PROP_GETTER(Data, data)
 
 CACHED_PROP_SETTER_BASE(String, string, instancetype) END_RET
 CACHED_PROP_SETTER_BASE(Dictionary, dictionary, instancetype) END_RET
-CACHED_PROP_SETTER_BASE(Data, data, void) END
+CACHED_PROP_SETTER_BASE(Data, data, instancetype) END_RET
 
 #undef CACHED_PROP_SETTER_BASE
 #undef CACHED_PROP_GETTER
@@ -161,25 +153,28 @@ CACHED_PROP_SETTER_BASE(Data, data, void) END
     if(self.useCaching && (dd = _propertyCache[key]) != nil)
         return dd.integerValue;
 
-    [MKObject evalOSStatus:MIDIObjectGetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(key), &ret) name:[NSString stringWithFormat:@"Getting integer property: \'%@\'", key] throw:NO];
-    _propertyCache[key] = @(ret);
+    if(![MIDIKit evalOSStatus:MIDIObjectGetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(key), &ret) name:[NSString stringWithFormat:@"Getting integer property: \'%@\'", key] throw:NO])
+        _propertyCache[key] = @(ret);
+
     return ret;
 }
 
 - (instancetype)setInteger:(NSInteger)value forProperty:(NSString *)key {
-    [MKObject evalOSStatus:MIDIObjectSetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(key), (SInt32)value) name:[NSString stringWithFormat:@"Setting integer property: \'%@\'", key] throw:NO];
-    _propertyCache[(key)] = @(value);
+    if(![MIDIKit evalOSStatus:MIDIObjectSetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(key), (SInt32)value) name:[NSString stringWithFormat:@"Setting integer property: \'%@\'", key] throw:NO])
+        _propertyCache[(key)] = @(value);
     return self;
 }
 
-- (void)removeCachedProperty:(NSString *)key {
+- (instancetype)removeCachedProperty:(NSString *)key {
     [self.propertyCache removeObjectForKey:key];
+    return self;
 }
 
-- (void)removeProperty:(NSString *)key {
+- (instancetype)removeProperty:(NSString *)key {
     [self removeCachedProperty:key];
 
-    [MKObject evalOSStatus:MIDIObjectRemoveProperty(self.MIDIRef, (__bridge CFStringRef)(key)) name:[NSString stringWithFormat:@"Removing property: \'%@\'", key] throw:NO];
+    [MIDIKit evalOSStatus:MIDIObjectRemoveProperty(self.MIDIRef, (__bridge CFStringRef)(key)) name:[NSString stringWithFormat:@"Removing property: \'%@\'", key] throw:NO];
+    return self;
 }
 
 
@@ -253,11 +248,13 @@ CACHED_PROP_SETTER_BASE(Data, data, void) END
 
 #pragma mark - Caching
 
-- (void)performBlockWithCaching:(void (^)(MKObject *obj))block {
+- (instancetype)performBlockWithCaching:(void (^)(MKObject *obj))block {
     BOOL old = self.useCaching;
     self.useCaching = YES;
     block(self);
     self.useCaching = old;
+
+    return self;
 }
 
 - (instancetype)purgeCache {
@@ -296,9 +293,7 @@ CACHED_PROP_SETTER_BASE(Data, data, void) END
 }
 
 + (BOOL)hasUniqueID {
-    return [self isSubclassOfClass:[MKEndpoint class]]
-        || [self isSubclassOfClass:[MKEntity class]]
-        || [self isSubclassOfClass:[MKDevice class]];
+    return NO; // only entities, endpoints, devices
 }
 
 - (BOOL)isValid {
@@ -312,7 +307,8 @@ CACHED_PROP_SETTER_BASE(Data, data, void) END
 
 - (NSDictionary *)allProperties {
     CFPropertyListRef ret;
-    [MKObject evalOSStatus:MIDIObjectGetProperties(self.MIDIRef, &ret, true) name:@"Copy object properties" throw:NO];
+    if([MIDIKit evalOSStatus:MIDIObjectGetProperties(self.MIDIRef, &ret, true) name:@"Copy object properties" throw:NO] != 0)
+        return nil;
     
     NSDictionary *properties = (__bridge_transfer NSDictionary *)ret;
     if(ret) _propertyCache = [NSMutableDictionary dictionaryWithDictionary:properties];

@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "MKMessage.h"
-#import "MKEndpoint.h"
 #import "MKInputPort.h"
 #import "MKOutputPort.h"
 #import <JavaScriptCore/JavaScriptCore.h>
@@ -46,9 +45,9 @@ JSExportAs(send, - (instancetype)sendNumberArray:(NSArray *)array);
 
 
 #pragma mark - -Output Destinations-
-- (instancetype)addDestination:(MKEndpoint *)destination;
-- (instancetype)removeDestination:(MKEndpoint *)destination;
-- (MKEndpoint *)destinationAtIndex:(NSUInteger)index;
+- (instancetype)addDestination:(MKDestination *)destination;
+- (instancetype)removeDestination:(MKDestination *)destination;
+- (MKDestination *)destinationAtIndex:(NSUInteger)index;
 @property (nonatomic, readonly) NSMutableArray *destinations;
 
 @end
@@ -70,7 +69,7 @@ JSExportAs(send, - (instancetype)sendNumberArray:(NSArray *)array);
 
 #pragma mark - -Sending Data-
 // Uses the output port to send to all destinations
-- (void)sendData:(NSData *)data;
-- (void)sendMessages:(MKMessage *)message, ... NS_REQUIRES_NIL_TERMINATION;
+- (instancetype)sendData:(NSData *)data;
+- (instancetype)sendMessages:(MKMessage *)message, ... NS_REQUIRES_NIL_TERMINATION;
 
 @end

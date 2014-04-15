@@ -112,8 +112,6 @@ JSExportAs(newWithMIDIRef, + (instancetype)objectWithMIDIRef:(MIDIObjectRef)MIDI
     MIDIObjectRef _MIDIRef;
 }
 
-+ (OSStatus)evalOSStatus:(OSStatus)code name:(NSString *)name throw:(BOOL)throw;
-
 #pragma mark - -Init-
 - (instancetype)initWithMIDIRef:(MIDIObjectRef)MIDIRef;
 - (instancetype)initWithUniqueID:(MIDIUniqueID)uniqueID;
@@ -121,7 +119,7 @@ JSExportAs(newWithMIDIRef, + (instancetype)objectWithMIDIRef:(MIDIObjectRef)MIDI
 
 #pragma mark - -Caching-
 // Turns useCaching on during execution, then back to previous setting
-- (void)performBlockWithCaching:(void (^)(MKObject *obj))block;
+- (instancetype)performBlockWithCaching:(void (^)(MKObject *obj))block;
 
 
 #pragma mark - -Properties-
@@ -130,11 +128,11 @@ JSExportAs(newWithMIDIRef, + (instancetype)objectWithMIDIRef:(MIDIObjectRef)MIDI
 - (NSData *)dataForProperty:(NSString *)key;
 
 #pragma mark Setters
-- (void)setData:(NSData *)value forProperty:(NSString *)propName;
+- (instancetype)setData:(NSData *)value forProperty:(NSString *)propName;
 
 #pragma mark Removal
-- (void)removeProperty:(NSString *)key;
-- (void)removeCachedProperty:(NSString *)key;
+- (instancetype)removeProperty:(NSString *)key;
+- (instancetype)removeCachedProperty:(NSString *)key;
 
 #pragma mark Copying All Properties
 // This will copy the entire dict. This is called in -description,

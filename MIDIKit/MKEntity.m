@@ -11,23 +11,27 @@
 
 @implementation MKEntity
 
-- (MKEndpoint *)destinationAtIndex:(NSUInteger)index {
-    return [[MKEndpoint alloc] initWithMIDIRef:MIDIEntityGetDestination(self.MIDIRef, index)];
++ (BOOL)hasUniqueID {
+    return YES;
 }
 
-- (MKEndpoint *)sourceAtIndex:(NSUInteger)index {
-    return [[MKEndpoint alloc] initWithMIDIRef:MIDIEntityGetSource(self.MIDIRef, index)];
+- (MKDestination *)destinationAtIndex:(NSUInteger)index {
+    return [[MKDestination alloc] initWithMIDIRef:MIDIEntityGetDestination(self.MIDIRef, index)];
+}
+
+- (MKSource *)sourceAtIndex:(NSUInteger)index {
+    return [[MKSource alloc] initWithMIDIRef:MIDIEntityGetSource(self.MIDIRef, index)];
 }
 
 - (id)objectAtIndexedSubscript:(NSUInteger)index {
     return [self destinationAtIndex:index];
 }
 
-- (MKEndpoint *)firstDestination {
+- (MKDestination *)firstDestination {
     return [self destinationAtIndex:0];
 }
 
-- (MKEndpoint *)firstSource {
+- (MKSource *)firstSource {
     return [self sourceAtIndex:0];
 }
 

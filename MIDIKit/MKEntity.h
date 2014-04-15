@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 John Heaton. All rights reserved.
 //
 
-#import "MKObject.h"
-#import "MKEndpoint.h"
+#import "MKSource.h"
+#import "MKDestination.h"
 
 #pragma mark - -Mutual ObjC/JavaScript-
 
@@ -20,13 +20,13 @@
 @protocol MKEntityJS <JSExport, MKObjectJS>
 
 #pragma mark - -Child Objects-
-- (MKEndpoint *)firstDestination;
-- (MKEndpoint *)firstSource;
+- (MKDestination *)firstDestination;
+- (MKDestination *)firstSource;
 
 - (NSUInteger)numberOfDestinations;
 - (NSUInteger)numberOfSources;
-- (MKEndpoint *)destinationAtIndex:(NSUInteger)index;
-- (MKEndpoint *)sourceAtIndex:(NSUInteger)index;
+- (MKDestination *)destinationAtIndex:(NSUInteger)index;
+- (MKSource *)sourceAtIndex:(NSUInteger)index;
 
 
 #pragma mark - -Parent Device-

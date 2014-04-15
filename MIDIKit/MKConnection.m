@@ -6,10 +6,7 @@
 //  Copyright (c) 2014 John Heaton. All rights reserved.
 //
 
-#import "MKConnection.h"
-#import "MKClient.h"
-#import "MKInputPort.h"
-#import "MKOutputPort.h"
+#import "MIDIKit.h"
 
 @implementation MKConnection
 @synthesize client=_client;
@@ -41,28 +38,30 @@
     return [self initWithClient:[MKClient global]];
 }
 
-- (instancetype)addDestination:(MKEndpoint *)destination {
-    if(![self.destinations containsObject:destination])
+- (instancetype)addDestination:(MKDestination *)destination {
+    if([destination isKindOfClass:[MKDestination class]])
         [self.destinations addObject:destination];
     
     return self;
 }
 
-- (instancetype)removeDestination:(MKEndpoint *)destination {
-    if([self.destinations containsObject:destination])
+- (instancetype)removeDestination:(MKDestination *)destination {
+    if([destination isKindOfClass:[MKDestination class]])
         [self.destinations removeObject:destination];
     
     return self;
 }
 
-- (MKEndpoint *)destinationAtIndex:(NSUInteger)index {
+- (MKDestination *)destinationAtIndex:(NSUInteger)index {
     return _destinations[index];
 }
 
-- (void)sendData:(NSData *)data {
-    for(MKEndpoint *dst in self.destinations) {
-        [self.outputPort sendData:data toDestination:dst];
+- (instancetype)sendData:(NSData *)data {
+    for(MKDestination *dst in self.destinations) {
+        if([dst isKindOfClass:[MKDestination class]])
+            [self.outputPort sendData:data toDestination:dst];
     }
+    return self;
 }
 
 - (instancetype)sendNumberArray:(NSArray *)array {
@@ -84,13 +83,14 @@
     return self;
 }
 
-- (void)sendMessages:(MKMessage *)message, ... {
+- (instancetype)sendMessages:(MKMessage *)message, ... {
     va_list args;
     va_start(args, message);
     for(MKMessage *msg = message;msg != nil;msg = va_arg(args, MKMessage *)) {
         [self sendMessage:msg];
     }
     va_end(args);
+    return self;
 }
 
 - (instancetype)sendMessageArray:(NSArray *)messages {

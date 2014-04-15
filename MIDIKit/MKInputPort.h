@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 John Heaton. All rights reserved.
 //
 
-#import "MKObject.h"
 #import "MKEntity.h"
 #import "MKClient.h"
 
@@ -20,8 +19,8 @@
 #pragma mark - -Connecting Sources-
 // Calling this method will begin input from the given source
 // to this input port, thus triggering the delegate callbacks
-- (instancetype)connectSource:(MKEndpoint *)source;
-- (instancetype)disconnectSource:(MKEndpoint *)source;
+- (instancetype)connectSource:(MKSource *)source;
+- (instancetype)disconnectSource:(MKSource *)source;
 
 
 #pragma mark - -CoreMIDI Port Disposal-
@@ -59,15 +58,15 @@ JSExportAs(removeInputHandler,
 #pragma mark Delegates
 // Adds an input delegate who is interested in receiving
 // input callbacks
-- (void)addInputDelegate:(id<MKInputPortDelegate>)delegate;
-- (void)removeInputDelegate:(id<MKInputPortDelegate>)delegate;
-- (void)removeAllInputDelegates;
+- (instancetype)addInputDelegate:(id<MKInputPortDelegate>)delegate;
+- (instancetype)removeInputDelegate:(id<MKInputPortDelegate>)delegate;
+- (instancetype)removeAllInputDelegates;
 
 #pragma mark Blocks
 typedef void (^MKInputHandler)(MKInputPort *port, NSData *data);
 
-- (void)addInputHandler:(MKInputHandler)inputHandler;
-- (void)removeInputHandler:(MKInputHandler)inputHandler;
+- (instancetype)addInputHandler:(MKInputHandler)inputHandler;
+- (instancetype)removeInputHandler:(MKInputHandler)inputHandler;
 
 @end
 
@@ -78,6 +77,6 @@ typedef void (^MKInputHandler)(MKInputPort *port, NSData *data);
 #pragma mark - -Data Input-
 - (void)inputPort:(MKInputPort *)inputPort
      receivedData:(NSData *)data
-       fromSource:(MKEndpoint *)source;
+       fromSource:(MKSource *)source;
 
 @end

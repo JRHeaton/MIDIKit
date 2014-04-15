@@ -35,8 +35,8 @@
 @property (nonatomic, readonly) NSArray *entities;
 
 #pragma mark Root Destination/Source
-- (MKEndpoint *)rootDestination;
-- (MKEndpoint *)rootSource;
+- (MKDestination *)rootDestination;
+- (MKSource *)rootSource;
 
 @end
 

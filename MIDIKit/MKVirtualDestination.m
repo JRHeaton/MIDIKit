@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 John Heaton. All rights reserved.
 //
 
-#import "MKVirtualDestination.h"
+#import "MIDIKit.h"
 
 @implementation MKVirtualDestination {
     NSMutableSet *_delegates;
@@ -31,6 +31,10 @@ static void _MKVirtualDestinationReadProc(const MIDIPacketList *pktlist, void *r
     }
 }
 
++ (BOOL)hasUniqueID {
+    return YES;
+}
+
 + (instancetype)virtualDestinationWithName:(NSString *)name client:(MKClient *)client {
     return [[self alloc] initWithName:name client:client];
 }
@@ -39,7 +43,7 @@ static void _MKVirtualDestinationReadProc(const MIDIPacketList *pktlist, void *r
     MIDIEndpointRef e;
 
     if(!client.valid) return nil;
-    if([MKObject evalOSStatus:MIDIDestinationCreate(client.MIDIRef, (__bridge CFStringRef)(name), _MKVirtualDestinationReadProc, (__bridge void *)(self), (void *)&_MIDIRef) name:@"Creating a virtual destination" throw:NO] != 0)
+    if([MIDIKit evalOSStatus:MIDIDestinationCreate(client.MIDIRef, (__bridge CFStringRef)(name), _MKVirtualDestinationReadProc, (__bridge void *)(self), (void *)&_MIDIRef) name:@"Creating a virtual destination" throw:NO] != 0)
         return nil;
     if(!(self = [super initWithMIDIRef:e])) return nil;
     
@@ -50,12 +54,14 @@ static void _MKVirtualDestinationReadProc(const MIDIPacketList *pktlist, void *r
     return self;
 }
 
-- (void)addDelegate:(id<MKVirtualDestinationDelegate>)delegate {
+- (instancetype)addDelegate:(id<MKVirtualDestinationDelegate>)delegate {
     [_delegates addObject:delegate];
+    return self;
 }
 
-- (void)removeDelegate:(id<MKVirtualDestinationDelegate>)delegate {
+- (instancetype)removeDelegate:(id<MKVirtualDestinationDelegate>)delegate {
     [_delegates removeObject:delegate];
+    return self;
 }
 
 @end

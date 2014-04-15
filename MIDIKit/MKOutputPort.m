@@ -7,6 +7,7 @@
 //
 
 #import "MIDIKit.h"
+#import "MKPrivate.h"
 
 @implementation MKOutputPort
 
@@ -14,7 +15,7 @@
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client {
     if(!client.valid) return nil;
-    if([MKObject evalOSStatus:MIDIOutputPortCreate(client.MIDIRef, (__bridge CFStringRef)(name), (void *)&_MIDIRef) name:@"Creating an output port" throw:NO] != 0) {
+    if([MIDIKit evalOSStatus:MIDIOutputPortCreate(client.MIDIRef, (__bridge CFStringRef)(name), (void *)&_MIDIRef) name:@"Creating an output port" throw:NO] != 0) {
         return nil;
     }
 
@@ -39,48 +40,70 @@
     return self;
 }
 
-- (void)sendData:(NSData *)data toDestination:(MKEndpoint *)endpoint {
-    [self.sendQueue addOperationWithBlock:^{
-        if(data.length <= 256) {
-            MIDIPacketList list;
-            list.numPackets = 1;
-            list.packet[0].length = data.length;
-            list.packet[0].timeStamp = 0;
-            memcpy(list.packet[0].data, data.bytes, data.length);
-
-            if(MIDISend(self.MIDIRef, endpoint.MIDIRef, &list) != 0) {
-                // Handle error
-            }
-        } else {
-            [NSException raise:@"Data is too large" format:@"I am lazy and need to implement this."];
-        }
-    }];
-}
-
-- (instancetype)sendMessage:(MKMessage *)msg toDestination:(MKEndpoint *)endpoint {
-    [self sendData:msg.data toDestination:endpoint];
-    return self;
-}
-
-- (instancetype)sendJSArray:(JSValue *)dataArray toDestination:(MKEndpoint *)endpoint {
+- (instancetype)sendJS:(JSValue *)dataArray toDestination:(MKDestination *)destination {
     NSArray *array = dataArray.toArray;
     NSMutableData *data = [NSMutableData dataWithLength:array.count];
-    
+
     for(int i=0;i<array.count;++i) {
         ((UInt8 *)data.mutableBytes)[i] = [array[i] unsignedCharValue];
     }
-    
-    [self sendData:data toDestination:endpoint];
-    
+
+    [self sendData:data toDestination:destination];
+
     return self;
 }
 
-- (instancetype)sendMessageArray:(NSArray *)messages toDestination:(MKEndpoint *)endpoint {
+- (instancetype)sendData:(NSData *)data toDestination:(MKDestination *)destination {
+    [self.sendQueue addOperationWithBlock:^{
+        MIDIPacketList *list = MKPacketListFromData(data);
+
+        if(![MIDIKit evalOSStatus:MIDISend(self.MIDIRef, destination.MIDIRef, (const MIDIPacketList *)list) name:@"Send data" throw:NO]) {
+            // handle error
+        }
+
+        free(list);
+    }];
+    return self;
+}
+
+- (instancetype)sendMessage:(MKMessage *)msg toDestination:(MKDestination *)destination {
+    return [self sendData:msg.data toDestination:destination];
+}
+
+- (instancetype)sendMessages:(NSArray *)messages toDestination:(MKDestination *)destination {
     for(MKMessage *msg in messages) {
         if([msg isKindOfClass:[MKMessage class]]) {
-            [self sendMessage:msg toDestination:endpoint];
+            (void)[self sendMessage:msg toDestination:destination];
         }
     }
+    return self;
+}
+
+- (instancetype)sendPacket:(MIDIPacket *)packet toDestination:(MKDestination *)destination {
+    NSParameterAssert(packet);
+
+    // Must reallocate/copy because sending is done async on the sendQueue
+    // and we can't give data on the stack
+    MIDIPacketList *list = malloc(sizeof(MIDIPacketList));
+    list->numPackets = 1;
+    memcpy(&list->packet[0], packet, sizeof(MIDIPacket));
+
+    (void)[self sendPacketList:list toDestination:destination];
+
+    return self;
+}
+
+- (instancetype)sendPacketList:(MIDIPacketList *)packetList toDestination:(MKDestination *)destination {
+    NSParameterAssert(packetList);
+    NSParameterAssert(destination);
+    if(!self.valid) return self; // TODO: handle this better
+
+    [self.sendQueue addOperationWithBlock:^{
+        if([MIDIKit evalOSStatus:MIDISend(self.MIDIRef, destination.MIDIRef, (const MIDIPacketList *)packetList) name:@"Send data" throw:NO] != 0) {
+            // TODO: handle error
+        }
+    }];
+
     return self;
 }
 

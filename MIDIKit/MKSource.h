@@ -6,12 +6,25 @@
 //  Copyright (c) 2014 John Heaton. All rights reserved.
 //
 
-#import "MKEndpoint.h"
+#import "MKObject.h"
 
-@protocol MKSourceJS <JSExport, MKEndpointJS>
+@class MKEntity;
+@protocol MKSourceJS <JSExport>
+
++ (NSUInteger)numberOfSources;
++ (NSUInteger)count;
+
+JSExportAs(atIndex, + (instancetype)sourceAtIndex:(NSUInteger)index);
+
+JSExportAs(firstNamed, + (instancetype)firstSourceNamed:(NSString *)name);
+JSExportAs(firstContaining, + (instancetype)firstSourceContaining:(NSString *)namePart);
+
+@property (nonatomic, readonly) MKEntity *entity;
 
 @end
 
-@interface MKSource : MKEndpoint <MKSourceJS>
+@interface MKSource : MKObject <MKSourceJS>
+
++ (instancetype)enumerateSources:(BOOL (^)(MKSource *source, NSUInteger index, BOOL *stop))block;
 
 @end

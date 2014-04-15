@@ -16,7 +16,6 @@
 		5240064418FB0A650030B46D /* MKOutputPort.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EEF18F7A6C600A5A5D3 /* MKOutputPort.m */; };
 		5240064518FB0A660030B46D /* MKDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73618DEAD5700A8CFD4 /* MKDevice.m */; };
 		5240064618FB0A670030B46D /* MKEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73A18DEADB800A8CFD4 /* MKEntity.m */; };
-		5240064718FB0A680030B46D /* MKEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */; };
 		5240064818FB0A690030B46D /* MKVirtualSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EF318F7B65D00A5A5D3 /* MKVirtualSource.m */; };
 		5240064918FB0A6A0030B46D /* MKVirtualDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EF718F7B80900A5A5D3 /* MKVirtualDestination.m */; };
 		5240064D18FB15050030B46D /* MKThruConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 5240064B18FB15050030B46D /* MKThruConnection.h */; };
@@ -31,8 +30,9 @@
 		5273C73818DEAD5700A8CFD4 /* MKDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73618DEAD5700A8CFD4 /* MKDevice.m */; };
 		5273C73B18DEADB800A8CFD4 /* MKEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C73918DEADB800A8CFD4 /* MKEntity.h */; };
 		5273C73C18DEADB800A8CFD4 /* MKEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73A18DEADB800A8CFD4 /* MKEntity.m */; };
-		5273C73F18DEADEE00A8CFD4 /* MKEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C73D18DEADEE00A8CFD4 /* MKEndpoint.h */; };
-		5273C74018DEADEE00A8CFD4 /* MKEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */; };
+		527B2AB518FCC6AB001D0CDD /* MKPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 527B2AB418FCC6AB001D0CDD /* MKPrivate.m */; };
+		527B2AB618FCC6AB001D0CDD /* MKPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 527B2AB418FCC6AB001D0CDD /* MKPrivate.m */; };
+		527B2AB718FCC6AB001D0CDD /* MKPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 527B2AB418FCC6AB001D0CDD /* MKPrivate.m */; };
 		528C943D18FC774100A7B960 /* MKDestination.h in Headers */ = {isa = PBXBuildFile; fileRef = 528C943B18FC774100A7B960 /* MKDestination.h */; };
 		528C943E18FC774100A7B960 /* MKDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = 528C943C18FC774100A7B960 /* MKDestination.m */; };
 		528C944118FC7FC000A7B960 /* MKSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 528C943F18FC7FC000A7B960 /* MKSource.h */; };
@@ -57,7 +57,6 @@
 		52A1E07D18FB890600D7073F /* MKOutputPort.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EEF18F7A6C600A5A5D3 /* MKOutputPort.m */; };
 		52A1E07E18FB890800D7073F /* MKDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73618DEAD5700A8CFD4 /* MKDevice.m */; };
 		52A1E07F18FB890A00D7073F /* MKEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73A18DEADB800A8CFD4 /* MKEntity.m */; };
-		52A1E08018FB890D00D7073F /* MKEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */; };
 		52A1E08118FB890E00D7073F /* MKVirtualSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EF318F7B65D00A5A5D3 /* MKVirtualSource.m */; };
 		52A1E08218FB891000D7073F /* MKVirtualDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EF718F7B80900A5A5D3 /* MKVirtualDestination.m */; };
 		52A1E08318FB891300D7073F /* MKConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EFD18F7C86900A5A5D3 /* MKConnection.m */; };
@@ -134,8 +133,8 @@
 		5273C73618DEAD5700A8CFD4 /* MKDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKDevice.m; sourceTree = "<group>"; };
 		5273C73918DEADB800A8CFD4 /* MKEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKEntity.h; sourceTree = "<group>"; };
 		5273C73A18DEADB800A8CFD4 /* MKEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKEntity.m; sourceTree = "<group>"; };
-		5273C73D18DEADEE00A8CFD4 /* MKEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKEndpoint.h; sourceTree = "<group>"; };
-		5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKEndpoint.m; sourceTree = "<group>"; };
+		527B2AB318FCC67D001D0CDD /* MKPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKPrivate.h; sourceTree = "<group>"; };
+		527B2AB418FCC6AB001D0CDD /* MKPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKPrivate.m; sourceTree = "<group>"; };
 		528C943B18FC774100A7B960 /* MKDestination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKDestination.h; sourceTree = "<group>"; };
 		528C943C18FC774100A7B960 /* MKDestination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKDestination.m; sourceTree = "<group>"; };
 		528C943F18FC7FC000A7B960 /* MKSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKSource.h; sourceTree = "<group>"; };
@@ -265,10 +264,8 @@
 		524005DD18FB044E0030B46D /* Endpoints */ = {
 			isa = PBXGroup;
 			children = (
-				5273C73D18DEADEE00A8CFD4 /* MKEndpoint.h */,
-				5273C73E18DEADEE00A8CFD4 /* MKEndpoint.m */,
-				528C944818FC848700A7B960 /* Input */,
-				528C944918FC848F00A7B960 /* Output */,
+				528C944818FC848700A7B960 /* Sources */,
+				528C944918FC848F00A7B960 /* Destinations */,
 			);
 			name = Endpoints;
 			sourceTree = "<group>";
@@ -348,6 +345,7 @@
 				528C945A18FC919800A7B960 /* MIDIKit.m */,
 				524005DE18FB045D0030B46D /* Helper/Convenience */,
 				524005D918FB041F0030B46D /* Wrappers */,
+				527B2AAE18FCC126001D0CDD /* Private */,
 			);
 			name = "MIDIKit Source (Shared)";
 			path = MIDIKit;
@@ -362,26 +360,35 @@
 			path = MIDIKit;
 			sourceTree = "<group>";
 		};
-		528C944818FC848700A7B960 /* Input */ = {
+		527B2AAE18FCC126001D0CDD /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				527B2AB318FCC67D001D0CDD /* MKPrivate.h */,
+				527B2AB418FCC6AB001D0CDD /* MKPrivate.m */,
+			);
+			name = Private;
+			sourceTree = "<group>";
+		};
+		528C944818FC848700A7B960 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				528C943F18FC7FC000A7B960 /* MKSource.h */,
 				528C944018FC7FC000A7B960 /* MKSource.m */,
-				52B22EF618F7B80900A5A5D3 /* MKVirtualDestination.h */,
-				52B22EF718F7B80900A5A5D3 /* MKVirtualDestination.m */,
+				52B22EF218F7B65D00A5A5D3 /* MKVirtualSource.h */,
+				52B22EF318F7B65D00A5A5D3 /* MKVirtualSource.m */,
 			);
-			name = Input;
+			name = Sources;
 			sourceTree = "<group>";
 		};
-		528C944918FC848F00A7B960 /* Output */ = {
+		528C944918FC848F00A7B960 /* Destinations */ = {
 			isa = PBXGroup;
 			children = (
 				528C943B18FC774100A7B960 /* MKDestination.h */,
 				528C943C18FC774100A7B960 /* MKDestination.m */,
-				52B22EF218F7B65D00A5A5D3 /* MKVirtualSource.h */,
-				52B22EF318F7B65D00A5A5D3 /* MKVirtualSource.m */,
+				52B22EF618F7B80900A5A5D3 /* MKVirtualDestination.h */,
+				52B22EF718F7B80900A5A5D3 /* MKVirtualDestination.m */,
 			);
-			name = Output;
+			name = Destinations;
 			sourceTree = "<group>";
 		};
 		528C944F18FC8FE500A7B960 /* scripts */ = {
@@ -420,7 +427,6 @@
 				52B22EFE18F7C86900A5A5D3 /* MKConnection.h in Headers */,
 				5273C73718DEAD5700A8CFD4 /* MKDevice.h in Headers */,
 				52B22EF818F7B80900A5A5D3 /* MKVirtualDestination.h in Headers */,
-				5273C73F18DEADEE00A8CFD4 /* MKEndpoint.h in Headers */,
 				52B22EF018F7A6C600A5A5D3 /* MKOutputPort.h in Headers */,
 				52B22EF418F7B65D00A5A5D3 /* MKVirtualSource.h in Headers */,
 				528C943D18FC774100A7B960 /* MKDestination.h in Headers */,
@@ -567,12 +573,12 @@
 				5240064518FB0A660030B46D /* MKDevice.m in Sources */,
 				5240064418FB0A650030B46D /* MKOutputPort.m in Sources */,
 				5240064618FB0A670030B46D /* MKEntity.m in Sources */,
-				5240064718FB0A680030B46D /* MKEndpoint.m in Sources */,
 				5240064918FB0A6A0030B46D /* MKVirtualDestination.m in Sources */,
 				5240064F18FB15050030B46D /* MKThruConnection.m in Sources */,
 				528C944518FC7FC000A7B960 /* MKSource.m in Sources */,
 				5240063F18FB0A5C0030B46D /* MKMessage.m in Sources */,
 				528C944718FC7FD100A7B960 /* MKDestination.m in Sources */,
+				527B2AB718FCC6AB001D0CDD /* MKPrivate.m in Sources */,
 				5240064818FB0A690030B46D /* MKVirtualSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -582,7 +588,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5273C70918DE9E2500A8CFD4 /* MKClient.m in Sources */,
-				5273C74018DEADEE00A8CFD4 /* MKEndpoint.m in Sources */,
 				5273C73818DEAD5700A8CFD4 /* MKDevice.m in Sources */,
 				52B22F0618F803E900A5A5D3 /* MKMessage.m in Sources */,
 				528C945B18FC919800A7B960 /* MIDIKit.m in Sources */,
@@ -595,6 +600,7 @@
 				528C944318FC7FC000A7B960 /* MKSource.m in Sources */,
 				52B22EFF18F7C86900A5A5D3 /* MKConnection.m in Sources */,
 				528C943E18FC774100A7B960 /* MKDestination.m in Sources */,
+				527B2AB518FCC6AB001D0CDD /* MKPrivate.m in Sources */,
 				52B22EF118F7A6C600A5A5D3 /* MKOutputPort.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -611,12 +617,12 @@
 				52A1E07D18FB890600D7073F /* MKOutputPort.m in Sources */,
 				52A1E07C18FB890500D7073F /* MKInputPort.m in Sources */,
 				52A1E07F18FB890A00D7073F /* MKEntity.m in Sources */,
-				52A1E08018FB890D00D7073F /* MKEndpoint.m in Sources */,
 				52A1E08118FB890E00D7073F /* MKVirtualSource.m in Sources */,
 				528C944618FC7FCE00A7B960 /* MKDestination.m in Sources */,
 				528C944418FC7FC000A7B960 /* MKSource.m in Sources */,
 				52A1E08218FB891000D7073F /* MKVirtualDestination.m in Sources */,
 				52A1E07E18FB890800D7073F /* MKDevice.m in Sources */,
+				527B2AB618FCC6AB001D0CDD /* MKPrivate.m in Sources */,
 				52A1E07A18FB88FF00D7073F /* MKObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

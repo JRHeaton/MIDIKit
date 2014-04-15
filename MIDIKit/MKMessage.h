@@ -116,6 +116,6 @@ JSExportAs(messages,
 
 // myMessage[0] = @(0x90)
 // This ONLY works with one-byte NSNumbers
-- (void)setObject:(id)object atIndexedSubscript:(NSUInteger)idx;
+- (instancetype)setObject:(id)object atIndexedSubscript:(NSUInteger)idx;
 
 @end

@@ -6,12 +6,11 @@
 //  Copyright (c) 2014 John Heaton. All rights reserved.
 //
 
-#import "MKEndpoint.h"
 #import "MKClient.h"
 
 #pragma mark - -Mutual ObjC/JavaScript-
 
-@protocol MKVirtualDestinationS <JSExport, MKEndpointJS>
+@protocol MKVirtualDestinationJS<JSExport>
 
 @end
 
@@ -21,7 +20,7 @@
 // that is usable by other clients just like a normal destination.
 
 @protocol MKVirtualDestinationDelegate;
-@interface MKVirtualDestination : MKEndpoint <MKClientDependentInstaniation, MKVirtualDestinationS>
+@interface MKVirtualDestination : MKObject <MKClientDependentInstaniation, MKVirtualDestinationJS>
 
 #pragma mark - -Init-
 // Creates a new virtual destination and adds it to the MIDI server
@@ -31,8 +30,8 @@
 
 #pragma mark - -Data Delegates-
 // Adds a new delegate to be notified when data is received
-- (void)addDelegate:(id<MKVirtualDestinationDelegate>)delegate;
-- (void)removeDelegate:(id<MKVirtualDestinationDelegate>)delegate;
+- (instancetype)addDelegate:(id<MKVirtualDestinationDelegate>)delegate;
+- (instancetype)removeDelegate:(id<MKVirtualDestinationDelegate>)delegate;
 
 @end
 

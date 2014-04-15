@@ -6,11 +6,10 @@
 //  Copyright (c) 2014 John Heaton. All rights reserved.
 //
 
-#import "MKObject.h"
 #import "MKClient.h"
 
 @class MKMessage;
-@class MKEndpoint;
+@class MKDestination;
 #pragma mark - -Mutual ObjC/JavaScript-
 
 // Output ports are unidirectional ports through which you can
@@ -20,18 +19,10 @@
 
 #pragma mark - -Sending MIDI Data-
 
-#pragma mark Byte Array
-JSExportAs(send,
-- (instancetype)sendJSArray:(JSValue *)dataArray toDestination:(MKEndpoint *)endpoint);
+JSExportAs(send, - (instancetype)sendJS:(JSValue *)dataArray toDestination:(MKDestination *)destination);
+JSExportAs(sendMessage, - (instancetype)sendMessage:(MKMessage *)msg toDestination:(MKDestination *)destination);
+JSExportAs(sendMessages, - (instancetype)sendMessages:(NSArray *)messages toDestination:(MKDestination *)destination);
 
-#pragma mark Message
-JSExportAs(sendMessage,
-- (instancetype)sendMessage:(MKMessage *)msg toDestination:(MKEndpoint *)endpoint);
-
-#pragma mark Message Array
-JSExportAs(sendMessages, - (instancetype)sendMessageArray:(NSArray *)messages toDestination:(MKEndpoint *)endpoint);
-
-#pragma mark Port Disposal
 - (instancetype)dispose;
 
 @end
@@ -46,12 +37,14 @@ JSExportAs(sendMessages, - (instancetype)sendMessageArray:(NSArray *)messages to
 
 #pragma mark - -Sending Data-
 // Sends the MIDI data to the given destination
-- (void)sendData:(NSData *)data toDestination:(MKEndpoint *)endpoint;
+- (instancetype)sendPacket:(MIDIPacket *)packet toDestination:(MKDestination *)destination;
+- (instancetype)sendPacketList:(MIDIPacketList *)packetList toDestination:(MKDestination *)destination;
+- (instancetype)sendData:(NSData *)data toDestination:(MKDestination *)destination;
 
 
 #pragma mark - -Output Concurrency-
 // This queue can be manipulated for various reasons.
 // Example: [myOutputPort.sendQueue setMaxConcurrentOperationCount:1]
-@property (nonatomic, readonly, strong) NSOperationQueue *sendQueue;
+@property (nonatomic, readonly) NSOperationQueue *sendQueue;
 
 @end

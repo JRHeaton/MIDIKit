@@ -91,18 +91,20 @@
 #if TARGET_OS_MAC
                          @"exit" : ^(int code) { exit(code); },
                          @"chdir" : ^(NSString *dir) { _self[@"_cwd"] = dir; },
-                         @"cwd" : ^JSValue *() { return _self[@"_cwd"]; },
+                         @"cwd" : ^JSValue *{ return _self[@"_cwd"]; },
 #endif
                          @"execPath" : [NSBundle mainBundle].executablePath,
                          @"pid" : @(info.processIdentifier),
                          @"moduleLoadList" : @[],
-                         @"env" : info.environment,
                          @"argv" : info.arguments,
                          @"version" : [NSString stringWithFormat:@"%u.%u.%u", kMIDIKitVersionMajor, kMIDIKitVersionMinor, kMIDIKitVersionPatch]
                          };
     self[@"console"] = @{
                          @"log" : logBlock,
                          };
+    if(info.environment) {
+        self[@"process"][@"env"] = info.environment;
+    }
     self[@"log"] = logBlock;
 
     MKInstallIntoContext(self);

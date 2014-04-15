@@ -14,6 +14,10 @@
 @dynamic numberOfEntities;
 @dynamic entities;
 
++ (BOOL)hasUniqueID {
+    return YES;
+}
+
 + (NSUInteger)numberOfDevices {
     return MIDIGetNumberOfDevices();
 }
@@ -34,11 +38,11 @@
     }];
 }
 
-- (MKEndpoint *)rootDestination {
+- (MKDestination *)rootDestination {
     return [[self entityAtIndex:0] destinationAtIndex:0];
 }
 
-- (MKEndpoint *)rootSource {
+- (MKSource *)rootSource {
     return [[self entityAtIndex:0] sourceAtIndex:0];
 }
 

@@ -43,6 +43,9 @@ int main(int argc, const char * argv[]) {
             printf("to run in REPL mode, set env var REPL=1\n");
             // standard exec
 
+            NSLog(@"%@", [c evaluateScript:@"o = MKClient.global().firstOutputPort(); d = MKDestination.firstDestinationNamed('Launchpad Mini 4'); o.send([0x90, 0, 127], d);"]);
+
+
             return 0;
         }
 

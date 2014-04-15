@@ -134,7 +134,7 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
     CFStringRef cfName = (__bridge CFStringRef)(name);
 
     if(!name) return [self init];
-    if([MKObject evalOSStatus:MIDIClientCreate(cfName, _MKClientMIDINotifyProc, (__bridge void *)(self), &c) name:@"Creating a client" throw:NO] != 0) {
+    if([MIDIKit evalOSStatus:MIDIClientCreate(cfName, _MKClientMIDINotifyProc, (__bridge void *)(self), &c) name:@"Creating a client" throw:NO] != 0) {
         return nil;
     }
 
@@ -159,9 +159,10 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
     return global;
 }
 
-- (void)dispose {
+- (instancetype)dispose {
     MIDIClientDispose(self.MIDIRef);
     self.MIDIRef = 0;
+    return self;
 }
 
 - (MKInputPort *)createInputPortNamed:(NSString *)name {
@@ -180,12 +181,14 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
     return [[MKVirtualDestination alloc] initWithName:name ?: [NSString stringWithFormat:@"%@-VDest-%lu", self.name, (unsigned long)self.virtualDestinations.count] client:self];
 }
 
-- (void)addNotificationDelegate:(id<MKClientNotificationDelegate>)delegate {
+- (instancetype)addNotificationDelegate:(id<MKClientNotificationDelegate>)delegate {
     [self.notificationDelegates addObject:delegate];
+    return self;
 }
 
-- (void)removeNotificationDelegate:(id<MKClientNotificationDelegate>)delegate {
+- (instancetype)removeNotificationDelegate:(id<MKClientNotificationDelegate>)delegate {
     [self.notificationDelegates removeObject:delegate];
+    return self;
 }
 
 - (MKVirtualSource *)createVirtualSource {

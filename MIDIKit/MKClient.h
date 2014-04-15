@@ -57,7 +57,7 @@
 
 #pragma mark - -CoreMIDI Client Disposal-
 // Disposes the MIDIRef(MIDIClientRef) object (invalidates this object)
-- (void)dispose;
+- (instancetype)dispose;
 
 
 #pragma mark - -Notifications-
@@ -82,8 +82,8 @@
 
 
 #pragma mark - -Global Notificadtion Delegates-
-- (void)addNotificationDelegate:(id<MKClientNotificationDelegate>)delegate;
-- (void)removeNotificationDelegate:(id<MKClientNotificationDelegate>)delegate;
+- (instancetype)addNotificationDelegate:(id<MKClientNotificationDelegate>)delegate;
+- (instancetype)removeNotificationDelegate:(id<MKClientNotificationDelegate>)delegate;
 
 @end
 

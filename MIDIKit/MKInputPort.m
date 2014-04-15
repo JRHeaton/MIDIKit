@@ -6,9 +6,7 @@
 //  Copyright (c) 2014 John Heaton. All rights reserved.
 //
 
-#import "MKInputPort.h"
-#import "MKClient.h"
-#import "MKMessage.h"
+#import "MIDIKit.h"
 
 @interface MKInputPort ()
 @property (nonatomic, strong) NSMutableSet *inputDelegates;
@@ -22,7 +20,7 @@
 
 static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRefCon, void *srcConnRefCon) {
     MKInputPort *self = (__bridge MKInputPort *)(readProcRefCon);
-    MKEndpoint *source = (__bridge MKEndpoint *)(srcConnRefCon);
+    MKSource *source = (__bridge MKSource *)(srcConnRefCon);
 
     MIDIPacket *packet = (MIDIPacket *)&pktlist->packet[0];
     for (int i=0;i<pktlist->numPackets;++i) {
@@ -62,7 +60,7 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
     MIDIPortRef p;
 
     if(!client.valid) return nil;
-    if([MKObject evalOSStatus:MIDIInputPortCreate(client.MIDIRef, (__bridge CFStringRef)(name), _MKInputPortReadProc, (__bridge void *)(self), &p) name:@"Creating an input port" throw:NO] != 0) {
+    if([MIDIKit evalOSStatus:MIDIInputPortCreate(client.MIDIRef, (__bridge CFStringRef)(name), _MKInputPortReadProc, (__bridge void *)(self), &p) name:@"Creating an input port" throw:NO] != 0) {
         return nil;
     }
 
@@ -77,12 +75,12 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
     return self;
 }
 
-- (instancetype)connectSource:(MKEndpoint *)source {
+- (instancetype)connectSource:(MKSource *)source {
     MIDIPortConnectSource(self.MIDIRef, source.MIDIRef, (__bridge_retained void *)(source));
     return self;
 }
 
-- (instancetype)disconnectSource:(MKEndpoint *)source {
+- (instancetype)disconnectSource:(MKSource *)source {
     MIDIPortDisconnectSource(self.MIDIRef, source.MIDIRef);
     return self;
 }
@@ -93,20 +91,24 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
     return self;
 }
 
-- (void)addInputDelegate:(id<MKInputPortDelegate>)delegate {
+- (instancetype)addInputDelegate:(id<MKInputPortDelegate>)delegate {
     [_inputDelegates addObject:delegate];
+    return self;
 }
 
-- (void)removeInputDelegate:(id<MKInputPortDelegate>)delegate {
+- (instancetype)removeInputDelegate:(id<MKInputPortDelegate>)delegate {
     [_inputDelegates removeObject:delegate];
+    return self;
 }
 
-- (void)removeAllInputDelegates {
+- (instancetype)removeAllInputDelegates {
     [_inputDelegates removeAllObjects];
+    return self;
 }
 
-- (void)addInputHandler:(MKInputHandler)inputHandler {
+- (instancetype)addInputHandler:(MKInputHandler)inputHandler {
     [self.inputHandlers addObject:inputHandler];
+    return self;
 }
 
 - (instancetype)removeAllInputHandlers {
@@ -124,8 +126,9 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
     return self;
 }
 
-- (void)removeInputHandler:(MKInputHandler)inputHandler {
+- (instancetype)removeInputHandler:(MKInputHandler)inputHandler {
     [self.inputHandlers removeObject:inputHandler];
+    return self;
 }
 
 @end
