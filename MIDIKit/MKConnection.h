@@ -52,9 +52,6 @@ JSExportAs(send, - (instancetype)sendNumberArray:(NSArray *)array);
 // if they're not already created.
 - (instancetype)initWithClient:(MKClient *)client;
 
-// Async helper
-- (instancetype)performBlock:(void (^)(MKConnection *c))block afterDelay:(NSTimeInterval)delay;
-
 // Uses the output port to send to all destinations
 - (instancetype)sendData:(NSData *)data;
 - (instancetype)sendMessages:(MKMessage *)message, ... NS_REQUIRES_NIL_TERMINATION;

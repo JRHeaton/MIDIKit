@@ -14,8 +14,6 @@
 
 @implementation MKMessage
 
-@dynamic type, key, controller, velocity, status, data1, data2;
-
 #pragma mark - Types
 
 + (MKMessageType)noteOnType {
@@ -298,6 +296,28 @@ FORWARD(velocity, data2, setVelocity, setData2)
 - (void)setVelocityOrValue:(UInt8)velocityOrValue {
     [self setByte:velocityOrValue atIndex:2];
 }
+
+#define ARG_TYPE UInt8
+#define RETURN_SETTER(upper, lower) \
+- (instancetype)set##upper##Return:(ARG_TYPE)lower { \
+    self.lower = lower; \
+    return self; \
+}
+
+RETURN_SETTER(Channel, channel)
+RETURN_SETTER(Status, status)
+RETURN_SETTER(Key, key)
+RETURN_SETTER(Controller, controller)
+RETURN_SETTER(Data1, data1)
+RETURN_SETTER(Data2, data2)
+RETURN_SETTER(Velocity, velocity)
+
+#undef ARG_TYPE
+#define ARG_TYPE MKMessageType
+RETURN_SETTER(Type, type)
+
+#undef ARG_TYPE
+#undef RETURN_SETTER
 
 - (NSMutableData *)data {
     return self.mutableData;

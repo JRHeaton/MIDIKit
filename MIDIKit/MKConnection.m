@@ -102,16 +102,4 @@
     return [NSString stringWithFormat:@"%@ inputPort=%@, outputPort=%@, client=%@, destinations=%@", super.description, self.inputPort, self.outputPort, self.client, self.destinations];
 }
 
-- (void)performBlock:(void (^)(MKConnection *connection))block {
-    block(self);
-}
-
-- (instancetype)performBlock:(void (^)(MKConnection *c))block afterDelay:(NSTimeInterval)delay {
-    if(block) {
-        [self performSelector:@selector(performBlock:) withObject:[block copy] afterDelay:delay];
-    }
-    
-    return self;
-}
-
 @end

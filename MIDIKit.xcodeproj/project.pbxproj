@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		521C1BC318FD16A500A002FC /* flash.js in Sources */ = {isa = PBXBuildFile; fileRef = 521C1BC218FD16A500A002FC /* flash.js */; };
 		524005E518FB06CD0030B46D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C70F18DEA14E00A8CFD4 /* Foundation.framework */; };
 		5240063E18FB0A5B0030B46D /* MKConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EFD18F7C86900A5A5D3 /* MKConnection.m */; };
 		5240063F18FB0A5C0030B46D /* MKMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22F0418F803E900A5A5D3 /* MKMessage.m */; };
@@ -110,6 +111,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		521C1BC218FD16A500A002FC /* flash.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = flash.js; sourceTree = "<group>"; };
 		522EA3FA18FA690500444217 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 		522EA3FD18FA6B0400444217 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		524005E418FB06CD0030B46D /* libMIDIKitiOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMIDIKitiOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -208,6 +210,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		521C1BC118FD16A500A002FC /* Example JavaScript */ = {
+			isa = PBXGroup;
+			children = (
+				521C1BC218FD16A500A002FC /* flash.js */,
+			);
+			path = "Example JavaScript";
+			sourceTree = "<group>";
+		};
 		524005D718FB03F10030B46D /* Client */ = {
 			isa = PBXGroup;
 			children = (
@@ -293,6 +303,7 @@
 		5273C6CA18DE96A200A8CFD4 = {
 			isa = PBXGroup;
 			children = (
+				521C1BC118FD16A500A002FC /* Example JavaScript */,
 				5273C6DD18DE96A200A8CFD4 /* MIDIKit Source (Shared) */,
 				524005DF18FB068D0030B46D /* MIDIKit Framework (OS X) */,
 				52DDEDF018FB55400019BE98 /* CLI Tool (mkcli) */,
@@ -598,6 +609,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5273C70918DE9E2500A8CFD4 /* MKClient.m in Sources */,
+				521C1BC318FD16A500A002FC /* flash.js in Sources */,
 				5273C73818DEAD5700A8CFD4 /* MKDevice.m in Sources */,
 				52B22F0618F803E900A5A5D3 /* MKMessage.m in Sources */,
 				528C945B18FC919800A7B960 /* MIDIKit.m in Sources */,

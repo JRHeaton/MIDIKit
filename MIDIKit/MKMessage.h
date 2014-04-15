@@ -87,6 +87,15 @@ JSExportAs(messages,
 // velocity for note messages
 @property (nonatomic, assign) UInt8 velocity, data2;
 
+JSExportAs(setChannel, - (instancetype)setChannelReturn:(UInt8)channel);
+JSExportAs(setType, - (instancetype)setTypeReturn:(MKMessageType)type);
+JSExportAs(setStatus, - (instancetype)setStatusReturn:(UInt8)status);
+JSExportAs(setKey, - (instancetype)setKeyReturn:(UInt8)key);
+JSExportAs(setController, - (instancetype)setControllerReturn:(UInt8)controller);
+JSExportAs(setData1, - (instancetype)setData1Return:(UInt8)data1);
+JSExportAs(setData2, - (instancetype)setData2Return:(UInt8)data2);
+JSExportAs(setVelocity, - (instancetype)setVelocityReturn:(UInt8)velocity);
+
 @end
 
 @interface MKMessage : NSObject <MKMessageJS>
