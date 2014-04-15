@@ -166,6 +166,12 @@
 		52B22F0418F803E900A5A5D3 /* MKMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMessage.m; sourceTree = "<group>"; };
 		52DDEDEE18FB55400019BE98 /* midirepl */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = midirepl; sourceTree = BUILT_PRODUCTS_DIR; };
 		52DDEE0118FB60010019BE98 /* libreadline.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libreadline.dylib; path = usr/lib/libreadline.dylib; sourceTree = SDKROOT; };
+		52EAA53A18FCE09D00094EEF /* MKObjectProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKObjectProperties.h; sourceTree = "<group>"; };
+		52EAA53B18FCE0B400094EEF /* MKClientProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKClientProperties.h; sourceTree = "<group>"; };
+		52EAA53C18FCE0C000094EEF /* MKPortProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKPortProperties.h; sourceTree = "<group>"; };
+		52EAA53D18FCE0C700094EEF /* MKEndpointProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKEndpointProperties.h; sourceTree = "<group>"; };
+		52EAA53E18FCE0CC00094EEF /* MKEntityProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKEntityProperties.h; sourceTree = "<group>"; };
+		52EAA53F18FCE0EE00094EEF /* MKDeviceProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKDeviceProperties.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,7 +276,7 @@
 			name = Endpoints;
 			sourceTree = "<group>";
 		};
-		524005DE18FB045D0030B46D /* Helper/Convenience */ = {
+		524005DE18FB045D0030B46D /* Useful Abstractions */ = {
 			isa = PBXGroup;
 			children = (
 				52B22EFC18F7C86900A5A5D3 /* MKConnection.h */,
@@ -278,7 +284,7 @@
 				52B22F0318F803E900A5A5D3 /* MKMessage.h */,
 				52B22F0418F803E900A5A5D3 /* MKMessage.m */,
 			);
-			name = Helper/Convenience;
+			name = "Useful Abstractions";
 			sourceTree = "<group>";
 		};
 		524005DF18FB068D0030B46D /* MIDIKit Framework (OS X) */ = {
@@ -343,7 +349,8 @@
 			children = (
 				52A1E07618FB883000D7073F /* MIDIKit.h */,
 				528C945A18FC919800A7B960 /* MIDIKit.m */,
-				524005DE18FB045D0030B46D /* Helper/Convenience */,
+				52EAA53918FCE05600094EEF /* Property Availability Protocols */,
+				524005DE18FB045D0030B46D /* Useful Abstractions */,
 				524005D918FB041F0030B46D /* Wrappers */,
 				527B2AAE18FCC126001D0CDD /* Private */,
 			);
@@ -415,6 +422,19 @@
 			);
 			name = "CLI Tool (mkcli)";
 			path = mkcli;
+			sourceTree = "<group>";
+		};
+		52EAA53918FCE05600094EEF /* Property Availability Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				52EAA53A18FCE09D00094EEF /* MKObjectProperties.h */,
+				52EAA53B18FCE0B400094EEF /* MKClientProperties.h */,
+				52EAA53C18FCE0C000094EEF /* MKPortProperties.h */,
+				52EAA53D18FCE0C700094EEF /* MKEndpointProperties.h */,
+				52EAA53E18FCE0CC00094EEF /* MKEntityProperties.h */,
+				52EAA53F18FCE0EE00094EEF /* MKDeviceProperties.h */,
+			);
+			name = "Property Availability Protocols";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

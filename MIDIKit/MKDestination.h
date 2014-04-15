@@ -7,6 +7,7 @@
 //
 
 #import "MKObject.h"
+#import "MKEndpointProperties.h"
 
 @class MKEntity;
 @protocol MKDestinationJS <JSExport>
@@ -23,7 +24,7 @@ JSExportAs(firstContaining, + (instancetype)firstDestinationContaining:(NSString
 
 @end
 
-@interface MKDestination : MKObject <MKDestinationJS>
+@interface MKDestination : MKObject <MKDestinationJS, MKEndpointProperties>
 
 + (instancetype)enumerateDestinations:(BOOL (^)(MKDestination *destination, NSUInteger index, BOOL *stop))block;
 + (instancetype)firstDestinationMeetingCriteria:(BOOL (^)(MKDestination *candidate))block;

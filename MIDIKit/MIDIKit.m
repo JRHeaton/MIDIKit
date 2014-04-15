@@ -33,6 +33,7 @@ NSArray *MKClassList() {
                          [MKOutputPort class],
                          [MKDestination class],
                          [MKSource class],
+                         [MKEntity class],
                          [MKVirtualDestination class],
                          [MKVirtualSource class]
                          ];

@@ -7,6 +7,7 @@
 //
 
 #import "MKObject.h"
+#import "MKClientProperties.h"
 
 @class MKVirtualDestination, MKVirtualSource;
 @class MKInputPort, MKOutputPort;
@@ -78,7 +79,7 @@
 
 
 #pragma mark - -Client Wrapper-
-@interface MKClient : MKObject <MKClientJS>
+@interface MKClient : MKObject <MKClientJS, MKClientProperties>
 
 
 #pragma mark - -Global Notificadtion Delegates-

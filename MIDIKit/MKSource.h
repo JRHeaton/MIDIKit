@@ -7,6 +7,7 @@
 //
 
 #import "MKObject.h"
+#import "MKEndpointProperties.h"
 
 @class MKEntity;
 @protocol MKSourceJS <JSExport>
@@ -23,7 +24,7 @@ JSExportAs(firstContaining, + (instancetype)firstSourceContaining:(NSString *)na
 
 @end
 
-@interface MKSource : MKObject <MKSourceJS>
+@interface MKSource : MKObject <MKSourceJS, MKEndpointProperties>
 
 + (instancetype)enumerateSources:(BOOL (^)(MKSource *source, NSUInteger index, BOOL *stop))block;
 

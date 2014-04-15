@@ -7,6 +7,7 @@
 //
 
 #import "MKClient.h"
+#import "MKEndpointProperties.h"
 
 #pragma mark - -Mutual ObjC/JavaScript-
 
@@ -20,7 +21,7 @@
 // that is usable by other clients just like a normal destination.
 
 @protocol MKVirtualDestinationDelegate;
-@interface MKVirtualDestination : MKObject <MKClientDependentInstaniation, MKVirtualDestinationJS>
+@interface MKVirtualDestination : MKObject <MKClientDependentInstaniation, MKVirtualDestinationJS, MKEndpointProperties>
 
 #pragma mark - -Init-
 // Creates a new virtual destination and adds it to the MIDI server

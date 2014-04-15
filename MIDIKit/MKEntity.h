@@ -8,6 +8,7 @@
 
 #import "MKSource.h"
 #import "MKDestination.h"
+#import "MKEntityProperties.h"
 
 #pragma mark - -Mutual ObjC/JavaScript-
 
@@ -36,7 +37,7 @@
 
 
 #pragma mark - -Entity Wrapper-
-@interface MKEntity : MKObject <MKEntityJS>
+@interface MKEntity : MKObject <MKEntityJS, MKEntityProperties>
 
 #pragma mark - -Subscripting-
 - (id)objectAtIndexedSubscript:(NSUInteger)index; // defaults to destination

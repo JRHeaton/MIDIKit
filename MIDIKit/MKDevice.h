@@ -8,6 +8,7 @@
 
 #import "MKObject.h"
 #import "MKEntity.h"
+#import "MKDeviceProperties.h"
 
 #pragma mark - -Mutual ObjC/JavaScript-
 
@@ -42,7 +43,7 @@
 
 
 #pragma mark - -Device Wrapper-
-@interface MKDevice : MKObject <MKDeviceJS>
+@interface MKDevice : MKObject <MKDeviceJS, MKDeviceProperties>
 
 #pragma mark - -Enumeration/Init-
 // Convenient enumeration

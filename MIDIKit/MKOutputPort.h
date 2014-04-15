@@ -7,6 +7,7 @@
 //
 
 #import "MKClient.h"
+#import "MKPortProperties.h"
 
 @class MKMessage;
 @class MKDestination;
@@ -29,7 +30,7 @@ JSExportAs(sendMessages, - (instancetype)sendMessages:(NSArray *)messages toDest
 
 
 #pragma mark - -Output Port Wrapper-
-@interface MKOutputPort : MKObject <MKClientDependentInstaniation, MKOutputPortJS>
+@interface MKOutputPort : MKObject <MKClientDependentInstaniation, MKOutputPortJS, MKPortProperties>
 
 #pragma mark - -Init-
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;

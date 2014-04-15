@@ -9,11 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CoreMIDI/CoreMIDI.h>
 #import <JavaScriptCore/JavaScriptCore.h>
+#import "MKObjectProperties.h"
 
 @class MKJavaScriptContext;
 #pragma mark - -Mutual ObjC/JavaScript-
 
-@protocol MKObjectJS <JSExport, NSObject>
+@protocol MKObjectJS <JSExport>
 
 #pragma mark - -Init-
 JSExportAs(newWithUniqueID, + (instancetype)objectWithUniqueID:(MIDIUniqueID)uniqueID);
@@ -107,7 +108,7 @@ JSExportAs(newWithMIDIRef, + (instancetype)objectWithMIDIRef:(MIDIObjectRef)MIDI
  */
 
 #pragma mark - -Base Object Wrapper-
-@interface MKObject : NSObject <MKObjectJS> {
+@interface MKObject : NSObject <MKObjectJS, MKObjectProperties> {
 @protected
     MIDIObjectRef _MIDIRef;
 }
