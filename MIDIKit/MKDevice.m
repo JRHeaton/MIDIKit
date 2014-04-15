@@ -68,7 +68,7 @@
     for(NSUInteger i=0;i<num;++i) {
         [ret addObject:[self entityAtIndex:i]];
     }
-    return ret.copy;
+    return ret;
 }
 
 @end
