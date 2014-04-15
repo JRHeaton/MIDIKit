@@ -21,6 +21,13 @@ int main(int argc, const char * argv[]) {
         MKJavaScriptContext *c = [MKJavaScriptContext new];
         c[@"LPMessage"] = [LPMessage class];
 
+        __weak typeof(c) _c = c;
+        __block NSUInteger currentLine = 0;
+        c.exceptionHandler = ^(JSContext *context, JSValue *exception) {
+
+            printf("%s", [NSString stringWithFormat:@"\033[1;32m~> %@\033[1;31m%@\033[0m\n", !currentLine ? @"" : [NSString stringWithFormat:@"Line %lu: ", (unsigned long)currentLine], [NSString stringWithFormat:@"Line %d: %@", [[exception.toObject objectForKey:@"line"] intValue], exception]].UTF8String);
+        };
+
         NSString *execPath = [NSBundle mainBundle].executablePath;
         execPath = [execPath substringToIndex:execPath.length - execPath.lastPathComponent.length];
 
@@ -30,41 +37,66 @@ int main(int argc, const char * argv[]) {
             c.currentEvaluatingScriptPath = [NSString stringWithUTF8String:argv[1]];
         } else {
             NSLog(@"using SRCROOT..."); // defined by -DSRCROOT="\"${SRCROOT}\"" in build settings
-            c.currentEvaluatingScriptPath = [[NSString stringWithUTF8String:SRCROOT] stringByAppendingPathComponent:@"Examples/midirepl/scripts"];
+            c.currentEvaluatingScriptPath = [[NSString stringWithUTF8String:SRCROOT] stringByAppendingPathComponent:@"Example JavaScript"];
         }
-        __weak typeof(c) _c = c;
         c[@"unitTests"] = ^{ runTestScript(_c, @"unitTest.js"); };
         c[@"launchpad"] = ^{ runTestScript(_c, @"launchpad.js"); };
-        c[@"help"] = @"\nscript(path)    -- evaluate a script\nlocal()         -- set relative path for script() calls\nshowEval(bool)  -- set whether return values should be printed\nprocess         -- global process object";
+        c[@"help"] = @"\nrequire(path)   -- evaluate a script\nlocal()         -- set relative path for require() calls\nshowEval(bool)  -- set whether return values should be printed\nprocess         -- global process object";
 
-        c[@"script"] = ^JSValue *(NSString *path) {
+        c[@"require"] = ^JSValue *(NSString *path) {
             NSString *evalPath = [_c[@"__dirname"] toString];
-            if([path hasPrefix:@"./"])
+            if([path hasPrefix:@"./"] || ![path hasPrefix:@"/"])
                 path = [evalPath stringByAppendingPathComponent:path];
+
+            if(![path hasSuffix:@".js"] && [path.lastPathComponent componentsSeparatedByString:@"."].count == 1) {
+                path = [path stringByAppendingString:@".js"];
+            }
+
+            if(![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+                [_c evaluateScript:[NSString stringWithFormat:@"throw new Error('Script does not exist: %@')", path]];
+                return [JSValue valueWithUndefinedInContext:_c];
+            }
 
             NSString *s = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
             if(s.length) {
-                return [_c evaluateScript:[NSString stringWithFormat:@"(function () { %@ })()", s]];
+                return [_c evaluateScript:[NSString stringWithFormat:
+                                           @"(function() { "
+                                           "    var exports; "
+                                           "    (function () { "
+                                           "        %@ "
+                                           "    })(); "
+                                           "    return exports; "
+                                           "})()",
+                                           s]];
             }
 
             return [JSValue valueWithUndefinedInContext:_c];
         };
         c[@"local"] = ^JSValue *{ _c[@"__dirname"] = [_c evaluateScript:@"process.cwd()"]; return _c[@"__dirname"]; };
-        if(![NSProcessInfo processInfo].environment[@"REPL"]) {
-            printf("to run in REPL mode, set env var REPL=1\n");
-            // standard exec
-
-            return 0;
-        }
 
         __block BOOL showEval = YES;
         c[@"showEval"] = ^(BOOL show) { showEval = show; };
 
-        c.exceptionHandler = ^(JSContext *context, JSValue *exception) {
-            printf("\033[1;32m~> \033[1;31m%s\033[0m\n", exception.description.UTF8String);
-        };
+        
+        if(![NSProcessInfo processInfo].environment[@"REPL"]) {
+            printf("to run in REPL mode, set env var REPL=1\n");
+            // standard exec
+
+            NSLog(@"%@", [c evaluateScript:@"require('asd')"]);
+
+            return 0;
+        }
+
+        using_history();
+#define hist [@"~/.midirepl_history" stringByExpandingTildeInPath].UTF8String
+        signal(SIGINT, [](int) -> void {
+            write_history(hist);
+            exit(0);
+        });
+
+        read_history(hist);
         while(1) {
-            const char *buf = readline("\033[1;34m] \033[0m");
+            const char *buf = readline("\033[1;34m|> \033[0m");
 
             if(!buf || !strlen(buf)) continue;
             add_history(buf);

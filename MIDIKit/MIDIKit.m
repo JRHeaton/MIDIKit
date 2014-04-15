@@ -17,13 +17,12 @@
 #endif
 
 #ifdef DEBUG
-BOOL MKSettingDescriptionsIncludeProperties = YES;
 BOOL MKSettingOSStatusEvaluationLogErrors = YES;
 #else
-BOOL MKSettingDescriptionsIncludeProperties = NO;
 BOOL MKSettingOSStatusEvaluationLogErrors = NO;
 #endif
 
+BOOL MKSettingDescriptionsIncludeProperties = NO;
 BOOL MKSettingOSStatusEvaluationThrowsOnError = NO;
 
 

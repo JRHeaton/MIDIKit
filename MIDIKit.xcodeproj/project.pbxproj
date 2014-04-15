@@ -44,7 +44,7 @@
 		528C944618FC7FCE00A7B960 /* MKDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = 528C943C18FC774100A7B960 /* MKDestination.m */; };
 		528C944718FC7FD100A7B960 /* MKDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = 528C943C18FC774100A7B960 /* MKDestination.m */; };
 		528C944D18FC8FD900A7B960 /* LPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 528C944B18FC8FD900A7B960 /* LPMessage.m */; };
-		528C944E18FC8FD900A7B960 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 528C944C18FC8FD900A7B960 /* main.m */; };
+		528C944E18FC8FD900A7B960 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 528C944C18FC8FD900A7B960 /* main.mm */; };
 		528C945918FC90B400A7B960 /* MKJavaScriptContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 528C945818FC90B400A7B960 /* MKJavaScriptContext.m */; };
 		528C945B18FC919800A7B960 /* MIDIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 528C945A18FC919800A7B960 /* MIDIKit.m */; };
 		528C945C18FC919800A7B960 /* MIDIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 528C945A18FC919800A7B960 /* MIDIKit.m */; };
@@ -144,7 +144,7 @@
 		528C944018FC7FC000A7B960 /* MKSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKSource.m; sourceTree = "<group>"; };
 		528C944A18FC8FD900A7B960 /* LPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPMessage.h; path = Examples/midirepl/LPMessage.h; sourceTree = SOURCE_ROOT; };
 		528C944B18FC8FD900A7B960 /* LPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPMessage.m; path = Examples/midirepl/LPMessage.m; sourceTree = SOURCE_ROOT; };
-		528C944C18FC8FD900A7B960 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Examples/midirepl/main.m; sourceTree = SOURCE_ROOT; };
+		528C944C18FC8FD900A7B960 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = Examples/midirepl/main.mm; sourceTree = SOURCE_ROOT; };
 		528C945018FC8FE500A7B960 /* LPConnection.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = LPConnection.js; sourceTree = "<group>"; };
 		528C945118FC8FE500A7B960 /* launchpad.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = launchpad.js; sourceTree = "<group>"; };
 		528C945218FC8FE500A7B960 /* unitTest.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = unitTest.js; sourceTree = "<group>"; };
@@ -425,7 +425,7 @@
 				528C945818FC90B400A7B960 /* MKJavaScriptContext.m */,
 				528C944A18FC8FD900A7B960 /* LPMessage.h */,
 				528C944B18FC8FD900A7B960 /* LPMessage.m */,
-				528C944C18FC8FD900A7B960 /* main.m */,
+				528C944C18FC8FD900A7B960 /* main.mm */,
 				528C944F18FC8FE500A7B960 /* scripts */,
 			);
 			name = "CLI Tool (mkcli)";
@@ -656,7 +656,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				528C944D18FC8FD900A7B960 /* LPMessage.m in Sources */,
-				528C944E18FC8FD900A7B960 /* main.m in Sources */,
+				528C944E18FC8FD900A7B960 /* main.mm in Sources */,
 				528C945918FC90B400A7B960 /* MKJavaScriptContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

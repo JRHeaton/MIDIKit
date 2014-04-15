@@ -48,7 +48,7 @@ MKIntegerProperty(connectionUniqueID);
 MKIntegerProperty(driverVersion);
 MKBoolGetterProperty(offline, isOffline);
 MKBoolGetterProperty(online, isOnline);
-MKBoolGetterProperty(private, isPrivate);
+MKBoolProperty(isPrivate);
 MKDataProperty(patchNameFile);
 MKDataProperty(userPatchNameFile);
 

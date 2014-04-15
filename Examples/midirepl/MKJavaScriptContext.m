@@ -63,28 +63,28 @@
 
     self[@"objectDescription"] = ^(JSValue *val) { return [val.toObject description]; };
     __weak typeof(self) _self = self;
-    self[@"require"] = _requireBlock = ^JSValue *(NSString *name) {
-
-        BOOL isScript = [name hasSuffix:@".js"];
-        if([name hasPrefix:@"./"] || !name.isAbsolutePath) {
-            name = [_self.currentEvaluatingScriptPath stringByAppendingPathComponent:name];
-        }
-//        else {
-//            _self.currentEvaluatingScriptPath = [name substringToIndex:(name.length - [name lastPathComponent].length)];
+//    self[@"require"] = _requireBlock = ^JSValue *(NSString *name) {
+//
+//        BOOL isScript = [name hasSuffix:@".js"];
+//        if([name hasPrefix:@"./"] || !name.isAbsolutePath) {
+//            name = [_self.currentEvaluatingScriptPath stringByAppendingPathComponent:name];
 //        }
-
-
-
-        if(isScript) {
-            return [_self evaluateScriptAtPath:name];
-        } else if([name hasSuffix:@".mkmodule"]
-                   || [name hasSuffix:@".bundle"]
-                   || [name hasSuffix:@".dylib"]) {
-            return [_self loadNativeModuleAtPath:name];
-        }
-
-        return nil;
-    };
+////        else {
+////            _self.currentEvaluatingScriptPath = [name substringToIndex:(name.length - [name lastPathComponent].length)];
+////        }
+//
+//
+//
+//        if(isScript) {
+//            return [_self evaluateScriptAtPath:name];
+//        } else if([name hasSuffix:@".mkmodule"]
+//                   || [name hasSuffix:@".bundle"]
+//                   || [name hasSuffix:@".dylib"]) {
+//            return [_self loadNativeModuleAtPath:name];
+//        }
+//
+//        return nil;
+//    };
 
     NSProcessInfo *info = [NSProcessInfo processInfo];
     self[@"process"] = @{
