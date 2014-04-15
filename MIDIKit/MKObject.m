@@ -87,9 +87,6 @@ exception:
 }
 
 - (NSString *)description {
-    if([JSContext currentContext])
-        NSLog(@"%@", [JSContext currentContext]);
-
     NSMutableString *desc = [NSMutableString stringWithFormat:@"%@ valid=%@, MIDIRef=0x%x", [super description], self.valid ? @"YES" : @"NO", (int)self.MIDIRef];
     if([[self class] hasUniqueID]) {
         [desc appendFormat:@", uniqueID=%d", (int)self.uniqueID];
