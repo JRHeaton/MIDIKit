@@ -1,6 +1,10 @@
 MIDIKit
 =======
 
+#WARNING:
+###**This README is *not* accurate/complete... yet. It should be within the next few days. MIDIKit is still in hardcore development, though being basically fully featured and stable already.**
+---
+
 This framework aims to take the fuss out of dealing with a C-based, lower-level API (CoreMIDI), and gives you a rich, powerful, object-oriented layer on top, removing the hassle of needing to know the nitty gritty of MIDI (teehee), and letting you transparently interact with the MIDI objects available in an intuitive manner.
 
 ###Document Structure
