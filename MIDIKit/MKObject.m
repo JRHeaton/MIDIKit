@@ -90,9 +90,9 @@ exception:
     if([JSContext currentContext])
         NSLog(@"%@", [JSContext currentContext]);
 
-    NSMutableString *desc = [NSMutableString stringWithFormat:@"%@ valid=%@, MIDIRef=0x%x", [super description], self.valid ? @"YES" : @"NO", self.MIDIRef];
+    NSMutableString *desc = [NSMutableString stringWithFormat:@"%@ valid=%@, MIDIRef=0x%x", [super description], self.valid ? @"YES" : @"NO", (int)self.MIDIRef];
     if([[self class] hasUniqueID]) {
-        [desc appendFormat:@", uniqueID=0x%x", self.uniqueID];
+        [desc appendFormat:@", uniqueID=%d", (int)self.uniqueID];
     }
     if([MIDIKit descriptionsIncludeProperties]) {
         [desc appendFormat:@", properties=%@", self.allProperties];
