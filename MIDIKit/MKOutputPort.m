@@ -19,7 +19,7 @@
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client {
     if(!client.valid) return nil;
-    if([MIDIKit evalOSStatus:MIDIOutputPortCreate(client.MIDIRef, (__bridge CFStringRef)(name), (void *)&_MIDIRef) name:@"Creating an output port" throw:NO] != 0) {
+    if([MIDIKit evalOSStatus:MIDIOutputPortCreate(client.MIDIRef, (__bridge CFStringRef)(name), (void *)&_MIDIRef) name:@"Creating an output port"] != 0) {
         return nil;
     }
 
@@ -61,7 +61,7 @@
     [self.sendQueue addOperationWithBlock:^{
         MIDIPacketList *list = MKPacketListFromData(data);
 
-        if(![MIDIKit evalOSStatus:MIDISend(self.MIDIRef, destination.MIDIRef, (const MIDIPacketList *)list) name:@"Send data" throw:NO]) {
+        if(![MIDIKit evalOSStatus:MIDISend(self.MIDIRef, destination.MIDIRef, (const MIDIPacketList *)list) name:@"Send data"]) {
             // handle error
         }
 
@@ -104,7 +104,7 @@
     if(!self.valid) return self; // TODO: handle this better
 
     [self.sendQueue addOperationWithBlock:^{
-        if([MIDIKit evalOSStatus:MIDISend(self.MIDIRef, destination.MIDIRef, (const MIDIPacketList *)packetList) name:@"Send data" throw:NO] != 0) {
+        if([MIDIKit evalOSStatus:MIDISend(self.MIDIRef, destination.MIDIRef, (const MIDIPacketList *)packetList) name:@"Send data"] != 0) {
             // TODO: handle error
         }
     }];

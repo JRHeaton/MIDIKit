@@ -36,8 +36,11 @@ extern void MKInstallIntoContext(JSContext *c);
 // This is handy to set to YES when inspecting objects
 extern BOOL MKSettingDescriptionsIncludeProperties; // default: NO
 
+// Whether +evalOSStatus:name:throw: will throw an exception on error
+extern BOOL MKSettingOSStatusEvaluationThrowsOnError; // default: NO
+
 // Whether to suppress logs/exceptions from +evalOSStatus:name:throw:
-extern BOOL MKSettingShouldIgnoreOSStatusEvaluationErrors; // default: NO if debug build, else YES
+extern BOOL MKSettingOSStatusEvaluationLogErrors; // default: NO if debug build, else YES
 
 
 // ------------------------------------------------------------------
@@ -52,8 +55,11 @@ extern BOOL MKSettingShouldIgnoreOSStatusEvaluationErrors; // default: NO if deb
 JSExportAs(showProperties, + (BOOL)setDescriptionsIncludeProperties:(BOOL)val);
 + (BOOL)descriptionsIncludeProperties;
 
-JSExportAs(printErrors, + (BOOL)setShouldPrintOSStatusEvaluationErrors:(BOOL)val);
-+ (BOOL)shouldPrintOSStatusEvaluationErrors;
+JSExportAs(printErrors, + (BOOL)setOSStatusEvaluationThrowsOnError:(BOOL)val);
++ (BOOL)OSStatusEvaluationThrowsOnError;
+
+JSExportAs(throw, + (BOOL)setOSStatusEvaluationLogErrors:(BOOL)val);
++ (BOOL)OSStatusEvaluationLogErrors;
 
 + (void)openGitHub;
 
@@ -61,6 +67,6 @@ JSExportAs(printErrors, + (BOOL)setShouldPrintOSStatusEvaluationErrors:(BOOL)val
 
 @interface MIDIKit : NSObject <MIDIKitJS>
 
-+ (OSStatus)evalOSStatus:(OSStatus)code name:(NSString *)name throw:(BOOL)shouldThrow;
++ (OSStatus)evalOSStatus:(OSStatus)code name:(NSString *)name;
 
 @end

@@ -60,7 +60,7 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
     MIDIPortRef p;
 
     if(!client.valid) return nil;
-    if([MIDIKit evalOSStatus:MIDIInputPortCreate(client.MIDIRef, (__bridge CFStringRef)(name), _MKInputPortReadProc, (__bridge void *)(self), &p) name:@"Creating an input port" throw:NO] != 0) {
+    if([MIDIKit evalOSStatus:MIDIInputPortCreate(client.MIDIRef, (__bridge CFStringRef)(name), _MKInputPortReadProc, (__bridge void *)(self), &p) name:@"Creating an input port"] != 0) {
         return nil;
     }
 

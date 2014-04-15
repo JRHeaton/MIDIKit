@@ -112,8 +112,7 @@ exception:
 \
     [MIDIKit evalOSStatus: \
         MIDIObjectGet##upper##Property(self.MIDIRef, (__bridge CFStringRef)(key), &cfVal) \
-        name:[NSString stringWithFormat:@"Getting " #lower " property: \'%@\'", key] \
-        throw:NO]; \
+        name:[NSString stringWithFormat:@"Getting " #lower " property: \'%@\'", key]]; \
 \
     if(cfVal) \
         _propertyCache[key] = nsVal = (__bridge NS##upper *)(cfVal); \
@@ -129,8 +128,7 @@ CACHED_PROP_PROPERTY(Data, data)
 - (ret)set##upper:(NS##upper *)value forProperty:(NSString *)key { \
     [MIDIKit evalOSStatus: \
         MIDIObjectSet##upper##Property(self.MIDIRef, (__bridge CFStringRef)(key), (__bridge CF##upper##Ref)(value)) \
-        name:[NSString stringWithFormat:@"Setting " #lower " property: \'%@\'", key] \
-        throw:NO]; \
+        name:[NSString stringWithFormat:@"Setting " #lower " property: \'%@\'", key]]; \
 \
     _propertyCache[(key)] = value;
 
@@ -152,7 +150,7 @@ CACHED_PROP_PROPERTY_BASE(Data, data, instancetype) END_RET
     if(self.useCaching && (dd = _propertyCache[key]) != nil)
         return dd.integerValue;
 
-    if(![MIDIKit evalOSStatus:MIDIObjectGetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(key), &ret) name:[NSString stringWithFormat:@"Getting integer property: \'%@\'", key] throw:NO])
+    if(![MIDIKit evalOSStatus:MIDIObjectGetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(key), &ret) name:[NSString stringWithFormat:@"Getting integer property: \'%@\'", key]])
         _propertyCache[key] = @(ret);
 
     return ret;
@@ -160,7 +158,7 @@ CACHED_PROP_PROPERTY_BASE(Data, data, instancetype) END_RET
 
 - (NSDictionary *)allProperties {
     CFPropertyListRef ret;
-    if([MIDIKit evalOSStatus:MIDIObjectGetProperties(self.MIDIRef, &ret, true) name:@"Copy object properties" throw:NO] != 0)
+    if([MIDIKit evalOSStatus:MIDIObjectGetProperties(self.MIDIRef, &ret, true) name:@"Copy object properties"] != 0)
         return nil;
 
     NSDictionary *properties = (__bridge_transfer NSDictionary *)ret;
@@ -169,7 +167,7 @@ CACHED_PROP_PROPERTY_BASE(Data, data, instancetype) END_RET
 }
 
 - (instancetype)setInteger:(NSInteger)value forProperty:(NSString *)key {
-    if(![MIDIKit evalOSStatus:MIDIObjectSetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(key), (SInt32)value) name:[NSString stringWithFormat:@"Setting integer property: \'%@\'", key] throw:NO])
+    if(![MIDIKit evalOSStatus:MIDIObjectSetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(key), (SInt32)value) name:[NSString stringWithFormat:@"Setting integer property: \'%@\'", key]])
         _propertyCache[(key)] = @(value);
     return self;
 }
@@ -182,7 +180,7 @@ CACHED_PROP_PROPERTY_BASE(Data, data, instancetype) END_RET
 - (instancetype)removeProperty:(NSString *)key {
     [self removeCachedProperty:key];
 
-    [MIDIKit evalOSStatus:MIDIObjectRemoveProperty(self.MIDIRef, (__bridge CFStringRef)(key)) name:[NSString stringWithFormat:@"Removing property: \'%@\'", key] throw:NO];
+    [MIDIKit evalOSStatus:MIDIObjectRemoveProperty(self.MIDIRef, (__bridge CFStringRef)(key)) name:[NSString stringWithFormat:@"Removing property: \'%@\'", key]];
     return self;
 }
 

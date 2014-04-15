@@ -17,8 +17,9 @@
 #endif
 
 BOOL MKSettingDescriptionsIncludeProperties = NO;
+BOOL MKSettingOSStatusEvaluationThrowsOnError = NO;
 
-BOOL MKSettingShouldPrintOSStatusEvaluationErrors =
+BOOL MKSettingOSStatusEvaluationLogErrors =
 #if DEBUG == 1
 NO;
 #else
@@ -64,7 +65,8 @@ void MKInstallIntoContext(JSContext *c) {
 + (BOOL)getter { return var; }
 
 GLOBAL(setDescriptionsIncludeProperties, descriptionsIncludeProperties, MKSettingDescriptionsIncludeProperties)
-GLOBAL(setShouldPrintOSStatusEvaluationErrors, shouldPrintOSStatusEvaluationErrors, MKSettingShouldPrintOSStatusEvaluationErrors)
+GLOBAL(setOSStatusEvaluationThrowsOnError, OSStatusEvaluationThrowsOnError, MKSettingOSStatusEvaluationThrowsOnError)
+GLOBAL(setOSStatusEvaluationLogErrors, OSStatusEvaluationLogErrors, MKSettingOSStatusEvaluationLogErrors)
 
 + (void)openGitHub {
     static NSString *_MKGitHubURL = @"http://github.com/JRHeaton/MIDIKit";
@@ -78,12 +80,13 @@ GLOBAL(setShouldPrintOSStatusEvaluationErrors, shouldPrintOSStatusEvaluationErro
 #endif
 }
 
-+ (OSStatus)evalOSStatus:(OSStatus)code name:(NSString *)name throw:(BOOL)throw {
++ (OSStatus)evalOSStatus:(OSStatus)code name:(NSString *)name{
     if(code != 0) {
-        NSLog(@"[MIDI Error] %@ : %@", name, [NSError errorWithDomain:NSOSStatusErrorDomain code:code userInfo:nil]);
-        if(throw) {
+        if(MKSettingOSStatusEvaluationLogErrors)
+            NSLog(@"[MIDI Error] %@ : %@", name, [NSError errorWithDomain:NSOSStatusErrorDomain code:code userInfo:nil]);
+
+        if(MKSettingOSStatusEvaluationThrowsOnError)
             [NSException raise:@"MKOSStatusEvaluationException" format:@"Error during operation: %@", name];
-        }
     }
 
     return code;

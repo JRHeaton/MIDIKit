@@ -47,7 +47,7 @@ static void _MKVirtualDestinationReadProc(const MIDIPacketList *pktlist, void *r
     MIDIEndpointRef e;
 
     if(!client.valid) return nil;
-    if([MIDIKit evalOSStatus:MIDIDestinationCreate(client.MIDIRef, (__bridge CFStringRef)(name), _MKVirtualDestinationReadProc, (__bridge void *)(self), (void *)&e) name:@"Creating a virtual destination" throw:NO] != 0)
+    if([MIDIKit evalOSStatus:MIDIDestinationCreate(client.MIDIRef, (__bridge CFStringRef)(name), _MKVirtualDestinationReadProc, (__bridge void *)(self), (void *)&e) name:@"Creating a virtual destination"] != 0)
         return nil;
     if(!(self = [super initWithMIDIRef:e])) return nil;
     

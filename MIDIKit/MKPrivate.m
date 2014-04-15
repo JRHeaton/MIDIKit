@@ -36,7 +36,7 @@ MIDIPacketList *MKPacketListFromData(NSData *data) {
 
 MKEntity *MKEntityForEndpoint(id endpoint) {
     MIDIEntityRef ret;
-    if(![MIDIKit evalOSStatus:MIDIEndpointGetEntity(((MKObject *)endpoint).MIDIRef, &ret) name:@"Getting entity" throw:NO])
+    if(![MIDIKit evalOSStatus:MIDIEndpointGetEntity(((MKObject *)endpoint).MIDIRef, &ret) name:@"Getting entity"])
         return [[MKEntity alloc] initWithMIDIRef:ret];
 
     return nil;

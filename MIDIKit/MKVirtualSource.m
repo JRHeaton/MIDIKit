@@ -29,7 +29,7 @@
     MIDIEndpointRef e;
 
     if(!client.valid) return nil;
-    if([MIDIKit evalOSStatus:MIDISourceCreate(client.MIDIRef, (__bridge CFStringRef)(name), &e) name:@"Creating a virtual source" throw:NO] != 0)
+    if([MIDIKit evalOSStatus:MIDISourceCreate(client.MIDIRef, (__bridge CFStringRef)(name), &e) name:@"Creating a virtual source"] != 0)
         return nil;
     if(!(self = [super initWithMIDIRef:e])) return nil;
     
@@ -42,7 +42,7 @@
 - (instancetype)receivedData:(NSData *)data {
     [self.receiveQueue addOperationWithBlock:^{
         MIDIPacketList *list = MKPacketListFromData(data);
-        if([MIDIKit evalOSStatus:MIDIReceived(self.MIDIRef, list) name:@"Virtual receive" throw:NO] != 0) {
+        if([MIDIKit evalOSStatus:MIDIReceived(self.MIDIRef, list) name:@"Virtual receive"] != 0) {
             // TODO: handle error
         }
 
