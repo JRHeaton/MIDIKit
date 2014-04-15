@@ -18,7 +18,7 @@ dev = MKDevice.firstContaining('Launchpad')
 // if device holds a valid MIDI reference
 if(dev.valid) {
     // set it up for output
-	connection.addDestination(dev.rootDestination);
+    connection.addDestination(dev.rootDestination);
 
     // conveniently set up some functions on this connection object
     connection.reset = function() { this.sendMessage(LPMessage.reset()) }

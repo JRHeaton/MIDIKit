@@ -32,7 +32,7 @@
 
 JSExportAs(send, - (instancetype)sendNumberArray:(NSArray *)array);
 
-@property (nonatomic, weak) MKClient *client;
+@property (nonatomic, strong) MKClient *client;
 @property (nonatomic, strong) MKInputPort *inputPort;
 @property (nonatomic, strong) MKOutputPort *outputPort;
 
