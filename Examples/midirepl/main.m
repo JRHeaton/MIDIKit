@@ -35,7 +35,7 @@ int main(int argc, const char * argv[]) {
         __weak typeof(c) _c = c;
         c[@"unitTests"] = ^{ runTestScript(_c, @"unitTest.js"); };
         c[@"launchpad"] = ^{ runTestScript(_c, @"launchpad.js"); };
-        c[@"help"] = ^{ [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/JRHeaton/MIDIKit/blob/master/README.md"]]; };
+        c[@"help"] = @"\nscript(path)    -- evaluate a script\nlocal()         -- set relative path for script() calls\nshowEval(bool)  -- set whether return values should be printed\nprocess         -- global process object";
 
         c[@"script"] = ^JSValue *(NSString *path) {
             NSString *evalPath = [_c[@"__dirname"] toString];
