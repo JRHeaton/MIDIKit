@@ -9,7 +9,7 @@
 #import "MKObject.h"
 
 @class MKEntity;
-@protocol MKDestinationJS <JSExport>
+@protocol MKDestinationJS <JSExport, MKObjectJS>
 
 + (NSUInteger)numberOfDestinations;
 + (NSUInteger)count; // shorthand

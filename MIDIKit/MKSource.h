@@ -9,7 +9,7 @@
 #import "MKObject.h"
 
 @class MKEntity;
-@protocol MKSourceJS <JSExport>
+@protocol MKSourceJS <JSExport, MKObjectJS>
 
 + (NSUInteger)numberOfSources;
 + (NSUInteger)count;

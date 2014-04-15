@@ -18,7 +18,8 @@
 
 #pragma mark - -Enumeration/Init-
 + (NSUInteger)numberOfDevices;
-+ (instancetype)firstOnlineDeviceNamed:(NSString *)name;
++ (NSUInteger)count; // shorthand
+JSExportAs(firstNamed, + (instancetype)firstOnlineDeviceNamed:(NSString *)name);
 
 
 #pragma mark - -Child Objects-

@@ -10,9 +10,9 @@
 
 #pragma mark - -Mutual ObjC/JavaScript-
 
-@protocol MKVirtualSourceJS <JSExport>
+@protocol MKVirtualSourceJS <JSExport, MKObjectJS>
 
-JSExportAs(virtualSourceNamed,
+JSExportAs(named,
 + (instancetype)virtualSourceWithName:(NSString *)name client:(MKClient *)client);
 
 @end

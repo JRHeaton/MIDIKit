@@ -17,8 +17,8 @@
 @protocol MKObjectJS <JSExport>
 
 #pragma mark - -Init-
-JSExportAs(newWithUniqueID, + (instancetype)objectWithUniqueID:(MIDIUniqueID)uniqueID);
-JSExportAs(newWithMIDIRef, + (instancetype)objectWithMIDIRef:(MIDIObjectRef)MIDIRef);
+JSExportAs(withUniqueID, + (instancetype)objectWithUniqueID:(MIDIUniqueID)uniqueID);
+JSExportAs(withMIDIRef, + (instancetype)objectWithMIDIRef:(MIDIObjectRef)MIDIRef);
 
 #pragma mark - -Properties-
 #pragma mark Setters

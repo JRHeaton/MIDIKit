@@ -344,7 +344,7 @@
 			children = (
 				52A1E07618FB883000D7073F /* MIDIKit.h */,
 				528C945A18FC919800A7B960 /* MIDIKit.m */,
-				52EAA53918FCE05600094EEF /* Property Availability Protocols */,
+				52EAA53918FCE05600094EEF /* MIDI Property Availability */,
 				524005DE18FB045D0030B46D /* Useful Abstractions */,
 				524005D918FB041F0030B46D /* Wrappers */,
 				527B2AAE18FCC126001D0CDD /* Private */,
@@ -419,12 +419,12 @@
 			path = mkcli;
 			sourceTree = "<group>";
 		};
-		52EAA53918FCE05600094EEF /* Property Availability Protocols */ = {
+		52EAA53918FCE05600094EEF /* MIDI Property Availability */ = {
 			isa = PBXGroup;
 			children = (
 				52A786BE18FCE5E60064E313 /* MKObjectProperties.h */,
 			);
-			name = "Property Availability Protocols";
+			name = "MIDI Property Availability";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

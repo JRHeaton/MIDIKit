@@ -10,7 +10,9 @@
 
 #pragma mark - -Mutual ObjC/JavaScript-
 
-@protocol MKVirtualDestinationJS<JSExport>
+@protocol MKVirtualDestinationJS<JSExport, MKObjectJS>
+
+JSExportAs(named, + (instancetype)virtualDestinationWithName:(NSString *)name client:(MKClient *)client);
 
 @end
 
@@ -24,7 +26,6 @@
 
 #pragma mark - -Init-
 // Creates a new virtual destination and adds it to the MIDI server
-+ (instancetype)virtualDestinationWithName:(NSString *)name client:(MKClient *)client;
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
 
 
