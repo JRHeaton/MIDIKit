@@ -55,5 +55,5 @@ connection.reset()
 connection.light()
 connection.notePadExample()
 
-// if evaluated directly into a JSContext with an enclosing function wrapper, this will be the return value
+// implemented like this at least temporarily
 module.exports = connection;

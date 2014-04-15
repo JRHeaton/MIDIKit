@@ -14,9 +14,9 @@
 + (NSUInteger)numberOfSources;
 + (NSUInteger)count;
 
-JSExportAs(atIndex, + (instancetype)sourceAtIndex:(NSUInteger)index);
+JSExportAs(atIndex,         + (instancetype)sourceAtIndex:(NSUInteger)index);
 
-JSExportAs(firstNamed, + (instancetype)firstSourceNamed:(NSString *)name);
+JSExportAs(firstNamed,      + (instancetype)firstSourceNamed:(NSString *)name);
 JSExportAs(firstContaining, + (instancetype)firstSourceContaining:(NSString *)namePart);
 
 @property (nonatomic, readonly) MKEntity *entity;

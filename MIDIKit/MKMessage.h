@@ -34,27 +34,24 @@ typedef NS_ENUM(UInt8, MKMessageType) {
 @protocol MKMessageJS <JSExport>
 
 + (instancetype)new;
-JSExportAs(withType, + (instancetype)messageWithType:(MKMessageType)type);
-JSExportAs(withStatus, + (instancetype)messageWithStatus:(UInt8)status :(UInt8)data1 :(UInt8)data2);
+JSExportAs(withType,        + (instancetype)messageWithType:(MKMessageType)type);
+JSExportAs(withStatus,      + (instancetype)messageWithStatus:(UInt8)status :(UInt8)data1 :(UInt8)data2);
 
-JSExportAs(controlChange, + (instancetype)controlChangeMessageWithController:(UInt8)controller value:(UInt8)value);
-JSExportAs(noteOn, + (instancetype)noteOnMessageWithKey:(UInt8)key velocity:(UInt8)velocity);
+JSExportAs(controlChange,   + (instancetype)controlChangeMessageWithController:(UInt8)controller value:(UInt8)value);
+JSExportAs(noteOn,          + (instancetype)noteOnMessageWithKey:(UInt8)key velocity:(UInt8)velocity);
 
 // Convnenience for converting from one class to another
 // Usually, this is done because a subclass of MKMessage is
 // implementing logic.
 + (instancetype)subclass:(MKMessage *)message;
 + (instancetype)copy:(MKMessage *)message;
-JSExportAs(withMessage, + (instancetype)messageWithMessage:(MKMessage *)message);
+JSExportAs(withMessage,     + (instancetype)messageWithMessage:(MKMessage *)message);
 
 // Cleaner syntax for variable-length messages: MKMessage.message(0xf0, 0xa, 0xb, 0xc, 0xd, 0xf7)
-JSExportAs(message,
-+ (instancetype)messageJS:(JSValue *)val
-);
+JSExportAs(message,         + (instancetype)messageJS:(JSValue *)val);
 
 // Same, but for many messages in one stream of arguments
-JSExportAs(messages,
-+ (NSArray *)messagesJS:(JSValue *)val
+JSExportAs(messages,        + (NSArray *)messagesJS:(JSValue *)val
 );
 
 // Convenience/accessibility for JavaScript

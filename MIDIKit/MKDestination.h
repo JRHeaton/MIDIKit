@@ -16,13 +16,13 @@
 + (NSUInteger)numberOfDestinations;
 + (NSUInteger)count; // shorthand
 
-JSExportAs(atIndex, + (instancetype)destinationAtIndex:(NSUInteger)index);
+JSExportAs(atIndex,         + (instancetype)destinationAtIndex:(NSUInteger)index);
 
-JSExportAs(firstNamed, + (instancetype)firstDestinationNamed:(NSString *)name);
+JSExportAs(firstNamed,      + (instancetype)firstDestinationNamed:(NSString *)name);
 JSExportAs(firstContaining, + (instancetype)firstDestinationContaining:(NSString *)namePart);
 
-JSExportAs(sendMessage, - (instancetype)sendMessage:(MKMessage *)msg usingOutputPort:(MKOutputPort *)outputPort);
-JSExportAs(sendMessages, - (instancetype)sendMessages:(NSArray *)messages usingOutputPort:(MKOutputPort *)outputPort);
+JSExportAs(sendMessage,     - (instancetype)sendMessage:(MKMessage *)msg usingOutputPort:(MKOutputPort *)outputPort);
+JSExportAs(sendMessages,    - (instancetype)sendMessages:(NSArray *)messages usingOutputPort:(MKOutputPort *)outputPort);
 
 @property (nonatomic, readonly) MKEntity *entity;
 

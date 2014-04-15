@@ -53,14 +53,14 @@ extern BOOL MKSettingOSStatusEvaluationLogErrors; // default: YES if debug build
 // DO NOT INSTANTIATE THIS CLASS -- it will do no good
 @protocol MIDIKitJS <JSExport>
 
-JSExportAs(showProperties, + (BOOL)setDescriptionsIncludeProperties:(BOOL)val);
-+ (BOOL)descriptionsIncludeProperties;
+JSExportAs(showProperties,  + (BOOL)setDescriptionsIncludeProperties:(BOOL)val);
+JSExportAs(printErrors,     + (BOOL)setOSStatusEvaluationThrowsOnError:(BOOL)val);
+JSExportAs(throw,           + (BOOL)setOSStatusEvaluationLogErrors:(BOOL)val);
 
-JSExportAs(printErrors, + (BOOL)setOSStatusEvaluationThrowsOnError:(BOOL)val);
++ (BOOL)descriptionsIncludeProperties;
++ (BOOL)OSStatusEvaluationLogErrors;
 + (BOOL)OSStatusEvaluationThrowsOnError;
 
-JSExportAs(throw, + (BOOL)setOSStatusEvaluationLogErrors:(BOOL)val);
-+ (BOOL)OSStatusEvaluationLogErrors;
 
 + (void)openGitHub;
 

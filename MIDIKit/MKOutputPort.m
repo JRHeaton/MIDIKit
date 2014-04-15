@@ -36,20 +36,12 @@ static NSMapTable *_MKOutputPortNameMap = nil;
     }
 
     [_MKOutputPortNameMap setObject:self forKey:name];
+    _sendQueue = [NSOperationQueue new];
 
     self.client = client;
     [self.client.outputPorts addObject:self];
     
     return self;
-}
-
-- (NSOperationQueue *)sendQueue {
-    static NSOperationQueue *queue = nil;
-    if(!queue) {
-        queue = [NSOperationQueue new];
-    }
-    
-    return queue;
 }
 
 - (instancetype)dispose {
@@ -61,11 +53,9 @@ static NSMapTable *_MKOutputPortNameMap = nil;
 - (instancetype)sendJS:(JSValue *)dataArray toDestination:(MKDestination *)destination {
     NSArray *array = dataArray.toArray;
     if(!array.count && [[JSContext currentArguments].firstObject isKindOfClass:[MKMessage class]]) {
-        NSLog(@"msgggggggggggg");
         return [self sendMessage:[JSContext currentArguments].firstObject toDestination:destination];
     }
 
-    NSLog(@"zoob");
     id thing = array.firstObject;
     if(!thing) return self;
 

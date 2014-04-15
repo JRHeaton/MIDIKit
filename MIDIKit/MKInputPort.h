@@ -15,7 +15,7 @@
 typedef void (^MKInputHandler)(MKInputPort *port, NSData *data);
 @protocol MKInputPortJS <JSExport, MKObjectJS>
 
-JSExportAs(named, + (instancetype)inputPortWithName:(NSString *)name client:(MKClient *)client);
+JSExportAs(named,               + (instancetype)inputPortWithName:(NSString *)name client:(MKClient *)client);
 
 // Calling this method will begin input from the given source
 // to this input port, thus triggering the delegate callbacks
@@ -25,10 +25,8 @@ JSExportAs(named, + (instancetype)inputPortWithName:(NSString *)name client:(MKC
 // This disposes the underlying port
 - (instancetype)dispose;
 
-JSExportAs(addInputHandler,
-- (instancetype)addInputHandlerJS:(JSValue *)handler);
-JSExportAs(removeInputHandler,
-- (instancetype)removeInputHandlerJS:(JSValue *)handler);
+JSExportAs(addInputHandler,     - (instancetype)addInputHandlerJS:(JSValue *)handler);
+JSExportAs(removeInputHandler,  - (instancetype)removeInputHandlerJS:(JSValue *)handler);
 - (instancetype)removeAllInputHandlers;
 
 @property (nonatomic, strong) NSMutableArray *inputHandlers;

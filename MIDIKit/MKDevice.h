@@ -16,7 +16,7 @@
 
 + (NSUInteger)numberOfDevices;
 + (NSUInteger)count; // shorthand
-JSExportAs(firstNamed, + (instancetype)firstDeviceNamed:(NSString *)name);
+JSExportAs(firstNamed,      + (instancetype)firstDeviceNamed:(NSString *)name);
 JSExportAs(firstContaining, + (instancetype)firstDeviceContaining:(NSString *)name);
 
 // Index-access to child entities

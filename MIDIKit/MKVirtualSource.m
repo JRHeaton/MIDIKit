@@ -45,6 +45,7 @@ static NSMapTable *_MKVirtualSourceNameMap = nil;
     if(!(self = [super initWithMIDIRef:e])) return nil;
 
     [_MKVirtualSourceNameMap setObject:self forKey:name];
+    _receiveQueue = [NSOperationQueue new];
     
     self.client = client;
     [self.client.virtualSources addObject:self];
@@ -63,15 +64,6 @@ static NSMapTable *_MKVirtualSourceNameMap = nil;
     }];
 
     return self;
-}
-
-- (NSOperationQueue *)receiveQueue {
-    static NSOperationQueue *queue = nil;
-    if(!queue) {
-        queue = [NSOperationQueue new];
-    }
-
-    return queue;
 }
 
 @end
