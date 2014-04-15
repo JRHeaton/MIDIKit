@@ -67,11 +67,11 @@ int main(int argc, const char * argv[]) {
             if(s.length) {
                 return [_c evaluateScript:[NSString stringWithFormat:
                                            @"(function() { "
-                                           "    var exports; "
+                                           "    var module = { exports: {} }; "
                                            "    (function () { "
                                            "        %@ "
                                            "    })(); "
-                                           "    return exports; "
+                                           "    return module.exports; "
                                            "})()",
                                            s]];
             }
