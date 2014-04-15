@@ -1,3 +1,15 @@
+// -------------------------
+// script.js
+//
+// This script will illuminate one red pad at grid position(0, 0)
+// and light up the rest of the grid in bright yellow.
+// The yellow pads will blink on and off, hence the flash.
+//
+// If you evalute this script into a JSContext, you'll have a reference
+// to the MKConnection object, on which there is a reset() method 
+// you can use to bring your device back to a cleared state.
+
+
 // Create a subclass of MKMessage for Launchpad-specific messages
 LPMessage = Object.create(MKMessage)
 
