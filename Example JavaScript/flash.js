@@ -29,6 +29,10 @@ if(dev.valid) {
     connection.reset()
     connection.light()
     connection.notePadExample()
+
+    // enable flashing (buffer switching automatically)
+    // this is another way to make a message
+    connection.sendMessage(LPMessage.message(0xb0, 0x00, 0x28));
 }
 
 // if evaluated directly into a JSContext with an enclosing function wrapper, this will be the return value

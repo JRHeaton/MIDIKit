@@ -81,7 +81,7 @@
 }
 
 + (instancetype)messageWithMessage:(MKMessage *)message {
-    return [[self alloc] initWithData:message.data];
+    return [self messageWithData:message.data];
 }
 
 + (instancetype)messageWithStatus:(UInt8)status :(UInt8)data1 :(UInt8)data2 {
@@ -125,7 +125,7 @@
 }
 
 + (instancetype)messageJS:(JSValue *)val {
-    return [[self alloc] initWithData:[self _dataFromJSArray:[JSContext currentArguments]]];
+    return [self messageWithData:[self _dataFromJSArray:[JSContext currentArguments]]];
 }
 
 + (NSArray *)messagesJS:(JSValue *)val {

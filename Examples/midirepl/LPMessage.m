@@ -28,7 +28,7 @@ static const UInt8 LPMsg[6][3] = {
 }
 
 + (instancetype)_staticMessageAtIndex:(NSUInteger)index {
-    return [[self alloc] initWithData:[NSData dataWithBytes:LPMsg[index] length:3]];
+    return [self messageWithData:[NSData dataWithBytes:LPMsg[index] length:3]];
 }
 
 + (instancetype)reset {
@@ -65,7 +65,7 @@ static const UInt8 LPMsg[6][3] = {
     buf[2] |= (updatingBuffer & 0xff) << 2;
     buf[2] |= copyToUpdating << 4;
     
-    return [[self alloc] initWithData:[NSData dataWithBytes:buf length:3]];
+    return [LPMessage messageWithData:[NSData dataWithBytes:buf length:3]];
 }
 
 + (instancetype)setFirstBuffers {
@@ -93,7 +93,7 @@ static const UInt8 LPMsg[6][3] = {
         buf[2]  = [self velocityForRed:redBrightness green:greenBrightness clear:clearOther copy:copyToOther];
     }
     
-    return [[self alloc] initWithData:[NSData dataWithBytes:buf length:3]];
+    return [self messageWithData:[NSData dataWithBytes:buf length:3]];
 }
 
 + (instancetype)redFullAtX:(NSUInteger)x Y:(NSUInteger)y {
