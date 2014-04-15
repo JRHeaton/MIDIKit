@@ -217,26 +217,65 @@
 }
 
 - (NSString *)description {
+    if(!self.length
+       || (self.length == 3
+           && !self.bytes[0]
+           && !self.bytes[1]
+           && !self.bytes[2])) {
+           return [NSString stringWithFormat:@"%@ [Empty Message]", [super description]];
+       }
+
     NSString *typeName;
+    NSString *dataInfo;
     switch (self.type) {
-        case kMKMessageTypeSysex: typeName = @"Sysex"; break;
-        case kMKMessageTypeChannelPressureAfterTouch: typeName = @"Channel AfterTouch"; break;
-        case kMKMessageTypeControlChange: typeName = @"Control Change"; break;
-        case kMKMessageTypeNoteOff: typeName = @"Note Off"; break;
-        case kMKMessageTypeNoteOn: typeName = @"Note On"; break;
-        case kMKMessageTypePitchBend: typeName = @"Pitch Bend"; break;
-        case kMKMessageTypePolyphonicKeyPressureAfterTouch: typeName = @"Polyphonic AfterTouch"; break;
-        case kMKMessageTypeProgramChange: typeName = @"Program Change"; break;
-        default: typeName = @"Unknown"; break;
+        case kMKMessageTypeSysex:
+            typeName = @"Sysex";
+            dataInfo = [self _hexStringForData:self.data maxByteCount:20];
+
+            break;
+        case kMKMessageTypeChannelPressureAfterTouch:
+            typeName = @"Channel AfterTouch";
+            dataInfo = [NSString stringWithFormat:@"key=%d, pressure=%d", self.key, self.pressure];
+
+            break;
+        case kMKMessageTypeControlChange:
+            typeName = @"Control Change";
+            dataInfo = [NSString stringWithFormat:@"key=%d, value=%d", self.controller, self.value];
+
+            break;
+        case kMKMessageTypeNoteOff:
+            typeName = @"Note Off";
+            dataInfo = [NSString stringWithFormat:@"key=%d, velocity=%d", self.key, self.velocity];
+
+            break;
+        case kMKMessageTypeNoteOn:
+            typeName = @"Note On";
+            dataInfo = [NSString stringWithFormat:@"key=%d, velocity=%d", self.key, self.velocity];
+
+            break;
+        case kMKMessageTypePitchBend:
+            typeName = @"Pitch Bend";
+            dataInfo = [self _hexStringForData:self.data maxByteCount:20];
+
+            break;
+        case kMKMessageTypePolyphonicKeyPressureAfterTouch:
+            typeName = @"Polyphonic AfterTouch";
+            dataInfo = [NSString stringWithFormat:@"key=%d, pressure=%d", self.key, self.pressure];
+
+            break;
+        case kMKMessageTypeProgramChange:
+            typeName = @"Program Change";
+            dataInfo = [NSString stringWithFormat:@"programNumber=%d", self.programNumber];
+
+            break;
+        default:
+            typeName = @"Unknown";
+            dataInfo = [self _hexStringForData:self.data maxByteCount:20];
+
+            break;
     }
 
-    NSString *dataString;
-    switch (self.type) {
-        case kMKMessageTypeSysex: dataString = [self _hexStringForData:self.data maxByteCount:20]; break;
-        default: dataString = [NSString stringWithFormat:@"0x%02X, 0x%02X, 0x%02X", self.status, self.data1, self.data2];
-    }
-
-    return [NSString stringWithFormat:@"%@ type=0x%X(%@), length=0x%lX, data={%@}", super.description, self.type, typeName, (unsigned long)self.length, dataString];
+    return [NSString stringWithFormat:@"%@ type=0x%X(%@), length=0x%lX, %@", super.description, self.type, typeName, (unsigned long)self.length, dataInfo];
 }
 
 - (MKMessageType)type {
@@ -260,11 +299,11 @@
 }
 
 - (void)setData1:(UInt8)data1 {
-    [self setByte:data1 atIndex:1];
+    [self setByte:data1 & 0x7f atIndex:1];
 }
 
 - (void)setData2:(UInt8)data2 {
-    [self setByte:data2 atIndex:2];
+    [self setByte:data2 & 0x7f atIndex:2];
 }
 
 #define FORWARD(newGetter, oldGetter, newSetter, oldSetter) \
@@ -274,6 +313,9 @@
 FORWARD(key, data1, setKey, setData1)
 FORWARD(controller, data1, setController, setData1)
 FORWARD(velocity, data2, setVelocity, setData2)
+FORWARD(pressure, data2, setPressure, setData2)
+FORWARD(value, data2, setValue, setData2)
+FORWARD(programNumber, data2, setProgramNumber, setData2)
 
 #undef FORWARD
 

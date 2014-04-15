@@ -83,9 +83,9 @@ JSExportAs(messages,
 // status byte containing type and channel
 @property (nonatomic, assign) UInt8 status;
 // key for note messages, controller for control change/other
-@property (nonatomic, assign) UInt8 key, controller, data1;
+@property (nonatomic, assign) UInt8 key, controller, programNumber, data1;
 // velocity for note messages
-@property (nonatomic, assign) UInt8 velocity, data2;
+@property (nonatomic, assign) UInt8 velocity, pressure, value, data2;
 
 JSExportAs(setChannel, - (instancetype)setChannelReturn:(UInt8)channel);
 JSExportAs(setType, - (instancetype)setTypeReturn:(MKMessageType)type);
