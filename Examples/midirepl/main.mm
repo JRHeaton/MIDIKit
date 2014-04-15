@@ -41,7 +41,13 @@ int main(int argc, const char * argv[]) {
         }
         c[@"unitTests"] = ^{ runTestScript(_c, @"unitTest.js"); };
         c[@"launchpad"] = ^{ runTestScript(_c, @"launchpad.js"); };
-        c[@"help"] = @"\nrequire(path)   -- evaluate a script\nlocal()         -- set relative path for require() calls\nshowEval(bool)  -- set whether return values should be printed\nprocess         -- global process object";
+        c[@"setPath"] = ^(NSString *path) { _c[@"__dirname"] = path; };
+        c[@"help"] = ^{ printf("%s\n",
+        "require(path)   -- evaluate a script\n"
+        "local()         -- set relative path for require() calls\n"
+        "showEval(bool)  -- set whether return values should be printed\n"
+        "process         -- global process object\n"
+        "setCwd(path)    -- sets the relative path for relative path require() calls"); };
 
         c[@"require"] = ^JSValue *(NSString *path) {
             NSString *evalPath = [_c[@"__dirname"] toString];
