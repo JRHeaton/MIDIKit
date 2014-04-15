@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		521C1BC318FD16A500A002FC /* flash.js in Sources */ = {isa = PBXBuildFile; fileRef = 521C1BC218FD16A500A002FC /* flash.js */; };
 		521C1BC518FD412900A002FC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 521C1BC418FD412900A002FC /* README.md */; };
 		524005E518FB06CD0030B46D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C70F18DEA14E00A8CFD4 /* Foundation.framework */; };
 		5240063E18FB0A5B0030B46D /* MKConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EFD18F7C86900A5A5D3 /* MKConnection.m */; };
@@ -20,24 +19,24 @@
 		5240064618FB0A670030B46D /* MKEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73A18DEADB800A8CFD4 /* MKEntity.m */; };
 		5240064818FB0A690030B46D /* MKVirtualSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EF318F7B65D00A5A5D3 /* MKVirtualSource.m */; };
 		5240064918FB0A6A0030B46D /* MKVirtualDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EF718F7B80900A5A5D3 /* MKVirtualDestination.m */; };
-		5240064D18FB15050030B46D /* MKThruConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 5240064B18FB15050030B46D /* MKThruConnection.h */; };
+		5240064D18FB15050030B46D /* MKThruConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 5240064B18FB15050030B46D /* MKThruConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5240064E18FB15050030B46D /* MKThruConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5240064C18FB15050030B46D /* MKThruConnection.m */; };
 		5240064F18FB15050030B46D /* MKThruConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5240064C18FB15050030B46D /* MKThruConnection.m */; };
 		5273C6D818DE96A200A8CFD4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D718DE96A200A8CFD4 /* Cocoa.framework */; };
-		5273C70418DE9A9800A8CFD4 /* MKObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C70218DE9A9800A8CFD4 /* MKObject.h */; };
+		5273C70418DE9A9800A8CFD4 /* MKObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C70218DE9A9800A8CFD4 /* MKObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5273C70518DE9A9800A8CFD4 /* MKObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C70318DE9A9800A8CFD4 /* MKObject.m */; };
-		5273C70818DE9E2500A8CFD4 /* MKClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C70618DE9E2500A8CFD4 /* MKClient.h */; };
+		5273C70818DE9E2500A8CFD4 /* MKClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C70618DE9E2500A8CFD4 /* MKClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5273C70918DE9E2500A8CFD4 /* MKClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C70718DE9E2500A8CFD4 /* MKClient.m */; };
-		5273C73718DEAD5700A8CFD4 /* MKDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C73518DEAD5700A8CFD4 /* MKDevice.h */; };
+		5273C73718DEAD5700A8CFD4 /* MKDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C73518DEAD5700A8CFD4 /* MKDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5273C73818DEAD5700A8CFD4 /* MKDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73618DEAD5700A8CFD4 /* MKDevice.m */; };
-		5273C73B18DEADB800A8CFD4 /* MKEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C73918DEADB800A8CFD4 /* MKEntity.h */; };
+		5273C73B18DEADB800A8CFD4 /* MKEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = 5273C73918DEADB800A8CFD4 /* MKEntity.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5273C73C18DEADB800A8CFD4 /* MKEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C73A18DEADB800A8CFD4 /* MKEntity.m */; };
 		527B2AB518FCC6AB001D0CDD /* MKPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 527B2AB418FCC6AB001D0CDD /* MKPrivate.m */; };
 		527B2AB618FCC6AB001D0CDD /* MKPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 527B2AB418FCC6AB001D0CDD /* MKPrivate.m */; };
 		527B2AB718FCC6AB001D0CDD /* MKPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 527B2AB418FCC6AB001D0CDD /* MKPrivate.m */; };
-		528C943D18FC774100A7B960 /* MKDestination.h in Headers */ = {isa = PBXBuildFile; fileRef = 528C943B18FC774100A7B960 /* MKDestination.h */; };
+		528C943D18FC774100A7B960 /* MKDestination.h in Headers */ = {isa = PBXBuildFile; fileRef = 528C943B18FC774100A7B960 /* MKDestination.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		528C943E18FC774100A7B960 /* MKDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = 528C943C18FC774100A7B960 /* MKDestination.m */; };
-		528C944118FC7FC000A7B960 /* MKSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 528C943F18FC7FC000A7B960 /* MKSource.h */; };
+		528C944118FC7FC000A7B960 /* MKSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 528C943F18FC7FC000A7B960 /* MKSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		528C944218FC7FC000A7B960 /* MKSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 528C943F18FC7FC000A7B960 /* MKSource.h */; };
 		528C944318FC7FC000A7B960 /* MKSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 528C944018FC7FC000A7B960 /* MKSource.m */; };
 		528C944418FC7FC000A7B960 /* MKSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 528C944018FC7FC000A7B960 /* MKSource.m */; };
@@ -63,18 +62,18 @@
 		52A1E08218FB891000D7073F /* MKVirtualDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EF718F7B80900A5A5D3 /* MKVirtualDestination.m */; };
 		52A1E08318FB891300D7073F /* MKConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EFD18F7C86900A5A5D3 /* MKConnection.m */; };
 		52A1E08418FB891500D7073F /* MKMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22F0418F803E900A5A5D3 /* MKMessage.m */; };
-		52B22EEC18F7A0EF00A5A5D3 /* MKInputPort.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EEA18F7A0EF00A5A5D3 /* MKInputPort.h */; };
+		52B22EEC18F7A0EF00A5A5D3 /* MKInputPort.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EEA18F7A0EF00A5A5D3 /* MKInputPort.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		52B22EED18F7A0EF00A5A5D3 /* MKInputPort.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EEB18F7A0EF00A5A5D3 /* MKInputPort.m */; };
-		52B22EF018F7A6C600A5A5D3 /* MKOutputPort.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EEE18F7A6C600A5A5D3 /* MKOutputPort.h */; };
+		52B22EF018F7A6C600A5A5D3 /* MKOutputPort.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EEE18F7A6C600A5A5D3 /* MKOutputPort.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		52B22EF118F7A6C600A5A5D3 /* MKOutputPort.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EEF18F7A6C600A5A5D3 /* MKOutputPort.m */; };
-		52B22EF418F7B65D00A5A5D3 /* MKVirtualSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EF218F7B65D00A5A5D3 /* MKVirtualSource.h */; };
+		52B22EF418F7B65D00A5A5D3 /* MKVirtualSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EF218F7B65D00A5A5D3 /* MKVirtualSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		52B22EF518F7B65D00A5A5D3 /* MKVirtualSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EF318F7B65D00A5A5D3 /* MKVirtualSource.m */; };
-		52B22EF818F7B80900A5A5D3 /* MKVirtualDestination.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EF618F7B80900A5A5D3 /* MKVirtualDestination.h */; };
+		52B22EF818F7B80900A5A5D3 /* MKVirtualDestination.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EF618F7B80900A5A5D3 /* MKVirtualDestination.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		52B22EF918F7B80900A5A5D3 /* MKVirtualDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EF718F7B80900A5A5D3 /* MKVirtualDestination.m */; };
 		52B22EFB18F7BAF400A5A5D3 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B22EFA18F7BAF400A5A5D3 /* JavaScriptCore.framework */; };
-		52B22EFE18F7C86900A5A5D3 /* MKConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EFC18F7C86900A5A5D3 /* MKConnection.h */; };
+		52B22EFE18F7C86900A5A5D3 /* MKConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22EFC18F7C86900A5A5D3 /* MKConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		52B22EFF18F7C86900A5A5D3 /* MKConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EFD18F7C86900A5A5D3 /* MKConnection.m */; };
-		52B22F0518F803E900A5A5D3 /* MKMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22F0318F803E900A5A5D3 /* MKMessage.h */; };
+		52B22F0518F803E900A5A5D3 /* MKMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22F0318F803E900A5A5D3 /* MKMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		52B22F0618F803E900A5A5D3 /* MKMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22F0418F803E900A5A5D3 /* MKMessage.m */; };
 		52DDEDEF18FB55400019BE98 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C70F18DEA14E00A8CFD4 /* Foundation.framework */; };
 		52DDEE0218FB60010019BE98 /* libreadline.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 52DDEE0118FB60010019BE98 /* libreadline.dylib */; };
@@ -613,7 +612,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5273C70918DE9E2500A8CFD4 /* MKClient.m in Sources */,
-				521C1BC318FD16A500A002FC /* flash.js in Sources */,
 				5273C73818DEAD5700A8CFD4 /* MKDevice.m in Sources */,
 				52B22F0618F803E900A5A5D3 /* MKMessage.m in Sources */,
 				528C945B18FC919800A7B960 /* MIDIKit.m in Sources */,
