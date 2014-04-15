@@ -76,7 +76,7 @@ JSExportAs(newWithMIDIRef, + (instancetype)objectWithMIDIRef:(MIDIObjectRef)MIDI
 #pragma mark Transmission Capabilities
 - (BOOL)transmitsOnChannel:(NSUInteger)channel;
 - (BOOL)receivesOnChannel:(NSUInteger)channel;
-- (instancetype)setTransmits:(BOOL)transmits onChannel:(NSInteger)channel;
+- (instancetype)setTransmits:(BOOL)transmits onChannel:(NSUInteger)channel;
 - (instancetype)setReceives:(BOOL)receives onChannel:(NSUInteger)channel;
 
 

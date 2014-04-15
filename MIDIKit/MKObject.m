@@ -104,7 +104,7 @@ exception:
 
 #pragma mark - MIDI Properties
 
-#define CACHED_PROP_GETTER(upper, lower) \
+#define CACHED_PROP_PROPERTY(upper, lower) \
 - (NS##upper *)lower##ForProperty:(NS##upper *)key { \
     CF##upper##Ref cfVal; \
     NS##upper *nsVal; \
@@ -122,11 +122,11 @@ exception:
     return nsVal; \
 }
 
-CACHED_PROP_GETTER(Dictionary, dictionary)
-CACHED_PROP_GETTER(String, string)
-CACHED_PROP_GETTER(Data, data)
+CACHED_PROP_PROPERTY(Dictionary, dictionary)
+CACHED_PROP_PROPERTY(String, string)
+CACHED_PROP_PROPERTY(Data, data)
 
-#define CACHED_PROP_SETTER_BASE(upper, lower, ret) \
+#define CACHED_PROP_PROPERTY_BASE(upper, lower, ret) \
 - (ret)set##upper:(NS##upper *)value forProperty:(NSString *)key { \
     [MIDIKit evalOSStatus: \
         MIDIObjectSet##upper##Property(self.MIDIRef, (__bridge CFStringRef)(key), (__bridge CF##upper##Ref)(value)) \
@@ -138,12 +138,12 @@ CACHED_PROP_GETTER(Data, data)
 #define END_RET return self; }
 #define END return; }
 
-CACHED_PROP_SETTER_BASE(String, string, instancetype) END_RET
-CACHED_PROP_SETTER_BASE(Dictionary, dictionary, instancetype) END_RET
-CACHED_PROP_SETTER_BASE(Data, data, instancetype) END_RET
+CACHED_PROP_PROPERTY_BASE(String, string, instancetype) END_RET
+CACHED_PROP_PROPERTY_BASE(Dictionary, dictionary, instancetype) END_RET
+CACHED_PROP_PROPERTY_BASE(Data, data, instancetype) END_RET
 
-#undef CACHED_PROP_SETTER_BASE
-#undef CACHED_PROP_GETTER
+#undef CACHED_PROP_PROPERTY_BASE
+#undef CACHED_PROP_PROPERTY
 #undef END_RET
 #undef END
 
@@ -157,6 +157,16 @@ CACHED_PROP_SETTER_BASE(Data, data, instancetype) END_RET
         _propertyCache[key] = @(ret);
 
     return ret;
+}
+
+- (NSDictionary *)allProperties {
+    CFPropertyListRef ret;
+    if([MIDIKit evalOSStatus:MIDIObjectGetProperties(self.MIDIRef, &ret, true) name:@"Copy object properties" throw:NO] != 0)
+        return nil;
+
+    NSDictionary *properties = (__bridge_transfer NSDictionary *)ret;
+    if(ret) _propertyCache = [NSMutableDictionary dictionaryWithDictionary:properties];
+    return properties;
 }
 
 - (instancetype)setInteger:(NSInteger)value forProperty:(NSString *)key {
@@ -180,53 +190,11 @@ CACHED_PROP_SETTER_BASE(Data, data, instancetype) END_RET
 
 #pragma mark - Property Logic
 
-- (BOOL)transmitsOnChannel:(NSUInteger)channel {
-    channel = [self channelInRange:channel];
-    return (self.transmitChannelBits & (1 << (channel - 1))) >> (channel - 1);
-}
-
-- (BOOL)receivesOnChannel:(NSUInteger)channel {
-    channel = [self channelInRange:channel];
-    return (self.receiveChannelBits & (1 << (channel - 1))) >> (channel - 1);
-}
-
-- (instancetype)setReceives:(BOOL)receives onChannel:(NSUInteger)channel {
-    NSUInteger receivesBits = self.receiveChannelBits;
-    channel = [self channelInRange:channel];
-
-    UInt8 bit = (1 << (channel - 1));
-
-    switch ((UInt8)receives) {
-        case YES: receivesBits |= bit; break;
-        case NO: receivesBits &= ~bit;
-    }
-
-    self.receiveChannelBits = receivesBits;
-    return self;
-}
-
-- (instancetype)setTransmits:(BOOL)transmits onChannel:(NSInteger)channel {
-    NSUInteger transmitsBits = self.transmitChannelBits;
-    channel = [self channelInRange:channel];
-
-    UInt8 bit = (1 << (channel - 1));
-
-    switch ((UInt8)transmits) {
-        case YES: transmitsBits |= bit; break;
-        case NO: transmitsBits &= ~bit;
-    }
-
-    self.transmitChannelBits = transmitsBits;
-    return self;
-}
-
-
 #pragma mark - Helpers
 
 - (NSUInteger)channelInRange:(NSUInteger)channel {
     return MIN(MAX(0, channel), 16);
 }
-
 
 #pragma mark - Equality Checking
 
@@ -263,7 +231,7 @@ CACHED_PROP_SETTER_BASE(Data, data, instancetype) END_RET
 }
 
 
-#pragma mark - Dynamic Getters/Setters
+#pragma mark - Dynamic PROPERTYs/PROPERTYs
 
 - (void)setUniqueID:(MIDIUniqueID)uniqueID {
     if(self.shouldHaveUniqueID) {
@@ -305,88 +273,72 @@ CACHED_PROP_SETTER_BASE(Data, data, instancetype) END_RET
     return valid;
 }
 
-- (NSDictionary *)allProperties {
-    CFPropertyListRef ret;
-    if([MIDIKit evalOSStatus:MIDIObjectGetProperties(self.MIDIRef, &ret, true) name:@"Copy object properties" throw:NO] != 0)
-        return nil;
-    
-    NSDictionary *properties = (__bridge_transfer NSDictionary *)ret;
-    if(ret) _propertyCache = [NSMutableDictionary dictionaryWithDictionary:properties];
-    return properties;
+#define BITFIELD_PROP(upper, lower) \
+- (instancetype)set##upper:(BOOL)val onChannel:(NSUInteger)channel {\
+    NSUInteger bits = self.lower##ChannelBits;\
+    channel = [self channelInRange:channel];\
+    UInt8 bit = (1 << (channel - 1));\
+\
+    switch ((UInt8)val) {\
+        case YES: bits |= bit; break;\
+        case NO: bits &= ~bit;\
+    }\
+\
+    self.lower##ChannelBits = bits;\
+    return self;\
+} \
+\
+- (BOOL)lower##sOnChannel:(NSUInteger)channel { \
+    channel = [self channelInRange:channel]; \
+    return (self.lower##ChannelBits & (1 << (channel - 1))) >> (channel - 1);\
 }
+
+BITFIELD_PROP(Receives, receive)
+BITFIELD_PROP(Transmits, transmit)
 
 
 #pragma mark Properties
 
-#define GETTER(type, name, property, propertyType) \
-- (type)name { \
-    return (type)[self propertyType##ForProperty:(__bridge NSString *)property]; \
+#define PROPERTY(type, upper, lower, propSymbol, propertyTypeUpper, propertyTypeLower) \
+- (type)lower { \
+    return (type)[self propertyTypeLower##ForProperty:(__bridge NSString *)propSymbol]; \
+} \
+\
+- (void)set##upper:(type)val { \
+    [self set##propertyTypeUpper:val forProperty:(__bridge NSString *)propSymbol]; \
 }
 
-#define SETTER(type, name, property, propertyType) \
-- (void)set##name:(type)val { \
-    [self set##propertyType:val forProperty:(__bridge NSString *)property]; \
-}
+PROPERTY(BOOL, DrumMachine, isDrumMachine, kMIDIPropertyIsDrumMachine, Integer, integer)
+PROPERTY(BOOL, EffectUnit, isEffectUnit, kMIDIPropertyIsEffectUnit, Integer, integer)
+PROPERTY(BOOL, EmbeddedEntity, isEmbeddedEntity, kMIDIPropertyIsEmbeddedEntity, Integer, integer)
+PROPERTY(BOOL, Mixer, isMixer, kMIDIPropertyIsMixer, Integer, integer)
+PROPERTY(BOOL, Sampler, isSampler, kMIDIPropertyIsSampler, Integer, integer)
+PROPERTY(BOOL, Private, isPrivate, kMIDIPropertyPrivate, Integer, integer)
 
-SETTER(BOOL, DrumMachine, kMIDIPropertyIsDrumMachine, Integer)
-SETTER(BOOL, EffectUnit, kMIDIPropertyIsEffectUnit, Integer)
-SETTER(BOOL, isEmbeddedEntity, kMIDIPropertyIsEmbeddedEntity, Integer)
-SETTER(BOOL, Mixer, kMIDIPropertyIsMixer, Integer)
-SETTER(BOOL, Sampler, kMIDIPropertyIsSampler, Integer)
-SETTER(BOOL, Private, kMIDIPropertyPrivate, Integer)
+PROPERTY(NSString *, Manufacturer, manufacturer, kMIDIPropertyManufacturer, String, string)
+PROPERTY(NSString *, Name, name, kMIDIPropertyName, String, string)
+PROPERTY(NSString *, Model, model, kMIDIPropertyModel, String, string)
+PROPERTY(NSInteger, DeviceID, deviceID, kMIDIPropertyDeviceID, Integer, integer)
+PROPERTY(NSString *, DisplayName, displayName, kMIDIPropertyDisplayName, String, string)
+PROPERTY(NSString *, DriverOwner, driverOwner, kMIDIPropertyDriverOwner, String, string)
+PROPERTY(NSInteger, DriverVersion, driverVersion, kMIDIPropertyDriverVersion, Integer, integer)
+PROPERTY(NSString *, IconImagePath, iconImagePath, kMIDIPropertyImage, String, string)
+PROPERTY(NSInteger, MaxReceiveChannels, maxReceiveChannels, kMIDIPropertyMaxReceiveChannels, Integer, integer)
+PROPERTY(NSInteger, MaxSysexSpeed, maxSysexSpeed, kMIDIPropertyMaxSysExSpeed, Integer, integer)
+PROPERTY(NSInteger, MaxTransmitChannels, maxTransmitChannels, kMIDIPropertyMaxTransmitChannels, Integer, integer)
+PROPERTY(BOOL, PanDisruptsStereo, panDisruptsStereo, kMIDIPropertyPanDisruptsStereo, Integer, integer)
+PROPERTY(NSUInteger, ReceiveChannelBits, receiveChannelBits, kMIDIPropertyReceiveChannels, Integer, integer)
+PROPERTY(NSUInteger, TransmitChannelBits, transmitChannelBits, kMIDIPropertyTransmitChannels, Integer, integer)
+PROPERTY(BOOL, ReceivesClock, receivesClock, kMIDIPropertyReceivesClock, Integer, integer)
+PROPERTY(BOOL, ReceivesMTC, receivesMTC, kMIDIPropertyReceivesMTC, Integer, integer)
+PROPERTY(BOOL, ReceivesNotes, receivesNotes, kMIDIPropertyReceivesNotes, Integer, integer)
+PROPERTY(BOOL, TransmitsMTC, transmitsMTC, kMIDIPropertyTransmitsMTC, Integer, integer)
+PROPERTY(BOOL, TransmitsClock, transmitsClock, kMIDIPropertyTransmitsClock, Integer, integer)
+PROPERTY(BOOL, TransmitsNotes, transmitsNotes, kMIDIPropertyTransmitsNotes, Integer, integer)
+PROPERTY(BOOL, ReceivesProgramChanges, receivesProgramChanges, kMIDIPropertyReceivesProgramChanges, Integer, integer)
 
-GETTER(BOOL, isDrumMachine, kMIDIPropertyIsDrumMachine, integer)
-GETTER(BOOL, isEffectUnit, kMIDIPropertyIsEffectUnit, integer)
-GETTER(BOOL, isEmbeddedEntity, kMIDIPropertyIsEmbeddedEntity, integer)
-GETTER(BOOL, isMixer, kMIDIPropertyIsMixer, integer)
-GETTER(BOOL, isSampler, kMIDIPropertyIsSampler, integer)
-GETTER(BOOL, isPrivate, kMIDIPropertyPrivate, integer)
-
-SETTER(NSString *, Manufacturer, kMIDIPropertyManufacturer, String)
-SETTER(NSString *, Name, kMIDIPropertyName, String)
-SETTER(NSString *, Model, kMIDIPropertyModel, String)
-SETTER(NSInteger, DeviceID, kMIDIPropertyDeviceID, Integer)
-SETTER(NSString *, DisplayName, kMIDIPropertyDisplayName, String)
-SETTER(NSString *, DriverOwner, kMIDIPropertyDriverOwner, String)
-SETTER(NSInteger, DriverVersion, kMIDIPropertyDriverVersion, Integer)
-SETTER(NSString *, IconImagePath, kMIDIPropertyImage, String)
-SETTER(NSInteger, MaxReceiveChannels, kMIDIPropertyMaxReceiveChannels, Integer)
-SETTER(NSInteger, MaxSysexSpeed, kMIDIPropertyMaxSysExSpeed, Integer)
-SETTER(NSInteger, MaxTransmitChannels, kMIDIPropertyMaxTransmitChannels, Integer)
-SETTER(BOOL, PanDisruptsStereo, kMIDIPropertyPanDisruptsStereo, Integer)
-SETTER(NSUInteger, ReceiveChannelBits, kMIDIPropertyReceiveChannels, Integer)
-SETTER(NSUInteger, TransmitChannelBits, kMIDIPropertyTransmitChannels, Integer)
-SETTER(BOOL, ReceivesClock, kMIDIPropertyReceivesClock, Integer)
-SETTER(BOOL, ReceivesMTC, kMIDIPropertyReceivesMTC, Integer)
-SETTER(BOOL, ReceivesNotes, kMIDIPropertyReceivesNotes, Integer)
-SETTER(BOOL, TransmitsMTC, kMIDIPropertyTransmitsMTC, Integer)
-SETTER(BOOL, TransmitsClock, kMIDIPropertyTransmitsClock, Integer)
-SETTER(BOOL, TransmitsNotes, kMIDIPropertyTransmitsNotes, Integer)
-SETTER(BOOL, ReceivesProgramChanges, kMIDIPropertyReceivesProgramChanges, Integer)
-
-GETTER(NSString *, manufacturer, kMIDIPropertyManufacturer, string)
-GETTER(NSString *, name, kMIDIPropertyName, string)
-GETTER(NSString *, model, kMIDIPropertyModel, string)
-GETTER(NSInteger, deviceID, kMIDIPropertyDeviceID, integer)
-GETTER(NSString *, displayName, kMIDIPropertyDisplayName, string)
-GETTER(NSString *, driverOwner, kMIDIPropertyDriverOwner, string)
-GETTER(NSInteger, driverVersion, kMIDIPropertyDriverVersion, integer)
-GETTER(NSString *, iconImagePath, kMIDIPropertyImage, string)
-GETTER(NSInteger, maxReceiveChannels, kMIDIPropertyMaxReceiveChannels, integer)
-GETTER(NSInteger, maxSysexSpeed, kMIDIPropertyMaxSysExSpeed, integer)
-GETTER(NSInteger, maxTransmitChannels, kMIDIPropertyMaxTransmitChannels, integer)
-GETTER(BOOL, panDisruptsStereo, kMIDIPropertyPanDisruptsStereo, integer)
-GETTER(NSUInteger, receiveChannelBits, kMIDIPropertyReceiveChannels, integer)
-GETTER(NSUInteger, transmitChannelBits, kMIDIPropertyTransmitChannels, integer)
-GETTER(BOOL, receivesClock, kMIDIPropertyReceivesClock, integer)
-GETTER(BOOL, receivesMTC, kMIDIPropertyReceivesMTC, integer)
-GETTER(BOOL, receivesNotes, kMIDIPropertyReceivesNotes, integer)
-GETTER(BOOL, transmitsMTC, kMIDIPropertyTransmitsMTC, integer)
-GETTER(BOOL, transmitsClock, kMIDIPropertyTransmitsClock, integer)
-GETTER(BOOL, transmitsNotes, kMIDIPropertyTransmitsNotes, integer)
-GETTER(BOOL, receivesProgramChanges, kMIDIPropertyReceivesProgramChanges, integer)
-
-#undef GETTER
-#undef SETTER
+#undef PROPERTY
+#undef PROPERTY
+#undef BITFIELD_PROP
 
 @end
