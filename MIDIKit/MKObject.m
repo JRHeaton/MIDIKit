@@ -126,11 +126,12 @@ CACHED_PROP_PROPERTY(Data, data)
 
 #define CACHED_PROP_PROPERTY_BASE(upper, lower, ret) \
 - (ret)set##upper:(NS##upper *)value forProperty:(NSString *)key { \
-    [MIDIKit evalOSStatus: \
+    if(![MIDIKit evalOSStatus: \
         MIDIObjectSet##upper##Property(self.MIDIRef, (__bridge CFStringRef)(key), (__bridge CF##upper##Ref)(value)) \
-        name:[NSString stringWithFormat:@"Setting " #lower " property: \'%@\'", key]]; \
-\
-    _propertyCache[(key)] = value;
+        name:[NSString stringWithFormat:@"Setting " #lower " property: \'%@\'", key]]) { \
+        _propertyCache[(key)] = value; \
+    } \
+
 
 #define END_RET return self; }
 #define END return; }
