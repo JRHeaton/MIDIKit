@@ -2,11 +2,20 @@
 LPMessage = Object.create(MKMessage)
 
 // add methods which implement command logic
+
+// reset the device grids
 LPMessage.reset = function() {
     return MKMessage.controlChange(0, 0)
 }
+
+// light up the entire grid
 LPMessage.lightAll = function() {
     return MKMessage.controlChange(0, 0x7f)
+}
+
+// enable flashing (buffer switching automatically)
+LPMessage.flash = function() {
+    return MKMessage.message(0xb0, 0, 0x28);
 }
 
 // create a new connection with this process' global client (MKClient.global())
@@ -23,16 +32,15 @@ if(dev.valid) {
     // conveniently set up some functions on this connection object
     connection.reset = function() { this.sendMessage(LPMessage.reset()) }
     connection.light = function() { this.sendMessage(LPMessage.lightAll()) }
-    connection.notePadExample = function() { this.sendMessage(MKMessage.noteOn(0, 0x0f)) }
+    connection.notePadExample = function() {
+        // dispatch the messages
+        this.sendMessages([MKMessage.noteOn(0, 0x0f), LPMessage.flash()])
+    }
 
     // call it, and let there be light!
     connection.reset()
     connection.light()
     connection.notePadExample()
-
-    // enable flashing (buffer switching automatically)
-    // this is another way to make a message
-    connection.sendMessage(LPMessage.message(0xb0, 0x00, 0x28));
 }
 
 // if evaluated directly into a JSContext with an enclosing function wrapper, this will be the return value

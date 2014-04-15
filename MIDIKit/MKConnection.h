@@ -27,7 +27,7 @@
 + (instancetype)new; // use global client
 + (instancetype)connectionWithClient:(MKClient *)client;
 
-- (instancetype)sendMessageArray:(NSArray *)messages;
+JSExportAs(sendMessages, - (instancetype)sendMessageArray:(NSArray *)messages);
 - (instancetype)sendMessage:(MKMessage *)message;
 
 JSExportAs(send, - (instancetype)sendNumberArray:(NSArray *)array);

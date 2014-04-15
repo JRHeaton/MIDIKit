@@ -24,7 +24,7 @@
 @protocol MKClientJS <JSExport, MKObjectJS>
 
 + (instancetype)global;
-+ (instancetype)clientWithName:(NSString *)name;
+JSExportAs(named, + (instancetype)clientWithName:(NSString *)name);
 
 // firstInputPort and firstOutputPort will look to see if there are
 // any already-created ports in the arrays below, and if not, create one,
