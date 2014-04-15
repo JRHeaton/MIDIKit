@@ -96,6 +96,8 @@ JSExportAs(setData1, - (instancetype)setData1Return:(UInt8)data1);
 JSExportAs(setData2, - (instancetype)setData2Return:(UInt8)data2);
 JSExportAs(setVelocity, - (instancetype)setVelocityReturn:(UInt8)velocity);
 
+@property (nonatomic, readonly, getter = isEmpty) BOOL empty;
+
 @end
 
 @interface MKMessage : NSObject <MKMessageJS>

@@ -18,15 +18,14 @@
 @class MKDevice;
 @protocol MKEntityJS <JSExport, MKObjectJS>
 
-- (MKDestination *)firstDestination;
-- (MKDestination *)firstSource;
-
 - (NSUInteger)numberOfDestinations;
 - (NSUInteger)numberOfSources;
 - (MKDestination *)destinationAtIndex:(NSUInteger)index;
 - (MKSource *)sourceAtIndex:(NSUInteger)index;
 
-- (MKDevice *)device;
+@property (nonatomic, readonly) MKDevice *device;
+@property (nonatomic, readonly) MKSource *firstSource;
+@property (nonatomic, readonly) MKDestination *firstDestination;
 
 @end
 

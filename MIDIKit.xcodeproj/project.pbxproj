@@ -316,8 +316,8 @@
 		524005DD18FB044E0030B46D /* Endpoints */ = {
 			isa = PBXGroup;
 			children = (
-				528C944818FC848700A7B960 /* Sources */,
-				528C944918FC848F00A7B960 /* Destinations */,
+				528C944818FC848700A7B960 /* Output (Sending Data) */,
+				528C944918FC848F00A7B960 /* Input (Receiving Data) */,
 			);
 			name = Endpoints;
 			sourceTree = "<group>";
@@ -466,26 +466,26 @@
 			name = Private;
 			sourceTree = "<group>";
 		};
-		528C944818FC848700A7B960 /* Sources */ = {
+		528C944818FC848700A7B960 /* Output (Sending Data) */ = {
 			isa = PBXGroup;
 			children = (
 				528C943F18FC7FC000A7B960 /* MKSource.h */,
 				528C944018FC7FC000A7B960 /* MKSource.m */,
-				52B22EF218F7B65D00A5A5D3 /* MKVirtualSource.h */,
-				52B22EF318F7B65D00A5A5D3 /* MKVirtualSource.m */,
+				52B22EF618F7B80900A5A5D3 /* MKVirtualDestination.h */,
+				52B22EF718F7B80900A5A5D3 /* MKVirtualDestination.m */,
 			);
-			name = Sources;
+			name = "Output (Sending Data)";
 			sourceTree = "<group>";
 		};
-		528C944918FC848F00A7B960 /* Destinations */ = {
+		528C944918FC848F00A7B960 /* Input (Receiving Data) */ = {
 			isa = PBXGroup;
 			children = (
 				528C943B18FC774100A7B960 /* MKDestination.h */,
 				528C943C18FC774100A7B960 /* MKDestination.m */,
-				52B22EF618F7B80900A5A5D3 /* MKVirtualDestination.h */,
-				52B22EF718F7B80900A5A5D3 /* MKVirtualDestination.m */,
+				52B22EF218F7B65D00A5A5D3 /* MKVirtualSource.h */,
+				52B22EF318F7B65D00A5A5D3 /* MKVirtualSource.m */,
 			);
-			name = Destinations;
+			name = "Input (Receiving Data)";
 			sourceTree = "<group>";
 		};
 		52DDEDF018FB55400019BE98 /* CLI Tool (mkcli) */ = {

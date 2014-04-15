@@ -57,6 +57,7 @@ void MKInstallIntoContext(JSContext *c) {
     for(Class cls in MKClassList()) {
         c[NSStringFromClass(cls)] = cls;
     }
+    c[@"MIDIRestart"] = ^BOOL() { return [MKServer restart]; };
 }
 
 @implementation MIDIKit

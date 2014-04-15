@@ -33,7 +33,7 @@
 
 + (instancetype)firstSourceMeetingCriteria:(BOOL (^)(MKSource *candidate))block {
     return [self enumerateSources:^BOOL(MKSource *endpoint, NSUInteger index, BOOL *stop) {
-        return endpoint.online && block(endpoint);
+        return block(endpoint);
     }];
 }
 

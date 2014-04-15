@@ -11,7 +11,7 @@
 #import <JavaScriptCore/JavaScriptCore.h>
 #import "MKObjectProperties.h"
 
-@class MKJavaScriptContext;
+@class MKJavaScriptContext, MKObject;
 @protocol MKObjectJS <JSExport>
 
 JSExportAs(withUniqueID, + (instancetype)objectWithUniqueID:(MIDIUniqueID)uniqueID);
@@ -34,8 +34,9 @@ JSExportAs(withMIDIRef, + (instancetype)objectWithMIDIRef:(MIDIObjectRef)MIDIRef
 // Whether or not the MIDIRef is junk
 @property (nonatomic, readonly, getter = isValid) BOOL valid;
 
-- (BOOL)isEqualToObject:(id<MKObjectJS>)object;
-- (NSString *)description;
+- (BOOL)isEqualToObject:(MKObject *)object;
+
+@property (nonatomic, readonly) NSString *description;
 
 @end
 

@@ -22,7 +22,7 @@ static void _MKVirtualDestinationReadProc(const MIDIPacketList *pktlist, void *r
     MKVirtualDestination *self = (__bridge MKVirtualDestination *)(readProcRefCon);
 
 #warning clean this up later
-    NSArray *msgs = [MKMessage messagesWithPacketList:pktlist];
+    NSArray *msgs = [MKMessage messagesWithPacketList:(MIDIPacketList *)pktlist];
     if(msgs) {
         for(id<MKVirtualDestinationDelegate> delegate in self->_delegates) {
             if([delegate respondsToSelector:@selector(virtualDestination:receivedMessage:)]) {

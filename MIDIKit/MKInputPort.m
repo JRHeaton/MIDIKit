@@ -22,13 +22,15 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
     MKInputPort *self = (__bridge MKInputPort *)(readProcRefCon);
     MKSource *source = (__bridge MKSource *)(srcConnRefCon);
 
+    NSLog(@"%d packets in list", pktlist->numPackets);
+
     MIDIPacket *packet = (MIDIPacket *)&pktlist->packet[0];
     for (int i=0;i<pktlist->numPackets;++i) {
         NSData *goodData = nil;
 
         for(id<MKInputPortDelegate> delegate in self.inputDelegates) {
             if([delegate respondsToSelector:@selector(inputPort:receivedData:fromSource:)]) {
-                [delegate inputPort:self receivedData:(goodData = [NSData dataWithBytes:packet->data length:packet->length]) fromSource:source];
+                [delegate inputPort:self receivedData:goodData ?: (goodData = [NSData dataWithBytes:packet->data length:packet->length]) fromSource:source];
             }
         }
 

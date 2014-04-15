@@ -25,7 +25,7 @@
 @protocol MKConnectionJS <JSExport>
 
 + (instancetype)new; // use global client
-+ (instancetype)connectionWithClient:(MKClient *)client;
+JSExportAs(withClient, + (instancetype)connectionWithClient:(MKClient *)client);
 
 JSExportAs(sendMessages, - (instancetype)sendMessageArray:(NSArray *)messages);
 - (instancetype)sendMessage:(MKMessage *)message;

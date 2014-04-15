@@ -134,7 +134,7 @@ typedef struct {
             }
         } break;
         case kMKMessageTypeNoteOn: {
-            
+            NSLog(@"NOTE ON");
         } break;
     }
 }

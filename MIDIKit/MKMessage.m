@@ -52,7 +52,7 @@
 
 - (instancetype)init {
     if(!(self = [super init])) return nil;
-    _mutableData = [NSMutableData dataWithLength:3];
+    _mutableData = [NSMutableData dataWithCapacity:3];
     return self;
 }
 
@@ -66,7 +66,7 @@
 
 + (instancetype)messageWithData:(NSData *)data {
     MKMessage *ret = [[self alloc] init];
-    ret.mutableData = data ? ([data isKindOfClass:[NSMutableData class]] ? data : data.mutableCopy) : [NSMutableData dataWithCapacity:0];
+    ret.mutableData = data ? ([data isKindOfClass:[NSMutableData class]] ? data : data.mutableCopy) : [NSMutableData dataWithCapacity:3];
     return ret;
 }
 
@@ -217,14 +217,18 @@
     return str;
 }
 
+- (BOOL)isEmpty {
+    if(!self.length) return YES;
+    for(NSUInteger i=0;i<self.length;++i) {
+        if(self.bytes[i]) return NO;
+    }
+    return YES;
+}
+
 - (NSString *)description {
-    if(!self.length
-       || (self.length == 3
-           && !self.bytes[0]
-           && !self.bytes[1]
-           && !self.bytes[2])) {
-           return [NSString stringWithFormat:@"%@ [Empty Message]", [super description]];
-       }
+    if(self.empty) {
+        return [NSString stringWithFormat:@"%@ [Empty Message]", [super description]];
+    }
 
     NSString *typeName;
     NSString *dataInfo;
@@ -275,12 +279,15 @@
 
             break;
     }
+    if(self.type != kMKMessageTypeSysex && self.length > 3) {
+        dataInfo = [dataInfo stringByAppendingString:[self _hexStringForData:self.data maxByteCount:20]];
+    }
 
     return [NSString stringWithFormat:@"%@ type=0x%X(%@), length=0x%lX, %@", super.description, self.type, typeName, (unsigned long)self.length, dataInfo];
 }
 
 - (MKMessageType)type {
-    return self.length ? (MKMessageType)(self.bytes[0] & 0xF0) : 0;
+    return self.length ? (MKMessageType)(self.status & 0xF0) : 0;
 }
 
 - (UInt8)status {
@@ -321,7 +328,7 @@ FORWARD(programNumber, data2, setProgramNumber, setData2)
 #undef FORWARD
 
 - (UInt8)channel {
-    return (self.bytes[0] & 0x0F) + 1;
+    return self.length ? (self.status & 0x0F) + 1 : 0;
 }
 
 - (void)setChannel:(UInt8)channel {
@@ -330,14 +337,6 @@ FORWARD(programNumber, data2, setProgramNumber, setData2)
 
 - (void)setType:(MKMessageType)type {
     [self setByte:(type | (self.channel - 1)) atIndex:0];
-}
-
-- (void)setKeyOrController:(UInt8)keyOrController {
-    [self setByte:keyOrController atIndex:1];
-}
-
-- (void)setVelocityOrValue:(UInt8)velocityOrValue {
-    [self setByte:velocityOrValue atIndex:2];
 }
 
 #define ARG_TYPE UInt8

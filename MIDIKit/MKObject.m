@@ -197,7 +197,7 @@ CACHED_PROP_PROPERTY_BASE(Data, data, instancetype) END_RET
     if([object isKindOfClass:[MKObject class]]) {
         return self.MIDIRef == ((MKObject *)object).MIDIRef;
     }
-    return [super isEqual:object];
+    return NO;
 }
 
 - (BOOL)isEqualTo:(id)object {

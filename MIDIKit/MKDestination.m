@@ -35,7 +35,7 @@
 
 + (instancetype)firstDestinationMeetingCriteria:(BOOL (^)(MKDestination *candidate))block {
     return [self enumerateDestinations:^BOOL(MKDestination *endpoint, NSUInteger index, BOOL *stop) {
-        return endpoint.online && block(endpoint);
+        return block(endpoint);
     }];
 }
 + (instancetype)enumerateDestinations:(BOOL (^)(MKDestination *endpoint, NSUInteger index, BOOL *stop))block {

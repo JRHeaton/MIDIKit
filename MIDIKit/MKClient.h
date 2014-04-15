@@ -29,8 +29,8 @@ JSExportAs(named, + (instancetype)clientWithName:(NSString *)name);
 // firstInputPort and firstOutputPort will look to see if there are
 // any already-created ports in the arrays below, and if not, create one,
 // and return it.
-- (MKInputPort *)firstInputPort;
-- (MKOutputPort *)firstOutputPort;
+@property (nonatomic, readonly) MKInputPort *firstInputPort;
+@property (nonatomic, readonly) MKOutputPort *firstOutputPort;
 
 // This will create and and insert a port/endpoint into the corresponding array,
 // and return it.
