@@ -45,6 +45,12 @@
     }];
 }
 
++ (instancetype)firstDeviceContaining:(NSString *)name {
+    return [self firstDeviceMeetingCriteria:^BOOL(MKDevice *candidate) {
+        return candidate.online && [candidate.name rangeOfString:name].location != NSNotFound;
+    }];
+}
+
 - (MKDestination *)rootDestination {
     return [[self entityAtIndex:0] destinationAtIndex:0];
 }

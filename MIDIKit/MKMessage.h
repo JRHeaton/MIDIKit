@@ -36,6 +36,9 @@ typedef NS_ENUM(UInt8, MKMessageType) {
 + (instancetype)new;
 + (instancetype)messageWithType:(MKMessageType)type;
 
+JSExportAs(controlChange, + (instancetype)controlChangeMessageWithController:(UInt8)controller value:(UInt8)value);
+JSExportAs(noteOn, + (instancetype)noteOnMessageWithKey:(UInt8)key velocity:(UInt8)velocity);
+
 // Convnenience for converting from one class to another
 // Usually, this is done because a subclass of MKMessage is
 // implementing logic.
@@ -90,9 +93,6 @@ JSExportAs(messages,
 @end
 
 @interface MKMessage : NSObject <MKMessageJS>
-
-+ (instancetype)controlChangeMessageWithController:(UInt8)controller value:(UInt8)value;
-+ (instancetype)noteOnMessageWithKey:(UInt8)key velocity:(UInt8)velocity;
 
 - (instancetype)initWithType:(MKMessageType)type;
 
