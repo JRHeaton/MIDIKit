@@ -12,8 +12,6 @@
 #import "MKOutputPort.h"
 #import <JavaScriptCore/JavaScriptCore.h>
 
-#pragma mark - -Mutual ObjC/JavaScript-
-
 // A connection object is essentially a convenient way to
 // send and receive from multiple sources and destinations
 // without having to constantly iterate through a container
@@ -26,48 +24,37 @@
 
 @protocol MKConnectionJS <JSExport>
 
-#pragma mark - -Init-
-+ (instancetype)new;
-+ (instancetype)connectionWithNewClient;
++ (instancetype)new; // use global client
 + (instancetype)connectionWithClient:(MKClient *)client;
 
-#pragma mark - -Sending Data-
 - (instancetype)sendMessageArray:(NSArray *)messages;
 - (instancetype)sendMessage:(MKMessage *)message;
 
 JSExportAs(send, - (instancetype)sendNumberArray:(NSArray *)array);
 
-
-#pragma mark - -Coordinating Wrappers-
 @property (nonatomic, weak) MKClient *client;
 @property (nonatomic, strong) MKInputPort *inputPort;
 @property (nonatomic, strong) MKOutputPort *outputPort;
 
-
-#pragma mark - -Output Destinations-
 - (instancetype)addDestination:(MKDestination *)destination;
 - (instancetype)removeDestination:(MKDestination *)destination;
 - (MKDestination *)destinationAtIndex:(NSUInteger)index;
+
 @property (nonatomic, readonly) NSMutableArray *destinations;
 
 @end
 
 
-#pragma mark - -Connection Helper Class-
 @interface MKConnection : NSObject <MKConnectionJS>
 
-#pragma mark - -Init-
 // NOTE: instantiation with a client will automatically
 // create an input and output port from the client
 // if they're not already created.
 - (instancetype)initWithClient:(MKClient *)client;
 
-#pragma mark - -Timed Block Execution Helpers-
 // Async helper
 - (instancetype)performBlock:(void (^)(MKConnection *c))block afterDelay:(NSTimeInterval)delay;
 
-
-#pragma mark - -Sending Data-
 // Uses the output port to send to all destinations
 - (instancetype)sendData:(NSData *)data;
 - (instancetype)sendMessages:(MKMessage *)message, ... NS_REQUIRES_NIL_TERMINATION;

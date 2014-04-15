@@ -9,23 +9,16 @@
 #import "MKObject.h"
 #import "MKEntity.h"
 
-#pragma mark - -Mutual ObjC/JavaScript-
-
 // Devices are parent objects of entities,
 // and are usually the 'root' object created by the driver.
 
 @protocol MKDeviceJS <JSExport, MKObjectJS>
 
-#pragma mark - -Enumeration/Init-
 + (NSUInteger)numberOfDevices;
 + (NSUInteger)count; // shorthand
 JSExportAs(firstNamed, + (instancetype)firstDeviceNamed:(NSString *)name);
 JSExportAs(firstContaining, + (instancetype)firstDeviceContaining:(NSString *)name);
 
-
-#pragma mark - -Child Objects-
-
-#pragma mark Entities
 // Index-access to child entities
 - (MKEntity *)entityAtIndex:(NSUInteger)index;
 
@@ -42,15 +35,11 @@ JSExportAs(firstContaining, + (instancetype)firstDeviceContaining:(NSString *)na
 @end
 
 
-#pragma mark - -Device Wrapper-
 @interface MKDevice : MKObject <MKDeviceJS, MKDeviceProperties>
 
-#pragma mark - -Enumeration/Init-
 // Convenient enumeration
 + (instancetype)firstDeviceMeetingCriteria:(BOOL (^)(MKDevice *candidate))block;
 
-
-#pragma mark - -Subscripting-
 // Also available with subscripting. Ex: myDevice[2]
 - (id)objectAtIndexedSubscript:(NSUInteger)index;
 

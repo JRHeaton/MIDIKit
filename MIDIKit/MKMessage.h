@@ -51,10 +51,6 @@ JSExportAs(message,
 + (instancetype)messageJS:(JSValue *)val
 );
 
-@optional
-+ (instancetype)messageJS:(JSValue *)val __JS_EXPORT_AS__msg:(id)argument;
-+ (instancetype)messageJS:(JSValue *)val __JS_EXPORT_AS__m:(id)argument;
-
 // Same, but for many messages in one stream of arguments
 JSExportAs(messages,
 + (NSArray *)messagesJS:(JSValue *)val

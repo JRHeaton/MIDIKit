@@ -19,10 +19,6 @@
     return [[self alloc] initWithClient:(id)client];
 }
 
-+ (instancetype)connectionWithNewClient {
-    return [[self alloc] init];
-}
-
 - (instancetype)initWithClient:(MKClient *)client {
     if(!(self = [super init])) return nil;
 

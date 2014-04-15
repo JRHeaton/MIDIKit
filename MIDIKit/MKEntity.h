@@ -10,8 +10,6 @@
 #import "MKDestination.h"
 #import "MKObjectProperties.h"
 
-#pragma mark - -Mutual ObjC/JavaScript-
-
 // Entities represent a collection of endpoints on a device.
 // In a typical simple setup, a device will have one entity,
 // which contains one source and one destination. This is not
@@ -20,7 +18,6 @@
 @class MKDevice;
 @protocol MKEntityJS <JSExport, MKObjectJS>
 
-#pragma mark - -Child Objects-
 - (MKDestination *)firstDestination;
 - (MKDestination *)firstSource;
 
@@ -29,17 +26,13 @@
 - (MKDestination *)destinationAtIndex:(NSUInteger)index;
 - (MKSource *)sourceAtIndex:(NSUInteger)index;
 
-
-#pragma mark - -Parent Device-
 - (MKDevice *)device;
 
 @end
 
 
-#pragma mark - -Entity Wrapper-
 @interface MKEntity : MKObject <MKEntityJS, MKEntityProperties>
 
-#pragma mark - -Subscripting-
 - (id)objectAtIndexedSubscript:(NSUInteger)index; // defaults to destination
 
 @end
