@@ -277,7 +277,7 @@
 			name = Client;
 			sourceTree = "<group>";
 		};
-		524005D918FB041F0030B46D /* Wrappers */ = {
+		524005D918FB041F0030B46D /* CoreMIDI Object Wrappers */ = {
 			isa = PBXGroup;
 			children = (
 				5273C70218DE9A9800A8CFD4 /* MKObject.h */,
@@ -286,7 +286,7 @@
 				5296F88918FF3B1100682874 /* MKEnumerableObject.m */,
 				524005D718FB03F10030B46D /* Client */,
 			);
-			name = Wrappers;
+			name = "CoreMIDI Object Wrappers";
 			sourceTree = "<group>";
 		};
 		524005DA18FB04300030B46D /* Port */ = {
@@ -447,7 +447,7 @@
 				529BF7FD18FDACED001C0BB7 /* MKServer.m */,
 				52EAA53918FCE05600094EEF /* MIDI Property Availability */,
 				524005DE18FB045D0030B46D /* Useful Abstractions */,
-				524005D918FB041F0030B46D /* Wrappers */,
+				524005D918FB041F0030B46D /* CoreMIDI Object Wrappers */,
 				527B2AAE18FCC126001D0CDD /* Private */,
 			);
 			name = "MIDIKit Source (Shared)";
