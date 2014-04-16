@@ -55,6 +55,7 @@ typedef struct {
     ret->client = [MKClient clientWithName:name];
     ret->_inputDestination = [MKVirtualDestination virtualDestinationWithName:name client:ret->client];
     ret->_outputSource = [MKVirtualSource virtualSourceWithName:name client:ret->client];
+    ret->_inputDestination.online = ret->_outputSource.online = YES;
 
     [ret->_inputDestination addDelegate:ret];
 

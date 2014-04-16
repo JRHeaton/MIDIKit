@@ -107,6 +107,22 @@ exception:
 
 - (NSString *)description {
     NSMutableString *desc = [NSMutableString stringWithFormat:@"%@ valid=%@, MIDIRef=0x%x", [super description], self.valid ? @"YES" : @"NO", (int)self.MIDIRef];
+
+    BOOL isClient = [self isKindOfClass:[MKClient class]];
+    BOOL isEndpoint =
+    [self isKindOfClass:[MKDestination class]] ||
+    [self isKindOfClass:[MKSource class]] ||
+    [self isKindOfClass:[MKVirtualDestination class]] ||
+    [self isKindOfClass:[MKVirtualSource class]];
+    BOOL isEntity = [self isKindOfClass:[MKEntity class]];
+    BOOL isDevice = [self isKindOfClass:[MKDevice class]];
+
+    if(isClient || isEndpoint || isEndpoint || isEntity || isDevice) {
+        [desc appendFormat:@", name=%@", [self name]];
+    }
+    if(isEntity || isEndpoint || isDevice) {
+        [desc appendFormat:@", online=%@", [self isOnline] ? @"YES" : @"NO"];
+    }
     if([[self class] hasUniqueID]) {
         [desc appendFormat:@", uniqueID=%d", (int)self.uniqueID];
     }

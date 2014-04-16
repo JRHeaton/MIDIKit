@@ -13,6 +13,7 @@
 
 + (NSUInteger)numberOfSources;
 + (NSUInteger)count;
++ (NSArray *)all;
 
 JSExportAs(atIndex,         + (instancetype)sourceAtIndex:(NSUInteger)index);
 
@@ -25,6 +26,6 @@ JSExportAs(firstContaining, + (instancetype)firstSourceContaining:(NSString *)na
 
 @interface MKSource : MKObject <MKSourceJS, MKEndpointProperties>
 
-+ (instancetype)enumerateSources:(BOOL (^)(MKSource *source, NSUInteger index, BOOL *stop))block;
++ (void)enumerateSources:(void (^)(MKSource *source, NSUInteger index, BOOL *stop))block;
 
 @end

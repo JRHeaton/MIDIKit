@@ -29,32 +29,49 @@
     return [self numberOfDestinations];
 }
 
++ (NSArray *)all {
+    NSMutableArray *ret = [NSMutableArray arrayWithCapacity:self.count];
+    [self enumerateDestinations:^void(MKDestination *d, NSUInteger index, BOOL *stop) {
+        [ret addObject:d];
+    }];
+    return ret;
+}
+
 + (instancetype)destinationAtIndex:(NSUInteger)index {
     return [self objectWithMIDIRef:MIDIGetDestination(index)];
 }
 
-+ (instancetype)firstDestinationMeetingCriteria:(BOOL (^)(MKDestination *candidate))block {
-    return [self enumerateDestinations:^BOOL(MKDestination *endpoint, NSUInteger index, BOOL *stop) {
-        return block(endpoint);
-    }];
-}
-+ (instancetype)enumerateDestinations:(BOOL (^)(MKDestination *endpoint, NSUInteger index, BOOL *stop))block {
-    if(!block) return nil;
++ (void)enumerateDestinations:(void (^)(MKDestination *endpoint, NSUInteger index, BOOL *stop))block {
+    if(!block) return;
 
     BOOL stop = NO;
     for(NSInteger i=0;i<MIDIGetNumberOfDestinations() && !stop;++i) {
         id candidate = [[self alloc] initWithMIDIRef:MIDIGetDestination(i)];
-        if(block(candidate, i, &stop))
-            return candidate;
+        block(candidate, i, &stop);
     }
-
-    return nil;
 }
 
-+ (instancetype)firstDestinationContaining:(NSString *)namePart {
-    return [self enumerateDestinations:^BOOL(MKDestination *endpoint, NSUInteger index, BOOL *stop) {
-        return endpoint.online && [endpoint.name rangeOfString:namePart].location != NSNotFound;
++ (instancetype)firstDestinationMeetingCriteria:(BOOL (^)(MKDestination *candidate))block {
+    __block MKDestination *ret = nil;
+    [self enumerateDestinations:^(MKDestination *endpoint, NSUInteger index, BOOL *stop) {
+        if(block(endpoint)) {
+            ret = endpoint;
+            *stop = YES;
+        }
     }];
+
+    return ret;
+}
+
++ (instancetype)firstSourceContaining:(NSString *)namePart {
+    __block MKDestination *ret = nil;
+    [self enumerateDestinations:^(MKDestination *endpoint, NSUInteger index, BOOL *stop) {
+        if(endpoint.online && [endpoint.name rangeOfString:namePart].location != NSNotFound) {
+            ret = endpoint;
+            *stop = YES;
+        }
+    }];
+    return ret;
 }
 
 + (instancetype)firstDestinationNamed:(NSString *)name {

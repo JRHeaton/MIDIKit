@@ -13,6 +13,7 @@
 
 + (NSUInteger)numberOfDestinations;
 + (NSUInteger)count; // shorthand
++ (NSArray *)all;
 
 JSExportAs(atIndex,         + (instancetype)destinationAtIndex:(NSUInteger)index);
 
@@ -28,7 +29,7 @@ JSExportAs(sendMessages,    - (instancetype)sendMessages:(NSArray *)messages usi
 
 @interface MKDestination : MKObject <MKDestinationJS, MKEndpointProperties>
 
-+ (instancetype)enumerateDestinations:(BOOL (^)(MKDestination *destination, NSUInteger index, BOOL *stop))block;
++ (void)enumerateDestinations:(void (^)(MKDestination *destination, NSUInteger index, BOOL *stop))block;
 + (instancetype)firstDestinationMeetingCriteria:(BOOL (^)(MKDestination *candidate))block;
 
 - (instancetype)sendPacket:(MIDIPacket *)packet usingOutputPort:(MKOutputPort *)outputPort;

@@ -27,33 +27,50 @@
     return [self numberOfSources];
 }
 
++ (NSArray *)all {
+    NSMutableArray *ret = [NSMutableArray arrayWithCapacity:self.count];
+    [self enumerateSources:^void(MKSource *source, NSUInteger index, BOOL *stop) {
+        [ret addObject:source];
+    }];
+
+    return ret;
+}
+
 + (instancetype)sourceAtIndex:(NSUInteger)index {
     return [self objectWithMIDIRef:MIDIGetSource(index)];
 }
 
-+ (instancetype)firstSourceMeetingCriteria:(BOOL (^)(MKSource *candidate))block {
-    return [self enumerateSources:^BOOL(MKSource *endpoint, NSUInteger index, BOOL *stop) {
-        return block(endpoint);
-    }];
-}
-
-+ (instancetype)enumerateSources:(BOOL (^)(MKSource *endpoint, NSUInteger index, BOOL *stop))block {
-    if(!block) return nil;
++ (void)enumerateSources:(void (^)(MKSource *endpoint, NSUInteger index, BOOL *stop))block {
+    if(!block) return;
 
     BOOL stop = NO;
     for(NSInteger i=0;i<MIDIGetNumberOfSources() && !stop;++i) {
         id candidate = [[self alloc] initWithMIDIRef:MIDIGetSource(i)];
-        if(block(candidate, i, &stop))
-            return candidate;
+        block(candidate, i, &stop);
     }
+}
 
-    return nil;
++ (instancetype)firstSourceMeetingCriteria:(BOOL (^)(MKSource *candidate))block {
+    __block MKSource *ret = nil;
+    [self enumerateSources:^(MKSource *endpoint, NSUInteger index, BOOL *stop) {
+        if(block(endpoint)) {
+            ret = endpoint;
+            *stop = YES;
+        }
+    }];
+
+    return ret;
 }
 
 + (instancetype)firstSourceContaining:(NSString *)namePart {
-    return [self enumerateSources:^BOOL(MKSource *endpoint, NSUInteger index, BOOL *stop) {
-        return endpoint.online && [endpoint.name rangeOfString:namePart].location != NSNotFound;
+    __block MKSource *ret = nil;
+    [self enumerateSources:^(MKSource *endpoint, NSUInteger index, BOOL *stop) {
+        if(endpoint.online && [endpoint.name rangeOfString:namePart].location != NSNotFound) {
+            ret = endpoint;
+            *stop = YES;
+        }
     }];
+    return ret;
 }
 
 + (instancetype)firstSourceNamed:(NSString *)name {

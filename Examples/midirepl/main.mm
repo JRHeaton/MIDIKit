@@ -132,41 +132,45 @@ int main(int argc, const char * argv[]) {
 
         [c[@"help"] callWithArguments:nil];
 
-        while(1) {
-            const char *buf = readline("-> ");
+        [[NSOperationQueue new] addOperationWithBlock:^{
+            while(1) {
+                const char *buf = readline("-> ");
 
-            if(!buf || !strlen(buf)) continue;
-            add_history(buf);
+                if(!buf || !strlen(buf)) continue;
+                add_history(buf);
 
-            JSValue *val;
-            @try {
-                val = [c evaluateScript:[NSString stringWithUTF8String:buf]];
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    JSValue *val;
+                    @try {
+                        val = [c evaluateScript:[NSString stringWithUTF8String:buf]];
 
-                if(showEval) {
-                    const char *print = NULL;
+                        if(showEval) {
+                            const char *print = NULL;
 
-                    BOOL isBadVal = (val.isUndefined || val.isNull);
-                    if(isBadVal) {
-                        print = val.isUndefined ? "[undefined]" : "[null]";
-                    } else {
-                        id objVal = val.toObject;
-                        if([objVal isKindOfClass:[NSDictionary class]] && ![(NSDictionary *)objVal count]) {
-                            print = [val description].UTF8String;
-                        } else {
-                            print = [objVal description].UTF8String;
+                            BOOL isBadVal = (val.isUndefined || val.isNull);
+                            if(isBadVal) {
+                                print = val.isUndefined ? "[undefined]" : "[null]";
+                            } else {
+                                id objVal = val.toObject;
+                                if([objVal isKindOfClass:[NSDictionary class]] && ![(NSDictionary *)objVal count]) {
+                                    print = [val description].UTF8String;
+                                } else {
+                                    print = [objVal description].UTF8String;
+                                }
+                            }
+                            printf("\033[1;32m~> \033[0;36m%s\n\033[0m", print);
                         }
                     }
-                    printf("\033[1;32m~> \033[0;36m%s\n\033[0m", print);
-                }
+                    @catch (NSException *exception) {
+                        NSLog(@"ObjC exception thrown: %@", exception);
+                    }
+                    
+                    write_history(hist);
+                });
             }
-            @catch (NSException *exception) {
-                NSLog(@"ObjC exception thrown: %@", exception);
-            }
+        }];
 
-            write_history(hist);
-        }
-
-//        CFRunLoopRun();
+        CFRunLoopRun();
     }
     return 0;
 }
