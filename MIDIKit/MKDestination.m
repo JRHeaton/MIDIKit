@@ -26,6 +26,19 @@
 }
 
 + (instancetype)atIndex:(NSUInteger)index {
+    if(index >= [self count]) {
+        static NSString *exceptionName = @"MKEnumerableObjectRangeException";
+        static NSString *format = @"+atIndex called with index (%lu) higher than what is available. Please use this responsibly in hand with +count";
+
+        if([JSContext currentContext]) {
+            NSLog(format, index);
+        } else {
+            [NSException raise:exceptionName format:format, index];
+        }
+
+        return nil;
+    }
+
     return [self objectWithMIDIRef:MIDIGetDestination(index)];
 }
 
