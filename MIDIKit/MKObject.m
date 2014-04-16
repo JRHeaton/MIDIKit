@@ -207,7 +207,7 @@ CACHED_PROP_PROPERTY_BASE(Data, data, instancetype) END_RET
 #pragma mark - Helpers
 
 - (NSUInteger)channelInRange:(NSUInteger)channel {
-    return MIN(MAX(0, channel), 16);
+    return MIN(MAX(1, channel), 16);
 }
 
 #pragma mark - Equality Checking

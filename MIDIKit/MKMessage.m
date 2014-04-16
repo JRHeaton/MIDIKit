@@ -283,7 +283,7 @@
         dataInfo = [dataInfo stringByAppendingString:[self _hexStringForData:self.data maxByteCount:20]];
     }
 
-    return [NSString stringWithFormat:@"%@ type=0x%X(%@), length=0x%lX, %@", super.description, self.type, typeName, (unsigned long)self.length, dataInfo];
+    return [NSString stringWithFormat:@"%@ status=0x%x(type=%@, channel=%d), length=0x%lx, %@", super.description, self.status, typeName, self.channel, (unsigned long)self.length, dataInfo];
 }
 
 - (MKMessageType)type {
@@ -332,7 +332,8 @@ FORWARD(programNumber, data2, setProgramNumber, setData2)
 }
 
 - (void)setChannel:(UInt8)channel {
-    [self setByte:(self.type | (MAX(1, MIN(16, channel)) - 1)) atIndex:0];
+    channel = MIN(MAX(1, channel), 16) - 1;
+    [self setByte:(self.type | channel) atIndex:0];
 }
 
 - (void)setType:(MKMessageType)type {

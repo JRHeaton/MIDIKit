@@ -115,6 +115,8 @@ int main(int argc, const char * argv[]) {
             printf("to run in REPL mode, set env var REPL=1\n");
             // standard exec
 
+            NSLog(@"%@", [[MKMessage noteOnMessageWithKey:5 velocity:127] setChannelReturn:2]);
+
             return 0;
         }
 
