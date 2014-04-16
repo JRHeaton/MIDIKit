@@ -14,6 +14,7 @@
 #import <UIKit/UIKit.h>
 #else
 #import <AppKit/AppKit.h>
+#import <dlfcn.h>
 #endif
 
 #ifdef DEBUG
@@ -78,6 +79,10 @@ GLOBAL(setOSStatusEvaluationLogErrors, OSStatusEvaluationLogErrors, MKSettingOSS
 #if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
     [[objc_getClass("UIApplication") sharedApplication] openURL:[NSURL URLWithString:_MKGitHubURL]];
 #else
+    Class _NSWorkspace = objc_getClass("NSWorkspace");
+    if(!_NSWorkspace) {
+        dlopen("/System/Library/Frameworks/AppKit.framework/AppKit", RTLD_LAZY);
+    }
     [[objc_getClass("NSWorkspace") sharedWorkspace] openURL:[NSURL URLWithString:_MKGitHubURL]];
 #endif
 }
