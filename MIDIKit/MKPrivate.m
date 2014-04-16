@@ -59,3 +59,12 @@ void MKDispatchSelectorToDelegates(SEL selector, NSArray *delegates, NSArray *ar
         }
     }
 }
+
+NSData *MKDataFromNumberArray(NSArray *array) {
+    NSMutableData *ret = [NSMutableData dataWithLength:array.count];
+    for(id num in array) {
+        UInt8 byte = [([num isKindOfClass:[JSValue class]] ? [num toNumber] : num) unsignedCharValue];
+        [ret appendBytes:&byte length:1];
+    }
+    return ret;
+}

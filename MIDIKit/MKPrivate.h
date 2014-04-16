@@ -14,3 +14,4 @@
 extern MIDIPacketList *MKPacketListFromData(NSData *data);
 extern MKEntity *MKEntityForEndpoint(id endpoint);
 extern void MKDispatchSelectorToDelegates(SEL selector, NSArray *delegates, NSArray *arguments);
+extern NSData *MKDataFromNumberArray(NSArray *array);

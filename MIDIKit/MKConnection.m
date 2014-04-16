@@ -7,6 +7,7 @@
 //
 
 #import "MIDIKit.h"
+#import "MKPrivate.h"
 
 @implementation MKConnection
 @synthesize client=_client;
@@ -23,7 +24,7 @@
     if(!(self = [super init])) return nil;
 
     _destinations = [NSMutableArray arrayWithCapacity:0];
-    self.client = client;
+    self.client = client ?: (client = [MKClient global]);
     self.inputPort = client.firstInputPort;
     self.outputPort = client.firstOutputPort;
 
@@ -61,22 +62,15 @@
 }
 
 - (instancetype)sendNumberArray:(NSArray *)array {
-    NSMutableData *data = [NSMutableData new];
-    for(NSNumber *number in array) {
-        if([number isKindOfClass:[NSNumber class]]) {
-            unsigned char byte = number.unsignedCharValue;
-            [data appendBytes:&byte length:1];
-        }
-    }
-    
-    [self sendData:data];
-    
-    return self;
+    return [self sendData:MKDataFromNumberArray(array)];
+}
+
+- (instancetype)sendByteValuesJS:(JSValue *)value {
+    return [self sendData:MKDataFromNumberArray([JSContext currentArguments])];
 }
 
 - (instancetype)sendMessage:(MKMessage *)message {
-    [self sendData:message.data];
-    return self;
+    return [self sendData:message.data];
 }
 
 - (instancetype)sendMessages:(MKMessage *)message, ... {
@@ -99,7 +93,11 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ inputPort=%@, outputPort=%@, client=%@, destinations=%@", super.description, self.inputPort, self.outputPort, self.client, self.destinations];
+    return [NSString stringWithFormat:@"%@ {\n\t"
+                "inputPort    = %@, \n\t"
+                "outputPort   = %@, \n\t"
+                "client       = %@, \n\t"
+                "destinations = %@}", super.description, self.inputPort, self.outputPort, self.client, self.destinations];
 }
 
 @end
