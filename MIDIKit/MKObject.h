@@ -43,6 +43,9 @@ JSExportAs(withMIDIRef,     + (instancetype)objectWithMIDIRef:(MIDIObjectRef)MID
 
 - (BOOL)isEqualToObject:(MKObject *)object;
 
+// This is for accessing the ObjC description value via JS
+@property (nonatomic, readonly) NSString *description;
+
 @end
 
 /*

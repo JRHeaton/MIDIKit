@@ -125,4 +125,18 @@
     return nil;
 }
 
++ (void)enumerateWithBlockJS:(JSValue *)block {
+    if(!block || block.isNull || block.isUndefined) return; // TODO: print this?
+
+    [self enumerateWithBlock:^(MKEnumerableObject *object, NSUInteger index, BOOL *stop) {
+        *stop = [block callWithArguments:@[ object, @(index) ]].toBool;
+    }];
+}
+
++ (instancetype)firstMeetingCriteriaJS:(JSValue *)block {
+    return [self firstMeetingCriteria:^BOOL(MKEnumerableObject *candidate) {
+        return [block callWithArguments:@[ candidate ]].toBool;
+    }];
+}
+
 @end

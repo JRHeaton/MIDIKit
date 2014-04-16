@@ -25,6 +25,16 @@ JSExportAs(atIndex, + (instancetype)atIndexNumber:(NSNumber *)number);
 + (instancetype)firstOfflineNamed:(NSString *)name;
 + (instancetype)firstOfflineContaining:(NSString *)namePart;
 
+// NOTE: in the JS version of enumerateWithBlock, we don't have pointers, so
+// the block returns a BOOL object, which when yes, stops the loop
+//
+// MKDevice.enumerateWithBlock(function (object, index) {
+//     log(index + ': ' + object.description)
+//     return index == 2
+// })
+JSExportAs(enumerateWithBlock,      + (void)enumerateWithBlockJS:(JSValue *)block);
+JSExportAs(firstMeetingCriteria,    + (instancetype)firstMeetingCriteriaJS:(JSValue *)block);
+
 @end
 
 @interface MKEnumerableObject : MKObject <MKEnumerableObjectJS>

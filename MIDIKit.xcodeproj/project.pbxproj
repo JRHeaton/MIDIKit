@@ -280,8 +280,6 @@
 		524005D918FB041F0030B46D /* Wrappers */ = {
 			isa = PBXGroup;
 			children = (
-				5240064B18FB15050030B46D /* MKThruConnection.h */,
-				5240064C18FB15050030B46D /* MKThruConnection.m */,
 				5273C70218DE9A9800A8CFD4 /* MKObject.h */,
 				5273C70318DE9A9800A8CFD4 /* MKObject.m */,
 				5296F88818FF3B1100682874 /* MKEnumerableObject.h */,
@@ -334,10 +332,9 @@
 		524005DE18FB045D0030B46D /* Useful Abstractions */ = {
 			isa = PBXGroup;
 			children = (
-				52B22EFC18F7C86900A5A5D3 /* MKConnection.h */,
-				52B22EFD18F7C86900A5A5D3 /* MKConnection.m */,
-				52B22F0318F803E900A5A5D3 /* MKMessage.h */,
-				52B22F0418F803E900A5A5D3 /* MKMessage.m */,
+				5296F89018FF47E200682874 /* I/O */,
+				5296F89118FF47E900682874 /* MIDI Message */,
+				5296F88F18FF47BF00682874 /* Thru Connection */,
 			);
 			name = "Useful Abstractions";
 			sourceTree = "<group>";
@@ -495,6 +492,33 @@
 				52B22EF318F7B65D00A5A5D3 /* MKVirtualSource.m */,
 			);
 			name = "Input (Receiving Data)";
+			sourceTree = "<group>";
+		};
+		5296F88F18FF47BF00682874 /* Thru Connection */ = {
+			isa = PBXGroup;
+			children = (
+				5240064B18FB15050030B46D /* MKThruConnection.h */,
+				5240064C18FB15050030B46D /* MKThruConnection.m */,
+			);
+			name = "Thru Connection";
+			sourceTree = "<group>";
+		};
+		5296F89018FF47E200682874 /* I/O */ = {
+			isa = PBXGroup;
+			children = (
+				52B22EFC18F7C86900A5A5D3 /* MKConnection.h */,
+				52B22EFD18F7C86900A5A5D3 /* MKConnection.m */,
+			);
+			name = I/O;
+			sourceTree = "<group>";
+		};
+		5296F89118FF47E900682874 /* MIDI Message */ = {
+			isa = PBXGroup;
+			children = (
+				52B22F0318F803E900A5A5D3 /* MKMessage.h */,
+				52B22F0418F803E900A5A5D3 /* MKMessage.m */,
+			);
+			name = "MIDI Message";
 			sourceTree = "<group>";
 		};
 		52DDEDF018FB55400019BE98 /* CLI Tool (mkcli) */ = {
