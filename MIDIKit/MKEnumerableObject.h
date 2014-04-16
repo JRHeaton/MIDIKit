@@ -33,6 +33,8 @@ JSExportAs(atIndex, + (instancetype)atIndexNumber:(NSNumber *)number);
 //     return index == 2
 // })
 JSExportAs(enumerateWithBlock,      + (void)enumerateWithBlockJS:(JSValue *)block);
+
+// MKDevice.firstMeetingCriteria(function (dev) { return dev.name == "Launchpad S" })
 JSExportAs(firstMeetingCriteria,    + (instancetype)firstMeetingCriteriaJS:(JSValue *)block);
 
 @end
