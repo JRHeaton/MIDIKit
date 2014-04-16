@@ -56,11 +56,36 @@ static NSMapTable *_MKVirtualSourceNameMap = nil;
 - (instancetype)receivedData:(NSData *)data {
     [self.receiveQueue addOperationWithBlock:^{
         MIDIPacketList *list = MKPacketListFromData(data);
-        if([MIDIKit evalOSStatus:MIDIReceived(self.MIDIRef, list) name:@"Virtual receive"] != 0) {
+        [self receivedPacketList:list];
+        free(list);
+    }];
+
+    return self;
+}
+
+- (instancetype)receivedMessage:(MKMessage *)message {
+    return [self receivedData:message.data];
+}
+
+- (instancetype)receivedPacket:(MIDIPacket *)packet {
+    MIDIPacketList *list = malloc(sizeof(MIDIPacketList));
+    list->numPackets = 1;
+    memcpy(&list->packet[0], packet, sizeof(MIDIPacket));
+
+    id ret = [self receivedPacketList:list];
+    free(list);
+
+    return ret;
+}
+
+- (instancetype)receivedPacketList:(MIDIPacketList *)packetList {
+    NSParameterAssert(packetList);
+    if(!self.valid) return self; // TODO: handle this better
+
+    [self.receiveQueue addOperationWithBlock:^{
+        if([MIDIKit evalOSStatus:MIDIReceived(self.MIDIRef, (const MIDIPacketList *)packetList) name:@"Virtual source data receive"] != 0) {
             // TODO: handle error
         }
-
-        free(list);
     }];
 
     return self;
