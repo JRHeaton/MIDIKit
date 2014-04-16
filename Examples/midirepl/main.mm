@@ -115,7 +115,7 @@ int main(int argc, const char * argv[]) {
             printf("to run in REPL mode, set env var REPL=1\n");
             // standard exec
 
-            NSLog(@"%@", [[MKMessage noteOnMessageWithKey:5 velocity:127] setChannelReturn:2]);
+            NSLog(@"%@", [c evaluateScript:@"lpm = MKDevice.firstContaining('Launchpad Mini'); lps = MKDevice.firstContaining('Launchpad S'); c = MKConnection.new().addDestination(lpm.rootDestination).addDestination(lps.rootDestination); c.sendMessages(MKMessage.messages(0x90, 0x0, 127, 0x90, 0x10, 0x3c))"]);
 
             return 0;
         }

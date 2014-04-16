@@ -283,7 +283,7 @@
         dataInfo = [dataInfo stringByAppendingString:[self _hexStringForData:self.data maxByteCount:20]];
     }
 
-    return [NSString stringWithFormat:@"%@ status=0x%x(type=%@, channel=%d), length=0x%lx, %@", super.description, self.status, typeName, self.channel, (unsigned long)self.length, dataInfo];
+    return [NSString stringWithFormat:@"%@ status=0x%x[type=%@, channel=%d], length=0x%lx, %@", super.description, self.status, typeName, self.channel, (unsigned long)self.length, dataInfo];
 }
 
 - (MKMessageType)type {

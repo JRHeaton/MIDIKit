@@ -86,7 +86,6 @@ static NSMapTable *_MKOutputPortNameMap = nil;
     [self.sendQueue addOperationWithBlock:^{
         MIDIPacketList *list = MKPacketListFromData(data);
         [self sendPacketList:list toDestination:destination];
-        free(list);
     }];
     return self;
 }
@@ -114,7 +113,6 @@ static NSMapTable *_MKOutputPortNameMap = nil;
     memcpy(&list->packet[0], packet, sizeof(MIDIPacket));
 
     id ret = [self sendPacketList:list toDestination:destination];
-    free(list);
 
     return ret;
 }
@@ -127,6 +125,7 @@ static NSMapTable *_MKOutputPortNameMap = nil;
     [self.sendQueue addOperationWithBlock:^{
         if([MIDIKit evalOSStatus:MIDISend(self.MIDIRef, destination.MIDIRef, (const MIDIPacketList *)packetList) name:@"Send data"] != 0) {
             // TODO: handle error
+            free(packetList);
         }
     }];
 
