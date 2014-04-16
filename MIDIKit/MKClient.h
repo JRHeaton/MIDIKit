@@ -70,6 +70,8 @@ JSExportAs(named, + (instancetype)clientWithNameJS:(JSValue *)name);
 - (instancetype)addDelegate:(id<MKClientDelegate>)delegate;
 - (instancetype)removeDelegate:(id<MKClientDelegate>)delegate;
 
+@property (nonatomic, strong) NSMutableArray *delegates;
+
 @end
 
 
