@@ -8,9 +8,7 @@
 
 #import "MKObject.h"
 
-@class MKEntity;
-@class MKOutputPort;
-@class MKMessage;
+@class MKEntity, MKOutputPort, MKMessage;
 @protocol MKDestinationJS <JSExport, MKObjectJS>
 
 + (NSUInteger)numberOfDestinations;

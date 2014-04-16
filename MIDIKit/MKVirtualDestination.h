@@ -28,14 +28,18 @@ JSExportAs(named, + (instancetype)virtualDestinationWithName:(NSString *)name cl
 - (instancetype)addDelegate:(id<MKVirtualDestinationDelegate>)delegate;
 - (instancetype)removeDelegate:(id<MKVirtualDestinationDelegate>)delegate;
 
+@property (nonatomic, readonly) NSMutableArray *delegates;
+
 @end
 
 
 @protocol MKVirtualDestinationDelegate <NSObject>
-
 @optional
+
 // Called when a packet is received
 - (void)virtualDestination:(MKVirtualDestination *)virtualDestination receivedData:(NSData *)data;
 - (void)virtualDestination:(MKVirtualDestination *)virtualDestination receivedMessage:(MKMessage *)message;
+- (void)virtualDestination:(MKVirtualDestination *)virtualDestination receivedPacket:(MIDIPacket *)packet;
+- (void)virtualDestination:(MKVirtualDestination *)virtualDestination receivedPacketList:(MIDIPacketList *)packetList;
 
 @end

@@ -7,14 +7,13 @@
 //
 
 #import "MIDIKit.h"
+#import "MKPrivate.h"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-protocol-property-synthesis"
 #pragma clang diagnostic ignored "-Wprotocol"
 
-@implementation MKVirtualDestination {
-    NSMutableSet *_delegates;
-}
+@implementation MKVirtualDestination
 
 @synthesize client=_client;
 
@@ -23,27 +22,15 @@ static NSMapTable *_MKVirtualDestinationNameMap = nil;
 static void _MKVirtualDestinationReadProc(const MIDIPacketList *pktlist, void *readProcRefCon, void *srcConnRefCon) {
     MKVirtualDestination *self = (__bridge MKVirtualDestination *)(readProcRefCon);
 
-#warning clean this up later
-    NSArray *msgs = [MKMessage messagesWithPacketList:(MIDIPacketList *)pktlist];
-    if(msgs) {
-        for(id<MKVirtualDestinationDelegate> delegate in self->_delegates) {
-            if([delegate respondsToSelector:@selector(virtualDestination:receivedMessage:)]) {
-                for(MKMessage *msg in msgs) {
-                    [delegate virtualDestination:self receivedMessage:msg];
-                }
-            }
-        }
+    MKDispatchSelectorToDelegates(@selector(virtualDestination:receivedPacketList:), self.delegates, @[ self, (__bridge id)pktlist ]);
+    for(MKMessage *msg in [MKMessage messagesWithPacketList:(MIDIPacketList *)pktlist]) {
+        MKDispatchSelectorToDelegates(@selector(virtualDestination:receivedMessage:), self.delegates, @[ self, msg ]);
     }
 
     MIDIPacket *packet = (MIDIPacket *)&pktlist->packet[0];
     for (int i=0;i<pktlist->numPackets;++i) {
-        NSData *goodData = nil;
-
-        for(id<MKVirtualDestinationDelegate> delegate in self->_delegates) {
-            if([delegate respondsToSelector:@selector(virtualDestination:receivedData:)]) {
-                [delegate virtualDestination:self receivedData:(goodData = [NSData dataWithBytes:packet->data length:packet->length])];
-            }
-        }
+        NSData *data = [NSData dataWithBytes:packet->data length:packet->length];
+        MKDispatchSelectorToDelegates(@selector(virtualDestination:receivedData:), self.delegates, @[ self, data ]);
 
         packet = MIDIPacketNext(packet);
     }
@@ -78,7 +65,7 @@ static void _MKVirtualDestinationReadProc(const MIDIPacketList *pktlist, void *r
     
     self.client = client;
     [self.client.virtualDestinations addObject:self];
-    _delegates = [NSMutableSet setWithCapacity:0];
+    _delegates = [NSMutableArray arrayWithCapacity:0];
     
     return self;
 }

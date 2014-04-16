@@ -12,7 +12,6 @@
 @class MKVirtualDestination, MKVirtualSource;
 @class MKInputPort, MKOutputPort;
 @class MKDevice, MKEntity, MKDestination, MKSource;
-@protocol MKClientNotificationDelegate;
 
 
 /*
@@ -63,16 +62,16 @@ JSExportAs(named, + (instancetype)clientWithName:(NSString *)name);
 @end
 
 
+@protocol MKClientDelegate;
 @interface MKClient : MKObject <MKClientJS, MKClientProperties>
 
-
-- (instancetype)addNotificationDelegate:(id<MKClientNotificationDelegate>)delegate;
-- (instancetype)removeNotificationDelegate:(id<MKClientNotificationDelegate>)delegate;
+- (instancetype)addDelegate:(id<MKClientDelegate>)delegate;
+- (instancetype)removeDelegate:(id<MKClientDelegate>)delegate;
 
 @end
 
 
-@protocol MKClientNotificationDelegate <NSObject>
+@protocol MKClientDelegate <NSObject>
 
 @optional
 // Called when anything is added/removed

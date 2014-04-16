@@ -7,6 +7,7 @@
 //
 
 #import "MIDIKit.h"
+#import "MKPrivate.h"
 
 NSString *MKObjectPropertyChangedNotification = @"MKObjectPropertyChangedNotification";
 NSString *MKUserInfoPropertyNameKey = @"MKUserInfoPropertyNameKey";
@@ -16,7 +17,7 @@ static NSMapTable *_MKClientNameMap = nil;
 
 @interface MKClient ()
 
-@property (nonatomic, strong) NSMutableSet *notificationDelegates;
+@property (nonatomic, strong) NSMutableArray *notificationDelegates;
 
 @end
 
@@ -53,25 +54,25 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
 
     NSString *typeName;
     switch((SInt32)message->messageID) {
-        case kMIDIMsgSetupChanged: [self dispatchNotificationSelector:@selector(midiClientSetupChanged:) withArguments:@[self]]; break;
+        case kMIDIMsgSetupChanged: MKDispatchSelectorToDelegates(@selector(midiClientSetupChanged:), self.notificationDelegates, @[self]); break;
         case kMIDIMsgObjectAdded: {
             MIDIObjectAddRemoveNotification *notif = (MIDIObjectAddRemoveNotification *)message;
 
             id objectInstance = [[_MKClassForType(notif->childType, &typeName) alloc] initWithMIDIRef:notif->child];
-            [self dispatchNotificationSelector:@selector(midiClient:objectAdded:ofType:) withArguments:@[ self, objectInstance, @(notif->childType) ]];
+            MKDispatchSelectorToDelegates(@selector(midiClient:objectAdded:ofType:), self.notificationDelegates, @[ self, objectInstance, @(notif->childType)]);
 
             if(![typeName isEqualToString:@"object"]) {
-                [self dispatchNotificationSelector:NSSelectorFromString([NSString stringWithFormat:@"midiClient:%@Added:", typeName]) withArguments:@[ self, objectInstance ]];
+                MKDispatchSelectorToDelegates(NSSelectorFromString([NSString stringWithFormat:@"midiClient:%@Added:", typeName]), self.notificationDelegates, @[ self, objectInstance ]);
             }
         } break;
         case kMIDIMsgObjectRemoved: {
             MIDIObjectAddRemoveNotification *notif = (MIDIObjectAddRemoveNotification *)message;
 
             id objectInstance = [[_MKClassForType(notif->childType, &typeName) alloc] initWithMIDIRef:notif->child];
-            [self dispatchNotificationSelector:@selector(midiClient:objectRemoved:ofType:) withArguments:@[ self, objectInstance, @(notif->childType) ]];
+            MKDispatchSelectorToDelegates(@selector(midiClient:objectRemoved:ofType:), self.notificationDelegates, @[ self, objectInstance, @(notif->childType) ]);
 
             if(![typeName isEqualToString:@"object"]) {
-                [self dispatchNotificationSelector:NSSelectorFromString([NSString stringWithFormat:@"midiClient:%@Removed:", typeName]) withArguments:@[ self, objectInstance ]];
+                MKDispatchSelectorToDelegates(NSSelectorFromString([NSString stringWithFormat:@"midiClient:%@Removed:", typeName]), self.notificationDelegates, @[ self, objectInstance ]);
             }
         } break;
         case kMIDIMsgPropertyChanged: {
@@ -81,7 +82,7 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
 
             CFRetain(notif->propertyName);
             NSString *propertyName = (__bridge_transfer NSString *)notif->propertyName;
-            [self dispatchNotificationSelector:@selector(midiClient:object:changedValueOfPropertyForKey:) withArguments:@[ self, objectInstance, propertyName ] ];
+            MKDispatchSelectorToDelegates(@selector(midiClient:object:changedValueOfPropertyForKey:), self.notificationDelegates, @[ self, objectInstance, propertyName ]);
 
             if(_MKClientShouldPostNotifications) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:MKObjectPropertyChangedNotification
@@ -95,7 +96,7 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
         case kMIDIMsgSerialPortOwnerChanged: break;
         case kMIDIMsgIOError: {
             MIDIIOErrorNotification *notif = (MIDIIOErrorNotification *)message;
-            [self dispatchNotificationSelector:@selector(midiClient:driverIOErrorWithDevice:errorCode:) withArguments:@[ self, [MKDevice objectWithMIDIRef:notif->driverDevice], @(notif->errorCode)]];
+            MKDispatchSelectorToDelegates(@selector(midiClient:driverIOErrorWithDevice:errorCode:), self.notificationDelegates, @[ self, [MKDevice objectWithMIDIRef:notif->driverDevice], @(notif->errorCode)]);
         } break;
     }
 }
@@ -105,24 +106,6 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
     dispatch_once(&onceToken, ^{
         _MKClientNameMap = [NSMapTable strongToWeakObjectsMapTable];
     });
-}
-
-- (void)dispatchNotificationSelector:(SEL)selector withArguments:(NSArray *)arguments {
-    if(!self.notificationDelegates.count) return;
-
-    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[self.notificationDelegates.anyObject methodSignatureForSelector:selector]];
-    [invocation setSelector:selector];
-
-    for(NSUInteger i=0;i<arguments.count;++i) {
-        __unsafe_unretained id val = arguments[i];
-        [invocation setArgument:&val atIndex:i + 2];
-    }
-
-    for(NSObject<MKClientNotificationDelegate> *delegate in self.notificationDelegates) {
-        if([delegate respondsToSelector:selector]) {
-            [invocation invokeWithTarget:delegate];
-        }
-    }
 }
 
 + (void)startSendingNotifications {
@@ -159,7 +142,7 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
     _outputPorts = [NSMutableArray arrayWithCapacity:0];
     _virtualSources = [NSMutableArray arrayWithCapacity:0];
     _virtualDestinations = [NSMutableArray arrayWithCapacity:0];
-    _notificationDelegates = [NSMutableSet setWithCapacity:0];
+    _notificationDelegates = [NSMutableArray arrayWithCapacity:0];
 
     return self;
 }
@@ -196,12 +179,12 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
     return [[MKVirtualDestination alloc] initWithName:name ?: [NSString stringWithFormat:@"%@-VDest-%lu", self.name, (unsigned long)self.virtualDestinations.count] client:self];
 }
 
-- (instancetype)addNotificationDelegate:(id<MKClientNotificationDelegate>)delegate {
+- (instancetype)addDelegate:(id<MKClientDelegate>)delegate {
     [self.notificationDelegates addObject:delegate];
     return self;
 }
 
-- (instancetype)removeNotificationDelegate:(id<MKClientNotificationDelegate>)delegate {
+- (instancetype)removeDelegate:(id<MKClientDelegate>)delegate {
     [self.notificationDelegates removeObject:delegate];
     return self;
 }

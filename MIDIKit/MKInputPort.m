@@ -7,9 +7,10 @@
 //
 
 #import "MIDIKit.h"
+#import "MKPrivate.h"
 
 @interface MKInputPort ()
-@property (nonatomic, strong) NSMutableSet *inputDelegates;
+@property (nonatomic, strong) NSMutableArray *inputDelegates;
 @end
 
 @implementation MKInputPort
@@ -24,17 +25,19 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
     MKInputPort *self = (__bridge MKInputPort *)(readProcRefCon);
     MKSource *source = (__bridge MKSource *)(srcConnRefCon);
 
-    NSLog(@"%d packets in list", pktlist->numPackets);
+    MKDispatchSelectorToDelegates(@selector(inputPort:receivedPacketList:fromSource:), self.inputDelegates, @[ self, (__bridge id)pktlist, source ]);
+
+    // parse out messages
+    for(MKMessage *msg in [MKMessage messagesWithPacketList:(MIDIPacketList *)pktlist]) {
+        MKDispatchSelectorToDelegates(@selector(inputPort:receivedMessage:fromSource:), self.inputDelegates, @[ self, msg, source ]);
+    }
 
     MIDIPacket *packet = (MIDIPacket *)&pktlist->packet[0];
     for (int i=0;i<pktlist->numPackets;++i) {
-        NSData *goodData = nil;
+        MKDispatchSelectorToDelegates(@selector(inputPort:receivedPacket:fromSource:), self.inputDelegates, @[ self, (__bridge id)packet, source ]);
 
-        for(id<MKInputPortDelegate> delegate in self.inputDelegates) {
-            if([delegate respondsToSelector:@selector(inputPort:receivedData:fromSource:)]) {
-                [delegate inputPort:self receivedData:goodData ?: (goodData = [NSData dataWithBytes:packet->data length:packet->length]) fromSource:source];
-            }
-        }
+        NSData *data = [NSData dataWithBytes:packet->data length:packet->length];
+        MKDispatchSelectorToDelegates(@selector(inputPort:receivedData:fromSource:), self.inputDelegates, @[ self, data, source ]);
 
         if(self.inputHandler) {
             NSMutableArray *dataArray = [NSMutableArray arrayWithCapacity:0];
@@ -48,7 +51,7 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
             if([inputHandler isKindOfClass:[JSValue class]]) {
                 [inputHandler callWithArguments:@[ self, [MKMessage messageWithPacket:packet] ]];
             } else {
-                ((MKInputHandler)inputHandler)(self, goodData ?: [NSData dataWithBytes:packet->data length:packet->length]);
+                ((MKInputHandler)inputHandler)(self, data ?: [NSData dataWithBytes:packet->data length:packet->length]);
             }
         }
 
@@ -85,7 +88,7 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
     [self.client.inputPorts addObject:self];
 
     self.inputHandlers = [NSMutableArray arrayWithCapacity:0];
-    self.inputDelegates = [NSMutableSet setWithCapacity:0];
+    self.inputDelegates = [NSMutableArray arrayWithCapacity:0];
     
     return self;
 }
@@ -106,17 +109,17 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
     return self;
 }
 
-- (instancetype)addInputDelegate:(id<MKInputPortDelegate>)delegate {
+- (instancetype)addDelegate:(id<MKInputPortDelegate>)delegate {
     [_inputDelegates addObject:delegate];
     return self;
 }
 
-- (instancetype)removeInputDelegate:(id<MKInputPortDelegate>)delegate {
+- (instancetype)removeDelegate:(id<MKInputPortDelegate>)delegate {
     [_inputDelegates removeObject:delegate];
     return self;
 }
 
-- (instancetype)removeAllInputDelegates {
+- (instancetype)removeAllDelegates {
     [_inputDelegates removeAllObjects];
     return self;
 }

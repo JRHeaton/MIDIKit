@@ -41,3 +41,21 @@ MKEntity *MKEntityForEndpoint(id endpoint) {
 
     return nil;
 }
+
+void MKDispatchSelectorToDelegates(SEL selector, NSArray *delegates, NSArray *arguments) {
+    if(!delegates.count) return;
+
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[delegates.firstObject methodSignatureForSelector:selector]];
+    [invocation setSelector:selector];
+
+    for(NSUInteger i=0;i<arguments.count;++i) {
+        __unsafe_unretained id val = arguments[i];
+        [invocation setArgument:&val atIndex:i + 2];
+    }
+
+    for(id delegate in delegates) {
+        if([delegate respondsToSelector:selector]) {
+            [invocation invokeWithTarget:delegate];
+        }
+    }
+}

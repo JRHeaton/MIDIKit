@@ -40,7 +40,7 @@ JSExportAs(firstContaining, + (instancetype)firstDeviceContaining:(NSString *)na
 // Convenient enumeration
 + (instancetype)firstDeviceMeetingCriteria:(BOOL (^)(MKDevice *candidate))block;
 
-// Also available with subscripting. Ex: myDevice[2]
+// returns an entity at index
 - (id)objectAtIndexedSubscript:(NSUInteger)index;
 
 @end

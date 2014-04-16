@@ -97,14 +97,6 @@ int main(int argc, const char * argv[]) {
             printf("to run in REPL mode, set env var REPL=1\n");
             // standard exec
 
-//            [[MKClient global].firstInputPort connectSource:[MKSource firstSourceContaining:@"User Port"]];
-//            [[MKClient global].firstInputPort addInputHandler:^(MKInputPort *port, NSData *data) {
-//                NSLog(@"%@", [MKMessage messagesWithData:data]);
-//            }];
-
-            NSLog(@"%@", [c evaluateScript:@"MKDevice.firstContaining('Launchpad S')"]);
-            CFRunLoopRun();
-
             return 0;
         }
 

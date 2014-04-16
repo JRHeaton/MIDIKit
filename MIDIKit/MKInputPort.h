@@ -25,8 +25,8 @@ JSExportAs(named,               + (instancetype)inputPortWithName:(NSString *)na
 // This disposes the underlying port
 - (instancetype)dispose;
 
-JSExportAs(addInputHandler,     - (instancetype)addInputHandlerJS:(JSValue *)handler);
-JSExportAs(removeInputHandler,  - (instancetype)removeInputHandlerJS:(JSValue *)handler);
+JSExportAs(addInputHandler,         - (instancetype)addInputHandlerJS:(JSValue *)handler);
+JSExportAs(removeInputHandler,      - (instancetype)removeInputHandlerJS:(JSValue *)handler);
 - (instancetype)removeAllInputHandlers;
 
 @property (nonatomic, strong) NSMutableArray *inputHandlers;
@@ -43,9 +43,9 @@ JSExportAs(removeInputHandler,  - (instancetype)removeInputHandlerJS:(JSValue *)
 
 // Adds an input delegate who is interested in receiving
 // input callbacks
-- (instancetype)addInputDelegate:(id<MKInputPortDelegate>)delegate;
-- (instancetype)removeInputDelegate:(id<MKInputPortDelegate>)delegate;
-- (instancetype)removeAllInputDelegates;
+- (instancetype)addDelegate:(id<MKInputPortDelegate>)delegate;
+- (instancetype)removeDelegate:(id<MKInputPortDelegate>)delegate;
+- (instancetype)removeAllDelegates;
 
 - (instancetype)addInputHandler:(MKInputHandler)inputHandler;
 - (instancetype)removeInputHandler:(MKInputHandler)inputHandler;
@@ -54,9 +54,15 @@ JSExportAs(removeInputHandler,  - (instancetype)removeInputHandlerJS:(JSValue *)
 
 
 @protocol MKInputPortDelegate <NSObject>
+@optional
 
-- (void)inputPort:(MKInputPort *)inputPort
-     receivedData:(NSData *)data
-       fromSource:(MKSource *)source;
+// IMPORTANT: this method will be called for all MKMessages in a MIDIPacketList on input
+// It's using +messagesWithPacketList: to parse everything correctly. It's magic.
+- (void)inputPort:(MKInputPort *)inputPort receivedMessage:(MKMessage *)message fromSource:(MKSource *)source;
+
+// Raw data
+- (void)inputPort:(MKInputPort *)inputPort receivedData:(NSData *)data fromSource:(MKSource *)source;
+- (void)inputPort:(MKInputPort *)inputPort receivedPacket:(MIDIPacket *)packet fromSource:(MKSource *)source;
+- (void)inputPort:(MKInputPort *)inputPort receivedPacketList:(MIDIPacketList *)packetList fromSource:(MKSource *)source;
 
 @end
