@@ -50,12 +50,31 @@ int main(int argc, const char * argv[]) {
         c[@"launchpad"] = ^{ runTestScript(_c, @"launchpad.js"); };
         c[@"setPath"] = ^(NSString *path) { _c[@"__dirname"] = path; };
         c[@"help"] = ^{ printf("%s\n",
-                               "require(path)   -- evaluate a script\n"
-                               "local()         -- set relative path for require() calls\n"
-                               "showEval(bool)  -- set whether return values should be printed\n"
-                               "process         -- global process object\n"
-                               "setCwd(path)    -- sets the relative path for relative path require() calls\n"
-                               "MIDIRestart()   -- for when you kill the server with bad code");
+                               "\n"
+                               "Built-In (midirepl):\n    "
+                               "require(path)           -- evaluate a script\n    "
+                               "local()                 -- set relative path for require() calls\n    "
+                               "showEval(bool)          -- set whether return values should be printed\n    "
+                               "setCwd(path)            -- sets the relative path for relative path require() calls\n    "
+                               "MIDIRestart()           -- for when you kill the server with bad code\n    "
+                               "process                 -- global process object\n\n"
+
+                               "Classes:\n    "
+                               "MIDIKit                 -- For global settings\n    "
+                               "MKObject                -- Base wrapper\n    "
+                               "MKClient                -- Client to the MIDI server\n    "
+                               "MKInputPort             -- Port for receiving data\n    "
+                               "MKOutputPort            -- Port for sending data\n    "
+                               "MKDevice                -- Root hardware object\n    "
+                               "MKEntity                -- Child of MKDevice, owns endpoints\n    "
+                               "MKSource                -- Input entity\n    "
+                               "MKDestination           -- Output entity\n    "
+                               "MKVirtualSource         -- Client-created endpoint for sending data to MIDI programs\n    "
+                               "MKVirtualDestination    -- Client-created endpoint for receiving data from MIDI programs\n    "
+                               "MKMessage               -- Model representing a command to be sent via MIDI\n    "
+                               "MKConnection            -- Convenience class for easier multi-endpoint operations\n    "
+                               "Use MIDIKit.openGitHub() to check out the latest info.\n"
+                               );
         };
 
         c[@"require"] = ^JSValue *(NSString *path) {
@@ -105,6 +124,8 @@ int main(int argc, const char * argv[]) {
         signal(SIGINT, sigg);
 
         read_history(hist);
+
+        [c[@"help"] callWithArguments:nil];
 
         while(1) {
             const char *buf = readline("|> ");

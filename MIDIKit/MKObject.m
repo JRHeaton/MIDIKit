@@ -51,7 +51,7 @@ exception:
 
 - (instancetype)initWithMIDIRef:(MIDIObjectRef)MIDIRef {
     MKObject *ret;
-    if((ret = [_MKObjectMap objectForKey:@(MIDIRef)]) != nil) {
+    if((ret = [_MKObjectMap objectForKey:@((UInt32)MIDIRef)]) != nil) {
         self = ret;
         [self purgeCache];
         return self;
@@ -69,7 +69,7 @@ exception:
     MIDIObjectRef obj;
     if([MIDIKit evalOSStatus:MIDIObjectFindByUniqueID(uniqueID, &obj, &type) name:@"Find by unique id"] != 0) return nil;
 
-    if((self = [_MKObjectMap objectForKey:@(obj)]) != nil) {
+    if((self = [_MKObjectMap objectForKey:@((UInt32)obj)]) != nil) {
         [self purgeCache];
         return self;
     }
@@ -258,8 +258,8 @@ CACHED_PROP_PROPERTY_BASE(Data, data, instancetype) END_RET
 }
 
 - (void)setMIDIRef:(MIDIObjectRef)MIDIRef {
-    [_MKObjectMap removeObjectForKey:@(_MIDIRef)];
-    [_MKObjectMap setObject:self forKey:@(MIDIRef)];
+    [_MKObjectMap removeObjectForKey:@((UInt32)_MIDIRef)];
+    [_MKObjectMap setObject:self forKey:@((UInt32)MIDIRef)];
 
     _MIDIRef = MIDIRef;
     [self purgeCache];
