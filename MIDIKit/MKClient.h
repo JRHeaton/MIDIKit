@@ -23,7 +23,7 @@
 @protocol MKClientJS <JSExport, MKObjectJS>
 
 + (instancetype)global;
-JSExportAs(named, + (instancetype)clientWithName:(NSString *)name);
+JSExportAs(named, + (instancetype)clientWithNameJS:(JSValue *)name);
 
 // firstInputPort and firstOutputPort will look to see if there are
 // any already-created ports in the arrays below, and if not, create one,
@@ -64,6 +64,8 @@ JSExportAs(named, + (instancetype)clientWithName:(NSString *)name);
 
 @protocol MKClientDelegate;
 @interface MKClient : MKObject <MKClientJS, MKClientProperties>
+
++ (instancetype)clientWithName:(NSString *)name;
 
 - (instancetype)addDelegate:(id<MKClientDelegate>)delegate;
 - (instancetype)removeDelegate:(id<MKClientDelegate>)delegate;

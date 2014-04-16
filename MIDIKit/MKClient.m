@@ -119,17 +119,25 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
     _MKClientShouldPostNotifications = NO;
 }
 
++ (instancetype)clientWithNameJS:(JSValue *)name {
+    return [[self alloc] initWithName:(name.isUndefined || name.isNull) ? nil : name.toString];
+}
+
 + (instancetype)clientWithName:(NSString *)name {
     return [[self alloc] initWithName:name];
 }
 
 - (instancetype)initWithName:(NSString *)name {
     MIDIClientRef c;
-    CFStringRef cfName = (__bridge CFStringRef)(name);
+    static NSUInteger _unnamedCount = 0;
+    CFStringRef cfName = (__bridge CFStringRef)(name ?: [NSString stringWithFormat:@"%@-%d-ClientUnnamed-%lu",
+                                                         [NSProcessInfo processInfo].processName,
+                                                         [NSProcessInfo processInfo].processIdentifier,
+                                                         (unsigned long)_unnamedCount++]);
     MKClient *ret;
 
     if((ret = [_MKClientNameMap objectForKey:name]) != nil) return self = ret;
-    if(!name) return [self init];
+    if(!name) name = (__bridge NSString *)cfName;
     if([MIDIKit evalOSStatus:MIDIClientCreate(cfName, _MKClientMIDINotifyProc, (__bridge void *)(self), &c) name:@"Creating a client"] != 0) {
         return nil;
     }
