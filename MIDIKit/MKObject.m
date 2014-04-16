@@ -16,7 +16,7 @@
 
 static NSMapTable *_MKObjectMap = nil;
 
-@implementation MKObject
+@implementation MKObject 
 
 @synthesize useCaching=_useCaching;
 

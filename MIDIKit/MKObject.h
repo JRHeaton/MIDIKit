@@ -25,7 +25,14 @@ JSExportAs(withMIDIRef,     + (instancetype)objectWithMIDIRef:(MIDIObjectRef)MID
 - (NSInteger)integerForProperty:(NSString *)propName;
 - (NSDictionary *)dictionaryForProperty:(NSString *)propName;
 
+- (instancetype)removeProperty:(NSString *)key;
+- (instancetype)removeCachedProperty:(NSString *)key;
+
 - (instancetype)purgeCache;
+
+// This will copy the entire dict. This is called in -description,
+// but is not recommended for general use. It may be slow.
+@property (nonatomic, readonly) NSDictionary *allProperties;
 
 // If YES(default), then as properties are retrieved they are
 // cached
@@ -35,8 +42,6 @@ JSExportAs(withMIDIRef,     + (instancetype)objectWithMIDIRef:(MIDIObjectRef)MID
 @property (nonatomic, readonly, getter = isValid) BOOL valid;
 
 - (BOOL)isEqualToObject:(MKObject *)object;
-
-@property (nonatomic, readonly) NSString *description;
 
 @end
 
@@ -63,13 +68,6 @@ JSExportAs(withMIDIRef,     + (instancetype)objectWithMIDIRef:(MIDIObjectRef)MID
 
 - (NSData *)dataForProperty:(NSString *)key;
 - (instancetype)setData:(NSData *)value forProperty:(NSString *)propName;
-
-- (instancetype)removeProperty:(NSString *)key;
-- (instancetype)removeCachedProperty:(NSString *)key;
-
-// This will copy the entire dict. This is called in -description,
-// but is not recommended for general use. It may be slow.
-- (NSDictionary *)allProperties;
 
 // Underlying MIDI object
 @property (nonatomic, assign) MIDIObjectRef MIDIRef;

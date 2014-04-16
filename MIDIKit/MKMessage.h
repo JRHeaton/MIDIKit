@@ -52,8 +52,7 @@ JSExportAs(withMessage,     + (instancetype)messageWithMessage:(MKMessage *)mess
 JSExportAs(message,         + (instancetype)messageJS:(JSValue *)val);
 
 // Same, but for many messages in one stream of arguments
-JSExportAs(messages,        + (NSArray *)messagesJS:(JSValue *)val
-);
+JSExportAs(messages,        + (NSArray *)messagesJS:(JSValue *)val);
 
 // Convenience/accessibility for JavaScript
 + (MKMessageType)noteOnType;
