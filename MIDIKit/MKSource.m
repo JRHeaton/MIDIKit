@@ -19,64 +19,12 @@
     return YES;
 }
 
-+ (NSUInteger)numberOfSources {
++ (NSUInteger)count {
     return MIDIGetNumberOfSources();
 }
 
-+ (NSUInteger)count {
-    return [self numberOfSources];
-}
-
-+ (NSArray *)all {
-    NSMutableArray *ret = [NSMutableArray arrayWithCapacity:self.count];
-    [self enumerateSources:^void(MKSource *source, NSUInteger index, BOOL *stop) {
-        [ret addObject:source];
-    }];
-
-    return ret;
-}
-
-+ (instancetype)sourceAtIndex:(NSUInteger)index {
++ (instancetype)atIndex:(NSUInteger)index {
     return [self objectWithMIDIRef:MIDIGetSource(index)];
-}
-
-+ (void)enumerateSources:(void (^)(MKSource *endpoint, NSUInteger index, BOOL *stop))block {
-    if(!block) return;
-
-    BOOL stop = NO;
-    for(NSInteger i=0;i<MIDIGetNumberOfSources() && !stop;++i) {
-        id candidate = [[self alloc] initWithMIDIRef:MIDIGetSource(i)];
-        block(candidate, i, &stop);
-    }
-}
-
-+ (instancetype)firstSourceMeetingCriteria:(BOOL (^)(MKSource *candidate))block {
-    __block MKSource *ret = nil;
-    [self enumerateSources:^(MKSource *endpoint, NSUInteger index, BOOL *stop) {
-        if(block(endpoint)) {
-            ret = endpoint;
-            *stop = YES;
-        }
-    }];
-
-    return ret;
-}
-
-+ (instancetype)firstSourceContaining:(NSString *)namePart {
-    __block MKSource *ret = nil;
-    [self enumerateSources:^(MKSource *endpoint, NSUInteger index, BOOL *stop) {
-        if(endpoint.online && [endpoint.name rangeOfString:namePart].location != NSNotFound) {
-            ret = endpoint;
-            *stop = YES;
-        }
-    }];
-    return ret;
-}
-
-+ (instancetype)firstSourceNamed:(NSString *)name {
-    return [self firstSourceMeetingCriteria:^BOOL(MKSource *candidate) {
-        return candidate.online && [candidate.name isEqualToString:name];
-    }];
 }
 
 - (MKEntity *)entity {

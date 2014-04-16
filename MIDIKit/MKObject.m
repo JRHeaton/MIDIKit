@@ -282,11 +282,19 @@ CACHED_PROP_PROPERTY_BASE(Data, data, instancetype) END_RET
 }
 
 - (BOOL)isOnline {
-    return ![self integerForProperty:(__bridge NSString *)kMIDIPropertyOffline];
+    return !self.isOffline;
 }
 
 - (void)setOnline:(BOOL)online {
-    [self setInteger:!online forProperty:(__bridge NSString *)kMIDIPropertyOffline];
+    [self setOffline:!online];
+}
+
+- (void)setOffline:(BOOL)offline {
+    [self setInteger:offline forProperty:(__bridge NSString *)kMIDIPropertyOffline];
+}
+
+- (BOOL)isOffline {
+    return [self integerForProperty:(__bridge NSString *)kMIDIPropertyOffline];
 }
 
 - (BOOL)shouldHaveUniqueID {

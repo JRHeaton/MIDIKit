@@ -21,63 +21,12 @@
     return YES;
 }
 
-+ (NSUInteger)numberOfDestinations {
++ (NSUInteger)count {
     return MIDIGetNumberOfDestinations();
 }
 
-+ (NSUInteger)count {
-    return [self numberOfDestinations];
-}
-
-+ (NSArray *)all {
-    NSMutableArray *ret = [NSMutableArray arrayWithCapacity:self.count];
-    [self enumerateDestinations:^void(MKDestination *d, NSUInteger index, BOOL *stop) {
-        [ret addObject:d];
-    }];
-    return ret;
-}
-
-+ (instancetype)destinationAtIndex:(NSUInteger)index {
++ (instancetype)atIndex:(NSUInteger)index {
     return [self objectWithMIDIRef:MIDIGetDestination(index)];
-}
-
-+ (void)enumerateDestinations:(void (^)(MKDestination *endpoint, NSUInteger index, BOOL *stop))block {
-    if(!block) return;
-
-    BOOL stop = NO;
-    for(NSInteger i=0;i<MIDIGetNumberOfDestinations() && !stop;++i) {
-        id candidate = [[self alloc] initWithMIDIRef:MIDIGetDestination(i)];
-        block(candidate, i, &stop);
-    }
-}
-
-+ (instancetype)firstDestinationMeetingCriteria:(BOOL (^)(MKDestination *candidate))block {
-    __block MKDestination *ret = nil;
-    [self enumerateDestinations:^(MKDestination *endpoint, NSUInteger index, BOOL *stop) {
-        if(block(endpoint)) {
-            ret = endpoint;
-            *stop = YES;
-        }
-    }];
-
-    return ret;
-}
-
-+ (instancetype)firstSourceContaining:(NSString *)namePart {
-    __block MKDestination *ret = nil;
-    [self enumerateDestinations:^(MKDestination *endpoint, NSUInteger index, BOOL *stop) {
-        if(endpoint.online && [endpoint.name rangeOfString:namePart].location != NSNotFound) {
-            ret = endpoint;
-            *stop = YES;
-        }
-    }];
-    return ret;
-}
-
-+ (instancetype)firstDestinationNamed:(NSString *)name {
-    return [self firstDestinationMeetingCriteria:^BOOL(MKDestination *candidate) {
-        return candidate.online && [candidate.name isEqualToString:name];
-    }];
 }
 
 - (MKEntity *)entity {

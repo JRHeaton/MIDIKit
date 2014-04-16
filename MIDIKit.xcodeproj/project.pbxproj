@@ -58,6 +58,11 @@
 		528C945B18FC919800A7B960 /* MIDIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 528C945A18FC919800A7B960 /* MIDIKit.m */; };
 		528C945C18FC919800A7B960 /* MIDIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 528C945A18FC919800A7B960 /* MIDIKit.m */; };
 		528C945D18FC919800A7B960 /* MIDIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 528C945A18FC919800A7B960 /* MIDIKit.m */; };
+		5296F88A18FF3B1100682874 /* MKEnumerableObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 5296F88818FF3B1100682874 /* MKEnumerableObject.h */; };
+		5296F88B18FF3B1100682874 /* MKEnumerableObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 5296F88818FF3B1100682874 /* MKEnumerableObject.h */; };
+		5296F88C18FF3B1100682874 /* MKEnumerableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5296F88918FF3B1100682874 /* MKEnumerableObject.m */; };
+		5296F88D18FF3B1100682874 /* MKEnumerableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5296F88918FF3B1100682874 /* MKEnumerableObject.m */; };
+		5296F88E18FF3B1100682874 /* MKEnumerableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5296F88918FF3B1100682874 /* MKEnumerableObject.m */; };
 		529BF7FE18FDACED001C0BB7 /* MKServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 529BF7FC18FDACED001C0BB7 /* MKServer.h */; };
 		529BF7FF18FDACED001C0BB7 /* MKServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 529BF7FC18FDACED001C0BB7 /* MKServer.h */; };
 		529BF80018FDACED001C0BB7 /* MKServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 529BF7FD18FDACED001C0BB7 /* MKServer.m */; };
@@ -181,6 +186,8 @@
 		528C945718FC90B400A7B960 /* MKJavaScriptModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKJavaScriptModule.h; path = Examples/midirepl/MKJavaScriptModule.h; sourceTree = SOURCE_ROOT; };
 		528C945818FC90B400A7B960 /* MKJavaScriptContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKJavaScriptContext.m; path = Examples/midirepl/MKJavaScriptContext.m; sourceTree = SOURCE_ROOT; };
 		528C945A18FC919800A7B960 /* MIDIKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIDIKit.m; sourceTree = "<group>"; };
+		5296F88818FF3B1100682874 /* MKEnumerableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKEnumerableObject.h; sourceTree = "<group>"; };
+		5296F88918FF3B1100682874 /* MKEnumerableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKEnumerableObject.m; sourceTree = "<group>"; };
 		529BF7FC18FDACED001C0BB7 /* MKServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKServer.h; sourceTree = "<group>"; };
 		529BF7FD18FDACED001C0BB7 /* MKServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKServer.m; sourceTree = "<group>"; };
 		52A1E05418FB876900D7073F /* libMIDIKitOSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMIDIKitOSX.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -264,7 +271,7 @@
 			children = (
 				5273C70618DE9E2500A8CFD4 /* MKClient.h */,
 				5273C70718DE9E2500A8CFD4 /* MKClient.m */,
-				524005DA18FB04300030B46D /* Ports */,
+				524005DA18FB04300030B46D /* Port */,
 				524005DB18FB04370030B46D /* Device */,
 			);
 			name = Client;
@@ -277,12 +284,14 @@
 				5240064C18FB15050030B46D /* MKThruConnection.m */,
 				5273C70218DE9A9800A8CFD4 /* MKObject.h */,
 				5273C70318DE9A9800A8CFD4 /* MKObject.m */,
+				5296F88818FF3B1100682874 /* MKEnumerableObject.h */,
+				5296F88918FF3B1100682874 /* MKEnumerableObject.m */,
 				524005D718FB03F10030B46D /* Client */,
 			);
 			name = Wrappers;
 			sourceTree = "<group>";
 		};
-		524005DA18FB04300030B46D /* Ports */ = {
+		524005DA18FB04300030B46D /* Port */ = {
 			isa = PBXGroup;
 			children = (
 				52B22EEA18F7A0EF00A5A5D3 /* MKInputPort.h */,
@@ -290,7 +299,7 @@
 				52B22EEE18F7A6C600A5A5D3 /* MKOutputPort.h */,
 				52B22EEF18F7A6C600A5A5D3 /* MKOutputPort.m */,
 			);
-			name = Ports;
+			name = Port;
 			sourceTree = "<group>";
 		};
 		524005DB18FB04370030B46D /* Device */ = {
@@ -519,6 +528,7 @@
 				52B22EF018F7A6C600A5A5D3 /* MKOutputPort.h in Headers */,
 				52B22EF418F7B65D00A5A5D3 /* MKVirtualSource.h in Headers */,
 				528C943D18FC774100A7B960 /* MKDestination.h in Headers */,
+				5296F88A18FF3B1100682874 /* MKEnumerableObject.h in Headers */,
 				5240064D18FB15050030B46D /* MKThruConnection.h in Headers */,
 				528C944118FC7FC000A7B960 /* MKSource.h in Headers */,
 				52B22F0518F803E900A5A5D3 /* MKMessage.h in Headers */,
@@ -534,6 +544,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5296F88B18FF3B1100682874 /* MKEnumerableObject.h in Headers */,
 				528C944218FC7FC000A7B960 /* MKSource.h in Headers */,
 				529BF7FF18FDACED001C0BB7 /* MKServer.h in Headers */,
 			);
@@ -695,6 +706,7 @@
 				529BF80218FDACED001C0BB7 /* MKServer.m in Sources */,
 				528C945D18FC919800A7B960 /* MIDIKit.m in Sources */,
 				5240064518FB0A660030B46D /* MKDevice.m in Sources */,
+				5296F88E18FF3B1100682874 /* MKEnumerableObject.m in Sources */,
 				5240064418FB0A650030B46D /* MKOutputPort.m in Sources */,
 				5240064618FB0A670030B46D /* MKEntity.m in Sources */,
 				5240064918FB0A6A0030B46D /* MKVirtualDestination.m in Sources */,
@@ -728,6 +740,7 @@
 				529BF80018FDACED001C0BB7 /* MKServer.m in Sources */,
 				5273C73C18DEADB800A8CFD4 /* MKEntity.m in Sources */,
 				52B22EED18F7A0EF00A5A5D3 /* MKInputPort.m in Sources */,
+				5296F88C18FF3B1100682874 /* MKEnumerableObject.m in Sources */,
 				5273C70518DE9A9800A8CFD4 /* MKObject.m in Sources */,
 				52B22EF918F7B80900A5A5D3 /* MKVirtualDestination.m in Sources */,
 				52B22EF518F7B65D00A5A5D3 /* MKVirtualSource.m in Sources */,
@@ -751,6 +764,7 @@
 				529BF80118FDACED001C0BB7 /* MKServer.m in Sources */,
 				528C945C18FC919800A7B960 /* MIDIKit.m in Sources */,
 				52A1E07D18FB890600D7073F /* MKOutputPort.m in Sources */,
+				5296F88D18FF3B1100682874 /* MKEnumerableObject.m in Sources */,
 				52A1E07C18FB890500D7073F /* MKInputPort.m in Sources */,
 				52A1E07F18FB890A00D7073F /* MKEntity.m in Sources */,
 				52A1E08118FB890E00D7073F /* MKVirtualSource.m in Sources */,

@@ -6,18 +6,13 @@
 //  Copyright (c) 2014 John Heaton. All rights reserved.
 //
 
-#import "MKObject.h"
+#import "MKEnumerableObject.h"
 #import "MKEntity.h"
 
 // Devices are parent objects of entities,
 // and are usually the 'root' object created by the driver.
 
-@protocol MKDeviceJS <JSExport, MKObjectJS>
-
-+ (NSUInteger)numberOfDevices;
-+ (NSUInteger)count; // shorthand
-JSExportAs(firstNamed,      + (instancetype)firstDeviceNamed:(NSString *)name);
-JSExportAs(firstContaining, + (instancetype)firstDeviceContaining:(NSString *)name);
+@protocol MKDeviceJS <JSExport, MKObjectJS, MKEnumerableObjectJS>
 
 // Index-access to child entities
 - (MKEntity *)entityAtIndex:(NSUInteger)index;
@@ -35,10 +30,7 @@ JSExportAs(firstContaining, + (instancetype)firstDeviceContaining:(NSString *)na
 @end
 
 
-@interface MKDevice : MKObject <MKDeviceJS, MKDeviceProperties>
-
-// Convenient enumeration
-+ (instancetype)firstDeviceMeetingCriteria:(BOOL (^)(MKDevice *candidate))block;
+@interface MKDevice : MKEnumerableObject <MKDeviceJS, MKDeviceProperties>
 
 // returns an entity at index
 - (id)objectAtIndexedSubscript:(NSUInteger)index;

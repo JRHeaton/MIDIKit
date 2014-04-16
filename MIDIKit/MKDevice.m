@@ -21,34 +21,12 @@
     return YES;
 }
 
-+ (NSUInteger)numberOfDevices {
++ (NSUInteger)count {
     return MIDIGetNumberOfDevices();
 }
 
-+ (NSUInteger)count {
-    return [self numberOfDevices];
-}
-
-+ (instancetype)firstDeviceMeetingCriteria:(BOOL (^)(MKDevice *candidate))block {
-    for(NSInteger i=0;i<MIDIGetNumberOfDevices();++i) {
-        MKDevice *candidate = [[MKDevice alloc] initWithMIDIRef:MIDIGetDevice(i)];
-        if(block(candidate))
-            return candidate;
-    }
-    
-    return nil;
-}
-
-+ (instancetype)firstDeviceNamed:(NSString *)name {
-    return [self firstDeviceMeetingCriteria:^BOOL(MKDevice *candidate) {
-        return candidate.online && [candidate.name isEqualToString:name];
-    }];
-}
-
-+ (instancetype)firstDeviceContaining:(NSString *)name {
-    return [self firstDeviceMeetingCriteria:^BOOL(MKDevice *candidate) {
-        return candidate.online && [candidate.name rangeOfString:name].location != NSNotFound;
-    }];
++ (instancetype)atIndex:(NSUInteger)index {
+    return [self objectWithMIDIRef:MIDIGetDevice(index)];
 }
 
 - (MKDestination *)rootDestination {
