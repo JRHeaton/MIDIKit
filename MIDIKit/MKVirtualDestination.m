@@ -47,6 +47,15 @@ static void _MKVirtualDestinationReadProc(const MIDIPacketList *pktlist, void *r
     return YES;
 }
 
++ (instancetype)virtualDestinationWithNameJS:(JSValue *)val client:(MKClient *)client {
+    NSString *name = nil;
+    if(!val.isUndefined && !val.isNull) {
+        name = val.toString;
+    }
+
+    return [self virtualDestinationWithName:name client:client];
+}
+
 + (instancetype)virtualDestinationWithName:(NSString *)name client:(MKClient *)client {
     return [[self alloc] initWithName:name client:client];
 }
@@ -54,6 +63,9 @@ static void _MKVirtualDestinationReadProc(const MIDIPacketList *pktlist, void *r
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client {
     if(!client) {
         client = [MKClient global];
+    }
+    if(!name) {
+        name = [NSString stringWithFormat:@"%@-VDest-%lu", client.name, (unsigned long)client.virtualDestinations.count];
     }
     
     MIDIEndpointRef e;

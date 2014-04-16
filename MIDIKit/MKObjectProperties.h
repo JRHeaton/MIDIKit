@@ -153,5 +153,10 @@ MKIntegerProperty(singleRealtimeEntity);
 // Client
 // ---------------------------------------------------------
 @protocol MKClientProperties <MKEntityEndpointDeviceClientProperties>
+@end
+
+@protocol MKPortProperties <JSExport>
+
+MKStringProperty(name);
 
 @end

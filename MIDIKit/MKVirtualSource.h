@@ -10,7 +10,7 @@
 
 @protocol MKVirtualSourceJS <JSExport, MKObjectJS>
 
-JSExportAs(named,               + (instancetype)virtualSourceWithName:(NSString *)name client:(MKClient *)client);
+JSExportAs(named, + (instancetype)virtualSourceWithNameJS:(JSValue *)val client:(MKClient *)client);
 
 JSExportAs(receivedMessage,     - (instancetype)receivedMessage:(MKMessage *)message);
 JSExportAs(receivedMessages,    - (instancetype)receivedMessages:(NSArray *)messages);
@@ -26,6 +26,7 @@ JSExportAs(receivedMessages,    - (instancetype)receivedMessages:(NSArray *)mess
 @interface MKVirtualSource : MKObject <MKClientDependentInstaniation, MKVirtualSourceJS, MKEndpointProperties>
 
 // Creates a new virtual source and adds it to the MIDI server
++ (instancetype)virtualSourceWithName:(NSString *)name client:(MKClient *)client;
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
 
 // Virtually sends data from this source.

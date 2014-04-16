@@ -30,6 +30,15 @@ static NSMapTable *_MKVirtualSourceNameMap = nil;
     return YES;
 }
 
++ (instancetype)virtualSourceWithNameJS:(JSValue *)val client:(MKClient *)client {
+    NSString *name = nil;
+    if(!val.isUndefined && !val.isNull) {
+        name = val.toString;
+    }
+
+    return [self virtualSourceWithName:name client:client];
+}
+
 + (instancetype)virtualSourceWithName:(NSString *)name client:(MKClient *)client {
     return [[self alloc] initWithName:name client:client];
 }
@@ -37,6 +46,9 @@ static NSMapTable *_MKVirtualSourceNameMap = nil;
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client {
     if(!client) {
         client = [MKClient global];
+    }
+    if(!name) {
+        name = [NSString stringWithFormat:@"%@-VSource-%lu", client.name, (unsigned long)client.virtualSources.count];
     }
 
     MIDIEndpointRef e;

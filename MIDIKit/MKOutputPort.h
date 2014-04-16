@@ -16,7 +16,7 @@
 
 @protocol MKOutputPortJS <JSExport, MKObjectJS>
 
-JSExportAs(named,           + (instancetype)outputPortWithName:(NSString *)name client:(MKClient *)client);
+JSExportAs(named,           + (instancetype)outputPortWithNameJS:(JSValue *)val client:(MKClient *)client);
 
 //JSExportAs(send, - (instancetype)sendJS:(JSValue *)dataArray toDestination:(MKDestination *)destination);
 JSExportAs(sendMessage,     - (instancetype)sendMessage:(MKMessage *)msg toDestination:(MKDestination *)destination);
@@ -27,8 +27,9 @@ JSExportAs(sendMessages,    - (instancetype)sendMessages:(NSArray *)messages toD
 @end
 
 
-@interface MKOutputPort : MKObject <MKClientDependentInstaniation, MKOutputPortJS>
+@interface MKOutputPort : MKObject <MKClientDependentInstaniation, MKOutputPortJS, MKPortProperties>
 
++ (instancetype)outputPortWithName:(NSString *)name client:(MKClient *)client;
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
 
 // Sends the MIDI data to the given destination

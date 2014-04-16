@@ -56,7 +56,8 @@ int main(int argc, const char * argv[]) {
                                "showEval(bool)          -- set whether return values should be printed\n    "
                                "setCwd(path)            -- sets the path for require() calls to CWD\n    "
                                "MIDIRestart()           -- for when you kill the server with bad code\n    "
-                               "process                 -- global process object\n\n"
+                               "process                 -- global process object\n    "
+                               "help()                  -- show this\n\n"
 
                                "Classes:\n    "
                                "MIDIKit                 -- For global settings\n    "
@@ -71,7 +72,7 @@ int main(int argc, const char * argv[]) {
                                "MKVirtualSource         -- Client-created endpoint for sending data to MIDI programs\n    "
                                "MKVirtualDestination    -- Client-created endpoint for receiving data from MIDI programs\n    "
                                "MKMessage               -- Model representing a command to be sent via MIDI\n    "
-                               "MKConnection            -- Convenience class for easier multi-endpoint operations\n    "
+                               "MKConnection            -- Convenience class for easier multi-endpoint operations\n\n    "
                                "Use MIDIKit.openGitHub() to check out the latest info.\n"
                                );
         };
@@ -110,12 +111,15 @@ int main(int argc, const char * argv[]) {
         __block BOOL showEval = YES;
         c[@"showEval"] = ^(BOOL show) { showEval = show; };
 
-        
+
+        /////////////////////--------------------------------------------------------------------
+
         if(![NSProcessInfo processInfo].environment[@"REPL"]) {
             printf("to run in REPL mode, set env var REPL=1\n");
             // standard exec
 
-            NSLog(@"%@", [c evaluateScript:@"lpm = MKDevice.firstContaining('Launchpad Mini'); lps = MKDevice.firstContaining('Launchpad S'); c = MKConnection.new().addDestination(lpm.rootDestination).addDestination(lps.rootDestination); c.sendMessages(MKMessage.messages(0x90, 0x0, 127, 0x90, 0x10, 0x3c))"]);
+            NSLog(@"%@", [MKInputPort inputPortWithName:nil client:nil]);
+            NSLog(@"%@", [MKInputPort inputPortWithName:nil client:nil]);
 
             return 0;
         }

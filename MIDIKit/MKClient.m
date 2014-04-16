@@ -164,19 +164,19 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
 }
 
 - (MKInputPort *)createInputPortNamed:(NSString *)name {
-    return [[MKInputPort alloc] initWithName:name ?: [NSString stringWithFormat:@"%@-Input-%lu", self.name, (unsigned long)self.inputPorts.count] client:self];
+    return [[MKInputPort alloc] initWithName:name client:self];
 }
 
 - (MKOutputPort *)createOutputPortNamed:(NSString *)name {
-    return [[MKOutputPort alloc] initWithName:name ?: [NSString stringWithFormat:@"%@-Output-%lu", self.name, (unsigned long)self.outputPorts.count] client:self];
+    return [[MKOutputPort alloc] initWithName:name client:self];
 }
 
 - (MKVirtualSource *)createVirtualSourceNamed:(NSString *)name {
-    return [[MKVirtualSource alloc] initWithName:name ?: [NSString stringWithFormat:@"%@-VSource-%lu", self.name, (unsigned long)self.virtualSources.count] client:self];
+    return [[MKVirtualSource alloc] initWithName:name client:self];
 }
 
 - (MKVirtualDestination *)createVirtualDestinationNamed:(NSString *)name {
-    return [[MKVirtualDestination alloc] initWithName:name ?: [NSString stringWithFormat:@"%@-VDest-%lu", self.name, (unsigned long)self.virtualDestinations.count] client:self];
+    return [[MKVirtualDestination alloc] initWithName:name client:self];
 }
 
 - (instancetype)addDelegate:(id<MKClientDelegate>)delegate {

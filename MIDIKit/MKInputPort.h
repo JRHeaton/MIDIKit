@@ -15,7 +15,7 @@
 typedef void (^MKInputHandler)(MKInputPort *port, NSData *data);
 @protocol MKInputPortJS <JSExport, MKObjectJS>
 
-JSExportAs(named,               + (instancetype)inputPortWithName:(NSString *)name client:(MKClient *)client);
+JSExportAs(named, + (instancetype)inputPortWithNameJS:(JSValue *)val client:(MKClient *)client);
 
 // Calling this method will begin input from the given source
 // to this input port, thus triggering the delegate callbacks
@@ -37,8 +37,9 @@ JSExportAs(removeInputHandler,      - (instancetype)removeInputHandlerJS:(JSValu
 
 
 @protocol MKInputPortDelegate;
-@interface MKInputPort : MKObject <MKClientDependentInstaniation, MKInputPortJS>
+@interface MKInputPort : MKObject <MKClientDependentInstaniation, MKInputPortJS, MKPortProperties>
 
++ (instancetype)inputPortWithName:(NSString *)name client:(MKClient *)client;
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
 
 // Adds an input delegate who is interested in receiving

@@ -15,6 +15,8 @@
 
 @implementation MKInputPort
 
+@dynamic name;
+
 @synthesize client=_client;
 @synthesize inputHandler=_inputHandler;
 @synthesize inputHandlers=_inputHandlers;
@@ -70,9 +72,21 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
     return [[self alloc] initWithName:name client:client];
 }
 
++ (instancetype)inputPortWithNameJS:(JSValue *)val client:(MKClient *)client {
+    NSString *name = nil;
+    if(!val.isUndefined && !val.isNull) {
+        name = val.toString;
+    }
+
+    return [self inputPortWithName:name client:client];
+}
+
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client {
     if(!client) {
         client = [MKClient global];
+    }
+    if(!name) {
+        name = [NSString stringWithFormat:@"%@-Input-%lu", client.name, (unsigned long)client.inputPorts.count];
     }
 
     MIDIPortRef p;

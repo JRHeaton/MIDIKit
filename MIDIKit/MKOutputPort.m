@@ -11,6 +11,8 @@
 
 @implementation MKOutputPort
 
+@dynamic name;
+
 @synthesize client=_client;
 
 static NSMapTable *_MKOutputPortNameMap = nil;
@@ -22,6 +24,15 @@ static NSMapTable *_MKOutputPortNameMap = nil;
     });
 }
 
++ (instancetype)outputPortWithNameJS:(JSValue *)val client:(MKClient *)client {
+    NSString *name = nil;
+    if(!val.isUndefined && !val.isNull) {
+        name = val.toString;
+    }
+
+    return [self outputPortWithName:name client:client];
+}
+
 + (instancetype)outputPortWithName:(NSString *)name client:(MKClient *)client {
     return [[self alloc] initWithName:name client:client];
 }
@@ -29,6 +40,9 @@ static NSMapTable *_MKOutputPortNameMap = nil;
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client {
     if(!client) {
         client = [MKClient global];
+    }
+    if(!name) {
+        name = [NSString stringWithFormat:@"%@-Output-%lu", client.name, (unsigned long)client.outputPorts.count];
     }
     
     MKOutputPort *ret;

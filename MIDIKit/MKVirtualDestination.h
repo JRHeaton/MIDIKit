@@ -10,7 +10,7 @@
 
 @protocol MKVirtualDestinationJS<JSExport, MKObjectJS>
 
-JSExportAs(named, + (instancetype)virtualDestinationWithName:(NSString *)name client:(MKClient *)client);
+JSExportAs(named, + (instancetype)virtualDestinationWithNameJS:(JSValue *)val client:(MKClient *)client);
 
 @end
 
@@ -22,6 +22,7 @@ JSExportAs(named, + (instancetype)virtualDestinationWithName:(NSString *)name cl
 @interface MKVirtualDestination : MKObject <MKClientDependentInstaniation, MKVirtualDestinationJS, MKEndpointProperties>
 
 // Creates a new virtual destination and adds it to the MIDI server
++ (instancetype)virtualDestinationWithName:(NSString *)name client:(MKClient *)client;
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
 
 // Adds a new delegate to be notified when data is received
