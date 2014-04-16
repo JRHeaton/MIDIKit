@@ -90,7 +90,7 @@ GLOBAL(setOSStatusEvaluationLogErrors, OSStatusEvaluationLogErrors, MKSettingOSS
 + (OSStatus)evalOSStatus:(OSStatus)code name:(NSString *)name{
     if(code != 0) {
         if(MKSettingOSStatusEvaluationLogErrors)
-            NSLog(@"[MIDI Error] %@ : %@", name, [NSError errorWithDomain:NSOSStatusErrorDomain code:code userInfo:nil]);
+            NSLog(@"[MIDIKit Error] %@ : %@", name, [NSError errorWithDomain:NSOSStatusErrorDomain code:code userInfo:nil]);
 
         if(MKSettingOSStatusEvaluationThrowsOnError)
             [NSException raise:@"MKOSStatusEvaluationException" format:@"Error during operation: %@", name];
