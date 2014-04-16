@@ -18,7 +18,6 @@
 @dynamic name;
 
 @synthesize client=_client;
-@synthesize inputHandler=_inputHandler;
 @synthesize inputHandlers=_inputHandlers;
 
 static NSMapTable *_MKInputPortNameMap = nil;
@@ -40,14 +39,6 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
 
         NSData *data = [NSData dataWithBytes:packet->data length:packet->length];
         MKDispatchSelectorToDelegates(@selector(inputPort:receivedData:fromSource:), self.inputDelegates, @[ self, data, source ]);
-
-        if(self.inputHandler) {
-            NSMutableArray *dataArray = [NSMutableArray arrayWithCapacity:0];
-            for(int i=0;i<pktlist->packet[0].length;++i) {
-                [dataArray addObject:@(pktlist->packet[0].data[i])];
-            }
-            [self.inputHandler callWithArguments:@[dataArray]];
-        }
 
         for(id inputHandler in self.inputHandlers) {
             if([inputHandler isKindOfClass:[JSValue class]]) {

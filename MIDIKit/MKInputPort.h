@@ -31,8 +31,6 @@ JSExportAs(removeInputHandler,      - (instancetype)removeInputHandlerJS:(JSValu
 
 @property (nonatomic, strong) NSMutableArray *inputHandlers;
 
-@property (nonatomic, strong) JSValue *inputHandler;
-
 @end
 
 
