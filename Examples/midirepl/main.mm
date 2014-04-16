@@ -53,9 +53,8 @@ int main(int argc, const char * argv[]) {
                                "\n"
                                "Built-In (midirepl):\n    "
                                "require(path)           -- evaluate a script\n    "
-                               "local()                 -- set relative path for require() calls\n    "
                                "showEval(bool)          -- set whether return values should be printed\n    "
-                               "setCwd(path)            -- sets the relative path for relative path require() calls\n    "
+                               "setCwd(path)            -- sets the path for require() calls to CWD\n    "
                                "MIDIRestart()           -- for when you kill the server with bad code\n    "
                                "process                 -- global process object\n\n"
 
@@ -106,7 +105,7 @@ int main(int argc, const char * argv[]) {
 
             return [JSValue valueWithUndefinedInContext:_c];
         };
-        c[@"local"] = ^JSValue *{ _c[@"__dirname"] = [_c evaluateScript:@"process.cwd()"]; return _c[@"__dirname"]; };
+        c[@"setCwd"] = ^JSValue *{ _c[@"__dirname"] = [_c evaluateScript:@"process.cwd()"]; return _c[@"__dirname"]; };
 
         __block BOOL showEval = YES;
         c[@"showEval"] = ^(BOOL show) { showEval = show; };
@@ -128,7 +127,7 @@ int main(int argc, const char * argv[]) {
         [c[@"help"] callWithArguments:nil];
 
         while(1) {
-            const char *buf = readline("|> ");
+            const char *buf = readline("-> ");
 
             if(!buf || !strlen(buf)) continue;
             add_history(buf);

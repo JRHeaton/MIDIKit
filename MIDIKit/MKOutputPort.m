@@ -27,6 +27,10 @@ static NSMapTable *_MKOutputPortNameMap = nil;
 }
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client {
+    if(!client) {
+        client = [MKClient global];
+    }
+    
     MKOutputPort *ret;
 
     if((ret = [_MKOutputPortNameMap objectForKey:name]) != nil) return self = ret;

@@ -71,6 +71,10 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
 }
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client {
+    if(!client) {
+        client = [MKClient global];
+    }
+
     MIDIPortRef p;
     MKInputPort *ret;
 

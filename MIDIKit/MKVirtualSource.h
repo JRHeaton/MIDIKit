@@ -13,8 +13,7 @@
 JSExportAs(named,               + (instancetype)virtualSourceWithName:(NSString *)name client:(MKClient *)client);
 
 JSExportAs(receivedMessage,     - (instancetype)receivedMessage:(MKMessage *)message);
-JSExportAs(receivedPacket,      - (instancetype)receivedPacket:(MIDIPacket *)packet);
-JSExportAs(receivedPacketList,  - (instancetype)receivedPacketList:(MIDIPacketList *)packetList);
+JSExportAs(receivedMessages,    - (instancetype)receivedMessages:(NSArray *)messages);
 
 @end
 
@@ -31,6 +30,8 @@ JSExportAs(receivedPacketList,  - (instancetype)receivedPacketList:(MIDIPacketLi
 
 // Virtually sends data from this source.
 - (instancetype)receivedData:(NSData *)data;
+- (instancetype)receivedPacket:(MIDIPacket *)packet;
+- (instancetype)receivedPacketList:(MIDIPacketList *)packetList;
 
 @property (nonatomic, readonly) NSOperationQueue *receiveQueue;
 

@@ -52,6 +52,10 @@ static void _MKVirtualDestinationReadProc(const MIDIPacketList *pktlist, void *r
 }
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client {
+    if(!client) {
+        client = [MKClient global];
+    }
+    
     MIDIEndpointRef e;
     MKVirtualDestination *ret;
 
