@@ -44,6 +44,8 @@ char **completions(const char *frag, int i) {
             memcpy(match, c.UTF8String, c.length);
             match[c.length] = 0;
 
+            rl_completion_append_character = '.';
+
             return !i ? (char **)match : NULL;
         }
     }
