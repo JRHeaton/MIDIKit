@@ -28,6 +28,10 @@ int main(int argc, const char * argv[]) {
 #define PINK COLOR "135m"
 #define BOOBY COLOR "208m"
 #define DOLPHIN COLOR "89m"
+#define FLOOP COLOR "35m"
+#define DOOP COLOR "37m"
+#define ZOOP COLOR "70m"
+#define CROOP COLOR "72m"
 #define RESET START "0m"
 
         __weak typeof(c) _c = c;
@@ -63,7 +67,9 @@ int main(int argc, const char * argv[]) {
         c[@"setPath"] = ^(NSString *path) { _c[@"__dirname"] = path; };
         c[@"help"] = ^{ printf("%s\n",
                                "\n"
+                               FLOOP
                                "Built-In (midirepl):\n    "
+                               DOOP
                                "require(path)           -- evaluate a script\n    "
                                "showEval(bool)          -- set whether return values should be printed\n    "
                                "setCwd(path)            -- sets the path for require() calls to CWD\n    "
@@ -71,7 +77,9 @@ int main(int argc, const char * argv[]) {
                                "process                 -- global process object\n    "
                                "help()                  -- show this\n\n"
 
+                               ZOOP
                                "MIDIKit Classes:\n    "
+                               CROOP
                                "MIDIKit                 -- For global settings\n    "
                                "MKObject                -- Base wrapper\n    "
                                "MKClient                -- Client to the MIDI server\n    "
@@ -85,8 +93,10 @@ int main(int argc, const char * argv[]) {
                                "MKVirtualDestination    -- Client-created endpoint for receiving data from MIDI programs\n    "
                                "MKMessage               -- Model representing a command to be sent via MIDI\n    "
                                "MKConnection            -- Convenience class for easier multi-endpoint operations\n\n    "
-                               
+
+                               PINK
                                "Use MIDIKit.openGitHub() to check out the latest info.\n"
+                               RESET
                                );
         };
 
