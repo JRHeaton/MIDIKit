@@ -18,12 +18,21 @@
 + (instancetype)withMIDIRef:(MIDIObjectRef)MIDIRef;
 
 - (instancetype)setString:(NSString *)value forProperty:(NSString *)propName;
-- (instancetype)setInteger:(NSInteger)value forProperty:(NSString *)propName;
 - (instancetype)setDictionary:(NSDictionary *)value forProperty:(NSString *)propName;
 
+// "integer" properties can be many different types
+- (instancetype)setUnsignedInteger:(UInt32)value forProperty:(NSString *)propName;
+- (instancetype)setInteger:(SInt32)value forProperty:(NSString *)propName;
+- (instancetype)setNumber:(NSNumber *)value forProperty:(NSString *)propName;
+- (instancetype)setBool:(BOOL)value forProperty:(NSString *)propName;
+
 - (NSString *)stringForProperty:(NSString *)propName;
-- (NSInteger)integerForProperty:(NSString *)propName;
 - (NSDictionary *)dictionaryForProperty:(NSString *)propName;
+- (NSNumber *)numberForProperty:(NSString *)propName;
+
+JSExportAs(unsignedIntegerForProperty,  - (JSValue *)unsignedIntegerForPropertyJS:(NSString *)propName);
+JSExportAs(integerForProperty,          - (JSValue *)integerForPropertyJS:(NSString *)propName);
+JSExportAs(boolForProperty,             - (JSValue *)boolForPropertyJS:(NSString *)propName);
 
 - (instancetype)removeProperty:(NSString *)key;
 - (instancetype)removeCachedProperty:(NSString *)key;
@@ -69,8 +78,12 @@
 // Turns useCaching on during execution, then back to previous setting
 - (instancetype)performBlockWithCaching:(void (^)(MKObject *obj))block;
 
-- (NSData *)dataForProperty:(NSString *)key;
 - (instancetype)setData:(NSData *)value forProperty:(NSString *)propName;
+- (NSData *)dataForProperty:(NSString *)key;
+
+- (UInt32)unsignedIntegerForProperty:(NSString *)propName exists:(BOOL *)exists;
+- (SInt32)integerForProperty:(NSString *)propName exists:(BOOL *)exists;
+- (BOOL)boolForProperty:(NSString *)propName exists:(BOOL *)exists;
 
 // Underlying MIDI object
 @property (nonatomic, assign) MIDIObjectRef MIDIRef;

@@ -18,9 +18,9 @@
 #endif
 
 #ifdef DEBUG
-BOOL MKSettingOSStatusEvaluationLogErrors = YES;
+BOOL MKSettingOSStatusEvaluationLogsOnError = YES;
 #else
-BOOL MKSettingOSStatusEvaluationLogErrors = NO;
+BOOL MKSettingOSStatusEvaluationLogsOnError = NO;
 #endif
 
 BOOL MKSettingDescriptionsIncludeProperties = NO;
@@ -69,7 +69,7 @@ void MKInstallIntoContext(JSContext *c) {
 
 GLOBAL(setDescriptionsIncludeProperties, descriptionsIncludeProperties, MKSettingDescriptionsIncludeProperties)
 GLOBAL(setOSStatusEvaluationThrowsOnError, OSStatusEvaluationThrowsOnError, MKSettingOSStatusEvaluationThrowsOnError)
-GLOBAL(setOSStatusEvaluationLogErrors, OSStatusEvaluationLogErrors, MKSettingOSStatusEvaluationLogErrors)
+GLOBAL(setOSStatusEvaluationLogsOnError, OSStatusEvaluationLogsOnError, MKSettingOSStatusEvaluationLogsOnError)
 
 - (instancetype)init {
     [NSException raise:@"MKMIDIKitInstantiationException" format:@"The MIDIKit object is not to be instantiated. Use its methods for manipulating MIDIKit options."];
@@ -94,7 +94,7 @@ GLOBAL(setOSStatusEvaluationLogErrors, OSStatusEvaluationLogErrors, MKSettingOSS
 
 + (OSStatus)evalOSStatus:(OSStatus)code name:(NSString *)name{
     if(code != 0) {
-        if(MKSettingOSStatusEvaluationLogErrors)
+        if(MKSettingOSStatusEvaluationLogsOnError)
             NSLog(@"[MIDIKit Error] %@ : %@", name, [NSError errorWithDomain:NSOSStatusErrorDomain code:code userInfo:nil]);
 
         if(MKSettingOSStatusEvaluationThrowsOnError)

@@ -134,7 +134,7 @@ exception:
     if(isClient || isEndpoint || isEndpoint || isEntity || isDevice) {
         NSString *name = self.name;
         if(name.length)
-            [desc appendFormat:@", name=%@", name];
+            [desc appendFormat:@", name=\'%@\'", name];
     }
     if(isEntity || isEndpoint || isDevice) {
         [desc appendFormat:@", online=%@", [self isOnline] ? @"YES" : @"NO"];
@@ -195,16 +195,48 @@ CACHED_PROP_PROPERTY_BASE(Data, data, instancetype) END_RET
 #undef END_RET
 #undef END
 
-- (NSInteger)integerForProperty:(NSString *)key {
+#define NUM_REDIRECT_SETTER(upper, lower, NSNumberGetter, type) \
+- (instancetype)set##upper:(type)value forProperty:(NSString *)propName { \
+    return [self setNumber:@(value) forProperty:propName]; \
+} \
+\
+- (type)lower##ForProperty:(NSString *)propName exists:(BOOL *)exists { \
+    NSNumber *ret = [self numberForProperty:propName]; \
+    if(exists) *exists = (ret != nil); \
+    return (type)ret.NSNumberGetter; \
+}
+
+NUM_REDIRECT_SETTER(UnsignedInteger, unsignedInteger, unsignedIntValue, UInt32)
+NUM_REDIRECT_SETTER(Bool, bool, boolValue, BOOL)
+NUM_REDIRECT_SETTER(Integer, integer, intValue, SInt32)
+
+- (instancetype)setNumber:(NSNumber *)value forProperty:(NSString *)propName {
+    if(![MIDIKit evalOSStatus:MIDIObjectSetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(propName), value.intValue) name:[NSString stringWithFormat:@"Setting integer property: \'%@\'", propName]])
+        _propertyCache[(propName)] = value;
+    return self;
+}
+
+#define JS_PROP_GETTER(lower, type, JSValueSelFragment) \
+- (JSValue *)lower##ForPropertyJS:(NSString *)propName { \
+    BOOL exists; \
+    type val = [self lower##ForProperty:propName exists:&exists]; \
+    return exists ? [JSValue valueWith##JSValueSelFragment:val inContext:[JSContext currentContext]] : [JSValue valueWithUndefinedInContext:[JSContext currentContext]];\
+}
+
+JS_PROP_GETTER(unsignedInteger, UInt32, UInt32)
+JS_PROP_GETTER(integer, SInt32, Int32)
+JS_PROP_GETTER(bool, BOOL, Bool)
+
+- (NSNumber *)numberForProperty:(NSString *)key {
     SInt32 ret;
     NSNumber *dd;
     if(self.useCaching && (dd = _propertyCache[key]) != nil)
-        return dd.integerValue;
+        return dd;
 
     if(![MIDIKit evalOSStatus:MIDIObjectGetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(key), &ret) name:[NSString stringWithFormat:@"Getting integer property: \'%@\'", key]])
-        _propertyCache[key] = @(ret);
+        _propertyCache[key] = dd = @(ret);
 
-    return ret;
+    return dd;
 }
 
 - (NSDictionary *)allProperties {
@@ -215,12 +247,6 @@ CACHED_PROP_PROPERTY_BASE(Data, data, instancetype) END_RET
     NSDictionary *properties = (__bridge_transfer NSDictionary *)ret;
     if(ret) _propertyCache = [NSMutableDictionary dictionaryWithDictionary:properties];
     return properties;
-}
-
-- (instancetype)setInteger:(NSInteger)value forProperty:(NSString *)key {
-    if(![MIDIKit evalOSStatus:MIDIObjectSetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(key), (SInt32)value) name:[NSString stringWithFormat:@"Setting integer property: \'%@\'", key]])
-        _propertyCache[(key)] = @(value);
-    return self;
 }
 
 - (instancetype)removeCachedProperty:(NSString *)key {
@@ -288,7 +314,7 @@ CACHED_PROP_PROPERTY_BASE(Data, data, instancetype) END_RET
 }
 
 - (MIDIUniqueID)uniqueID {
-    return !self.shouldHaveUniqueID ? 0 : (MIDIUniqueID)[self integerForProperty:(__bridge NSString *)kMIDIPropertyUniqueID];
+    return !self.shouldHaveUniqueID ? 0 : (MIDIUniqueID)[self integerForProperty:(__bridge NSString *)kMIDIPropertyUniqueID exists:nil];
 }
 
 - (void)setMIDIRef:(MIDIObjectRef)MIDIRef {
@@ -300,7 +326,7 @@ CACHED_PROP_PROPERTY_BASE(Data, data, instancetype) END_RET
 }
 
 - (BOOL)isOnline {
-    return [self integerForProperty:(__bridge NSString *)kMIDIPropertyOffline]; // don't use !isOffline because integer values return 0 for undefined
+    return [self integerForProperty:(__bridge NSString *)kMIDIPropertyOffline exists:nil]; // don't use !isOffline because integer values return 0 for undefined
 }
 
 - (void)setOnline:(BOOL)online {
@@ -312,7 +338,7 @@ CACHED_PROP_PROPERTY_BASE(Data, data, instancetype) END_RET
 }
 
 - (BOOL)isOffline {
-    return [self integerForProperty:(__bridge NSString *)kMIDIPropertyOffline];
+    return [self integerForProperty:(__bridge NSString *)kMIDIPropertyOffline exists:nil];
 }
 
 - (BOOL)shouldHaveUniqueID {
@@ -367,54 +393,59 @@ BITFIELD_PROP(Transmits, transmit)
 
 #pragma mark Properties
 
-#define PROPERTY(type, upper, lower, propSymbol, propertyTypeUpper, propertyTypeLower) \
+#define PROPERTY(type, upper, lower, propSymbol, propertyTypeUpper, propertyTypeLower, selAdd) \
 - (type)lower { \
-    return (type)[self propertyTypeLower##ForProperty:(__bridge NSString *)propSymbol]; \
+    return (type)[self propertyTypeLower##ForProperty:(__bridge NSString *)propSymbol selAdd]; \
 } \
 \
 - (void)set##upper:(type)val { \
     [self set##propertyTypeUpper:val forProperty:(__bridge NSString *)propSymbol]; \
 }
 
-PROPERTY(NSUInteger, advanceScheduleTimeMuSec, advanceScheduleTimeMuSec, kMIDIPropertyAdvanceScheduleTimeMuSec, Integer, integer)
-PROPERTY(NSInteger, connectionUniqueID, connectionUniqueID, kMIDIPropertyConnectionUniqueID, Integer, integer)
-PROPERTY(BOOL, Broadcast, isBroadcast, kMIDIPropertyIsBroadcast, Integer, integer)
-PROPERTY(BOOL, SupportsGeneralMIDI, supportsGeneralMIDI, kMIDIPropertySupportsGeneralMIDI, Integer, integer)
-PROPERTY(BOOL, SupportsMMC, supportsMMC, kMIDIPropertySupportsMMC, Integer, integer)
-PROPERTY(BOOL, CanRoute, canRoute, kMIDIPropertyCanRoute, Integer, integer)
-PROPERTY(BOOL, TransmitsBankSelectMSB, transmitsBankSelectMSB, kMIDIPropertyTransmitsBankSelectMSB, Integer, integer)
-PROPERTY(BOOL, TransmitsBankSelectLSB, transmitsBankSelectLSB, kMIDIPropertyTransmitsBankSelectLSB, Integer, integer)
-PROPERTY(BOOL, SupportsShowControl, supportsShowControl, kMIDIPropertySupportsShowControl, Integer, integer)
-PROPERTY(BOOL, DrumMachine, isDrumMachine, kMIDIPropertyIsDrumMachine, Integer, integer)
-PROPERTY(BOOL, EffectUnit, isEffectUnit, kMIDIPropertyIsEffectUnit, Integer, integer)
-PROPERTY(BOOL, EmbeddedEntity, isEmbeddedEntity, kMIDIPropertyIsEmbeddedEntity, Integer, integer)
-PROPERTY(BOOL, Mixer, isMixer, kMIDIPropertyIsMixer, Integer, integer)
-PROPERTY(BOOL, Sampler, isSampler, kMIDIPropertyIsSampler, Integer, integer)
-PROPERTY(BOOL, Private, isPrivate, kMIDIPropertyPrivate, Integer, integer)
+#define EPROPERTY(type, upper, lower, propSymbol, propertyTypeUpper, propertyTypeLower) PROPERTY(type, upper, lower, propSymbol, propertyTypeUpper, propertyTypeLower, exists:nil)
 
-PROPERTY(NSString *, Manufacturer, manufacturer, kMIDIPropertyManufacturer, String, string)
-PROPERTY(NSString *, Name, name, kMIDIPropertyName, String, string)
-PROPERTY(NSString *, Model, model, kMIDIPropertyModel, String, string)
-PROPERTY(NSInteger, DeviceID, deviceID, kMIDIPropertyDeviceID, Integer, integer)
-PROPERTY(NSString *, DisplayName, displayName, kMIDIPropertyDisplayName, String, string)
-PROPERTY(NSString *, DriverOwner, driverOwner, kMIDIPropertyDriverOwner, String, string)
-PROPERTY(NSInteger, DriverVersion, driverVersion, kMIDIPropertyDriverVersion, Integer, integer)
-PROPERTY(NSString *, IconImagePath, iconImagePath, kMIDIPropertyImage, String, string)
-PROPERTY(NSString *, DriverDeviceEditorApp, driverDeviceEditorApp, kMIDIPropertyDriverDeviceEditorApp, String, string)
-PROPERTY(NSInteger, MaxReceiveChannels, maxReceiveChannels, kMIDIPropertyMaxReceiveChannels, Integer, integer)
-PROPERTY(NSInteger, MaxSysexSpeed, maxSysexSpeed, kMIDIPropertyMaxSysExSpeed, Integer, integer)
-PROPERTY(NSInteger, MaxTransmitChannels, maxTransmitChannels, kMIDIPropertyMaxTransmitChannels, Integer, integer)
-PROPERTY(BOOL, PanDisruptsStereo, panDisruptsStereo, kMIDIPropertyPanDisruptsStereo, Integer, integer)
-PROPERTY(NSUInteger, ReceiveChannelBits, receiveChannelBits, kMIDIPropertyReceiveChannels, Integer, integer)
-PROPERTY(NSUInteger, TransmitChannelBits, transmitChannelBits, kMIDIPropertyTransmitChannels, Integer, integer)
-PROPERTY(BOOL, ReceivesClock, receivesClock, kMIDIPropertyReceivesClock, Integer, integer)
-PROPERTY(BOOL, ReceivesMTC, receivesMTC, kMIDIPropertyReceivesMTC, Integer, integer)
-PROPERTY(BOOL, ReceivesNotes, receivesNotes, kMIDIPropertyReceivesNotes, Integer, integer)
-PROPERTY(BOOL, TransmitsMTC, transmitsMTC, kMIDIPropertyTransmitsMTC, Integer, integer)
-PROPERTY(BOOL, TransmitsClock, transmitsClock, kMIDIPropertyTransmitsClock, Integer, integer)
-PROPERTY(BOOL, TransmitsNotes, transmitsNotes, kMIDIPropertyTransmitsNotes, Integer, integer)
-PROPERTY(BOOL, ReceivesProgramChanges, receivesProgramChanges, kMIDIPropertyReceivesProgramChanges, Integer, integer)
-PROPERTY(NSInteger, SingleRealtimeEntity, singleRealtimeEntity, kMIDIPropertySingleRealtimeEntity, Integer, integer)
+EPROPERTY(NSUInteger, advanceScheduleTimeMuSec, advanceScheduleTimeMuSec, kMIDIPropertyAdvanceScheduleTimeMuSec, Integer, integer)
+EPROPERTY(NSInteger, connectionUniqueID, connectionUniqueID, kMIDIPropertyConnectionUniqueID, Integer, integer)
+EPROPERTY(BOOL, Broadcast, isBroadcast, kMIDIPropertyIsBroadcast, Integer, integer)
+EPROPERTY(BOOL, SupportsGeneralMIDI, supportsGeneralMIDI, kMIDIPropertySupportsGeneralMIDI, Integer, integer)
+EPROPERTY(BOOL, SupportsMMC, supportsMMC, kMIDIPropertySupportsMMC, Integer, integer)
+EPROPERTY(BOOL, CanRoute, canRoute, kMIDIPropertyCanRoute, Integer, integer)
+EPROPERTY(BOOL, TransmitsBankSelectMSB, transmitsBankSelectMSB, kMIDIPropertyTransmitsBankSelectMSB, Integer, integer)
+EPROPERTY(BOOL, TransmitsBankSelectLSB, transmitsBankSelectLSB, kMIDIPropertyTransmitsBankSelectLSB, Integer, integer)
+EPROPERTY(BOOL, SupportsShowControl, supportsShowControl, kMIDIPropertySupportsShowControl, Integer, integer)
+EPROPERTY(BOOL, DrumMachine, isDrumMachine, kMIDIPropertyIsDrumMachine, Integer, integer)
+EPROPERTY(BOOL, EffectUnit, isEffectUnit, kMIDIPropertyIsEffectUnit, Integer, integer)
+EPROPERTY(BOOL, EmbeddedEntity, isEmbeddedEntity, kMIDIPropertyIsEmbeddedEntity, Integer, integer)
+EPROPERTY(BOOL, Mixer, isMixer, kMIDIPropertyIsMixer, Integer, integer)
+EPROPERTY(BOOL, Sampler, isSampler, kMIDIPropertyIsSampler, Integer, integer)
+EPROPERTY(BOOL, Private, isPrivate, kMIDIPropertyPrivate, Integer, integer)
+
+EPROPERTY(NSInteger, MaxReceiveChannels, maxReceiveChannels, kMIDIPropertyMaxReceiveChannels, Integer, integer)
+EPROPERTY(NSInteger, MaxSysexSpeed, maxSysexSpeed, kMIDIPropertyMaxSysExSpeed, Integer, integer)
+EPROPERTY(NSInteger, MaxTransmitChannels, maxTransmitChannels, kMIDIPropertyMaxTransmitChannels, Integer, integer)
+EPROPERTY(BOOL, PanDisruptsStereo, panDisruptsStereo, kMIDIPropertyPanDisruptsStereo, Integer, integer)
+EPROPERTY(NSUInteger, ReceiveChannelBits, receiveChannelBits, kMIDIPropertyReceiveChannels, Integer, integer)
+EPROPERTY(NSUInteger, TransmitChannelBits, transmitChannelBits, kMIDIPropertyTransmitChannels, Integer, integer)
+EPROPERTY(BOOL, ReceivesClock, receivesClock, kMIDIPropertyReceivesClock, Integer, integer)
+EPROPERTY(BOOL, ReceivesMTC, receivesMTC, kMIDIPropertyReceivesMTC, Integer, integer)
+EPROPERTY(BOOL, ReceivesNotes, receivesNotes, kMIDIPropertyReceivesNotes, Integer, integer)
+EPROPERTY(BOOL, TransmitsMTC, transmitsMTC, kMIDIPropertyTransmitsMTC, Integer, integer)
+EPROPERTY(BOOL, TransmitsClock, transmitsClock, kMIDIPropertyTransmitsClock, Integer, integer)
+EPROPERTY(BOOL, TransmitsNotes, transmitsNotes, kMIDIPropertyTransmitsNotes, Integer, integer)
+EPROPERTY(BOOL, ReceivesProgramChanges, receivesProgramChanges, kMIDIPropertyReceivesProgramChanges, Integer, integer)
+EPROPERTY(NSInteger, SingleRealtimeEntity, singleRealtimeEntity, kMIDIPropertySingleRealtimeEntity, Integer, integer)
+EPROPERTY(NSInteger, DeviceID, deviceID, kMIDIPropertyDeviceID, Integer, integer)
+EPROPERTY(NSInteger, DriverVersion, driverVersion, kMIDIPropertyDriverVersion, Integer, integer)
+
+#define CPROPERTY(type, upper, lower, propSymbol, propertyTypeUpper, propertyTypeLower) PROPERTY(type, upper, lower, propSymbol, propertyTypeUpper, propertyTypeLower, )
+
+CPROPERTY(NSString *, Manufacturer, manufacturer, kMIDIPropertyManufacturer, String, string)
+CPROPERTY(NSString *, Name, name, kMIDIPropertyName, String, string)
+CPROPERTY(NSString *, Model, model, kMIDIPropertyModel, String, string)
+CPROPERTY(NSString *, DisplayName, displayName, kMIDIPropertyDisplayName, String, string)
+CPROPERTY(NSString *, DriverOwner, driverOwner, kMIDIPropertyDriverOwner, String, string)
+CPROPERTY(NSString *, IconImagePath, iconImagePath, kMIDIPropertyImage, String, string)
+CPROPERTY(NSString *, DriverDeviceEditorApp, driverDeviceEditorApp, kMIDIPropertyDriverDeviceEditorApp, String, string)
 
 #undef PROPERTY
 #undef PROPERTY

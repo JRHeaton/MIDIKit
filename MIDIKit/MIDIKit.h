@@ -35,13 +35,12 @@ extern void MKInstallIntoContext(JSContext *c);
 //
 // Whether or not to include all properties in -description of MKObject classes.
 // This is handy to set to YES when inspecting objects
-extern BOOL MKSettingDescriptionsIncludeProperties; // default: NO
+extern BOOL MKSettingDescriptionsIncludeProperties;     // default: NO
 
 // Whether +evalOSStatus:name:throw: will throw an exception on error
-extern BOOL MKSettingOSStatusEvaluationThrowsOnError; // default: NO
-
-// Whether to suppress logs/exceptions from +evalOSStatus:name:throw:
-extern BOOL MKSettingOSStatusEvaluationLogErrors; // default: YES if debug build, NO elsewise
+extern BOOL MKSettingOSStatusEvaluationThrowsOnError;   // default: NO
+// same for logging
+extern BOOL MKSettingOSStatusEvaluationLogsOnError;     // default: YES if debug build, NO elsewise
 
 
 // ------------------------------------------------------------------
@@ -55,10 +54,10 @@ extern BOOL MKSettingOSStatusEvaluationLogErrors; // default: YES if debug build
 
 JSExportAs(showProperties,  + (BOOL)setDescriptionsIncludeProperties:(BOOL)val);
 JSExportAs(printErrors,     + (BOOL)setOSStatusEvaluationThrowsOnError:(BOOL)val);
-JSExportAs(throw,           + (BOOL)setOSStatusEvaluationLogErrors:(BOOL)val);
+JSExportAs(throw,           + (BOOL)setOSStatusEvaluationLogsOnError:(BOOL)val);
 
 + (BOOL)descriptionsIncludeProperties;
-+ (BOOL)OSStatusEvaluationLogErrors;
++ (BOOL)OSStatusEvaluationLogsOnError;
 + (BOOL)OSStatusEvaluationThrowsOnError;
 
 
