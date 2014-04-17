@@ -23,6 +23,7 @@ char **completions(const char *frag, int i) {
     rl_completion_append_character = 0;
 
     NSString *c;
+    NSMutableArray *classMatches = [NSMutableArray array];
     for(Class cc in@[
                         [MIDIKit class],
                         [MKConnection class],
@@ -40,13 +41,24 @@ char **completions(const char *frag, int i) {
                         [MKServer class]
                         ]) {
         if([(c = NSStringFromClass(cc)) rangeOfString:@(frag)].location != NSNotFound) {
-            char *match = (char *)malloc(c.length + 1);
-            memcpy(match, c.UTF8String, c.length);
-            match[c.length] = 0;
+            [classMatches addObject:c];
+        }
+    }
 
+    if(classMatches.count) {
+        if(classMatches.count == 1) {
             rl_completion_append_character = '.';
 
-            return !i ? (char **)match : NULL;
+            return !i ? (char **)strdup([classMatches.firstObject UTF8String]) : NULL;
+        } else {
+            int ind=0;
+            for(NSString *match in classMatches) {
+                printf("%s%s\n", !ind ? "\n" : "", match.UTF8String);
+                ++ind;
+            }
+            rl_on_new_line();
+
+            return NULL;
         }
     }
 
