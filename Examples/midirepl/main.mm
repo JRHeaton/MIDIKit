@@ -67,32 +67,32 @@ int main(int argc, const char * argv[]) {
         c[@"setPath"] = ^(NSString *path) { _c[@"__dirname"] = path; };
         c[@"help"] = ^{ printf("%s\n",
                                "\n"
-                               FLOOP
+                               ZOOP
                                "Built-In (midirepl):\n    "
-                               DOOP
-                               "require(path)           -- evaluate a script\n    "
-                               "showEval(bool)          -- set whether return values should be printed\n    "
-                               "setCwd(path)            -- sets the path for require() calls to CWD\n    "
-                               "MIDIRestart()           -- for when you kill the server with bad code\n    "
-                               "process                 -- global process object\n    "
-                               "help()                  -- show this\n\n"
+                               CROOP
+                               "require(path)           -- " FLOOP "evaluate a script\n    " CROOP
+                               "showEval(bool)          -- " FLOOP "set whether return values should be printed\n    " CROOP
+                               "setCwd(path)            -- " FLOOP "sets the path for require() calls to CWD\n    " CROOP
+                               "MIDIRestart()           -- " FLOOP "for when you kill the server with bad code\n    " CROOP
+                               "process                 -- " FLOOP "global process object\n    " CROOP
+                               "help()                  -- " FLOOP "show this\n\n" CROOP
 
                                ZOOP
                                "MIDIKit Classes:\n    "
                                CROOP
-                               "MIDIKit                 -- For global settings\n    "
-                               "MKObject                -- Base wrapper\n    "
-                               "MKClient                -- Client to the MIDI server\n    "
-                               "MKInputPort             -- Port for receiving data\n    "
-                               "MKOutputPort            -- Port for sending data\n    "
-                               "MKDevice                -- Root hardware object\n    "
-                               "MKEntity                -- Child of MKDevice, owns endpoints\n    "
-                               "MKSource                -- Input entity\n    "
-                               "MKDestination           -- Output entity\n    "
-                               "MKVirtualSource         -- Client-created endpoint for sending data to MIDI programs\n    "
-                               "MKVirtualDestination    -- Client-created endpoint for receiving data from MIDI programs\n    "
-                               "MKMessage               -- Model representing a command to be sent via MIDI\n    "
-                               "MKConnection            -- Convenience class for easier multi-endpoint operations\n\n    "
+                               "MIDIKit                 -- " FLOOP "For global settings\n    " CROOP
+                               "MKObject                -- " FLOOP "Base wrapper\n    " CROOP
+                               "MKClient                -- " FLOOP "Client to the MIDI server\n    " CROOP
+                               "MKInputPort             -- " FLOOP "Port for receiving data\n    " CROOP
+                               "MKOutputPort            -- " FLOOP "Port for sending data\n    " CROOP
+                               "MKDevice                -- " FLOOP "Root hardware object\n    " CROOP
+                               "MKEntity                -- " FLOOP "Child of MKDevice, owns endpoints\n    " CROOP
+                               "MKSource                -- " FLOOP "Input entity\n    " CROOP
+                               "MKDestination           -- " FLOOP "Output entity\n    " CROOP
+                               "MKVirtualSource         -- " FLOOP "Client-created endpoint for sending data to MIDI programs\n    " CROOP
+                               "MKVirtualDestination    -- " FLOOP "Client-created endpoint for receiving data from MIDI programs\n    " CROOP
+                               "MKMessage               -- " FLOOP "Model representing a command to be sent via MIDI\n    " CROOP
+                               "MKConnection            -- " FLOOP "Convenience class for easier multi-endpoint operations\n\n    " CROOP
 
                                PINK
                                "Use MIDIKit.openGitHub() to check out the latest info.\n"
