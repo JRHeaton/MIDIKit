@@ -21,11 +21,27 @@ int main(int argc, const char * argv[]) {
         MKJavaScriptContext *c = [MKJavaScriptContext new];
         c[@"LPMessage"] = [LPMessage class];
 
+#define START "\033["
+#define COLOR START START "38;5;"
+#define ORANGE COLOR "197m"
+#define SEXY COLOR "61m"
+#define PINK COLOR "135m"
+#define BOOBY COLOR "208m"
+#define DOLPHIN COLOR "89m"
+#define RESET START "0m"
+
         __weak typeof(c) _c = c;
         __block NSUInteger currentLine = 0;
         c.exceptionHandler = ^(JSContext *context, JSValue *exception) {
 
-            printf("%s", [NSString stringWithFormat:@"\033[1;32m~> %@\033[1;31m%@\033[0m\n", !currentLine ? @"" : [NSString stringWithFormat:@"Line %lu: ", (unsigned long)currentLine], [NSString stringWithFormat:@"Line %d: %@", [[exception.toObject objectForKey:@"line"] intValue], exception]].UTF8String);
+            printf("%s",
+                   [NSString stringWithFormat:@"%s~> %s%@%@%s\n",
+                    ORANGE,
+                    BOOBY,
+                    !currentLine ? @"" : [NSString stringWithFormat:@"Line %lu: ", (unsigned long)currentLine],
+                    [NSString stringWithFormat:@"Line %d: %@", [[exception.toObject objectForKey:@"line"] intValue], exception],
+                    RESET
+                    ].UTF8String);
         };
 
         NSString *execPath = [NSBundle mainBundle].executablePath;
@@ -110,17 +126,17 @@ int main(int argc, const char * argv[]) {
 
 
         /////////////////////--------------------------------------------------------------------
+//
+//        if(![NSProcessInfo processInfo].environment[@"REPL"]) {
+//            printf("to run in REPL mode, set env var REPL=1\n");
+//            // standard exec
+//
+//            CFRunLoopRun();
+//
+//            return 0;
+//        }
 
-        if(![NSProcessInfo processInfo].environment[@"REPL"]) {
-            printf("to run in REPL mode, set env var REPL=1\n");
-            // standard exec
-
-            NSLog(@"%@", [c evaluateScript:[NSString stringWithContentsOfFile:@"/Users/John/Dropbox/Developer/projects/MIDIKit/Example JavaScript/mirror.js" encoding:NSUTF8StringEncoding error:nil]] );
-            CFRunLoopRun();
-
-            return 0;
-        }
-
+        rl_initialize();
         using_history();
 #define hist [@"~/.midirepl_history" stringByExpandingTildeInPath].UTF8String
 
@@ -130,7 +146,10 @@ int main(int argc, const char * argv[]) {
 
         [[NSOperationQueue new] addOperationWithBlock:^{
             while(1) {
-                const char *buf = readline("-> ");
+                __block const char *buf;
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    buf = readline("-> ");
+                });
 
                 if(!buf || !strlen(buf)) continue;
                 add_history(buf);
@@ -145,7 +164,7 @@ int main(int argc, const char * argv[]) {
 
                             BOOL isBadVal = (val.isUndefined || val.isNull);
                             if(isBadVal) {
-                                print = val.isUndefined ? "[undefined]" : "[null]";
+                                print = val.isUndefined ? PINK "[undefined]" : PINK "[null]";
                             } else {
                                 id objVal = val.toObject;
                                 if([objVal isKindOfClass:[NSDictionary class]] && ![(NSDictionary *)objVal count]) {
@@ -154,7 +173,7 @@ int main(int argc, const char * argv[]) {
                                     print = [objVal description].UTF8String;
                                 }
                             }
-                            printf("\033[1;32m~> \033[0;36m%s\n\033[0m", print);
+                            printf(ORANGE "~> " SEXY "%s\n" RESET, print);
                         }
                     }
                     @catch (NSException *exception) {
