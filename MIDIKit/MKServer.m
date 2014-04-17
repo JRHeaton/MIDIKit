@@ -15,4 +15,9 @@
     return !MIDIRestart();
 }
 
+- (instancetype)init {
+    [NSException raise:@"MKInstantiationException" format:@"You cannot init this class. Use its class methods for manipulating the MIDI server."];
+    return nil;
+}
+
 @end

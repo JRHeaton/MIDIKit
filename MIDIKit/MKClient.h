@@ -31,8 +31,7 @@ JSExportAs(named, + (instancetype)clientWithNameJS:(JSValue *)name);
 @property (nonatomic, readonly) MKInputPort *firstInputPort;
 @property (nonatomic, readonly) MKOutputPort *firstOutputPort;
 
-// This will create and and insert a port/endpoint into the corresponding array,
-// and return it.
+/// This will create and insert a port/endpoint into the corresponding array, then return it.
 - (MKInputPort *)createInputPort;
 - (MKOutputPort *)createOutputPort;
 
@@ -45,7 +44,7 @@ JSExportAs(named, + (instancetype)clientWithNameJS:(JSValue *)name);
 - (MKVirtualDestination *)createVirtualDestination;
 - (MKVirtualDestination *)createVirtualDestinationNamed:(NSString *)name;
 
-// Disposes the MIDIRef(MIDIClientRef) object (invalidates this object)
+/// Disposes the MIDIRef(MIDIClientRef) object (invalidates this object).
 - (instancetype)dispose;
 
 + (void)startSendingNotifications;
@@ -65,6 +64,13 @@ JSExportAs(named, + (instancetype)clientWithNameJS:(JSValue *)name);
 @protocol MKClientDelegate;
 @interface MKClient : MKObject <MKClientJS, MKClientProperties>
 
+/**
+ *  Creates a new client.
+ *
+ *  @param name The name of the new client.
+ *
+ *  @return The new client on success, or nil on failure.
+ */
 + (instancetype)clientWithName:(NSString *)name;
 
 - (instancetype)addDelegate:(id<MKClientDelegate>)delegate;

@@ -39,7 +39,7 @@ GLOBAL(setOSStatusEvaluationThrowsOnError, OSStatusEvaluationThrowsOnError, MKSe
 GLOBAL(setOSStatusEvaluationLogsOnError, OSStatusEvaluationLogsOnError, MKSettingOSStatusEvaluationLogsOnError)
 
 - (instancetype)init {
-    [NSException raise:@"MKMIDIKitInstantiationException" format:@"The MIDIKit object is not to be instantiated. Use its methods for manipulating MIDIKit options."];
+    [NSException raise:@"MKInstantiationException" format:@"You cannot init this class. Use its class methods for manipulating MIDIKit options."];
     return nil;
 }
 

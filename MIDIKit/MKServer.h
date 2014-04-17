@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <JavaScriptCore/JavaScriptCore.h>
 
-// Global MIDI server functions. you needn't ever init this class
-
 @protocol MKServerJS <JSExport>
 
 /**
@@ -22,6 +20,7 @@
 
 @end
 
+/// Global MIDI server functions. You cannot init this class.
 @interface MKServer : NSObject <MKServerJS>
 
 @end

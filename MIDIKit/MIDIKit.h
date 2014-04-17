@@ -64,6 +64,7 @@ JSExportAs(throwErrors,     + (BOOL)setOSStatusEvaluationLogsOnError:(BOOL)val);
 
 @end
 
+
 @interface MIDIKit : NSObject <MIDIKitJS>
 
 /**
