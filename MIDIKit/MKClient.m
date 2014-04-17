@@ -73,7 +73,7 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
         case kMIDIMsgSerialPortOwnerChanged: break;
         case kMIDIMsgIOError: {
             MIDIIOErrorNotification *notif = (MIDIIOErrorNotification *)message;
-            MKDispatchSelectorToDelegates(@selector(midiClient:driverIOErrorWithDevice:errorCode:), self.delegates, @[ self, [MKDevice objectWithMIDIRef:notif->driverDevice], @(notif->errorCode)]);
+            MKDispatchSelectorToDelegates(@selector(midiClient:driverIOErrorWithDevice:errorCode:), self.delegates, @[ self, [MKDevice withMIDIRef:notif->driverDevice], @(notif->errorCode)]);
         } break;
     }
 }

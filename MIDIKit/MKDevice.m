@@ -26,7 +26,7 @@
 }
 
 + (instancetype)atIndex:(NSUInteger)index {
-    return [self objectWithMIDIRef:MIDIGetDevice(index)];
+    return [self withMIDIRef:MIDIGetDevice(index)];
 }
 
 - (MKDestination *)rootDestination {

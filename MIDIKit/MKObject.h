@@ -14,8 +14,8 @@
 @class MKJavaScriptContext, MKObject;
 @protocol MKObjectJS <JSExport>
 
-JSExportAs(withUniqueID,    + (instancetype)objectWithUniqueID:(MIDIUniqueID)uniqueID);
-JSExportAs(withMIDIRef,     + (instancetype)objectWithMIDIRef:(MIDIObjectRef)MIDIRef);
++ (instancetype)withUniqueID:(MIDIUniqueID)uniqueID;
++ (instancetype)withMIDIRef:(MIDIObjectRef)MIDIRef;
 
 - (instancetype)setString:(NSString *)value forProperty:(NSString *)propName;
 - (instancetype)setInteger:(NSInteger)value forProperty:(NSString *)propName;

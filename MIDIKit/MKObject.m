@@ -43,11 +43,11 @@ exception:
     [NSException raise:@"MKMissingDependencyException" format:@"CoreMIDI.framework is required to be linked in order for MIDIKit to work"];
 }
 
-+ (instancetype)objectWithMIDIRef:(MIDIObjectRef)MIDIRef {
++ (instancetype)withMIDIRef:(MIDIObjectRef)MIDIRef {
     return [[self alloc] initWithMIDIRef:MIDIRef];
 }
 
-+ (instancetype)objectWithUniqueID:(MIDIUniqueID)uniqueID {
++ (instancetype)withUniqueID:(MIDIUniqueID)uniqueID {
     return [[self alloc] initWithUniqueID:uniqueID];
 }
 
@@ -76,7 +76,7 @@ exception:
         return self;
     }
 
-    if(!(self = [_MKClassForType(type, nil) objectWithMIDIRef:obj]))
+    if(!(self = [_MKClassForType(type, nil) withMIDIRef:obj]))
 
     self.MIDIRef = obj;
     [self commonInit];
@@ -247,7 +247,7 @@ CACHED_PROP_PROPERTY_BASE(Data, data, instancetype) END_RET
 #pragma mark - Equality Checking
 
 - (BOOL)isEqual:(id)object {
-    if([object isKindOfClass:[MKObject class]]) {
+    if([object isMemberOfClass:[MKObject class]]) {
         return self.MIDIRef == ((MKObject *)object).MIDIRef;
     }
     return NO;

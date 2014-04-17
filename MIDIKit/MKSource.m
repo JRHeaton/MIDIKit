@@ -24,7 +24,7 @@
 }
 
 + (instancetype)atIndex:(NSUInteger)index {
-    return [self objectWithMIDIRef:MIDIGetSource(index)];
+    return [self withMIDIRef:MIDIGetSource(index)];
 }
 
 - (MKEntity *)entity {

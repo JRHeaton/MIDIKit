@@ -39,7 +39,7 @@
         return nil;
     }
 
-    return [self objectWithMIDIRef:MIDIGetDestination(index)];
+    return [self withMIDIRef:MIDIGetDestination(index)];
 }
 
 - (MKEntity *)entity {
