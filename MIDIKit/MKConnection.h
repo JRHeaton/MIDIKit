@@ -33,6 +33,9 @@ JSExportAs(sendMessages,    - (instancetype)sendMessageArray:(NSArray *)messages
 
 @property (nonatomic, readonly) NSMutableArray *destinations;
 
+@property (nonatomic, assign) BOOL mirroring;
+JSExportAs(setMirroring, - (instancetype)setMirroringJS:(BOOL)mirroring);
+
 @end
 
 
@@ -42,7 +45,7 @@ JSExportAs(sendMessages,    - (instancetype)sendMessageArray:(NSArray *)messages
  *  without having to constantly iterate through a container
  *  and reference ports.
  */
-@interface MKConnection : NSObject <MKConnectionJS>
+@interface MKConnection : NSObject <MKConnectionJS, MKInputPortDelegate>
 
 /**
  *  Creates a new connection with the given client.

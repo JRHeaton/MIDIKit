@@ -15,6 +15,7 @@
 @synthesize inputPort=_inputPort;
 @synthesize outputPort=_outputPort;
 @synthesize destinations=_destinations;
+@synthesize mirroring=_mirroring;
 
 + (instancetype)connectionWithClient:(MKClient *)client {
     return [[self alloc] initWithClient:(id)client];
@@ -97,6 +98,25 @@
         }
     }
     return self;
+}
+
+- (void)setMirroring:(BOOL)mirroring {
+    _mirroring = mirroring;
+
+    if(!mirroring)
+        [self.inputPort removeDelegate:self];
+    else
+        [self.inputPort addDelegate:self];
+}
+
+- (instancetype)setMirroringJS:(BOOL)mirroring {
+    [self setMirroring:mirroring];
+    return self;
+}
+
+- (void)inputPort:(MKInputPort *)inputPort receivedMessage:(MKMessage *)message fromSource:(MKSource *)source {
+    if(self.mirroring)
+        [self sendMessage:message];
 }
 
 - (NSString *)description {

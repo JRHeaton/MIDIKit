@@ -112,6 +112,18 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
     return self;
 }
 
+- (instancetype)connectSources:(NSArray *)sources {
+    for(MKSource *s in sources)
+        [self connectSource:s];
+    return self;
+}
+
+- (instancetype)disconnectSources:(NSArray *)sources {
+    for(MKSource *s in sources)
+        [self disconnectSource:s];
+    return self;
+}
+
 - (instancetype)dispose {
     MIDIPortDispose(self.MIDIRef);
     self.MIDIRef = 0;

@@ -20,7 +20,9 @@ JSExportAs(named, + (instancetype)inputPortWithNameJS:(JSValue *)val client:(MKC
 // Calling this method will begin input from the given source
 // to this input port, thus triggering the delegate callbacks
 - (instancetype)connectSource:(MKSource *)source;
+- (instancetype)connectSources:(NSArray *)sources;
 - (instancetype)disconnectSource:(MKSource *)source;
+- (instancetype)disconnectSources:(NSArray *)sources;
 
 // This disposes the underlying port
 - (instancetype)dispose;
