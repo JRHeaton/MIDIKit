@@ -148,8 +148,7 @@ int main(int argc, const char * argv[]) {
             }
 
             NSString *s = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-            if(s.length) {
-                return [_c evaluateScript:[NSString stringWithFormat:
+            return [_c evaluateScript:[NSString stringWithFormat:
                                            @"(function() {                      "
                                            "    var module = { exports: {} };   "
                                            "    exports = module.exports;       "
@@ -159,9 +158,6 @@ int main(int argc, const char * argv[]) {
                                            "    return module.exports;          "
                                            "})()",
                                            s]];
-            }
-
-            return [JSValue valueWithUndefinedInContext:_c];
         };
         c[@"setCwd"] = ^JSValue *{ _c[@"__dirname"] = [_c evaluateScript:@"process.cwd()"]; return _c[@"__dirname"]; };
 
