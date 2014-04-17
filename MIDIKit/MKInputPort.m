@@ -19,6 +19,7 @@
 
 @synthesize client=_client;
 @synthesize inputHandlers=_inputHandlers;
+@synthesize connectedSources;
 
 static NSMapTable *_MKInputPortNameMap = nil;
 
