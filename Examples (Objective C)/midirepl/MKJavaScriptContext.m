@@ -109,7 +109,7 @@
     }
     self[@"log"] = logBlock;
 
-    MKInstallIntoContext(self);
+    [MIDIKit installIntoContext:self];
 }
 
 - (JSValue *)evaluateScriptAtPath:(NSString *)name {

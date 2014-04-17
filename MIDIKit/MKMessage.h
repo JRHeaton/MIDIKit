@@ -10,15 +10,6 @@
 #import <CoreMIDI/CoreMIDI.h>
 #import <JavaScriptCore/JavaScriptCore.h>
 
-// MKMessage is a data wrapper class which implements some basic MIDI
-// message protocol logic.
-//
-// It is mainly meant to be extended for generating messages
-// that correspond to specific sets of functions for specific
-// types of devices. For instance, you could subclass this
-// for generating messages that correspond to light commands
-// on a pad device
-
 typedef NS_ENUM(UInt8, MKMessageType) {
     kMKMessageTypeNoteOff                           = 0x80,
     kMKMessageTypeNoteOn                            = 0x90,
@@ -33,11 +24,33 @@ typedef NS_ENUM(UInt8, MKMessageType) {
 @class MKMessage;
 @protocol MKMessageJS <JSExport>
 
+/**
+ *  Creates a new message with the global client.
+ *
+ *  @return A new, empty message.
+ */
 + (instancetype)new;
 // Convnenience for converting from one class to another
 // Usually, this is done because a subclass of MKMessage is
 // implementing logic.
+/**
+ *  Instantiates a new message with the same data as the given message. 
+ *  Helpful for using subclasses when you're handed an MKMessage.
+ *
+ *  @param message The message whose data is to be used.
+ *
+ *  @return The new message.
+ */
 + (instancetype)subclass:(MKMessage *)message;
+
+/**
+ *  Instantiates a new message with a copy of the give message's data.
+ *  Helpful for using subclasses when you're handed an MKMessage.
+ *
+ *  @param message The message whose data is to be copied.
+ *
+ *  @return The new message.
+ */
 + (instancetype)copy:(MKMessage *)message;
 
 JSExportAs(withType,        + (instancetype)messageWithType:(MKMessageType)type);
@@ -64,25 +77,51 @@ JSExportAs(messages,        + (NSArray *)messagesJS:(JSValue *)val);
 + (MKMessageType)pitchBendType;
 + (MKMessageType)sysexType;
 
-// Shortcut for data.length
+/// The length of the data of this message.
 - (NSUInteger)length;
 
 // These will expand the data length to fit.
+/**
+ *  Sets a single byte at a given place in the message's data buffer.
+ *  The message will grow if it needs to.
+ *
+ *  @param byte  The value to apply.
+ *  @param index The index at which to
+ *
+ *  @return self (for chaining)
+ */
 - (instancetype)setByte:(UInt8)byte atIndex:(NSUInteger)index;
 
-// Channel of the note message
+/// The MIDI channel of this message.
 @property (nonatomic, assign) UInt8 channel;
-// Type of message
+
+/// The identity of this message.
 @property (nonatomic, assign) MKMessageType type;
 
-// 1st, 2nd and 3rd bytes of the message
-// All of these properties access/set the same corresponding byte
-// status byte containing type and channel
+/// The full first byte.
 @property (nonatomic, assign) UInt8 status;
-// key for note messages, controller for control change/other
+
+/**
+ *  These all get/set the second byte.
+ *  They are named conveniently for parts of common message types.
+ *
+ *  key:            note messages
+ *  controller:     control change messages
+ *  programNumber:  program change messages
+ *  data1:          generic
+ */
 @property (nonatomic, assign) UInt8 key, controller, programNumber, data1;
-// velocity for note messages
-@property (nonatomic, assign) UInt8 velocity, pressure, value, data2;
+
+/**
+ *  These all get/set the third byte.
+ *  They are named conveniently for parts of common message types.
+ *
+ *  velocity:       note messages
+ *  value:          control change messages
+ *  pressures:      aftertouch messages
+ *  data2:          generic
+ */
+@property (nonatomic, assign) UInt8 velocity, value, pressure, data2;
 
 
 JSExportAs(setChannel, - (instancetype)setChannelReturn:(UInt8)channel);
@@ -94,10 +133,24 @@ JSExportAs(setData1, - (instancetype)setData1Return:(UInt8)data1);
 JSExportAs(setData2, - (instancetype)setData2Return:(UInt8)data2);
 JSExportAs(setVelocity, - (instancetype)setVelocityReturn:(UInt8)velocity);
 
+/// Whether the message is zero-length or zeroed out.
 @property (nonatomic, readonly, getter = isEmpty) BOOL empty;
 
 @end
 
+
+/**
+ *  MKMessage is a data wrapper class which implements some basic MIDI
+ *  message protocol logic. It abstracts away the fuss of technical MIDI
+ *  data parsing/manipulation, and gives an easy-to-use interface for
+ *  manipulating properties of the data more expressively.
+ *
+ *  It can also be subclassed and extended for generating/parsing messages
+ *  that correspond to specific sets of functions for specific
+ *  types of devices. For instance, you could subclass this
+ *  for generating messages that correspond to light commands
+ *  on a pad device.
+ */
 @interface MKMessage : NSObject <MKMessageJS>
 
 + (instancetype)messageWithData:(NSData *)data;
@@ -109,12 +162,23 @@ JSExportAs(setVelocity, - (instancetype)setVelocityReturn:(UInt8)velocity);
 
 + (instancetype):(UInt8)status :(UInt8)data1 :(UInt8)data2;
 
-// Messages stay mutable for performance reasons
+/// The wrapped mutable data object.
 - (NSMutableData *)data;
+
+/// The wrapped mutable data.
 - (UInt8 *)bytes;
+
 
 // myMessage[0] = @(0x90)
 // This ONLY works with one-byte NSNumbers
-- (instancetype)setObject:(id)object atIndexedSubscript:(NSUInteger)idx;
+/**
+ *  Subscripting support.
+ *
+ *  @param number A one-byte unsigned NSNumber.
+ *  @param idx    The index to set this byte at in the data buffer.
+ *
+ *  @return self (for chaining).
+ */
+- (instancetype)setObject:(NSNumber *)number atIndexedSubscript:(NSUInteger)idx;
 
 @end

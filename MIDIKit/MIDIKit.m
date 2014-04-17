@@ -27,14 +27,6 @@ BOOL MKSettingOSStatusEvaluationLogsOnError = NO;
 BOOL MKSettingDescriptionsIncludeProperties = NO;
 BOOL MKSettingOSStatusEvaluationThrowsOnError = NO;
 
-void MKInstallIntoContext(JSContext *c) {
-    if(!c) return;
-
-    for(Class cls in _MKExportedClasses()) {
-        c[NSStringFromClass(cls)] = cls;
-    }
-    c[@"MIDIRestart"] = ^BOOL() { return [MKServer restart]; };
-}
 
 @implementation MIDIKit
 
@@ -77,6 +69,15 @@ GLOBAL(setOSStatusEvaluationLogsOnError, OSStatusEvaluationLogsOnError, MKSettin
     }
 
     return code;
+}
+
++ (void)installIntoContext:(JSContext *)c {
+    if(!c) return;
+
+    for(Class cls in _MKExportedClasses()) {
+        c[NSStringFromClass(cls)] = cls;
+    }
+    c[@"MIDIRestart"] = ^BOOL() { return [MKServer restart]; };
 }
 
 #undef GLOBAL

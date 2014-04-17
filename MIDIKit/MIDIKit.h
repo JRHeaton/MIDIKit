@@ -25,9 +25,6 @@
 #define kMIDIKitVersionMinor 2
 #define kMIDIKitVersionPatch 1
 
-// Use to put constructors for all MIDIKit classes into a JavaScript context
-extern void MKInstallIntoContext(JSContext *c);
-
 
 // -------------------
 // Global settings
@@ -69,6 +66,21 @@ JSExportAs(throwErrors,     + (BOOL)setOSStatusEvaluationLogsOnError:(BOOL)val);
 
 @interface MIDIKit : NSObject <MIDIKitJS>
 
+/**
+ *  Checks an OSStatus, and prints/throws an error if configured to do so.
+ *
+ *  @param code The status code to evaluate.
+ *  @param name The name of the operation which returned this code.
+ *
+ *  @return The status code.
+ */
 + (OSStatus)evalOSStatus:(OSStatus)code name:(NSString *)name;
+
+/**
+ *  Loads all appropriate MIDIKit classes into a JavaScript context.
+ *
+ *  @param context The context in which to install the classes.
+ */
++ (void)installIntoContext:(JSContext *)context;
 
 @end
