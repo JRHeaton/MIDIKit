@@ -53,9 +53,11 @@ GLOBAL(setOSStatusEvaluationLogsOnError, OSStatusEvaluationLogsOnError, MKSettin
 #else
     Class _NSWorkspace = objc_getClass("NSWorkspace");
     if(!_NSWorkspace) {
-        dlopen("/System/Library/Frameworks/AppKit.framework/AppKit", RTLD_LAZY);
+        if(dlopen("/System/Library/Frameworks/AppKit.framework/AppKit", RTLD_LAZY))
+            [[objc_getClass("NSWorkspace") sharedWorkspace] openURL:[NSURL URLWithString:_MKGitHubURL]];
+        else
+            NSLog(@"Could not load AppKit. Therefore, I cannot take you to the browser. Frowny pants.");
     }
-    [[objc_getClass("NSWorkspace") sharedWorkspace] openURL:[NSURL URLWithString:_MKGitHubURL]];
 #endif
 }
 
