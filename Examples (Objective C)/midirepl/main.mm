@@ -208,8 +208,9 @@ int main(int argc, const char * argv[]) {
             rl_on_new_line();
             rl_redisplay();
         });
+        c[@"quit"] = c[@"process"][@"exit"];
 
-        [c[@"help"] callWithArguments:nil];
+        printf(ZOOP "midirepl v0 by John Heaton\n" SEXY "help() is available\n" SEXY "quit() or ^D to get out\n" RESET);
 
         [[NSOperationQueue new] addOperationWithBlock:^{
             while(1) {
