@@ -139,7 +139,7 @@ int main(int argc, const char * argv[]) {
 
 
         /////////////////////--------------------------------------------------------------------
-//
+
 //        if(![NSProcessInfo processInfo].environment[@"REPL"]) {
 //            printf("to run in REPL mode, set env var REPL=1\n");
 //            // standard exec
@@ -161,7 +161,7 @@ int main(int argc, const char * argv[]) {
             while(1) {
                 __block const char *buf;
                 dispatch_sync(dispatch_get_main_queue(), ^{
-                    buf = readline("-> ");
+                    buf = readline("\001" DOOP "\002-> \002");
                 });
 
                 if(!buf || !strlen(buf)) continue;

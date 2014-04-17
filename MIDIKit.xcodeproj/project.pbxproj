@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		520F8D0318FFC50A006BB9F5 /* libcurses.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 520F8D0218FFC50A006BB9F5 /* libcurses.dylib */; };
+		520F8D0418FFC519006BB9F5 /* libMIDIKitOSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A1E05418FB876900D7073F /* libMIDIKitOSX.a */; };
+		520F8D0818FFC6E7006BB9F5 /* libhistory.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 520F8D0618FFC6E7006BB9F5 /* libhistory.a */; };
+		520F8D0918FFC6E7006BB9F5 /* libreadline.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 520F8D0718FFC6E7006BB9F5 /* libreadline.a */; };
 		521C1BC518FD412900A002FC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 521C1BC418FD412900A002FC /* README.md */; };
 		524005E518FB06CD0030B46D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C70F18DEA14E00A8CFD4 /* Foundation.framework */; };
 		5240063E18FB0A5B0030B46D /* MKConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EFD18F7C86900A5A5D3 /* MKConnection.m */; };
@@ -69,7 +73,6 @@
 		529BF80118FDACED001C0BB7 /* MKServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 529BF7FD18FDACED001C0BB7 /* MKServer.m */; };
 		529BF80218FDACED001C0BB7 /* MKServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 529BF7FD18FDACED001C0BB7 /* MKServer.m */; };
 		52A1E05518FB876900D7073F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C6D718DE96A200A8CFD4 /* Cocoa.framework */; };
-		52A1E07718FB88E200D7073F /* libMIDIKitOSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A1E05418FB876900D7073F /* libMIDIKitOSX.a */; };
 		52A1E07918FB88FE00D7073F /* MKThruConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5240064C18FB15050030B46D /* MKThruConnection.m */; };
 		52A1E07A18FB88FF00D7073F /* MKObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C70318DE9A9800A8CFD4 /* MKObject.m */; };
 		52A1E07B18FB890200D7073F /* MKClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5273C70718DE9E2500A8CFD4 /* MKClient.m */; };
@@ -95,7 +98,6 @@
 		52B22F0518F803E900A5A5D3 /* MKMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22F0318F803E900A5A5D3 /* MKMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		52B22F0618F803E900A5A5D3 /* MKMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22F0418F803E900A5A5D3 /* MKMessage.m */; };
 		52DDEDEF18FB55400019BE98 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C70F18DEA14E00A8CFD4 /* Foundation.framework */; };
-		52DDEE0218FB60010019BE98 /* libreadline.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 52DDEE0118FB60010019BE98 /* libreadline.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +141,9 @@
 /* Begin PBXFileReference section */
 		520F8CF818FFB19B006BB9F5 /* flash.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = flash.js; sourceTree = "<group>"; };
 		520F8CF918FFB19B006BB9F5 /* mirror.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = mirror.js; sourceTree = "<group>"; };
+		520F8D0218FFC50A006BB9F5 /* libcurses.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurses.dylib; path = usr/lib/libcurses.dylib; sourceTree = SDKROOT; };
+		520F8D0618FFC6E7006BB9F5 /* libhistory.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libhistory.a; sourceTree = "<group>"; };
+		520F8D0718FFC6E7006BB9F5 /* libreadline.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libreadline.a; sourceTree = "<group>"; };
 		521C1BC418FD412900A002FC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		522EA3FA18FA690500444217 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 		522EA3FD18FA6B0400444217 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -251,9 +256,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52DDEE0218FB60010019BE98 /* libreadline.dylib in Frameworks */,
+				520F8D0318FFC50A006BB9F5 /* libcurses.dylib in Frameworks */,
+				520F8D0918FFC6E7006BB9F5 /* libreadline.a in Frameworks */,
 				52DDEDEF18FB55400019BE98 /* Foundation.framework in Frameworks */,
-				52A1E07718FB88E200D7073F /* libMIDIKitOSX.a in Frameworks */,
+				520F8D0418FFC519006BB9F5 /* libMIDIKitOSX.a in Frameworks */,
+				520F8D0818FFC6E7006BB9F5 /* libhistory.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +299,16 @@
 			);
 			path = "Novation Launchpad";
 			sourceTree = "<group>";
+		};
+		520F8D0518FFC6E7006BB9F5 /* deps */ = {
+			isa = PBXGroup;
+			children = (
+				520F8D0618FFC6E7006BB9F5 /* libhistory.a */,
+				520F8D0718FFC6E7006BB9F5 /* libreadline.a */,
+			);
+			name = deps;
+			path = "Examples (Objective C)/midirepl/deps";
+			sourceTree = SOURCE_ROOT;
 		};
 		524005D718FB03F10030B46D /* Client */ = {
 			isa = PBXGroup;
@@ -445,6 +462,7 @@
 		5273C6D618DE96A200A8CFD4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				520F8D0218FFC50A006BB9F5 /* libcurses.dylib */,
 				52DDEE0118FB60010019BE98 /* libreadline.dylib */,
 				522EA3FD18FA6B0400444217 /* CoreFoundation.framework */,
 				522EA3FA18FA690500444217 /* CoreMIDI.framework */,
@@ -544,6 +562,7 @@
 		52DDEDF018FB55400019BE98 /* CLI Tool (mkcli) */ = {
 			isa = PBXGroup;
 			children = (
+				520F8D0518FFC6E7006BB9F5 /* deps */,
 				528C944C18FC8FD900A7B960 /* main.mm */,
 				526F3B8418FD936100451D4C /* JS Stuff */,
 			);
@@ -1079,6 +1098,13 @@
 					"DEBUG=1",
 					"SRCROOT=\"\\\"$(SRCROOT)\\\"\"",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/John/Downloads/readline-6.3",
+					"$(PROJECT_DIR)/Examples",
+					"(Objective",
+					"C)/midirepl/deps",
+				);
 				PRODUCT_NAME = midirepl;
 			};
 			name = Debug;
@@ -1088,6 +1114,13 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/John/Downloads/readline-6.3",
+					"$(PROJECT_DIR)/Examples",
+					"(Objective",
+					"C)/midirepl/deps",
+				);
 				PRODUCT_NAME = midirepl;
 			};
 			name = Release;
