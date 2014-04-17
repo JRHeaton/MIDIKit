@@ -227,7 +227,7 @@
 
 - (NSString *)description {
     if(self.empty) {
-        return [NSString stringWithFormat:@"%@ [Empty Message]", [super description]];
+        return [NSString stringWithFormat:@"%@ [Empty Message]%@", [super description], !self.length ? @"" : [NSString stringWithFormat:@", length=%lu", (unsigned long)self.length]];
     }
 
     NSString *typeName;
