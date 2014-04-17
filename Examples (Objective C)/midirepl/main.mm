@@ -14,6 +14,7 @@
 #import <objc/runtime.h>
 
 extern int rl_completion_append_character; // new readline
+extern int _rl_bell_preference;
 extern "C" void rl_replace_line(const char *, int);
 
 JSValue *runTestScript(MKJavaScriptContext *c, NSString *name) {
@@ -197,6 +198,7 @@ int main(int argc, const char * argv[]) {
 
         rl_initialize();
         using_history();
+        _rl_bell_preference = 0;
 
         rl_completion_entry_function = (Function *)completions;
 #define hist [@"~/.midirepl_history" stringByExpandingTildeInPath].UTF8String
