@@ -59,27 +59,39 @@ JSExportAs(boolForProperty,             - (JSValue *)boolForPropertyJS:(NSString
 
 /**
  * This is the root wrapper class for CoreMIDI objects.
- 
- Its main use is providing easy access to properties of
- objects in native ObjC types, and verifying that objects
- are valid. There is support for caching object properties,
- though this may change in the future. It's on by default,
- but you may set useCaching to NO.
- */
-
-/**
- *  
- *  
+ *
+ * Its main use is providing easy access to properties of
+ * objects in native Objective C types, and verifying that objects
+ * are valid. There is support for caching object properties,
+ * though this may change in the future. It's on by default,
+ * but you may set useCaching to NO.
  */
 @interface MKObject : NSObject <MKObjectJS> {
 @protected
     MIDIObjectRef _MIDIRef;
 }
 
+/**
+ *  Creates a new wrapper object for a CoreMIDI object.
+ *
+ *  @param MIDIRef The CoreMIDI object.
+ *
+ *  @return A new wrapper object.
+ */
 - (instancetype)initWithMIDIRef:(MIDIObjectRef)MIDIRef;
+
+/**
+ *  Creates a new wrapper object for a CoreMIDI with a given unique identifier.
+ *  It will look up the object, and intelligently allocate
+ *  the correct MKObject subclass for the object type if possible.
+ *
+ *  @param uniqueID The uniqueID of the CoreMIDI object.
+ *
+ *  @return A new wrapper object of the appropriate class.
+ */
 - (instancetype)initWithUniqueID:(MIDIUniqueID)uniqueID;
 
-// Turns useCaching on during execution, then back to previous setting
+/// Sets useCaching to YES during execution, then back to the previous setting.
 - (instancetype)performBlockWithCaching:(void (^)(MKObject *obj))block;
 
 - (instancetype)setData:(NSData *)value forProperty:(NSString *)propName;
@@ -89,7 +101,7 @@ JSExportAs(boolForProperty,             - (JSValue *)boolForPropertyJS:(NSString
 - (SInt32)integerForProperty:(NSString *)propName exists:(BOOL *)exists;
 - (BOOL)boolForProperty:(NSString *)propName exists:(BOOL *)exists;
 
-// Underlying MIDI object
+/// The wrapped/underlying MIDI object.
 @property (nonatomic, assign) MIDIObjectRef MIDIRef;
 
 @end

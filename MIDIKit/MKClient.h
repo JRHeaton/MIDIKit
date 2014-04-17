@@ -115,7 +115,9 @@ extern NSString *MKUserInfoPropertyNameKey;
 extern NSString *MKUserInfoObjectInstanceKey;
 
 
-// Protocols used for instaniation/reference to client
+/**
+ *  Protocol that declares a reference to an owning(parent) client object.
+ */
 @protocol MKClientReference <JSExport>
 
 @property (nonatomic, weak) MKClient *client;
@@ -123,8 +125,9 @@ extern NSString *MKUserInfoObjectInstanceKey;
 @end
 
 
-// Common protocol for objects that are created with a parent client
-// and a name.
+/**
+ *  Mutual protocol for objects that are created with a parent client and a name.
+ */
 @protocol MKClientDependentInstaniation <NSObject, MKClientReference>
 
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;

@@ -9,8 +9,6 @@
 #import "MKEnumerableObject.h"
 #import "MKEntity.h"
 
-// Devices are parent objects of entities,
-// and are usually the 'root' object created by the driver.
 
 @protocol MKDeviceJS <JSExport, MKObjectJS, MKEnumerableObjectJS>
 
@@ -30,6 +28,10 @@
 @end
 
 
+/**
+ *  Devices are parent objects of entities, and are usually
+ *  the 'root' of the enumerable objects chain. A device has no owner.
+ */
 @interface MKDevice : MKEnumerableObject <MKDeviceJS, MKDeviceProperties>
 
 // returns an entity at index

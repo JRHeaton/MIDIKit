@@ -8,22 +8,30 @@
 
 #import "MKObject.h"
 
-// Entities represent a collection of endpoints on a device.
-// In a typical simple setup, a device will have one entity,
-// which contains one source and one destination. This is not
-// required, though.
 
+/**
+ *  Entities represent a collection of endpoints on a device.
+ *  In a typical simple setup, a device will have one entity,
+ *  which contains one source and one destination. This is not
+ *  required, though.
+ */
 @class MKDevice, MKSource, MKDestination;
 @protocol MKEntityJS <JSExport, MKObjectJS>
 
-- (NSUInteger)numberOfDestinations;
-- (NSUInteger)numberOfSources;
 - (MKDestination *)destinationAtIndex:(NSUInteger)index;
 - (MKSource *)sourceAtIndex:(NSUInteger)index;
 
+/// The owning/parent device.
 @property (nonatomic, readonly) MKDevice *device;
+
+/// The first source of the first entity of this device.
 @property (nonatomic, readonly) MKSource *firstSource;
+
+/// The first destination of the first entity of this device.
 @property (nonatomic, readonly) MKDestination *firstDestination;
+
+@property (nonatomic, readonly) NSUInteger numberOfDestinations;
+@property (nonatomic, readonly) NSUInteger numberOfSources;
 
 @end
 
