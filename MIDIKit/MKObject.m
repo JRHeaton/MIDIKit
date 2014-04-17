@@ -368,7 +368,7 @@ JS_PROP_GETTER(bool, BOOL, Bool)
 
 #define BITFIELD_PROP(upper, lower) \
 - (instancetype)set##upper:(BOOL)val onChannel:(NSUInteger)channel {\
-    NSUInteger bits = self.lower##ChannelBits;\
+    UInt32 bits = self.lower##ChannelBits;\
     channel = [self channelInRange:channel];\
     UInt8 bit = (1 << (channel - 1));\
 \
@@ -404,48 +404,54 @@ BITFIELD_PROP(Transmits, transmit)
 
 #define EPROPERTY(type, upper, lower, propSymbol, propertyTypeUpper, propertyTypeLower) PROPERTY(type, upper, lower, propSymbol, propertyTypeUpper, propertyTypeLower, exists:nil)
 
-EPROPERTY(NSUInteger, advanceScheduleTimeMuSec, advanceScheduleTimeMuSec, kMIDIPropertyAdvanceScheduleTimeMuSec, Integer, integer)
-EPROPERTY(NSInteger, connectionUniqueID, connectionUniqueID, kMIDIPropertyConnectionUniqueID, Integer, integer)
-EPROPERTY(BOOL, Broadcast, isBroadcast, kMIDIPropertyIsBroadcast, Integer, integer)
-EPROPERTY(BOOL, SupportsGeneralMIDI, supportsGeneralMIDI, kMIDIPropertySupportsGeneralMIDI, Integer, integer)
-EPROPERTY(BOOL, SupportsMMC, supportsMMC, kMIDIPropertySupportsMMC, Integer, integer)
-EPROPERTY(BOOL, CanRoute, canRoute, kMIDIPropertyCanRoute, Integer, integer)
-EPROPERTY(BOOL, TransmitsBankSelectMSB, transmitsBankSelectMSB, kMIDIPropertyTransmitsBankSelectMSB, Integer, integer)
-EPROPERTY(BOOL, TransmitsBankSelectLSB, transmitsBankSelectLSB, kMIDIPropertyTransmitsBankSelectLSB, Integer, integer)
-EPROPERTY(BOOL, SupportsShowControl, supportsShowControl, kMIDIPropertySupportsShowControl, Integer, integer)
-EPROPERTY(BOOL, DrumMachine, isDrumMachine, kMIDIPropertyIsDrumMachine, Integer, integer)
-EPROPERTY(BOOL, EffectUnit, isEffectUnit, kMIDIPropertyIsEffectUnit, Integer, integer)
-EPROPERTY(BOOL, EmbeddedEntity, isEmbeddedEntity, kMIDIPropertyIsEmbeddedEntity, Integer, integer)
-EPROPERTY(BOOL, Mixer, isMixer, kMIDIPropertyIsMixer, Integer, integer)
-EPROPERTY(BOOL, Sampler, isSampler, kMIDIPropertyIsSampler, Integer, integer)
-EPROPERTY(BOOL, Private, isPrivate, kMIDIPropertyPrivate, Integer, integer)
+EPROPERTY(UInt32,       advanceScheduleTimeMuSec,   advanceScheduleTimeMuSec,   kMIDIPropertyAdvanceScheduleTimeMuSec,  UnsignedInteger,    unsignedInteger)
+EPROPERTY(UInt32,       connectionUniqueID,         connectionUniqueID,         kMIDIPropertyConnectionUniqueID,        UnsignedInteger,    unsignedInteger)
+EPROPERTY(UInt32,       ReceiveChannelBits,         receiveChannelBits,         kMIDIPropertyReceiveChannels,           Integer,            integer)
+EPROPERTY(UInt32,       TransmitChannelBits,        transmitChannelBits,        kMIDIPropertyTransmitChannels,          Integer,            integer)
+EPROPERTY(UInt32,       MaxReceiveChannels,         maxReceiveChannels,         kMIDIPropertyMaxReceiveChannels,        Integer,            integer)
+EPROPERTY(UInt32,       MaxSysexSpeed,              maxSysexSpeed,              kMIDIPropertyMaxSysExSpeed,             Integer,            integer)
+EPROPERTY(UInt32,       MaxTransmitChannels,        maxTransmitChannels,        kMIDIPropertyMaxTransmitChannels,       Integer,            integer)
 
-EPROPERTY(NSInteger, MaxReceiveChannels, maxReceiveChannels, kMIDIPropertyMaxReceiveChannels, Integer, integer)
-EPROPERTY(NSInteger, MaxSysexSpeed, maxSysexSpeed, kMIDIPropertyMaxSysExSpeed, Integer, integer)
-EPROPERTY(NSInteger, MaxTransmitChannels, maxTransmitChannels, kMIDIPropertyMaxTransmitChannels, Integer, integer)
-EPROPERTY(BOOL, PanDisruptsStereo, panDisruptsStereo, kMIDIPropertyPanDisruptsStereo, Integer, integer)
-EPROPERTY(NSUInteger, ReceiveChannelBits, receiveChannelBits, kMIDIPropertyReceiveChannels, Integer, integer)
-EPROPERTY(NSUInteger, TransmitChannelBits, transmitChannelBits, kMIDIPropertyTransmitChannels, Integer, integer)
-EPROPERTY(BOOL, ReceivesClock, receivesClock, kMIDIPropertyReceivesClock, Integer, integer)
-EPROPERTY(BOOL, ReceivesMTC, receivesMTC, kMIDIPropertyReceivesMTC, Integer, integer)
-EPROPERTY(BOOL, ReceivesNotes, receivesNotes, kMIDIPropertyReceivesNotes, Integer, integer)
-EPROPERTY(BOOL, TransmitsMTC, transmitsMTC, kMIDIPropertyTransmitsMTC, Integer, integer)
-EPROPERTY(BOOL, TransmitsClock, transmitsClock, kMIDIPropertyTransmitsClock, Integer, integer)
-EPROPERTY(BOOL, TransmitsNotes, transmitsNotes, kMIDIPropertyTransmitsNotes, Integer, integer)
-EPROPERTY(BOOL, ReceivesProgramChanges, receivesProgramChanges, kMIDIPropertyReceivesProgramChanges, Integer, integer)
-EPROPERTY(NSInteger, SingleRealtimeEntity, singleRealtimeEntity, kMIDIPropertySingleRealtimeEntity, Integer, integer)
-EPROPERTY(NSInteger, DeviceID, deviceID, kMIDIPropertyDeviceID, Integer, integer)
-EPROPERTY(NSInteger, DriverVersion, driverVersion, kMIDIPropertyDriverVersion, Integer, integer)
+EPROPERTY(SInt32,       SingleRealtimeEntity,       singleRealtimeEntity,       kMIDIPropertySingleRealtimeEntity,      Integer,            integer)
+EPROPERTY(SInt32,       DeviceID,                   deviceID,                   kMIDIPropertyDeviceID,                  Integer,            integer)
+EPROPERTY(SInt32,       DriverVersion,              driverVersion,              kMIDIPropertyDriverVersion,             Integer,            integer)
 
 #define CPROPERTY(type, upper, lower, propSymbol, propertyTypeUpper, propertyTypeLower) PROPERTY(type, upper, lower, propSymbol, propertyTypeUpper, propertyTypeLower, )
 
-CPROPERTY(NSString *, Manufacturer, manufacturer, kMIDIPropertyManufacturer, String, string)
-CPROPERTY(NSString *, Name, name, kMIDIPropertyName, String, string)
-CPROPERTY(NSString *, Model, model, kMIDIPropertyModel, String, string)
-CPROPERTY(NSString *, DisplayName, displayName, kMIDIPropertyDisplayName, String, string)
-CPROPERTY(NSString *, DriverOwner, driverOwner, kMIDIPropertyDriverOwner, String, string)
-CPROPERTY(NSString *, IconImagePath, iconImagePath, kMIDIPropertyImage, String, string)
-CPROPERTY(NSString *, DriverDeviceEditorApp, driverDeviceEditorApp, kMIDIPropertyDriverDeviceEditorApp, String, string)
+CPROPERTY(NSString *,   Manufacturer,               manufacturer,               kMIDIPropertyManufacturer,              String,             string)
+CPROPERTY(NSString *,   Name,                       name,                       kMIDIPropertyName,                      String,             string)
+CPROPERTY(NSString *,   Model,                      model,                      kMIDIPropertyModel,                     String,             string)
+CPROPERTY(NSString *,   DisplayName,                displayName,                kMIDIPropertyDisplayName,               String,             string)
+CPROPERTY(NSString *,   DriverOwner,                driverOwner,                kMIDIPropertyDriverOwner,               String,             string)
+CPROPERTY(NSString *,   IconImagePath,              iconImagePath,              kMIDIPropertyImage,                     String,             string)
+CPROPERTY(NSString *,   DriverDeviceEditorApp,      driverDeviceEditorApp,      kMIDIPropertyDriverDeviceEditorApp,     String,             string)
+
+// because the preprocessor can't fucking do ##bool (turns it into _Bool
+- (BOOL)_BoolForProperty:(NSString *)propName exists:(BOOL *)exists {
+    return [self boolForProperty:propName exists:exists];
+}
+
+EPROPERTY(BOOL,         Broadcast,                  isBroadcast,                kMIDIPropertyIsBroadcast,               Bool,               bool)
+EPROPERTY(BOOL,         SupportsGeneralMIDI,        supportsGeneralMIDI,        kMIDIPropertySupportsGeneralMIDI,       Integer,            bool)
+EPROPERTY(BOOL,         SupportsMMC,                supportsMMC,                kMIDIPropertySupportsMMC,               Integer,            bool)
+EPROPERTY(BOOL,         CanRoute,                   canRoute,                   kMIDIPropertyCanRoute,                  Integer,            bool)
+EPROPERTY(BOOL,         TransmitsBankSelectMSB,     transmitsBankSelectMSB,     kMIDIPropertyTransmitsBankSelectMSB,    Integer,            bool)
+EPROPERTY(BOOL,         TransmitsBankSelectLSB,     transmitsBankSelectLSB,     kMIDIPropertyTransmitsBankSelectLSB,    Integer,            bool)
+EPROPERTY(BOOL,         DrumMachine,                isDrumMachine,              kMIDIPropertyIsDrumMachine,             Integer,            bool)
+EPROPERTY(BOOL,         EffectUnit,                 isEffectUnit,               kMIDIPropertyIsEffectUnit,              Integer,            bool)
+EPROPERTY(BOOL,         EmbeddedEntity,             isEmbeddedEntity,           kMIDIPropertyIsEmbeddedEntity,          Integer,            bool)
+EPROPERTY(BOOL,         Mixer,                      isMixer,                    kMIDIPropertyIsMixer,                   Integer,            bool)
+EPROPERTY(BOOL,         Sampler,                    isSampler,                  kMIDIPropertyIsSampler,                 Integer,            bool)
+EPROPERTY(BOOL,         Private,                    isPrivate,                  kMIDIPropertyPrivate,                   Integer,            bool)
+EPROPERTY(BOOL,         PanDisruptsStereo,          panDisruptsStereo,          kMIDIPropertyPanDisruptsStereo,         Integer,            bool)
+EPROPERTY(BOOL,         ReceivesClock,              receivesClock,              kMIDIPropertyReceivesClock,             Integer,            bool)
+EPROPERTY(BOOL,         ReceivesMTC,                receivesMTC,                kMIDIPropertyReceivesMTC,               Integer,            bool)
+EPROPERTY(BOOL,         ReceivesNotes,              receivesNotes,              kMIDIPropertyReceivesNotes,             Integer,            bool)
+EPROPERTY(BOOL,         TransmitsMTC,               transmitsMTC,               kMIDIPropertyTransmitsMTC,              Integer,            bool)
+EPROPERTY(BOOL,         TransmitsClock,             transmitsClock,             kMIDIPropertyTransmitsClock,            Integer,            bool)
+EPROPERTY(BOOL,         TransmitsNotes,             transmitsNotes,             kMIDIPropertyTransmitsNotes,            Integer,            bool)
+EPROPERTY(BOOL,         ReceivesProgramChanges,     receivesProgramChanges,     kMIDIPropertyReceivesProgramChanges,    Integer,            bool)
+
 
 #undef PROPERTY
 #undef PROPERTY
