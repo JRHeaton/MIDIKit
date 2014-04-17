@@ -113,13 +113,13 @@ exception:
 
     NSMutableString *desc = [NSMutableString stringWithString:[super description]];
     if(valid)
-        [desc appendFormat:@", valid=%@", self.valid ? @"YES" : @"NO"];
+        [desc appendFormat:@" valid=%@", self.valid ? @"YES" : @"NO"];
     else {
         if(!self.MIDIRef) {
             [desc appendString:@" [Invalid]"];
             return desc;
         } else
-            [desc appendFormat:@", MIDIRef=%u", self.MIDIRef];
+            [desc appendFormat:@" MIDIRef=%u", self.MIDIRef];
     }
 
     BOOL isClient = [self isKindOfClass:[MKClient class]];
@@ -213,7 +213,7 @@ exception:
 }
 
 - (BOOL)isOnline {
-    return [self integerForProperty:(__bridge NSString *)kMIDIPropertyOffline exists:nil]; // don't use !isOffline because integer values return 0 for undefined
+    return ![self integerForProperty:(__bridge NSString *)kMIDIPropertyOffline exists:nil]; // don't use !isOffline because integer values return 0 for undefined
 }
 
 - (void)setOnline:(BOOL)online {

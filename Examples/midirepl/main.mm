@@ -59,7 +59,7 @@ int main(int argc, const char * argv[]) {
                                "process                 -- global process object\n    "
                                "help()                  -- show this\n\n"
 
-                               "Classes:\n    "
+                               "MIDIKit Classes:\n    "
                                "MIDIKit                 -- For global settings\n    "
                                "MKObject                -- Base wrapper\n    "
                                "MKClient                -- Client to the MIDI server\n    "
@@ -95,7 +95,7 @@ int main(int argc, const char * argv[]) {
             if(s.length) {
                 return [_c evaluateScript:[NSString stringWithFormat:
                                            @"(function() { "
-                                           "    var module = { exports: {} }; "
+                                           "    var module = { exports: undefined }; "
                                            "    (function () { "
                                            "        %@ "
                                            "    })(); "
@@ -118,15 +118,15 @@ int main(int argc, const char * argv[]) {
             printf("to run in REPL mode, set env var REPL=1\n");
             // standard exec
 
-            NSLog(@"%@", [MKInputPort inputPortWithName:nil client:nil]);
-            NSLog(@"%@", [MKInputPort inputPortWithName:nil client:nil]);
+            NSLog(@"%@", [c evaluateScript:[NSString stringWithContentsOfFile:@"/Users/John/Dropbox/Developer/projects/MIDIKit/Example JavaScript/mirror.js" encoding:NSUTF8StringEncoding error:nil]] );
+            CFRunLoopRun();
 
             return 0;
         }
 
         using_history();
 #define hist [@"~/.midirepl_history" stringByExpandingTildeInPath].UTF8String
-        signal(SIGINT, sigg);
+//        signal(SIGINT, sigg);
 
         read_history(hist);
 

@@ -193,6 +193,7 @@
 		52A1E05418FB876900D7073F /* libMIDIKitOSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMIDIKitOSX.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		52A1E07618FB883000D7073F /* MIDIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MIDIKit.h; sourceTree = "<group>"; };
 		52A786BE18FCE5E60064E313 /* MKObjectProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKObjectProperties.h; sourceTree = "<group>"; };
+		52AACB4418FF6A1100AD9B75 /* mirror.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = mirror.js; sourceTree = "<group>"; };
 		52B22EEA18F7A0EF00A5A5D3 /* MKInputPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKInputPort.h; sourceTree = "<group>"; };
 		52B22EEB18F7A0EF00A5A5D3 /* MKInputPort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKInputPort.m; sourceTree = "<group>"; };
 		52B22EEE18F7A6C600A5A5D3 /* MKOutputPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKOutputPort.h; sourceTree = "<group>"; };
@@ -262,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				521C1BC218FD16A500A002FC /* flash.js */,
+				52AACB4418FF6A1100AD9B75 /* mirror.js */,
 			);
 			path = "Example JavaScript";
 			sourceTree = "<group>";

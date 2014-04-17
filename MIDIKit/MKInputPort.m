@@ -26,7 +26,7 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
     MKInputPort *self = (__bridge MKInputPort *)(readProcRefCon);
     MKSource *source = (__bridge MKSource *)(srcConnRefCon);
 
-    MKDispatchSelectorToDelegates(@selector(inputPort:receivedPacketList:fromSource:), self.inputDelegates, @[ self, (__bridge id)pktlist, source ]);
+    MKDispatchSelectorToDelegates(@selector(inputPort:receivedPacketList:fromSource:), self.inputDelegates, @[ self, [NSValue valueWithPointer:pktlist], source ]);
 
     // parse out messages
     for(MKMessage *msg in [MKMessage messagesWithPacketList:(MIDIPacketList *)pktlist]) {
@@ -35,16 +35,16 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
 
     MIDIPacket *packet = (MIDIPacket *)&pktlist->packet[0];
     for (int i=0;i<pktlist->numPackets;++i) {
-        MKDispatchSelectorToDelegates(@selector(inputPort:receivedPacket:fromSource:), self.inputDelegates, @[ self, (__bridge id)packet, source ]);
+        MKDispatchSelectorToDelegates(@selector(inputPort:receivedPacket:fromSource:), self.inputDelegates, @[ self, [NSValue valueWithPointer:packet], source ]);
 
         NSData *data = [NSData dataWithBytes:packet->data length:packet->length];
         MKDispatchSelectorToDelegates(@selector(inputPort:receivedData:fromSource:), self.inputDelegates, @[ self, data, source ]);
 
         for(id inputHandler in self.inputHandlers) {
             if([inputHandler isKindOfClass:[JSValue class]]) {
-                [inputHandler callWithArguments:@[ self, [MKMessage messageWithPacket:packet] ]];
+                [inputHandler callWithArguments:@[ self, source, [MKMessage messageWithPacket:packet] ]];
             } else {
-                ((MKInputHandler)inputHandler)(self, data ?: [NSData dataWithBytes:packet->data length:packet->length]);
+                ((MKInputHandler)inputHandler)(self, source, data ?: [NSData dataWithBytes:packet->data length:packet->length]);
             }
         }
 

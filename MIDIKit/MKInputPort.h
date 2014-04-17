@@ -12,7 +12,7 @@
 // Input ports are unidirectional ports through which
 // you can receive input from MIDI source endpoints.
 
-typedef void (^MKInputHandler)(MKInputPort *port, NSData *data);
+typedef void (^MKInputHandler)(MKInputPort *port, MKSource *source, NSData *data);
 @protocol MKInputPortJS <JSExport, MKObjectJS>
 
 JSExportAs(named, + (instancetype)inputPortWithNameJS:(JSValue *)val client:(MKClient *)client);
