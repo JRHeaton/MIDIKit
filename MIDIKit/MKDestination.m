@@ -31,7 +31,7 @@
         static NSString *format = @"+atIndex called with index (%lu) higher than what is available. Please use this responsibly in hand with +count";
 
         if([JSContext currentContext]) {
-            NSLog(format, index);
+            [[JSContext currentContext] evaluateScript:[NSString stringWithFormat:@"throw new Error('%@')", [NSString stringWithFormat:format, index]]];
         } else {
             [NSException raise:exceptionName format:format, index];
         }

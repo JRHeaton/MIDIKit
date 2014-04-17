@@ -66,8 +66,13 @@ GLOBAL(setOSStatusEvaluationLogsOnError, OSStatusEvaluationLogsOnError, MKSettin
         if(MKSettingOSStatusEvaluationLogsOnError)
             NSLog(@"[MIDIKit Error] %@ : %@", name, [NSError errorWithDomain:NSOSStatusErrorDomain code:code userInfo:nil]);
 
-        if(MKSettingOSStatusEvaluationThrowsOnError)
-            [NSException raise:@"MKOSStatusEvaluationException" format:@"Error during operation: %@", name];
+        if(MKSettingOSStatusEvaluationThrowsOnError) {
+            if([JSContext currentContext]) {
+                [[JSContext currentContext] evaluateScript:[NSString stringWithFormat:@"throw new Error(%@)", name]];
+            }
+            else
+                [NSException raise:@"MKOSStatusEvaluationException" format:@"Error during operation: %@", name];
+        }
     }
 
     return code;
