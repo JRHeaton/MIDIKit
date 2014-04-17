@@ -337,7 +337,7 @@ FORWARD(programNumber, data2, setProgramNumber, setData2)
 }
 
 - (void)setType:(MKMessageType)type {
-    [self setByte:(type | (self.channel - 1)) atIndex:0];
+    [self setByte:(type | MAX(0, (self.channel - 1))) atIndex:0];
 }
 
 #define ARG_TYPE UInt8
