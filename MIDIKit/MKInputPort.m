@@ -19,7 +19,7 @@
 
 @synthesize client=_client;
 @synthesize inputHandlers=_inputHandlers;
-@synthesize connectedSources;
+@synthesize connectedSources=_connectedSources;
 
 static NSMapTable *_MKInputPortNameMap = nil;
 
@@ -97,10 +97,15 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
     self.client = client;
     [self.client.inputPorts addObject:self];
 
+    _connectedSources = [NSMutableArray arrayWithCapacity:0];
     self.inputHandlers = [NSMutableArray arrayWithCapacity:0];
     self.inputDelegates = [NSMutableArray arrayWithCapacity:0];
     
     return self;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@%@", [super description], self.connectedSources.count ? [NSString stringWithFormat:@", connectedSources=%@", self.connectedSources] : @""];
 }
 
 - (instancetype)connectSource:(MKSource *)source {
