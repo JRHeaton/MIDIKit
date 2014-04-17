@@ -75,6 +75,7 @@ int main(int argc, const char * argv[]) {
 #define START "\033["
 #define COLOR START START "38;5;"
 #define ORANGE COLOR "197m"
+#define LESLIEKNOPE "161m"
 #define SEXY COLOR "61m"
 #define PINK COLOR "135m"
 #define BOOBY COLOR "208m"
@@ -94,7 +95,7 @@ int main(int argc, const char * argv[]) {
             printf("%s",
                    [NSString stringWithFormat:@"%s-> %s%@%@%s\n",
                     ORANGE,
-                    BOOBY,
+                    LESLIEKNOPE,
                     !currentLine ? @"" : [NSString stringWithFormat:@"Line %lu: ", (unsigned long)currentLine],
                     [NSString stringWithFormat:@"Line %d: %@", [(exception.toObject)[@"line"] intValue], exception],
                     RESET
