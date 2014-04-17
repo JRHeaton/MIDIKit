@@ -14,6 +14,8 @@
 
 @protocol MKConnectionJS <JSExport>
 
++ (instancetype)new;
+
 JSExportAs(withClient,      + (instancetype)connectionWithClient:(MKClient *)client);
 JSExportAs(send,            - (instancetype)sendByteValuesJS:(JSValue *)value);
 JSExportAs(sendArray,       - (instancetype)sendNumberArray:(NSArray *)array);
@@ -25,6 +27,7 @@ JSExportAs(sendMessages,    - (instancetype)sendMessageArray:(NSArray *)messages
 @property (nonatomic, strong) MKOutputPort *outputPort;
 
 - (instancetype)addDestination:(MKDestination *)destination;
+- (instancetype)addDestinations:(NSArray *)destinations;
 - (instancetype)removeDestination:(MKDestination *)destination;
 - (MKDestination *)destinationAtIndex:(NSUInteger)index;
 

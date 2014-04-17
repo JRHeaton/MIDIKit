@@ -79,10 +79,10 @@ static const UInt8 LPMsg[6][3] = {
 + (instancetype)padMessageOn:(BOOL)turnOn
                     atColumn:(NSUInteger)column
                          row:(NSUInteger)row
-         clearOtherBufferPad:(BOOL)clearOther
-           copyToOtherBuffer:(BOOL)copyToOther
                redBrightness:(LPColorBrightness)redBrightness
-             greenBrightness:(LPColorBrightness)greenBrightness {
+             greenBrightness:(LPColorBrightness)greenBrightness
+         clearOtherBufferPad:(BOOL)clearOther
+           copyToOtherBuffer:(BOOL)copyToOther {
     static UInt8 buf[3] = { 0x90, 0x00, 0x00 };
     
 #define lucky8(val) (MAX(0, MIN((val), 7)))
@@ -97,19 +97,19 @@ static const UInt8 LPMsg[6][3] = {
 }
 
 + (instancetype)redFullAtX:(NSUInteger)x Y:(NSUInteger)y {
-    return [self padMessageOn:YES atColumn:x row:y clearOtherBufferPad:NO copyToOtherBuffer:NO redBrightness:kLPColorMax greenBrightness:kLPColorOff];
+    return [self padMessageOn:YES atColumn:x row:y redBrightness:kLPColorMax greenBrightness:kLPColorOff clearOtherBufferPad:NO copyToOtherBuffer:NO];
 }
 
 + (instancetype)greenFullAtX:(NSUInteger)x Y:(NSUInteger)y {
-    return [self padMessageOn:YES atColumn:x row:y clearOtherBufferPad:NO copyToOtherBuffer:NO redBrightness:kLPColorOff greenBrightness:kLPColorMax];
+    return [self padMessageOn:YES atColumn:x row:y redBrightness:kLPColorOff greenBrightness:kLPColorMax clearOtherBufferPad:NO copyToOtherBuffer:NO];
 }
 
 + (instancetype)greenAtX:(NSUInteger)x Y:(NSUInteger)y brightness:(LPColorBrightness)brightness clear:(BOOL)clear {
-    return [self padMessageOn:YES atColumn:x row:y clearOtherBufferPad:clear copyToOtherBuffer:NO redBrightness:kLPColorOff greenBrightness:brightness];
+    return [self padMessageOn:YES atColumn:x row:y redBrightness:kLPColorOff greenBrightness:brightness clearOtherBufferPad:clear copyToOtherBuffer:NO];
 }
 
 + (instancetype)redAtX:(NSUInteger)x Y:(NSUInteger)y brightness:(LPColorBrightness)brightness clear:(BOOL)clear {
-    return [self padMessageOn:YES atColumn:x row:y clearOtherBufferPad:clear copyToOtherBuffer:NO redBrightness:brightness greenBrightness:kLPColorOff];
+    return [self padMessageOn:YES atColumn:x row:y redBrightness:brightness greenBrightness:kLPColorOff clearOtherBufferPad:clear copyToOtherBuffer:NO];
 }
 
 + (UInt8)velocityForRed:(LPColorBrightness)red green:(LPColorBrightness)green clear:(BOOL)clear copy:(BOOL)copy {

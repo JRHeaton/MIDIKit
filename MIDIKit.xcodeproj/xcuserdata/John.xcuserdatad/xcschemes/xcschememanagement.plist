@@ -19,7 +19,12 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>Virtual Launchpad.xcscheme_^#shared#^_</key>
+		<key>MIDIUtil (iOS).xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
+		<key>Virtual Launchpad (OS X).xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>5</integer>
@@ -118,6 +123,16 @@
 			<true/>
 		</dict>
 		<key>52B22F0A18F858E500A5A5D3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>52B33F29190039A4006B1699</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>52B33F3F190039A4006B1699</key>
 		<dict>
 			<key>primary</key>
 			<true/>

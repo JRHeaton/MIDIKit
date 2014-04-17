@@ -97,6 +97,14 @@
 		52B22EFF18F7C86900A5A5D3 /* MKConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22EFD18F7C86900A5A5D3 /* MKConnection.m */; };
 		52B22F0518F803E900A5A5D3 /* MKMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 52B22F0318F803E900A5A5D3 /* MKMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		52B22F0618F803E900A5A5D3 /* MKMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B22F0418F803E900A5A5D3 /* MKMessage.m */; };
+		52B33F2B190039A4006B1699 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C70F18DEA14E00A8CFD4 /* Foundation.framework */; };
+		52B33F2C190039A4006B1699 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5240060E18FB08220030B46D /* CoreGraphics.framework */; };
+		52B33F2D190039A4006B1699 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 524005F418FB06CD0030B46D /* UIKit.framework */; };
+		52B33F5D19003A96006B1699 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52B33F5519003A96006B1699 /* Images.xcassets */; };
+		52B33F5E19003A96006B1699 /* MIDIUtil-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52B33F5619003A96006B1699 /* MIDIUtil-Info.plist */; };
+		52B33F5F19003A96006B1699 /* MUAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B33F5919003A96006B1699 /* MUAppDelegate.m */; };
+		52B33F6019003A96006B1699 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 52B33F5A19003A96006B1699 /* InfoPlist.strings */; };
+		52B33F6119003A96006B1699 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B33F5C19003A96006B1699 /* main.m */; };
 		52DDEDEF18FB55400019BE98 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C70F18DEA14E00A8CFD4 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -213,6 +221,14 @@
 		52B22EFD18F7C86900A5A5D3 /* MKConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKConnection.m; sourceTree = "<group>"; };
 		52B22F0318F803E900A5A5D3 /* MKMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMessage.h; sourceTree = "<group>"; };
 		52B22F0418F803E900A5A5D3 /* MKMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMessage.m; sourceTree = "<group>"; };
+		52B33F2A190039A4006B1699 /* MIDIUtil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MIDIUtil.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		52B33F5519003A96006B1699 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		52B33F5619003A96006B1699 /* MIDIUtil-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MIDIUtil-Info.plist"; sourceTree = "<group>"; };
+		52B33F5719003A96006B1699 /* MIDIUtil-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MIDIUtil-Prefix.pch"; sourceTree = "<group>"; };
+		52B33F5819003A96006B1699 /* MUAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUAppDelegate.h; sourceTree = "<group>"; };
+		52B33F5919003A96006B1699 /* MUAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUAppDelegate.m; sourceTree = "<group>"; };
+		52B33F5B19003A96006B1699 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		52B33F5C19003A96006B1699 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		52DDEDEE18FB55400019BE98 /* midirepl */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = midirepl; sourceTree = BUILT_PRODUCTS_DIR; };
 		52DDEE0118FB60010019BE98 /* libreadline.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libreadline.dylib; path = usr/lib/libreadline.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -249,6 +265,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				52A1E05518FB876900D7073F /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52B33F27190039A4006B1699 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52B33F2C190039A4006B1699 /* CoreGraphics.framework in Frameworks */,
+				52B33F2D190039A4006B1699 /* UIKit.framework in Frameworks */,
+				52B33F2B190039A4006B1699 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,6 +467,7 @@
 				5273C6DD18DE96A200A8CFD4 /* MIDIKit Source (Shared) */,
 				524005DF18FB068D0030B46D /* MIDIKit Framework (OS X) */,
 				52DDEDF018FB55400019BE98 /* CLI Tool (mkcli) */,
+				52B33F5419003A96006B1699 /* MIDIUtil */,
 				526F3BB618FD9BC600451D4C /* Virtual Launchpad */,
 				5273C6D618DE96A200A8CFD4 /* Frameworks */,
 				5273C6D518DE96A200A8CFD4 /* Products */,
@@ -455,6 +482,7 @@
 				52DDEDEE18FB55400019BE98 /* midirepl */,
 				52A1E05418FB876900D7073F /* libMIDIKitOSX.a */,
 				526F3B8918FD9B9800451D4C /* Virtual Launchpad.app */,
+				52B33F2A190039A4006B1699 /* MIDIUtil.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -557,6 +585,29 @@
 				52B22F0418F803E900A5A5D3 /* MKMessage.m */,
 			);
 			name = "MIDI Message";
+			sourceTree = "<group>";
+		};
+		52B33F5419003A96006B1699 /* MIDIUtil */ = {
+			isa = PBXGroup;
+			children = (
+				52B33F5819003A96006B1699 /* MUAppDelegate.h */,
+				52B33F5919003A96006B1699 /* MUAppDelegate.m */,
+				52B33F6219003AA4006B1699 /* Supporting Files */,
+			);
+			name = MIDIUtil;
+			path = "Examples (Objective C)/MIDIUtil";
+			sourceTree = "<group>";
+		};
+		52B33F6219003AA4006B1699 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				52B33F5C19003A96006B1699 /* main.m */,
+				52B33F5519003A96006B1699 /* Images.xcassets */,
+				52B33F5619003A96006B1699 /* MIDIUtil-Info.plist */,
+				52B33F5719003A96006B1699 /* MIDIUtil-Prefix.pch */,
+				52B33F5A19003A96006B1699 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		52DDEDF018FB55400019BE98 /* CLI Tool (mkcli) */ = {
@@ -686,6 +737,23 @@
 			productReference = 52A1E05418FB876900D7073F /* libMIDIKitOSX.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		52B33F29190039A4006B1699 /* MIDIUtil */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52B33F52190039A4006B1699 /* Build configuration list for PBXNativeTarget "MIDIUtil" */;
+			buildPhases = (
+				52B33F26190039A4006B1699 /* Sources */,
+				52B33F27190039A4006B1699 /* Frameworks */,
+				52B33F28190039A4006B1699 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MIDIUtil;
+			productName = MIDIUtil;
+			productReference = 52B33F2A190039A4006B1699 /* MIDIUtil.app */;
+			productType = "com.apple.product-type.application";
+		};
 		52DDEDED18FB55400019BE98 /* CLI Tool (midirepl) */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 52DDEDF718FB55400019BE98 /* Build configuration list for PBXNativeTarget "CLI Tool (midirepl)" */;
@@ -731,6 +799,7 @@
 				524005E318FB06CD0030B46D /* MIDIKit Static Lib (iOS) */,
 				52DDEDED18FB55400019BE98 /* CLI Tool (midirepl) */,
 				526F3B8818FD9B9800451D4C /* Virtual Launchpad */,
+				52B33F29190039A4006B1699 /* MIDIUtil */,
 			);
 		};
 /* End PBXProject section */
@@ -752,6 +821,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				521C1BC518FD412900A002FC /* README.md in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52B33F28190039A4006B1699 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52B33F5D19003A96006B1699 /* Images.xcassets in Resources */,
+				52B33F6019003A96006B1699 /* InfoPlist.strings in Resources */,
+				52B33F5E19003A96006B1699 /* MIDIUtil-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -840,6 +919,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		52B33F26190039A4006B1699 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52B33F6119003A96006B1699 /* main.m in Sources */,
+				52B33F5F19003A96006B1699 /* MUAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52DDEDEA18FB55400019BE98 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -886,6 +974,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				526F3BC118FD9BC600451D4C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		52B33F5A19003A96006B1699 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				52B33F5B19003A96006B1699 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1089,6 +1185,51 @@
 			};
 			name = Release;
 		};
+		52B33F4E190039A4006B1699 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Examples (Objective C)/MIDIUtil/MIDIUtil-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Examples (Objective C)/MIDIUtil/MIDIUtil-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		52B33F4F190039A4006B1699 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Examples (Objective C)/MIDIUtil/MIDIUtil-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/Examples (Objective C)/MIDIUtil/MIDIUtil-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		52DDEDF818FB55400019BE98 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1163,6 +1304,15 @@
 			buildConfigurations = (
 				52A1E06F18FB876900D7073F /* Debug */,
 				52A1E07018FB876900D7073F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		52B33F52190039A4006B1699 /* Build configuration list for PBXNativeTarget "MIDIUtil" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52B33F4E190039A4006B1699 /* Debug */,
+				52B33F4F190039A4006B1699 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

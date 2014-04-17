@@ -9,6 +9,14 @@
 #import "MKEnumerableObject.h"
 #import "MIDIKit.h"
 
+@implementation NSString (MIDIKit)
+
+- (BOOL)containsString:(NSString *)string {
+    return [self rangeOfString:string].location != NSNotFound;
+}
+
+@end
+
 @implementation MKEnumerableObject
 
 + (NSArray *)supportedSubClasses {
@@ -136,6 +144,60 @@
 + (instancetype)firstMeetingCriteriaJS:(JSValue *)block {
     return [self firstMeetingCriteria:^BOOL(MKEnumerableObject *candidate) {
         return [block callWithArguments:@[ candidate ]].toBool;
+    }];
+}
+
++ (NSArray *)allMeetingCriteria:(BOOL (^)(MKEnumerableObject *candidate))block {
+    if(!block) return nil;
+
+    NSMutableArray *ret = [NSMutableArray array];
+    [self enumerateWithBlock:^(MKEnumerableObject *object, NSUInteger index, BOOL *stop) {
+        if(block(object))
+            [ret addObject:object];
+    }];
+
+    return ret;
+}
+
++ (NSArray *)allMeetingCriteriaJS:(JSValue *)block {
+    return [self allMeetingCriteria:^BOOL(MKEnumerableObject *candidate) {
+        return [block callWithArguments:@[ candidate ]].toBool;
+    }];
+}
+
++ (NSArray *)allNamed:(NSString *)name {
+    return [self allMeetingCriteria:^BOOL(MKEnumerableObject *candidate) {
+        return [[(id)candidate name] isEqualToString:name];
+    }];
+}
+
++ (NSArray *)allContaining:(NSString *)name {
+    return [self allMeetingCriteria:^BOOL(MKEnumerableObject *candidate) {
+        return [[(id)candidate name] containsString:name];
+    }];
+}
+
++ (NSArray *)allOnlineNamed:(NSString *)name {
+    return [self allMeetingCriteria:^BOOL(MKEnumerableObject *candidate) {
+        return [(id)candidate isOnline] && [[(id) candidate name] isEqualToString:name];
+    }];
+}
+
++ (NSArray *)allOnlineContaining:(NSString *)namePart {
+    return [self allMeetingCriteria:^BOOL(MKEnumerableObject *candidate) {
+        return [(id)candidate isOnline] && [[(id) candidate name] containsString:namePart];
+    }];
+}
+
++ (NSArray *)allOfflineNamed:(NSString *)name {
+    return [self allMeetingCriteria:^BOOL(MKEnumerableObject *candidate) {
+        return [(id)candidate isOffline] && [[(id) candidate name] isEqualToString:name];
+    }];
+}
+
++ (NSArray *)allOfflineContaining:(NSString *)namePart {
+    return [self allMeetingCriteria:^BOOL(MKEnumerableObject *candidate) {
+        return [(id)candidate isOffline] && [[(id) candidate name] containsString:namePart];
     }];
 }
 

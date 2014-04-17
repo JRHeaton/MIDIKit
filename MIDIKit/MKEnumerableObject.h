@@ -25,6 +25,13 @@ JSExportAs(atIndex, + (instancetype)atIndexNumber:(NSNumber *)number);
 + (instancetype)firstOfflineNamed:(NSString *)name;
 + (instancetype)firstOfflineContaining:(NSString *)namePart;
 
++ (NSArray *)allNamed:(NSString *)name;
++ (NSArray *)allContaining:(NSString *)name;
++ (NSArray *)allOnlineNamed:(NSString *)name;
++ (NSArray *)allOnlineContaining:(NSString *)namePart;
++ (NSArray *)allOfflineNamed:(NSString *)name;
++ (NSArray *)allOfflineContaining:(NSString *)namePart;
+
 // NOTE: in the JS version of enumerateWithBlock, we don't have pointers, so
 // the block returns a BOOL object, which when yes, stops the loop
 //
@@ -36,12 +43,15 @@ JSExportAs(enumerateWithBlock,      + (void)enumerateWithBlockJS:(JSValue *)bloc
 
 // MKDevice.firstMeetingCriteria(function (dev) { return dev.name == "Launchpad S" })
 JSExportAs(firstMeetingCriteria,    + (instancetype)firstMeetingCriteriaJS:(JSValue *)block);
+JSExportAs(allMeetingCriteria,    + (NSArray *)allMeetingCriteriaJS:(JSValue *)block);
 
 @end
 
 @interface MKEnumerableObject : MKObject <MKEnumerableObjectJS>
 
 + (void)enumerateWithBlock:(void (^)(MKEnumerableObject *object, NSUInteger index, BOOL *stop))block;
+
 + (instancetype)firstMeetingCriteria:(BOOL (^)(MKEnumerableObject *candidate))block;
++ (NSArray *)allMeetingCriteria:(BOOL (^)(MKEnumerableObject *candidate))block;
 
 @end

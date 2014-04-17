@@ -42,6 +42,13 @@
     return self;
 }
 
+- (instancetype)addDestinations:(NSArray *)destinations {
+    for(MKDestination *d in destinations) {
+        [self addDestination:d];
+    }
+    return self;
+}
+
 - (instancetype)removeDestination:(MKDestination *)destination {
     if([destination isKindOfClass:[MKDestination class]])
         [self.destinations removeObject:destination];

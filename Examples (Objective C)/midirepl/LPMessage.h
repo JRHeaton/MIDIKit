@@ -28,17 +28,20 @@ typedef NS_ENUM(UInt8, LPColorBrightness) {
 + (instancetype)enableAutoSwitching;
 + (instancetype)disableAutoSwitching;
 
+JSExportAs(setBuffers,
 + (instancetype)bufferMessageWithDisplayBuffer:(NSUInteger)displayBuffer
                                 updatingBuffer:(NSUInteger)updatingBuffer
-                      copyNewDisplayToUpdating:(BOOL)copyToUpdating;
+                      copyNewDisplayToUpdating:(BOOL)copyToUpdating);
 
+JSExportAs(pad,
 + (instancetype)padMessageOn:(BOOL)turnOn
                     atColumn:(NSUInteger)column
                          row:(NSUInteger)row
-         clearOtherBufferPad:(BOOL)clearOther
-           copyToOtherBuffer:(BOOL)copyToOther
                redBrightness:(LPColorBrightness)redBrightness
-             greenBrightness:(LPColorBrightness)greenBrightness;
+             greenBrightness:(LPColorBrightness)greenBrightness
+         clearOtherBufferPad:(BOOL)clearOther
+           copyToOtherBuffer:(BOOL)copyToOther);
+
 + (instancetype)redFullAtX:(NSUInteger)x Y:(NSUInteger)y;
 + (instancetype)greenFullAtX:(NSUInteger)x Y:(NSUInteger)y;
 + (instancetype)greenAtX:(NSUInteger)x Y:(NSUInteger)y brightness:(LPColorBrightness)brightness clear:(BOOL)clear;
