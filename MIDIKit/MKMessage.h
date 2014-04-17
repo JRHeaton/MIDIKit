@@ -24,11 +24,7 @@ typedef NS_ENUM(UInt8, MKMessageType) {
 @class MKMessage;
 @protocol MKMessageJS <JSExport>
 
-/**
- *  Creates a new message with the global client.
- *
- *  @return A new, empty message.
- */
+/// A new, empty message.
 + (instancetype)new;
 // Convnenience for converting from one class to another
 // Usually, this is done because a subclass of MKMessage is
@@ -80,7 +76,6 @@ JSExportAs(messages,        + (NSArray *)messagesJS:(JSValue *)val);
 /// The length of the data of this message.
 - (NSUInteger)length;
 
-// These will expand the data length to fit.
 /**
  *  Sets a single byte at a given place in the message's data buffer.
  *  The message will grow if it needs to.
