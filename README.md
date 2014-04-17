@@ -6,6 +6,7 @@ MIDIKit
 
 In the mean time, you can check out the midirepl example project in this repo, which will give you an open shell to work with MIDIKit in JavaScript.
 ![midirepl](https://i.cloudup.com/YjUrIPxfj5.png)
+![LED Test](https://i.cloudup.com/VKYR25uWJb.jpeg)
 
 ---
 
@@ -168,5 +169,3 @@ MKConnection *conn = [MKConnection connectionWithClient:client];
 
 [conn sendData:myData];
 ```
-
-![LED Test](https://i.cloudup.com/VKYR25uWJb.jpeg)

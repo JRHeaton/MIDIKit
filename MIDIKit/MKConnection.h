@@ -25,6 +25,7 @@
 @protocol MKConnectionJS <JSExport>
 
 + (instancetype)new; // use global client
+
 JSExportAs(withClient,      + (instancetype)connectionWithClient:(MKClient *)client);
 JSExportAs(send,            - (instancetype)sendByteValuesJS:(JSValue *)value);
 JSExportAs(sendArray,       - (instancetype)sendNumberArray:(NSArray *)array);
