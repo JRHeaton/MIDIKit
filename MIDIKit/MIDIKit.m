@@ -71,6 +71,11 @@ GLOBAL(setDescriptionsIncludeProperties, descriptionsIncludeProperties, MKSettin
 GLOBAL(setOSStatusEvaluationThrowsOnError, OSStatusEvaluationThrowsOnError, MKSettingOSStatusEvaluationThrowsOnError)
 GLOBAL(setOSStatusEvaluationLogErrors, OSStatusEvaluationLogErrors, MKSettingOSStatusEvaluationLogErrors)
 
+- (instancetype)init {
+    [NSException raise:@"MKMIDIKitInstantiationException" format:@"The MIDIKit object is not to be instantiated. Use its methods for manipulating MIDIKit options."];
+    return nil;
+}
+
 + (void)openGitHub {
     static NSString *_MKGitHubURL = @"http://github.com/JRHeaton/MIDIKit";
 

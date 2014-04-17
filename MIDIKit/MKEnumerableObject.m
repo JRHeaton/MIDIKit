@@ -20,7 +20,7 @@
     return ret;
 }
 
-- (id)init {
+- (instancetype)init {
     [NSException raise:@"MKEnumerableObjectInvalidAllocationException" format:@"You mustn't allocate this base class directly."];
     return nil;
 }
