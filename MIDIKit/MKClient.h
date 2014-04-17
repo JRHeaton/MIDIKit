@@ -47,7 +47,10 @@ JSExportAs(named, + (instancetype)clientWithNameJS:(JSValue *)name);
 /// Disposes the MIDIRef(MIDIClientRef) object (invalidates this object).
 - (instancetype)dispose;
 
+/// Begins sending NSNotifications for MIDI system changes
 + (void)startSendingNotifications;
+
+/// Stops sending notifications.
 + (void)stopSendingNotifications;
 
 // If the convenience methods for instantiation of ports and endpoints
@@ -120,6 +123,7 @@ extern NSString *MKUserInfoObjectInstanceKey;
  */
 @protocol MKClientReference <JSExport>
 
+/// The parent client.
 @property (nonatomic, weak) MKClient *client;
 
 @end
@@ -130,6 +134,14 @@ extern NSString *MKUserInfoObjectInstanceKey;
  */
 @protocol MKClientDependentInstaniation <NSObject, MKClientReference>
 
+/**
+ *  Creates a new object with the given name and client.
+ *
+ *  @param name   The name of the object to create.
+ *  @param client The client with which to create the object.
+ *
+ *  @return A new object.
+ */
 - (instancetype)initWithName:(NSString *)name client:(MKClient *)client;
 
 @end

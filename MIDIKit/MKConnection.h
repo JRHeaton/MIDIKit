@@ -12,16 +12,6 @@
 #import "MKOutputPort.h"
 #import <JavaScriptCore/JavaScriptCore.h>
 
-// A connection object is essentially a convenient way to
-// send and receive from multiple sources and destinations
-// without having to constantly iterate through a container
-// and reference ports.
-//
-// Usage:
-// MKConnection *connection = [MKConnection connectionWithClient:myClient];
-// [connection addDestination:myDestination];
-// [connection sendMessage:[MKMessage controlChangeMessageWithController:0 value:0]];
-
 @protocol MKConnectionJS <JSExport>
 
 JSExportAs(withClient,      + (instancetype)connectionWithClient:(MKClient *)client);
@@ -43,15 +33,34 @@ JSExportAs(sendMessages,    - (instancetype)sendMessageArray:(NSArray *)messages
 @end
 
 
+/**
+ *  A connection object is essentially a convenient way to
+ *  send and receive from multiple sources and destinations
+ *  without having to constantly iterate through a container
+ *  and reference ports.
+ */
 @interface MKConnection : NSObject <MKConnectionJS>
 
-// NOTE: instantiation with a client will automatically
-// create an input and output port from the client
-// if they're not already created.
+/**
+ *  Creates a new connection with the given client.
+ *
+ *  @param client The client to use for creating the connection's objects,
+ *         or nil to use the global client.
+ *
+ *  @return A new connection.
+ */
 - (instancetype)initWithClient:(MKClient *)client;
 
-// Uses the output port to send to all destinations
+/**
+ *  Sends data to all destinations, using the output port.
+ *
+ *  @param data The data to send.
+ *
+ *  @return self (for chaining).
+ */
 - (instancetype)sendData:(NSData *)data;
+
+
 - (instancetype)sendMessages:(MKMessage *)message, ... NS_REQUIRES_NIL_TERMINATION;
 
 @end

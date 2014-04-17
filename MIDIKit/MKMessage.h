@@ -26,9 +26,7 @@ typedef NS_ENUM(UInt8, MKMessageType) {
 
 /// A new, empty message.
 + (instancetype)new;
-// Convnenience for converting from one class to another
-// Usually, this is done because a subclass of MKMessage is
-// implementing logic.
+
 /**
  *  Instantiates a new message with the same data as the given message. 
  *  Helpful for using subclasses when you're handed an MKMessage.
@@ -163,9 +161,6 @@ JSExportAs(setVelocity, - (instancetype)setVelocityReturn:(UInt8)velocity);
 /// The wrapped mutable data.
 - (UInt8 *)bytes;
 
-
-// myMessage[0] = @(0x90)
-// This ONLY works with one-byte NSNumbers
 /**
  *  Subscripting support.
  *

@@ -13,11 +13,15 @@
 #import <AppKit/AppKit.h>
 #import <objc/runtime.h>
 
+extern int rl_completion_append_character; // new readline
+
 JSValue *runTestScript(MKJavaScriptContext *c, NSString *name) {
     return [c require:name];
 }
 
 char **completions(const char *frag, int i) {
+    rl_completion_append_character = 0;
+
     NSString *c;
     for(Class cc in@[
                         [MIDIKit class],
