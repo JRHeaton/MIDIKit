@@ -7,7 +7,7 @@
 //
 
 #import "MIDIKit.h"
-#import <dlfcn.h>
+#import "MKPrivate.h"
 #import <objc/runtime.h>
 
 @interface MKObject ()
@@ -26,6 +26,8 @@ static NSMapTable *_MKObjectMap = nil;
         goto exception;
     }
 #else
+    #import <dlfcn.h>
+
     if(!dlsym(RTLD_SELF, "MIDIRestart")) {
         goto exception;
     }
@@ -73,7 +75,8 @@ exception:
         [self purgeCache];
         return self;
     }
-    if(!(self = [super init])) return nil;
+
+    if(!(self = [_MKClassForType(type, nil) objectWithMIDIRef:obj]))
 
     self.MIDIRef = obj;
     [self commonInit];
@@ -106,7 +109,18 @@ exception:
 }
 
 - (NSString *)description {
-    NSMutableString *desc = [NSMutableString stringWithFormat:@"%@ valid=%@, MIDIRef=0x%x", [super description], self.valid ? @"YES" : @"NO", (int)self.MIDIRef];
+    BOOL valid = self.valid;
+
+    NSMutableString *desc = [NSMutableString stringWithString:[super description]];
+    if(valid)
+        [desc appendFormat:@", valid=%@", self.valid ? @"YES" : @"NO"];
+    else {
+        if(!self.MIDIRef) {
+            [desc appendString:@" [Invalid]"];
+            return desc;
+        } else
+            [desc appendFormat:@", MIDIRef=%u", self.MIDIRef];
+    }
 
     BOOL isClient = [self isKindOfClass:[MKClient class]];
     BOOL isEndpoint =
@@ -118,7 +132,9 @@ exception:
     BOOL isDevice = [self isKindOfClass:[MKDevice class]];
 
     if(isClient || isEndpoint || isEndpoint || isEntity || isDevice) {
-        [desc appendFormat:@", name=%@", [self name]];
+        NSString *name = self.name;
+        if(name.length)
+            [desc appendFormat:@", name=%@", name];
     }
     if(isEntity || isEndpoint || isDevice) {
         [desc appendFormat:@", online=%@", [self isOnline] ? @"YES" : @"NO"];
@@ -127,7 +143,9 @@ exception:
         [desc appendFormat:@", uniqueID=%d", (int)self.uniqueID];
     }
     if([MIDIKit descriptionsIncludeProperties] && self.valid) {
-        [desc appendFormat:@", properties=%@", self.allProperties];
+        NSDictionary *properties = self.allProperties;
+        if(properties.count)
+            [desc appendFormat:@", properties=%@", self.allProperties];
     }
 
     return desc;
@@ -270,7 +288,7 @@ CACHED_PROP_PROPERTY_BASE(Data, data, instancetype) END_RET
 }
 
 - (MIDIUniqueID)uniqueID {
-    return (MIDIUniqueID)[self integerForProperty:(__bridge NSString *)kMIDIPropertyUniqueID];
+    return !self.shouldHaveUniqueID ? 0 : (MIDIUniqueID)[self integerForProperty:(__bridge NSString *)kMIDIPropertyUniqueID];
 }
 
 - (void)setMIDIRef:(MIDIObjectRef)MIDIRef {
@@ -282,7 +300,7 @@ CACHED_PROP_PROPERTY_BASE(Data, data, instancetype) END_RET
 }
 
 - (BOOL)isOnline {
-    return !self.isOffline;
+    return [self integerForProperty:(__bridge NSString *)kMIDIPropertyOffline]; // don't use !isOffline because integer values return 0 for undefined
 }
 
 - (void)setOnline:(BOOL)online {

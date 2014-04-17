@@ -26,23 +26,6 @@ static BOOL _MKClientShouldPostNotifications = NO;
 @synthesize virtualDestinations=_virtualDestinations;
 @synthesize virtualSources=_virtualSources;
 
-static Class _MKClassForType(MIDIObjectType type, NSString **objectTypeName) {
-    Class c;
-    NSString *n;
-    switch(type & ~kMIDIObjectType_ExternalMask) {
-        case kMIDIObjectType_Device: c = [MKDevice class]; n = @"device"; break;
-        case kMIDIObjectType_Destination: c = [MKDestination class]; n = @"destination"; break;
-        case kMIDIObjectType_Source: c = [MKSource class]; n = @"source"; break;
-        case kMIDIObjectType_Entity: c = [MKEntity class]; n = @"entity"; break;
-        default: c = [MKObject class]; n = @"object"; break;
-    }
-    if(objectTypeName) {
-        *objectTypeName = n.copy;
-    }
-    
-    return c;
-}
-
 static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCon) {
     MKClient *self = (__bridge MKClient *)(refCon);
 
