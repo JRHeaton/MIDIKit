@@ -7,9 +7,8 @@
 //
 
 #import "MKEnumerableObject.h"
-#import "MKEntity.h"
 
-
+@class MKEntity, MKDestination, MKSource;
 @protocol MKDeviceJS <JSExport, MKObjectJS, MKEnumerableObjectJS>
 
 // Index-access to child entities

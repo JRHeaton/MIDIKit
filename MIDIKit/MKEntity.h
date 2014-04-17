@@ -38,6 +38,4 @@
 
 @interface MKEntity : MKObject <MKEntityJS, MKEntityProperties>
 
-- (id)objectAtIndexedSubscript:(NSUInteger)index; // defaults to destination
-
 @end

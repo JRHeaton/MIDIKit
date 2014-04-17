@@ -16,11 +16,11 @@
 
 @protocol MKOutputPortJS <JSExport, MKObjectJS>
 
-JSExportAs(named,           + (instancetype)outputPortWithNameJS:(JSValue *)val client:(MKClient *)client);
+JSExportAs(withNameAndClient,           + (instancetype)outputPortWithNameJS:(JSValue *)val client:(MKClient *)client);
 
 //JSExportAs(send, - (instancetype)sendJS:(JSValue *)dataArray toDestination:(MKDestination *)destination);
-JSExportAs(sendMessage,     - (instancetype)sendMessage:(MKMessage *)msg toDestination:(MKDestination *)destination);
-JSExportAs(sendMessages,    - (instancetype)sendMessages:(NSArray *)messages toDestination:(MKDestination *)destination);
+JSExportAs(sendMessage,                 - (instancetype)sendMessage:(MKMessage *)msg toDestination:(MKDestination *)destination);
+JSExportAs(sendMessages,                - (instancetype)sendMessages:(NSArray *)messages toDestination:(MKDestination *)destination);
 
 - (instancetype)dispose;
 

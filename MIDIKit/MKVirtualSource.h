@@ -10,7 +10,7 @@
 
 @protocol MKVirtualSourceJS <JSExport, MKObjectJS>
 
-JSExportAs(named, + (instancetype)virtualSourceWithNameJS:(JSValue *)val client:(MKClient *)client);
+JSExportAs(withNameAndClient,   + (instancetype)virtualSourceWithNameJS:(JSValue *)val client:(MKClient *)client);
 
 JSExportAs(receivedMessage,     - (instancetype)receivedMessage:(MKMessage *)message);
 JSExportAs(receivedMessages,    - (instancetype)receivedMessages:(NSArray *)messages);

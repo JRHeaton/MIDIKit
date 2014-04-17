@@ -6,8 +6,7 @@
 //  Copyright (c) 2014 John Heaton. All rights reserved.
 //
 
-#import "MKDevice.h"
-#import "MKClient.h"
+#import "MIDIKit.h"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-protocol-property-synthesis"

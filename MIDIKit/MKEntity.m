@@ -26,10 +26,6 @@
     return [[MKSource alloc] initWithMIDIRef:MIDIEntityGetSource(self.MIDIRef, index)];
 }
 
-- (id)objectAtIndexedSubscript:(NSUInteger)index {
-    return [self destinationAtIndex:index];
-}
-
 - (MKDestination *)firstDestination {
     return [self destinationAtIndex:0];
 }

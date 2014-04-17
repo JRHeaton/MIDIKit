@@ -8,7 +8,7 @@
 
 #import "MKEnumerableObject.h"
 
-@class MKEntity, MKOutputPort, MKMessage;
+@class MKOutputPort, MKMessage;
 @protocol MKDestinationJS <JSExport, MKObjectJS, MKEnumerableObjectJS>
 
 JSExportAs(sendMessage,     - (instancetype)sendMessage:(MKMessage *)msg usingOutputPort:(MKOutputPort *)outputPort);

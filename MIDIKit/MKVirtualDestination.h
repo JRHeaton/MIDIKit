@@ -10,7 +10,7 @@
 
 @protocol MKVirtualDestinationJS<JSExport, MKObjectJS>
 
-JSExportAs(named, + (instancetype)virtualDestinationWithNameJS:(JSValue *)val client:(MKClient *)client);
+JSExportAs(withNameAndClient, + (instancetype)virtualDestinationWithNameJS:(JSValue *)val client:(MKClient *)client);
 
 @end
 
