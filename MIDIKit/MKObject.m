@@ -151,119 +151,6 @@ exception:
     return desc;
 }
 
-#pragma mark - MIDI Properties
-
-#define CACHED_PROP_PROPERTY(upper, lower) \
-- (NS##upper *)lower##ForProperty:(NS##upper *)key { \
-    CF##upper##Ref cfVal; \
-    NS##upper *nsVal; \
-    if(self.useCaching && (nsVal = _propertyCache[key]) != nil) \
-        return nsVal; \
-\
-    [MIDIKit evalOSStatus: \
-        MIDIObjectGet##upper##Property(self.MIDIRef, (__bridge CFStringRef)(key), &cfVal) \
-        name:[NSString stringWithFormat:@"Getting " #lower " property: \'%@\'", key]]; \
-\
-    if(cfVal) \
-        _propertyCache[key] = nsVal = (__bridge NS##upper *)(cfVal); \
-\
-    return nsVal; \
-}
-
-CACHED_PROP_PROPERTY(Dictionary, dictionary)
-CACHED_PROP_PROPERTY(String, string)
-CACHED_PROP_PROPERTY(Data, data)
-
-#define CACHED_PROP_PROPERTY_BASE(upper, lower, ret) \
-- (ret)set##upper:(NS##upper *)value forProperty:(NSString *)key { \
-    if(![MIDIKit evalOSStatus: \
-        MIDIObjectSet##upper##Property(self.MIDIRef, (__bridge CFStringRef)(key), (__bridge CF##upper##Ref)(value)) \
-        name:[NSString stringWithFormat:@"Setting " #lower " property: \'%@\'", key]]) { \
-        _propertyCache[(key)] = value; \
-    } \
-
-
-#define END_RET return self; }
-#define END return; }
-
-CACHED_PROP_PROPERTY_BASE(String, string, instancetype) END_RET
-CACHED_PROP_PROPERTY_BASE(Dictionary, dictionary, instancetype) END_RET
-CACHED_PROP_PROPERTY_BASE(Data, data, instancetype) END_RET
-
-#undef CACHED_PROP_PROPERTY_BASE
-#undef CACHED_PROP_PROPERTY
-#undef END_RET
-#undef END
-
-#define NUM_REDIRECT_SETTER(upper, lower, NSNumberGetter, type) \
-- (instancetype)set##upper:(type)value forProperty:(NSString *)propName { \
-    return [self setNumber:@(value) forProperty:propName]; \
-} \
-\
-- (type)lower##ForProperty:(NSString *)propName exists:(BOOL *)exists { \
-    NSNumber *ret = [self numberForProperty:propName]; \
-    if(exists) *exists = (ret != nil); \
-    return (type)ret.NSNumberGetter; \
-}
-
-NUM_REDIRECT_SETTER(UnsignedInteger, unsignedInteger, unsignedIntValue, UInt32)
-NUM_REDIRECT_SETTER(Bool, bool, boolValue, BOOL)
-NUM_REDIRECT_SETTER(Integer, integer, intValue, SInt32)
-
-- (instancetype)setNumber:(NSNumber *)value forProperty:(NSString *)propName {
-    if(![MIDIKit evalOSStatus:MIDIObjectSetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(propName), value.intValue) name:[NSString stringWithFormat:@"Setting integer property: \'%@\'", propName]])
-        _propertyCache[(propName)] = value;
-    return self;
-}
-
-#define JS_PROP_GETTER(lower, type, JSValueSelFragment) \
-- (JSValue *)lower##ForPropertyJS:(NSString *)propName { \
-    BOOL exists; \
-    type val = [self lower##ForProperty:propName exists:&exists]; \
-    return exists ? [JSValue valueWith##JSValueSelFragment:val inContext:[JSContext currentContext]] : [JSValue valueWithUndefinedInContext:[JSContext currentContext]];\
-}
-
-JS_PROP_GETTER(unsignedInteger, UInt32, UInt32)
-JS_PROP_GETTER(integer, SInt32, Int32)
-JS_PROP_GETTER(bool, BOOL, Bool)
-
-- (NSNumber *)numberForProperty:(NSString *)key {
-    SInt32 ret;
-    NSNumber *dd;
-    if(self.useCaching && (dd = _propertyCache[key]) != nil)
-        return dd;
-
-    if(![MIDIKit evalOSStatus:MIDIObjectGetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(key), &ret) name:[NSString stringWithFormat:@"Getting integer property: \'%@\'", key]])
-        _propertyCache[key] = dd = @(ret);
-
-    return dd;
-}
-
-- (NSDictionary *)allProperties {
-    CFPropertyListRef ret;
-    if([MIDIKit evalOSStatus:MIDIObjectGetProperties(self.MIDIRef, &ret, true) name:@"Copy object properties"] != 0)
-        return nil;
-
-    NSDictionary *properties = (__bridge_transfer NSDictionary *)ret;
-    if(ret) _propertyCache = [NSMutableDictionary dictionaryWithDictionary:properties];
-    return properties;
-}
-
-- (instancetype)removeCachedProperty:(NSString *)key {
-    [self.propertyCache removeObjectForKey:key];
-    return self;
-}
-
-- (instancetype)removeProperty:(NSString *)key {
-    [self removeCachedProperty:key];
-
-    [MIDIKit evalOSStatus:MIDIObjectRemoveProperty(self.MIDIRef, (__bridge CFStringRef)(key)) name:[NSString stringWithFormat:@"Removing property: \'%@\'", key]];
-    return self;
-}
-
-
-#pragma mark - Property Logic
-
 #pragma mark - Helpers
 
 - (NSUInteger)channelInRange:(NSUInteger)channel {
@@ -365,6 +252,116 @@ JS_PROP_GETTER(bool, BOOL, Bool)
 // For now, these will stay implemented in every MKObject, but only exported to JS/visible publicly to
 // the correct classes, via the MKObjectProperties.h protocols.
 //
+
+#pragma mark - MIDI Properties
+
+#define CACHED_PROP_PROPERTY(upper, lower) \
+- (NS##upper *)lower##ForProperty:(NS##upper *)key { \
+CF##upper##Ref cfVal; \
+NS##upper *nsVal; \
+if(self.useCaching && (nsVal = _propertyCache[key]) != nil) \
+return nsVal; \
+\
+[MIDIKit evalOSStatus: \
+MIDIObjectGet##upper##Property(self.MIDIRef, (__bridge CFStringRef)(key), &cfVal) \
+name:[NSString stringWithFormat:@"Getting " #lower " property: \'%@\'", key]]; \
+\
+if(cfVal) \
+_propertyCache[key] = nsVal = (__bridge NS##upper *)(cfVal); \
+\
+return nsVal; \
+}
+
+CACHED_PROP_PROPERTY(Dictionary, dictionary)
+CACHED_PROP_PROPERTY(String, string)
+CACHED_PROP_PROPERTY(Data, data)
+
+#define CACHED_PROP_PROPERTY_BASE(upper, lower, ret) \
+- (ret)set##upper:(NS##upper *)value forProperty:(NSString *)key { \
+if(![MIDIKit evalOSStatus: \
+MIDIObjectSet##upper##Property(self.MIDIRef, (__bridge CFStringRef)(key), (__bridge CF##upper##Ref)(value)) \
+name:[NSString stringWithFormat:@"Setting " #lower " property: \'%@\'", key]]) { \
+_propertyCache[(key)] = value; \
+} \
+
+
+#define END_RET return self; }
+#define END return; }
+
+CACHED_PROP_PROPERTY_BASE(String, string, instancetype) END_RET
+CACHED_PROP_PROPERTY_BASE(Dictionary, dictionary, instancetype) END_RET
+CACHED_PROP_PROPERTY_BASE(Data, data, instancetype) END_RET
+
+#undef CACHED_PROP_PROPERTY_BASE
+#undef CACHED_PROP_PROPERTY
+#undef END_RET
+#undef END
+
+#define NUM_REDIRECT_SETTER(upper, lower, NSNumberGetter, type) \
+- (instancetype)set##upper:(type)value forProperty:(NSString *)propName { \
+return [self setNumber:@(value) forProperty:propName]; \
+} \
+\
+- (type)lower##ForProperty:(NSString *)propName exists:(BOOL *)exists { \
+NSNumber *ret = [self numberForProperty:propName]; \
+if(exists) *exists = (ret != nil); \
+return (type)ret.NSNumberGetter; \
+}
+
+NUM_REDIRECT_SETTER(UnsignedInteger, unsignedInteger, unsignedIntValue, UInt32)
+NUM_REDIRECT_SETTER(Bool, bool, boolValue, BOOL)
+NUM_REDIRECT_SETTER(Integer, integer, intValue, SInt32)
+
+- (instancetype)setNumber:(NSNumber *)value forProperty:(NSString *)propName {
+    if(![MIDIKit evalOSStatus:MIDIObjectSetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(propName), value.intValue) name:[NSString stringWithFormat:@"Setting integer property: \'%@\'", propName]])
+        _propertyCache[(propName)] = value;
+    return self;
+}
+
+#define JS_PROP_GETTER(lower, type, JSValueSelFragment) \
+- (JSValue *)lower##ForPropertyJS:(NSString *)propName { \
+BOOL exists; \
+type val = [self lower##ForProperty:propName exists:&exists]; \
+return exists ? [JSValue valueWith##JSValueSelFragment:val inContext:[JSContext currentContext]] : [JSValue valueWithUndefinedInContext:[JSContext currentContext]];\
+}
+
+JS_PROP_GETTER(unsignedInteger, UInt32, UInt32)
+JS_PROP_GETTER(integer, SInt32, Int32)
+JS_PROP_GETTER(bool, BOOL, Bool)
+
+- (NSNumber *)numberForProperty:(NSString *)key {
+    SInt32 ret;
+    NSNumber *dd;
+    if(self.useCaching && (dd = _propertyCache[key]) != nil)
+        return dd;
+
+    if(![MIDIKit evalOSStatus:MIDIObjectGetIntegerProperty(self.MIDIRef, (__bridge CFStringRef)(key), &ret) name:[NSString stringWithFormat:@"Getting integer property: \'%@\'", key]])
+        _propertyCache[key] = dd = @(ret);
+
+    return dd;
+}
+
+- (NSDictionary *)allProperties {
+    CFPropertyListRef ret;
+    if([MIDIKit evalOSStatus:MIDIObjectGetProperties(self.MIDIRef, &ret, true) name:@"Copy object properties"] != 0)
+        return nil;
+
+    NSDictionary *properties = (__bridge_transfer NSDictionary *)ret;
+    if(ret) _propertyCache = [NSMutableDictionary dictionaryWithDictionary:properties];
+    return properties;
+}
+
+- (instancetype)removeCachedProperty:(NSString *)key {
+    [self.propertyCache removeObjectForKey:key];
+    return self;
+}
+
+- (instancetype)removeProperty:(NSString *)key {
+    [self removeCachedProperty:key];
+
+    [MIDIKit evalOSStatus:MIDIObjectRemoveProperty(self.MIDIRef, (__bridge CFStringRef)(key)) name:[NSString stringWithFormat:@"Removing property: \'%@\'", key]];
+    return self;
+}
 
 #define BITFIELD_PROP(upper, lower) \
 - (instancetype)set##upper:(BOOL)val onChannel:(NSUInteger)channel {\
