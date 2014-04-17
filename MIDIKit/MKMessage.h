@@ -81,7 +81,7 @@ JSExportAs(messages,        + (NSArray *)messagesJS:(JSValue *)val);
  *  @param byte  The value to apply.
  *  @param index The index at which to
  *
- *  @return self (for chaining)
+ *  @return self (for chaining).
  */
 - (instancetype)setByte:(UInt8)byte atIndex:(NSUInteger)index;
 
@@ -146,13 +146,45 @@ JSExportAs(setVelocity, - (instancetype)setVelocityReturn:(UInt8)velocity);
  */
 @interface MKMessage : NSObject <MKMessageJS>
 
+/**
+ *  Creates a new message with the given data.
+ *
+ *  Note: This method does not parse the data. It will return one single message
+ *  object for the entire buffer.
+ *
+ *  @param data The data to wrap in the message.
+ *
+ *  @return A new message.
+ */
 + (instancetype)messageWithData:(NSData *)data;
+
+/**
+ *  Creates a new message with the given packet.
+ *
+ *  Note: This method does not parse the data. It will return one single message
+ *  object for the entire buffer.
+ *
+ *  @param packet The packet whose data is to be wrapped in the message.
+ *
+ *  @return A new message wrapper for the data.
+ */
 + (instancetype)messageWithPacket:(MIDIPacket *)packet;
 
 + (NSArray *)messagesWithData:(NSData *)data;
 + (NSArray *)messagesWithPacket:(MIDIPacket *)packet;
 + (NSArray *)messagesWithPacketList:(MIDIPacketList *)list;
 
+/**
+ *  Creates a 3-byte message.
+ *
+ *  Note: Most but SysEx MIDI messages *are* 3 bytes.
+ *
+ *  @param status The first byte (status byte).
+ *  @param data1  The second byte.
+ *  @param data2  The third byte.
+ *
+ *  @return A new message.
+ */
 + (instancetype):(UInt8)status :(UInt8)data1 :(UInt8)data2;
 
 /// The wrapped mutable data object.

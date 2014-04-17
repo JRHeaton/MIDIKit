@@ -14,6 +14,7 @@
 
 @protocol MKConnectionJS <JSExport>
 
+/// Creates a new connection with the global MKClient.
 + (instancetype)new;
 
 JSExportAs(withClient,      + (instancetype)connectionWithClient:(MKClient *)client);
@@ -26,15 +27,50 @@ JSExportAs(sendMessages,    - (instancetype)sendMessageArray:(NSArray *)messages
 @property (nonatomic, strong) MKInputPort *inputPort;
 @property (nonatomic, strong) MKOutputPort *outputPort;
 
+/**
+ *  Adds a destination to the array of destinations for sending data to.
+ *
+ *  @param destination The destination to add.
+ *
+ *  @return self (for chaining).
+ */
 - (instancetype)addDestination:(MKDestination *)destination;
+
+/**
+ *  Adds multiple destinations to the array of destinations for sending data to.
+ *
+ *  @param destinations The destinations to add
+ *
+ *  @return self (for chaining).
+ */
 - (instancetype)addDestinations:(NSArray *)destinations;
+
+/**
+ *  Removes a destination from the array of destinations for sending data to.
+ *
+ *  @param destination The destination to be removed.
+ *
+ *  @return self (for chaining).
+ */
 - (instancetype)removeDestination:(MKDestination *)destination;
+
+/**
+ *  Returns the destination at a given index of the array of destinations for sending data to.
+ *
+ *  @param index The index of the desired destination.
+ *
+ *  @return The destination on success, nil on failure.
+ */
 - (MKDestination *)destinationAtIndex:(NSUInteger)index;
 
+/// Returns all destinations.
 @property (nonatomic, readonly) NSMutableArray *destinations;
 
 @property (nonatomic, assign) BOOL mirroring;
 JSExportAs(setMirroring, - (instancetype)setMirroringJS:(BOOL)mirroring);
+
+JSExportAs(setMirrorTransform, - (instancetype)setMirrorTransformJS:(JSValue *)block);
+@property (nonatomic, strong) MKMessage *(^mirrorTransform)(MKMessage *message, MKSource *source);
 
 @end
 

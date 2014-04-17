@@ -103,12 +103,15 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
 }
 
 - (instancetype)connectSource:(MKSource *)source {
-    [MIDIKit evalOSStatus:MIDIPortConnectSource(self.MIDIRef, source.MIDIRef, (__bridge_retained void *)(source)) name:@"Connect source"];
+    if(![MIDIKit evalOSStatus:MIDIPortConnectSource(self.MIDIRef, source.MIDIRef, (__bridge_retained void *)(source)) name:@"Connect source"])
+        [self.connectedSources addObject:source];
+
     return self;
 }
 
 - (instancetype)disconnectSource:(MKSource *)source {
     [MIDIKit evalOSStatus:MIDIPortDisconnectSource(self.MIDIRef, source.MIDIRef) name:@"Disconnect source"];
+    [self.connectedSources removeObject:source]; // no check, we want it gone.
     return self;
 }
 

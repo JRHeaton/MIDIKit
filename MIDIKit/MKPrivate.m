@@ -91,6 +91,7 @@ NSData *MKDataFromNumberArray(NSArray *array) {
         UInt8 byte = [([num isKindOfClass:[JSValue class]] ? [num toNumber] : num) unsignedCharValue];
         [ret appendBytes:&byte length:1];
     }
+
     return ret;
 }
 

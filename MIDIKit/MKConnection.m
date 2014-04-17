@@ -9,13 +9,16 @@
 #import "MIDIKit.h"
 #import "MKPrivate.h"
 
-@implementation MKConnection
+@implementation MKConnection {
+    JSValue *_mirrorTransformJS;
+}
 @synthesize client=_client;
 
 @synthesize inputPort=_inputPort;
 @synthesize outputPort=_outputPort;
 @synthesize destinations=_destinations;
 @synthesize mirroring=_mirroring;
+@synthesize mirrorTransform=_mirrorTransform;
 
 + (instancetype)connectionWithClient:(MKClient *)client {
     return [[self alloc] initWithClient:(id)client];
@@ -26,14 +29,18 @@
 
     _destinations = [NSMutableArray arrayWithCapacity:0];
     self.client = client ?: (client = [MKClient global]);
-    self.inputPort = client.firstInputPort;
-    self.outputPort = client.firstOutputPort;
 
     return self;
 }
 
 - (instancetype)init {
     return [self initWithClient:[MKClient global]];
+}
+
+- (void)setClient:(MKClient *)client {
+    _client = client;
+    self.inputPort = client.firstInputPort;
+    self.outputPort = client.firstOutputPort;
 }
 
 - (instancetype)addDestination:(MKDestination *)destination {
@@ -114,9 +121,26 @@
     return self;
 }
 
+- (instancetype)setMirrorTransformJS:(JSValue *)block {
+    _mirrorTransformJS = block;
+    self.mirrorTransform = nil;
+    return self;
+}
+
+- (void)setMirrorTransform:(MKMessage *(^)(MKMessage *, MKSource *))mirrorTransform {
+    _mirrorTransform = mirrorTransform;
+    _mirrorTransformJS = nil;
+}
+
 - (void)inputPort:(MKInputPort *)inputPort receivedMessage:(MKMessage *)message fromSource:(MKSource *)source {
-    if(self.mirroring)
+    if(self.mirroring) {
+        if(_mirrorTransformJS)
+            message = [_mirrorTransformJS callWithArguments:@[ message, source ]].toObject;
+        else if(self.mirrorTransform)
+            message = self.mirrorTransform(message, source);
+
         [self sendMessage:message];
+    }
 }
 
 - (NSString *)description {

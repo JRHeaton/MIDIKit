@@ -177,7 +177,7 @@ int main(int argc, const char * argv[]) {
                                            "        %@                          "
                                            "    })();                           "
                                            "    return module.exports;          "
-                                           "})()",
+                                           "})()                                ",
                                            s]];
         };
         c[@"setCwd"] = ^JSValue *{ _c[@"__dirname"] = [_c evaluateScript:@"process.cwd()"]; return _c[@"__dirname"]; };
@@ -222,7 +222,7 @@ int main(int argc, const char * argv[]) {
                     buf = readline("\001" DOOP "\002~> \001" RESET "\002");
                 });
 
-                if(!buf || !strlen(buf)) exit(0);
+                if(!buf) exit(0);
                 add_history(buf);
 
                 dispatch_sync(dispatch_get_main_queue(), ^{

@@ -24,6 +24,8 @@ JSExportAs(named, + (instancetype)inputPortWithNameJS:(JSValue *)val client:(MKC
 - (instancetype)disconnectSource:(MKSource *)source;
 - (instancetype)disconnectSources:(NSArray *)sources;
 
+@property (nonatomic, readonly) NSMutableArray *connectedSources;
+
 // This disposes the underlying port
 - (instancetype)dispose;
 
