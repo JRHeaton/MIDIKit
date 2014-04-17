@@ -60,7 +60,9 @@ JSExportAs(throwErrors,     + (BOOL)setOSStatusEvaluationLogsOnError:(BOOL)val);
 + (BOOL)OSStatusEvaluationLogsOnError;
 + (BOOL)OSStatusEvaluationThrowsOnError;
 
-
+/**
+ *  Opens the default web browser to the project page for MIDIKit.
+ */
 + (void)openGitHub;
 
 @end

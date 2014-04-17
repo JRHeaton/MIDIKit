@@ -45,7 +45,7 @@ int main(int argc, const char * argv[]) {
                     ORANGE,
                     BOOBY,
                     !currentLine ? @"" : [NSString stringWithFormat:@"Line %lu: ", (unsigned long)currentLine],
-                    [NSString stringWithFormat:@"Line %d: %@", [[exception.toObject objectForKey:@"line"] intValue], exception],
+                    [NSString stringWithFormat:@"Line %d: %@", [(exception.toObject)[@"line"] intValue], exception],
                     RESET
                     ].UTF8String);
         };
@@ -56,10 +56,10 @@ int main(int argc, const char * argv[]) {
         if(argc > 2) {
             NSLog(@"using argv[1]...");
 
-            c.currentEvaluatingScriptPath = [NSString stringWithUTF8String:argv[1]];
+            c.currentEvaluatingScriptPath = @(argv[1]);
         } else if([[NSProcessInfo processInfo].environment[@"USE_SRCROOT"] boolValue] == YES) {
             NSLog(@"using SRCROOT..."); // defined by -DSRCROOT="\"${SRCROOT}\"" in build settings
-            c.currentEvaluatingScriptPath = [[NSString stringWithUTF8String:SRCROOT] stringByAppendingPathComponent:@"Example JavaScript"];
+            c.currentEvaluatingScriptPath = [@SRCROOT stringByAppendingPathComponent:@"Example JavaScript"];
         } else {
             _c[@"__dirname"] = [NSFileManager defaultManager].currentDirectoryPath;
         }
@@ -119,12 +119,13 @@ int main(int argc, const char * argv[]) {
             NSString *s = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
             if(s.length) {
                 return [_c evaluateScript:[NSString stringWithFormat:
-                                           @"(function() { "
-                                           "    var module = { exports: undefined }; "
-                                           "    (function () { "
-                                           "        %@ "
-                                           "    })(); "
-                                           "    return module.exports; "
+                                           @"(function() {                      "
+                                           "    var module = { exports: {} };   "
+                                           "    exports = module.exports;       "
+                                           "    (function () {                  "
+                                           "        %@                          "
+                                           "    })();                           "
+                                           "    return module.exports;          "
                                            "})()",
                                            s]];
             }
@@ -169,7 +170,7 @@ int main(int argc, const char * argv[]) {
                 dispatch_sync(dispatch_get_main_queue(), ^{
                     JSValue *val;
                     @try {
-                        val = [c evaluateScript:[NSString stringWithUTF8String:buf]];
+                        val = [c evaluateScript:@(buf)];
 
                         if(showEval) {
                             const char *print = NULL;

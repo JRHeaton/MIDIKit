@@ -57,8 +57,8 @@ JSExportAs(boolForProperty,             - (JSValue *)boolForPropertyJS:(NSString
 
 @end
 
-/*
- This is the root wrapper class for CoreMIDI objects.
+/**
+ * This is the root wrapper class for CoreMIDI objects.
  
  Its main use is providing easy access to properties of
  objects in native ObjC types, and verifying that objects
@@ -67,6 +67,10 @@ JSExportAs(boolForProperty,             - (JSValue *)boolForPropertyJS:(NSString
  but you may set useCaching to NO.
  */
 
+/**
+ *  
+ *  
+ */
 @interface MKObject : NSObject <MKObjectJS> {
 @protected
     MIDIObjectRef _MIDIRef;

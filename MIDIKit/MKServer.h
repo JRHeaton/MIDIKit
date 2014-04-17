@@ -13,6 +13,11 @@
 
 @protocol MKServerJS <JSExport>
 
+/**
+ *  Restarts the MIDI server
+ *
+ *  @return YES if successful.
+ */
 + (BOOL)restart;
 
 @end
