@@ -110,7 +110,7 @@
 
     BOOL stop = NO;
     for(NSInteger i=0;i<[self count] && !stop;++i) {
-        id candidate = [[self alloc] initWithMIDIRef:MIDIGetDevice(i)];
+        MKEnumerableObject *candidate = [self atIndex:i];
         block(candidate, i, &stop);
     }
 }

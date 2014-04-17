@@ -16,10 +16,6 @@ JSValue *runTestScript(MKJavaScriptContext *c, NSString *name) {
     return [c require:name];
 }
 
-void sigg(int sig) {
-    printf("\033[1;32m~>> use process.exit() to close\033[0;m\n");
-}
-
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         MKJavaScriptContext *c = [MKJavaScriptContext new];
@@ -73,6 +69,7 @@ int main(int argc, const char * argv[]) {
                                "MKVirtualDestination    -- Client-created endpoint for receiving data from MIDI programs\n    "
                                "MKMessage               -- Model representing a command to be sent via MIDI\n    "
                                "MKConnection            -- Convenience class for easier multi-endpoint operations\n\n    "
+                               
                                "Use MIDIKit.openGitHub() to check out the latest info.\n"
                                );
         };
@@ -126,7 +123,6 @@ int main(int argc, const char * argv[]) {
 
         using_history();
 #define hist [@"~/.midirepl_history" stringByExpandingTildeInPath].UTF8String
-//        signal(SIGINT, sigg);
 
         read_history(hist);
 
