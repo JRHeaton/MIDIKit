@@ -176,6 +176,7 @@
 		527B2AB418FCC6AB001D0CDD /* MKPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKPrivate.m; sourceTree = "<group>"; };
 		5283466F18FF8C2E00DFA2B2 /* flash.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = flash.js; sourceTree = "<group>"; };
 		5283467018FF8C2E00DFA2B2 /* mirror.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = mirror.js; sourceTree = "<group>"; };
+		5283467118FFA88400DFA2B2 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		528C943B18FC774100A7B960 /* MKDestination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKDestination.h; sourceTree = "<group>"; };
 		528C943C18FC774100A7B960 /* MKDestination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKDestination.m; sourceTree = "<group>"; };
 		528C943F18FC7FC000A7B960 /* MKSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKSource.h; sourceTree = "<group>"; };
@@ -385,6 +386,7 @@
 			isa = PBXGroup;
 			children = (
 				521C1BC418FD412900A002FC /* README.md */,
+				5283467118FFA88400DFA2B2 /* LICENSE */,
 				5283466B18FF8C2E00DFA2B2 /* Example JavaScript */,
 				5273C6DD18DE96A200A8CFD4 /* MIDIKit Source (Shared) */,
 				524005DF18FB068D0030B46D /* MIDIKit Framework (OS X) */,

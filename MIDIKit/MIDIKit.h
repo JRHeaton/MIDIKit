@@ -54,7 +54,7 @@ extern BOOL MKSettingOSStatusEvaluationLogsOnError;     // default: YES if debug
 
 JSExportAs(showProperties,  + (BOOL)setDescriptionsIncludeProperties:(BOOL)val);
 JSExportAs(printErrors,     + (BOOL)setOSStatusEvaluationThrowsOnError:(BOOL)val);
-JSExportAs(throwErrors,           + (BOOL)setOSStatusEvaluationLogsOnError:(BOOL)val);
+JSExportAs(throwErrors,     + (BOOL)setOSStatusEvaluationLogsOnError:(BOOL)val);
 
 + (BOOL)descriptionsIncludeProperties;
 + (BOOL)OSStatusEvaluationLogsOnError;
