@@ -16,3 +16,4 @@ extern MKEntity *MKEntityForEndpoint(id endpoint);
 extern void MKDispatchSelectorToDelegates(SEL selector, NSArray *delegates, NSArray *arguments);
 extern NSData *MKDataFromNumberArray(NSArray *array);
 extern Class _MKClassForType(MIDIObjectType type, NSString **objectTypeName);
+extern NSArray *_MKExportedClasses();

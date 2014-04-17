@@ -9,6 +9,7 @@
 #import "MIDIKit.h"
 #import <objc/runtime.h>
 #import <TargetConditionals.h>
+#import "MKPrivate.h"
 
 #if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
 #import <UIKit/UIKit.h>
@@ -26,36 +27,10 @@ BOOL MKSettingOSStatusEvaluationLogsOnError = NO;
 BOOL MKSettingDescriptionsIncludeProperties = NO;
 BOOL MKSettingOSStatusEvaluationThrowsOnError = NO;
 
-
-NSArray *MKClassList() {
-    static NSArray *_MKClassList = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _MKClassList = @[
-                         [MIDIKit class],
-                         [MKConnection class],
-                         [MKMessage class],
-                         [MKObject class],
-                         [MKDevice class],
-                         [MKClient class],
-                         [MKInputPort class],
-                         [MKOutputPort class],
-                         [MKDestination class],
-                         [MKSource class],
-                         [MKEntity class],
-                         [MKVirtualDestination class],
-                         [MKVirtualSource class],
-                         [MKServer class]
-                         ];
-    });
-
-    return _MKClassList;
-}
-
 void MKInstallIntoContext(JSContext *c) {
     if(!c) return;
 
-    for(Class cls in MKClassList()) {
+    for(Class cls in _MKExportedClasses()) {
         c[NSStringFromClass(cls)] = cls;
     }
     c[@"MIDIRestart"] = ^BOOL() { return [MKServer restart]; };

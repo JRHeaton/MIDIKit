@@ -9,6 +9,31 @@
 #import "MKPrivate.h"
 #import "MIDIKit.h"
 
+NSArray *_MKExportedClasses() {
+    static NSArray *ret;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        ret = @[
+                [MIDIKit class],
+                [MKConnection class],
+                [MKMessage class],
+                [MKObject class],
+                [MKDevice class],
+                [MKClient class],
+                [MKInputPort class],
+                [MKOutputPort class],
+                [MKDestination class],
+                [MKSource class],
+                [MKEntity class],
+                [MKVirtualDestination class],
+                [MKVirtualSource class],
+                [MKServer class]
+                ];
+    });
+
+    return ret;
+}
+
 MIDIPacketList *MKPacketListFromData(NSData *data) {
     NSData *self = data;
 

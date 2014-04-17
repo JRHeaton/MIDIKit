@@ -101,14 +101,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		526F3BCB18FD9C3E00451D4C /* PBXContainerItemProxy */ = {
+		520F8D0A18FFD145006BB9F5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5273C6CB18DE96A200A8CFD4 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 52A1E05318FB876900D7073F;
 			remoteInfo = "MIDIKit Static Lib (OS X)";
 		};
-		52A1E07418FB87C400D7073F /* PBXContainerItemProxy */ = {
+		526F3BCB18FD9C3E00451D4C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5273C6CB18DE96A200A8CFD4 /* Project object */;
 			proxyType = 1;
@@ -697,7 +697,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				52A1E07518FB87C400D7073F /* PBXTargetDependency */,
+				520F8D0B18FFD145006BB9F5 /* PBXTargetDependency */,
 			);
 			name = "CLI Tool (midirepl)";
 			productName = mkcli;
@@ -853,15 +853,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		520F8D0B18FFD145006BB9F5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52A1E05318FB876900D7073F /* MIDIKit Static Lib (OS X) */;
+			targetProxy = 520F8D0A18FFD145006BB9F5 /* PBXContainerItemProxy */;
+		};
 		526F3BCC18FD9C3E00451D4C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 52A1E05318FB876900D7073F /* MIDIKit Static Lib (OS X) */;
 			targetProxy = 526F3BCB18FD9C3E00451D4C /* PBXContainerItemProxy */;
-		};
-		52A1E07518FB87C400D7073F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 52A1E05318FB876900D7073F /* MIDIKit Static Lib (OS X) */;
-			targetProxy = 52A1E07418FB87C400D7073F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

@@ -11,9 +11,40 @@
 #import "LPMessage.h"
 #import <readline/readline.h>
 #import <AppKit/AppKit.h>
+#import <objc/runtime.h>
 
 JSValue *runTestScript(MKJavaScriptContext *c, NSString *name) {
     return [c require:name];
+}
+
+char **completions(const char *frag, int i) {
+    NSString *c;
+    for(Class cc in@[
+                        [MIDIKit class],
+                        [MKConnection class],
+                        [MKMessage class],
+                        [MKObject class],
+                        [MKDevice class],
+                        [MKClient class],
+                        [MKInputPort class],
+                        [MKOutputPort class],
+                        [MKDestination class],
+                        [MKSource class],
+                        [MKEntity class],
+                        [MKVirtualDestination class],
+                        [MKVirtualSource class],
+                        [MKServer class]
+                        ]) {
+        if([(c = NSStringFromClass(cc)) rangeOfString:@(frag)].location != NSNotFound) {
+            char *match = (char *)malloc(c.length + 1);
+            memcpy(match, c.UTF8String, c.length);
+            match[c.length] = 0;
+
+            return !i ? (char **)match : NULL;
+        }
+    }
+
+    return NULL;
 }
 
 int main(int argc, const char * argv[]) {
@@ -151,6 +182,8 @@ int main(int argc, const char * argv[]) {
 
         rl_initialize();
         using_history();
+
+        rl_completion_entry_function = (Function *)completions;
 #define hist [@"~/.midirepl_history" stringByExpandingTildeInPath].UTF8String
 
         read_history(hist);
@@ -161,7 +194,7 @@ int main(int argc, const char * argv[]) {
             while(1) {
                 __block const char *buf;
                 dispatch_sync(dispatch_get_main_queue(), ^{
-                    buf = readline("\001" DOOP "\002-> \002");
+                    buf = readline("\001" DOOP "\002-> \001" RESET "\002");
                 });
 
                 if(!buf || !strlen(buf)) continue;
