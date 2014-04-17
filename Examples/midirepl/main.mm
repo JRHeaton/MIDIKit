@@ -34,6 +34,8 @@ int main(int argc, const char * argv[]) {
 #define CROOP COLOR "72m"
 #define RESET START "0m"
 
+        [MIDIKit setOSStatusEvaluationLogsOnError:YES];
+
         __weak typeof(c) _c = c;
         __block NSUInteger currentLine = 0;
         c.exceptionHandler = ^(JSContext *context, JSValue *exception) {
