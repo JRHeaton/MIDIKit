@@ -170,6 +170,17 @@ JSExportAs(setVelocity, - (instancetype)setVelocityReturn:(UInt8)velocity);
  */
 + (instancetype)messageWithPacket:(MIDIPacket *)packet;
 
+/**
+ *  Parses data into zerp or more message objects, based on message
+ *  lengths in the MIDI protocol.
+ *
+ *  Example: (data)[0x90, 10, 127, 0x80, 10, 0] -> messages would
+ *  result in 2 messages being made, one a note on, another a note off.
+ *
+ *  @param data The data to parse.
+ *
+ *  @return Zero or more objects in an array (never returns nil).
+ */
 + (NSArray *)messagesWithData:(NSData *)data;
 + (NSArray *)messagesWithPacket:(MIDIPacket *)packet;
 + (NSArray *)messagesWithPacketList:(MIDIPacketList *)list;

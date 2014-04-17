@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MKClient.h"
 
-@interface MUAppDelegate : UIResponder <UIApplicationDelegate>
+@interface MUAppDelegate : UIResponder <UIApplicationDelegate, MKClientDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

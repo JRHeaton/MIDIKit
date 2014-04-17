@@ -7,15 +7,27 @@
 //
 
 #import "MUAppDelegate.h"
+#import "MIDIKit.h"
+#import "LPMessage.h"
 
-@implementation MUAppDelegate
+@implementation MUAppDelegate {
+    MKClient *cc;
+}
+
+- (void)midiClient:(MKClient *)client destinationAdded:(MKDestination *)destination {
+    [LPMessage enumerateGrid:^(UInt8 x, UInt8 y) {
+        [client.firstOutputPort sendMessage:[LPMessage padMessageOn:YES atColumn:x row:y redBrightness:arc4random() % 3 greenBrightness:arc4random() % 3 clearOtherBufferPad:YES copyToOtherBuffer:NO] toDestination:destination];
+    }];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+
+    [(cc = [MKClient global]) addDelegate:self];
+    
     return YES;
 }
 

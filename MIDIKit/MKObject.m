@@ -119,7 +119,7 @@ exception:
             [desc appendString:@" [Invalid]"];
             return desc;
         } else
-            [desc appendFormat:@" MIDIRef=%u", self.MIDIRef];
+            [desc appendFormat:@" MIDIRef=%u", (unsigned int)self.MIDIRef];
     }
 
     BOOL isClient = [self isKindOfClass:[MKClient class]];

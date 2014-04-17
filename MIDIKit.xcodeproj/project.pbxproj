@@ -101,10 +101,11 @@
 		52B33F2C190039A4006B1699 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5240060E18FB08220030B46D /* CoreGraphics.framework */; };
 		52B33F2D190039A4006B1699 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 524005F418FB06CD0030B46D /* UIKit.framework */; };
 		52B33F5D19003A96006B1699 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52B33F5519003A96006B1699 /* Images.xcassets */; };
-		52B33F5E19003A96006B1699 /* MIDIUtil-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52B33F5619003A96006B1699 /* MIDIUtil-Info.plist */; };
 		52B33F5F19003A96006B1699 /* MUAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B33F5919003A96006B1699 /* MUAppDelegate.m */; };
 		52B33F6019003A96006B1699 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 52B33F5A19003A96006B1699 /* InfoPlist.strings */; };
 		52B33F6119003A96006B1699 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B33F5C19003A96006B1699 /* main.m */; };
+		52B33F6519006750006B1699 /* libMIDIKitiOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 524005E418FB06CD0030B46D /* libMIDIKitiOS.a */; };
+		52B33F6619006857006B1699 /* LPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 528C944B18FC8FD900A7B960 /* LPMessage.m */; };
 		52DDEDEF18FB55400019BE98 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5273C70F18DEA14E00A8CFD4 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -122,6 +123,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 52A1E05318FB876900D7073F;
 			remoteInfo = "MIDIKit Static Lib (OS X)";
+		};
+		52B33F6319006745006B1699 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5273C6CB18DE96A200A8CFD4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 524005E318FB06CD0030B46D;
+			remoteInfo = "MIDIKit Static Lib (iOS)";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -274,6 +282,7 @@
 			files = (
 				52B33F2C190039A4006B1699 /* CoreGraphics.framework in Frameworks */,
 				52B33F2D190039A4006B1699 /* UIKit.framework in Frameworks */,
+				52B33F6519006750006B1699 /* libMIDIKitiOS.a in Frameworks */,
 				52B33F2B190039A4006B1699 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -748,6 +757,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				52B33F6419006745006B1699 /* PBXTargetDependency */,
 			);
 			name = MIDIUtil;
 			productName = MIDIUtil;
@@ -830,7 +840,6 @@
 			files = (
 				52B33F5D19003A96006B1699 /* Images.xcassets in Resources */,
 				52B33F6019003A96006B1699 /* InfoPlist.strings in Resources */,
-				52B33F5E19003A96006B1699 /* MIDIUtil-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -925,6 +934,7 @@
 			files = (
 				52B33F6119003A96006B1699 /* main.m in Sources */,
 				52B33F5F19003A96006B1699 /* MUAppDelegate.m in Sources */,
+				52B33F6619006857006B1699 /* LPMessage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -950,6 +960,11 @@
 			isa = PBXTargetDependency;
 			target = 52A1E05318FB876900D7073F /* MIDIKit Static Lib (OS X) */;
 			targetProxy = 526F3BCB18FD9C3E00451D4C /* PBXContainerItemProxy */;
+		};
+		52B33F6419006745006B1699 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 524005E318FB06CD0030B46D /* MIDIKit Static Lib (iOS) */;
+			targetProxy = 52B33F6319006745006B1699 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

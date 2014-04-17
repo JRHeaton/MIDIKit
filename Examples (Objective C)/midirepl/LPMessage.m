@@ -137,7 +137,7 @@ static const UInt8 LPMsg[6][3] = {
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@, row=%lu, column=%lu", super.description, self.row, self.column];
+    return [NSString stringWithFormat:@"%@, row=%lu, column=%lu", super.description, (unsigned long)self.row, (unsigned long)self.column];
 }
 
 // Helper
