@@ -14,6 +14,7 @@
 #import <objc/runtime.h>
 
 extern int rl_completion_append_character; // new readline
+extern "C" void rl_replace_line(const char *, int);
 
 JSValue *runTestScript(MKJavaScriptContext *c, NSString *name) {
     return [c require:name];
@@ -90,7 +91,7 @@ int main(int argc, const char * argv[]) {
         c.exceptionHandler = ^(JSContext *context, JSValue *exception) {
 
             printf("%s",
-                   [NSString stringWithFormat:@"%s~> %s%@%@%s\n",
+                   [NSString stringWithFormat:@"%s-> %s%@%@%s\n",
                     ORANGE,
                     BOOBY,
                     !currentLine ? @"" : [NSString stringWithFormat:@"Line %lu: ", (unsigned long)currentLine],
@@ -201,6 +202,12 @@ int main(int argc, const char * argv[]) {
 #define hist [@"~/.midirepl_history" stringByExpandingTildeInPath].UTF8String
 
         read_history(hist);
+        signal(SIGINT, [](int c) {
+            puts(" (use ^D to exit)");
+            rl_replace_line("", 0);
+            rl_on_new_line();
+            rl_redisplay();
+        });
 
         [c[@"help"] callWithArguments:nil];
 
@@ -208,10 +215,10 @@ int main(int argc, const char * argv[]) {
             while(1) {
                 __block const char *buf;
                 dispatch_sync(dispatch_get_main_queue(), ^{
-                    buf = readline("\001" DOOP "\002-> \001" RESET "\002");
+                    buf = readline("\001" DOOP "\002~> \001" RESET "\002");
                 });
 
-                if(!buf || !strlen(buf)) continue;
+                if(!buf || !strlen(buf)) exit(0);
                 add_history(buf);
 
                 dispatch_sync(dispatch_get_main_queue(), ^{
@@ -233,7 +240,7 @@ int main(int argc, const char * argv[]) {
                                     print = [objVal description].UTF8String;
                                 }
                             }
-                            printf(ORANGE "~> " SEXY "%s\n" RESET, print);
+                            printf(ORANGE "-> " SEXY "%s\n" RESET, print);
                         }
                     }
                     @catch (NSException *exception) {
