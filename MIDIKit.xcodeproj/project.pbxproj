@@ -137,6 +137,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		520F8CF818FFB19B006BB9F5 /* flash.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = flash.js; sourceTree = "<group>"; };
+		520F8CF918FFB19B006BB9F5 /* mirror.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = mirror.js; sourceTree = "<group>"; };
 		521C1BC418FD412900A002FC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		522EA3FA18FA690500444217 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 		522EA3FD18FA6B0400444217 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -174,19 +176,17 @@
 		5273C73A18DEADB800A8CFD4 /* MKEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKEntity.m; sourceTree = "<group>"; };
 		527B2AB318FCC67D001D0CDD /* MKPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKPrivate.h; sourceTree = "<group>"; };
 		527B2AB418FCC6AB001D0CDD /* MKPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKPrivate.m; sourceTree = "<group>"; };
-		5283466F18FF8C2E00DFA2B2 /* flash.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = flash.js; sourceTree = "<group>"; };
-		5283467018FF8C2E00DFA2B2 /* mirror.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = mirror.js; sourceTree = "<group>"; };
 		5283467118FFA88400DFA2B2 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		528C943B18FC774100A7B960 /* MKDestination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKDestination.h; sourceTree = "<group>"; };
 		528C943C18FC774100A7B960 /* MKDestination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKDestination.m; sourceTree = "<group>"; };
 		528C943F18FC7FC000A7B960 /* MKSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKSource.h; sourceTree = "<group>"; };
 		528C944018FC7FC000A7B960 /* MKSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKSource.m; sourceTree = "<group>"; };
-		528C944A18FC8FD900A7B960 /* LPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPMessage.h; path = Examples/midirepl/LPMessage.h; sourceTree = SOURCE_ROOT; };
-		528C944B18FC8FD900A7B960 /* LPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPMessage.m; path = Examples/midirepl/LPMessage.m; sourceTree = SOURCE_ROOT; };
-		528C944C18FC8FD900A7B960 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = Examples/midirepl/main.mm; sourceTree = SOURCE_ROOT; };
-		528C945618FC90B400A7B960 /* MKJavaScriptContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKJavaScriptContext.h; path = Examples/midirepl/MKJavaScriptContext.h; sourceTree = SOURCE_ROOT; };
-		528C945718FC90B400A7B960 /* MKJavaScriptModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKJavaScriptModule.h; path = Examples/midirepl/MKJavaScriptModule.h; sourceTree = SOURCE_ROOT; };
-		528C945818FC90B400A7B960 /* MKJavaScriptContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKJavaScriptContext.m; path = Examples/midirepl/MKJavaScriptContext.m; sourceTree = SOURCE_ROOT; };
+		528C944A18FC8FD900A7B960 /* LPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPMessage.h; path = "Examples (Objective C)/midirepl/LPMessage.h"; sourceTree = SOURCE_ROOT; };
+		528C944B18FC8FD900A7B960 /* LPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPMessage.m; path = "Examples (Objective C)/midirepl/LPMessage.m"; sourceTree = SOURCE_ROOT; };
+		528C944C18FC8FD900A7B960 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = "Examples (Objective C)/midirepl/main.mm"; sourceTree = SOURCE_ROOT; };
+		528C945618FC90B400A7B960 /* MKJavaScriptContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKJavaScriptContext.h; path = "Examples (Objective C)/midirepl/MKJavaScriptContext.h"; sourceTree = SOURCE_ROOT; };
+		528C945718FC90B400A7B960 /* MKJavaScriptModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKJavaScriptModule.h; path = "Examples (Objective C)/midirepl/MKJavaScriptModule.h"; sourceTree = SOURCE_ROOT; };
+		528C945818FC90B400A7B960 /* MKJavaScriptContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKJavaScriptContext.m; path = "Examples (Objective C)/midirepl/MKJavaScriptContext.m"; sourceTree = SOURCE_ROOT; };
 		528C945A18FC919800A7B960 /* MIDIKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIDIKit.m; sourceTree = "<group>"; };
 		5296F88818FF3B1100682874 /* MKEnumerableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKEnumerableObject.h; sourceTree = "<group>"; };
 		5296F88918FF3B1100682874 /* MKEnumerableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKEnumerableObject.m; sourceTree = "<group>"; };
@@ -260,6 +260,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		520F8CF418FFB19B006BB9F5 /* Examples (JavaScript) */ = {
+			isa = PBXGroup;
+			children = (
+				520F8CF518FFB19B006BB9F5 /* Ableton Push */,
+				520F8CF618FFB19B006BB9F5 /* Akai MPK Mini */,
+				520F8CF718FFB19B006BB9F5 /* Novation Launchpad */,
+			);
+			path = "Examples (JavaScript)";
+			sourceTree = "<group>";
+		};
+		520F8CF518FFB19B006BB9F5 /* Ableton Push */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Ableton Push";
+			sourceTree = "<group>";
+		};
+		520F8CF618FFB19B006BB9F5 /* Akai MPK Mini */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Akai MPK Mini";
+			sourceTree = "<group>";
+		};
+		520F8CF718FFB19B006BB9F5 /* Novation Launchpad */ = {
+			isa = PBXGroup;
+			children = (
+				520F8CF818FFB19B006BB9F5 /* flash.js */,
+				520F8CF918FFB19B006BB9F5 /* mirror.js */,
+			);
+			path = "Novation Launchpad";
+			sourceTree = "<group>";
+		};
 		524005D718FB03F10030B46D /* Client */ = {
 			isa = PBXGroup;
 			children = (
@@ -367,7 +400,7 @@
 				526F3BC218FD9BC600451D4C /* main.m */,
 			);
 			name = "Virtual Launchpad";
-			path = "Examples/Virtual Launchpad";
+			path = "Examples (Objective C)/Virtual Launchpad";
 			sourceTree = "<group>";
 		};
 		526F3BCA18FD9BE700451D4C /* Files */ = {
@@ -387,7 +420,7 @@
 			children = (
 				521C1BC418FD412900A002FC /* README.md */,
 				5283467118FFA88400DFA2B2 /* LICENSE */,
-				5283466B18FF8C2E00DFA2B2 /* Example JavaScript */,
+				520F8CF418FFB19B006BB9F5 /* Examples (JavaScript) */,
 				5273C6DD18DE96A200A8CFD4 /* MIDIKit Source (Shared) */,
 				524005DF18FB068D0030B46D /* MIDIKit Framework (OS X) */,
 				52DDEDF018FB55400019BE98 /* CLI Tool (mkcli) */,
@@ -468,39 +501,6 @@
 				527B2AB418FCC6AB001D0CDD /* MKPrivate.m */,
 			);
 			name = Private;
-			sourceTree = "<group>";
-		};
-		5283466B18FF8C2E00DFA2B2 /* Example JavaScript */ = {
-			isa = PBXGroup;
-			children = (
-				5283466C18FF8C2E00DFA2B2 /* Ableton Push */,
-				5283466D18FF8C2E00DFA2B2 /* Akai MPK Mini */,
-				5283466E18FF8C2E00DFA2B2 /* Novation Launchpad */,
-			);
-			path = "Example JavaScript";
-			sourceTree = "<group>";
-		};
-		5283466C18FF8C2E00DFA2B2 /* Ableton Push */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Ableton Push";
-			sourceTree = "<group>";
-		};
-		5283466D18FF8C2E00DFA2B2 /* Akai MPK Mini */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Akai MPK Mini";
-			sourceTree = "<group>";
-		};
-		5283466E18FF8C2E00DFA2B2 /* Novation Launchpad */ = {
-			isa = PBXGroup;
-			children = (
-				5283466F18FF8C2E00DFA2B2 /* flash.js */,
-				5283467018FF8C2E00DFA2B2 /* mirror.js */,
-			);
-			path = "Novation Launchpad";
 			sourceTree = "<group>";
 		};
 		528C944918FC848F00A7B960 /* Virtual (Client-Created) */ = {
@@ -917,7 +917,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/Examples/Virtual Launchpad/Virtual Launchpad-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Examples (Objective C)/Virtual Launchpad/Virtual Launchpad-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -930,7 +930,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
-				INFOPLIST_FILE = "$(SRCROOT)/Examples/Virtual Launchpad/Virtual Launchpad-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Examples (Objective C)/Virtual Launchpad/Virtual Launchpad-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
