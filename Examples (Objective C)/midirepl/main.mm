@@ -73,7 +73,7 @@ int main(int argc, const char * argv[]) {
         c[@"LPMessage"] = [LPMessage class];
 
 #define START "\033["
-#define COLOR START START "38;5;"
+#define COLOR START "38;5;"
 #define ORANGE COLOR "197m"
 #define LESLIEKNOPE "161m"
 #define SEXY COLOR "61m"
