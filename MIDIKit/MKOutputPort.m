@@ -62,6 +62,10 @@ static NSMapTable *_MKOutputPortNameMap = nil;
     return self;
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ name=\'%@\'", [super description], self.name];
+}
+
 - (instancetype)dispose {
     MIDIPortDispose(self.MIDIRef);
     self.MIDIRef = 0;
