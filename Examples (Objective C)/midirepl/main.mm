@@ -113,7 +113,7 @@ int main(int argc, const char * argv[]) {
             c.currentEvaluatingScriptPath = @(argv[1]);
         } else if([[NSProcessInfo processInfo].environment[@"USE_SRCROOT"] boolValue] == YES) {
             NSLog(@"using SRCROOT..."); // defined by -DSRCROOT="\"${SRCROOT}\"" in build settings
-            c.currentEvaluatingScriptPath = [@SRCROOT stringByAppendingPathComponent:@"Example JavaScript"];
+            c.currentEvaluatingScriptPath = [@SRCROOT stringByAppendingPathComponent:@"Examples (JavaScript)"];
         } else {
             _c[@"__dirname"] = [NSFileManager defaultManager].currentDirectoryPath;
         }
