@@ -136,7 +136,7 @@ static void _MKClientMIDINotifyProc(const MIDINotification *message, void *refCo
     static MKClient *global;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        global = [self clientWithName:[NSString stringWithFormat:@"%@-%d-Client", [NSProcessInfo processInfo].processName, [NSProcessInfo processInfo].processIdentifier]];
+        global = [self clientWithName:[NSString stringWithFormat:@"%@-%d-Global", [NSProcessInfo processInfo].processName, [NSProcessInfo processInfo].processIdentifier]];
     });
 
     return global;
