@@ -105,7 +105,7 @@ static void _MKInputPortReadProc(const MIDIPacketList *pktlist, void *readProcRe
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@%@", [super description], self.connectedSources.count ? [NSString stringWithFormat:@", name=\'%@\', connectedSources=%@", self.name, self.connectedSources] : @""];
+    return [NSString stringWithFormat:@"%@, name=\'%@\'%@", [super description], self.name, self.connectedSources.count ? [NSString stringWithFormat:@", connectedSources=%@", self.connectedSources] : @""];
 }
 
 - (instancetype)connectSource:(MKSource *)source {
