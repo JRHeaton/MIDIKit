@@ -69,13 +69,15 @@ char **completions(const char *frag, int i) {
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
+#define COREMIDI_QUEUE dispatch_get_main_queue()
+
         MKJavaScriptContext *c = [MKJavaScriptContext new];
         c[@"LPMessage"] = [LPMessage class];
 
 #define START "\033["
 #define COLOR START "38;5;"
 #define ORANGE COLOR "197m"
-#define LESLIEKNOPE "161m"
+#define LESLIEKNOPE COLOR "161m"
 #define SEXY COLOR "61m"
 #define PINK COLOR "135m"
 #define BOOBY COLOR "208m"
@@ -116,6 +118,7 @@ int main(int argc, const char * argv[]) {
             _c[@"__dirname"] = [NSFileManager defaultManager].currentDirectoryPath;
         }
 
+        c[@"clear"] = ^{ printf("\x1b""c"); };
         c[@"unitTests"] = ^{ runTestScript(_c, @"unitTest.js"); };
         c[@"launchpad"] = ^{ runTestScript(_c, @"launchpad.js"); };
         c[@"setPath"] = ^(NSString *path) { _c[@"__dirname"] = path; };
@@ -188,14 +191,14 @@ int main(int argc, const char * argv[]) {
 
         /////////////////////--------------------------------------------------------------------
 
-//        if(![NSProcessInfo processInfo].environment[@"REPL"]) {
-//            printf("to run in REPL mode, set env var REPL=1\n");
-//            // standard exec
-//
-//            CFRunLoopRun();
-//
-//            return 0;
-//        }
+        if(![NSProcessInfo processInfo].environment[@"REPL"]) {
+            printf("to run in REPL mode, set env var REPL=1\n");
+            // standard exec
+
+            CFRunLoopRun();
+
+            return 0;
+        }
 
         rl_initialize();
         using_history();
@@ -217,17 +220,20 @@ int main(int argc, const char * argv[]) {
 
         [[NSOperationQueue new] addOperationWithBlock:^{
             while(1) {
-                __block const char *buf;
-                dispatch_sync(dispatch_get_main_queue(), ^{
-                    buf = readline("\001" DOOP "\002~> \001" RESET "\002");
-                });
+                const char *buf;
+                buf = readline("\001" DOOP "\002~> \001" RESET "\002");
 
                 if(!buf) exit(0);
                 add_history(buf);
+                write_history(hist);
 
-                dispatch_sync(dispatch_get_main_queue(), ^{
+                dispatch_sync(COREMIDI_QUEUE, ^{
                     JSValue *val;
                     @try {
+                        if(!strcmp(buf, "clear()")) {
+                            [c[@"clear"] callWithArguments:nil];
+                            return;
+                        }
                         val = [c evaluateScript:@(buf)];
 
                         if(showEval) {
@@ -250,8 +256,6 @@ int main(int argc, const char * argv[]) {
                     @catch (NSException *exception) {
                         NSLog(@"ObjC exception thrown: %@", exception);
                     }
-                    
-                    write_history(hist);
                 });
             }
         }];
