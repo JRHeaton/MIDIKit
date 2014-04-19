@@ -111,16 +111,11 @@ int main(int argc, const char * argv[]) {
             NSLog(@"using argv[1]...");
 
             c.currentEvaluatingScriptPath = @(argv[1]);
-        } else if([[NSProcessInfo processInfo].environment[@"USE_SRCROOT"] boolValue] == YES) {
-            NSLog(@"using SRCROOT..."); // defined by -DSRCROOT="\"${SRCROOT}\"" in build settings
-            c.currentEvaluatingScriptPath = [@SRCROOT stringByAppendingPathComponent:@"Examples (JavaScript)"];
         } else {
             _c[@"__dirname"] = [NSFileManager defaultManager].currentDirectoryPath;
         }
 
         c[@"clear"] = ^{ printf("\x1b""c"); };
-        c[@"unitTests"] = ^{ runTestScript(_c, @"unitTest.js"); };
-        c[@"launchpad"] = ^{ runTestScript(_c, @"launchpad.js"); };
         c[@"setPath"] = ^(NSString *path) { _c[@"__dirname"] = path; };
         c[@"help"] = ^{ printf("%s\n",
                                "\n"
