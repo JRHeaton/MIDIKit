@@ -406,7 +406,7 @@
 				528C943C18FC774100A7B960 /* MKDestination.m */,
 				528C943F18FC7FC000A7B960 /* MKSource.h */,
 				528C944018FC7FC000A7B960 /* MKSource.m */,
-				528C944918FC848F00A7B960 /* Virtual (Client-Created) */,
+				528C944918FC848F00A7B960 /* Virtual (Client-owned) */,
 			);
 			name = Endpoints;
 			sourceTree = "<group>";
@@ -558,7 +558,7 @@
 			name = Private;
 			sourceTree = "<group>";
 		};
-		528C944918FC848F00A7B960 /* Virtual (Client-Created) */ = {
+		528C944918FC848F00A7B960 /* Virtual (Client-owned) */ = {
 			isa = PBXGroup;
 			children = (
 				52B22EF618F7B80900A5A5D3 /* MKVirtualDestination.h */,
@@ -566,7 +566,7 @@
 				52B22EF218F7B65D00A5A5D3 /* MKVirtualSource.h */,
 				52B22EF318F7B65D00A5A5D3 /* MKVirtualSource.m */,
 			);
-			name = "Virtual (Client-Created)";
+			name = "Virtual (Client-owned)";
 			sourceTree = "<group>";
 		};
 		5296F88F18FF47BF00682874 /* Thru Connection */ = {

@@ -424,10 +424,12 @@ CPROPERTY(NSString *,   IconImagePath,              iconImagePath,              
 CPROPERTY(NSString *,   DriverDeviceEditorApp,      driverDeviceEditorApp,      kMIDIPropertyDriverDeviceEditorApp,     String,             string)
 
 // because the preprocessor can't fucking do ##bool (turns it into _Bool
-- (BOOL)_BoolForProperty:(NSString *)propName exists:(BOOL *)exists {
-    return [self boolForProperty:propName exists:exists];
-}
+//- (BOOL)_BoolForProperty:(NSString *)propName exists:(BOOL *)exists {
+//    return [self boolForProperty:propName exists:exists];
+//}
 
+#undef bool
+#define bool bool
 EPROPERTY(BOOL,         Broadcast,                  isBroadcast,                kMIDIPropertyIsBroadcast,               Bool,               bool)
 EPROPERTY(BOOL,         SupportsGeneralMIDI,        supportsGeneralMIDI,        kMIDIPropertySupportsGeneralMIDI,       Integer,            bool)
 EPROPERTY(BOOL,         SupportsMMC,                supportsMMC,                kMIDIPropertySupportsMMC,               Integer,            bool)
@@ -448,7 +450,8 @@ EPROPERTY(BOOL,         TransmitsMTC,               transmitsMTC,               
 EPROPERTY(BOOL,         TransmitsClock,             transmitsClock,             kMIDIPropertyTransmitsClock,            Integer,            bool)
 EPROPERTY(BOOL,         TransmitsNotes,             transmitsNotes,             kMIDIPropertyTransmitsNotes,            Integer,            bool)
 EPROPERTY(BOOL,         ReceivesProgramChanges,     receivesProgramChanges,     kMIDIPropertyReceivesProgramChanges,    Integer,            bool)
-
+#undef bool
+#define bool _Bool
 
 #undef PROPERTY
 #undef PROPERTY
