@@ -8,6 +8,7 @@
 
 #import "MIDIKit.h"
 #import "MKPrivate.h"
+#import <mach/mach_time.h>
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-protocol-property-synthesis"
@@ -104,11 +105,21 @@ static NSMapTable *_MKVirtualSourceNameMap = nil;
     if(!self.valid) return self; // TODO: handle this better
 
     [self.receiveQueue addOperationWithBlock:^{
-        if([MIDIKit evalOSStatus:MIDIReceived(self.MIDIRef, (const MIDIPacketList *)packetList) name:@"Virtual source data receive"] != 0) {
-            // TODO: handle error
+        MIDIPacket *packet = &packetList->packet[0];
+        for (int i = 0; i < packetList->numPackets; ++i) {
+            packet->timeStamp = mach_absolute_time();
 
-            free(packetList);
+            packet = MIDIPacketNext(packet);
         }
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if([MIDIKit evalOSStatus:MIDIReceived(self.MIDIRef, (const MIDIPacketList *)packetList) name:@"Virtual source data receive"] != 0) {
+                // TODO: handle error
+
+                free(packetList);
+            }
+        });
+
     }];
 
     return self;
