@@ -8,6 +8,7 @@
 
 #import "MKPrivate.h"
 #import "MIDIKit.h"
+#import <mach/mach_time.h>
 
 NSArray *_MKExportedClasses() {
     static NSArray *ret;
@@ -34,10 +35,10 @@ NSArray *_MKExportedClasses() {
     return ret;
 }
 
-MIDIPacketList *MKPacketListFromData(NSData *data) {
+MIDIPacketList *MKPacketListFromData(NSData *data, bool includeTimestamp) {
     NSData *self = data;
 
-    MIDIPacketList *list = malloc(sizeof(MIDIPacketList) + self.length);
+    MIDIPacketList *list = (MIDIPacketList *)malloc(sizeof(MIDIPacketList) + self.length);
 
     if(!self.length) return list; // empty
 
@@ -49,6 +50,8 @@ MIDIPacketList *MKPacketListFromData(NSData *data) {
 
     for(NSUInteger i=0;i<numPackets;++i) {
         packet = MIDIPacketListAdd(list, self.length, packet, 0, MAX_PACKET_LEN, &self.bytes[i * MAX_PACKET_LEN]);
+        if(includeTimestamp)
+            packet->timeStamp = mach_absolute_time();
     }
     if(remainder) {
         MIDIPacketListAdd(list, sizeof(MIDIPacketList) + self.length, packet, 0, remainder, self.bytes);

@@ -9,6 +9,7 @@
 #import "MIDIKit.h"
 #import "MKPrivate.h"
 #import <objc/runtime.h>
+#import <dlfcn.h>
 
 @interface MKObject ()
 @property (nonatomic, strong) NSMutableDictionary *propertyCache;
@@ -26,7 +27,6 @@ static NSMapTable *_MKObjectMap = nil;
         goto exception;
     }
 #else
-    #import <dlfcn.h>
 
     if(!dlsym(RTLD_SELF, "MIDIRestart")) {
         goto exception;

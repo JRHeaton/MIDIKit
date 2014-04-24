@@ -74,7 +74,7 @@ static NSMapTable *_MKOutputPortNameMap = nil;
 
 - (instancetype)sendData:(NSData *)data toDestination:(MKDestination *)destination {
     [self.sendQueue addOperationWithBlock:^{
-        MIDIPacketList *list = MKPacketListFromData(data);
+        MIDIPacketList *list = MKPacketListFromData(data, false);
         [self sendPacketList:list toDestination:destination];
     }];
     return self;
