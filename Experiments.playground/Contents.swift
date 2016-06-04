@@ -2,7 +2,9 @@ import MIDIKit
 import Launchpad
 
 do {
-	let connection = try Connection(client: Client()) { print("\($0.data.0) \($0.data.2) \($0.data.2)") }
+	let connection = try Connection(client: Client()) {
+		dump($0)
+	}
 	
 	if let dest = Destination.allLazy
 		.filter({ $0[.Name] == "Launchpad S" })
@@ -17,7 +19,7 @@ do {
 			}
 			return (rando(), rando(.Low))
 		}
-		try cmds.forEach { try connection.send($0, onChannel: 0) }
+		try connection.outputPort.send(cmds, onChannel: 0, toDestination: dest)
 		try connection.outputPort.send([0xb0, 0x69, 127], toDestination: dest)
 //		try send(.Reset)
 	}

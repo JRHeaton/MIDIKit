@@ -17,11 +17,24 @@ public final class OutputPort: Object {
 		try send(message.channelMessage.dataOnChannel(channel & 0xF), toDestination: destination)
 	}
 	
+	public func send<S: SequenceType where S.Generator.Element: ChannelMessageConvertible>(
+		messages: S,
+		onChannel channel: Int,
+		          toDestination destination: Destination) throws {
+		try messages.forEach { try send($0, onChannel: channel, toDestination: destination) }
+	}
+	
 	public func send(packet: Packet, toDestination destination: Destination) throws {
 		try packet.withPacketPointer { pktPtr in
 			var packetList = MIDIPacketList(numPackets: 1, packet: pktPtr.memory)
 			try send(&packetList, toDestination: destination)
 		}
+	}
+	
+	public func send<S: SequenceType where S.Generator.Element == Packet>(
+		packets: S,
+		toDestination destination: Destination) throws {
+		try packets.forEach { try send($0, toDestination: destination) }
 	}
 	
 	public func send(bytes: [UInt8],
