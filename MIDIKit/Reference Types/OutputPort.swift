@@ -27,7 +27,7 @@ public final class OutputPort: Object {
 				.forEach { buffer[$0.index] = $0.element }
 		}
 		var packetList = MIDIPacketList(numPackets: 1, packet: packet)
-		try self.send(&packetList, toDestination: destination)
+		try send(&packetList, toDestination: destination)
 	}
 	
 	public func send(packetList: UnsafePointer<MIDIPacketList>,

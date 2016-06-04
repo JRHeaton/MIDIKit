@@ -20,11 +20,11 @@ public final class Client: Object {
 	}
 	
 	public func firstInputPort(name: String = "") throws -> InputPort {
-		return try inputPorts.first ?? (try createInputPort(name))
+		return try inputPorts.first ?? (createInputPort(name))
 	}
 	
 	public func firstOutputPort(name: String = "") throws -> OutputPort {
-		return try outputPorts.first ?? (try createOutputPort(name))
+		return try outputPorts.first ?? createOutputPort(name)
 	}
 	
 	public func createInputPort(name: String = "") throws -> InputPort {

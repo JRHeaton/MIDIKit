@@ -1,5 +1,6 @@
 import CoreMIDI
 
+/// A type that is or provides a CoreMIDI object
 public protocol Object: Equatable {
 	var ref: MIDIObjectRef { get }
 }
