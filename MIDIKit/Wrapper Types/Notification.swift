@@ -15,7 +15,7 @@ public enum Notification {
 	case PropertyChanged(object: MIDIObjectRef, property: String)
 	case ThruConnectionsChanged
 	case SerialPortOwnerChanged
-	case DriverIOError(device: MIDIDeviceRef, errorStatus: OSStatus)
+	case DriverIOError(device: Device, errorStatus: OSStatus)
 	
 	init(_ notificationPointer: UnsafePointer<MIDINotification>) {
 		switch notificationPointer.memory.messageID {
@@ -25,39 +25,37 @@ public enum Notification {
 			let notif = UnsafePointer<MIDIObjectAddRemoveNotification>(notificationPointer).memory
 			switch notif.childType {
 			case .Destination:
-				self = .DestinationAdded(Destination(ref: notif.child))
+				self = .DestinationAdded(.init(ref: notif.child))
 			case .Device:
-				self = .DeviceAdded(Device(ref: notif.child))
+				self = .DeviceAdded(.init(ref: notif.child))
 			case .Entity:
-				self = .EntityAdded(Entity(ref: notif.child))
+				self = .EntityAdded(.init(ref: notif.child))
 			case .Source:
-				self = .SourceAdded(Source(ref: notif.child))
+				self = .SourceAdded(.init(ref: notif.child))
 			case .ExternalDestination: fallthrough
 			case .ExternalDevice: fallthrough
 			case .ExternalEntity: fallthrough
 			case .ExternalSource: fallthrough
 			case .Other:
-				self = .ObjectAdded(parent: notif.parent,
-				                    child: notif.child)
+				self = .ObjectAdded(parent: notif.parent, child: notif.child)
 			}
 		case .MsgObjectRemoved:
 			let notif = UnsafePointer<MIDIObjectAddRemoveNotification>(notificationPointer).memory
 			switch notif.childType {
 			case .Destination:
-				self = .DestinationRemoved(Destination(ref: notif.child))
+				self = .DestinationRemoved(.init(ref: notif.child))
 			case .Device:
-				self = .DeviceRemoved(Device(ref: notif.child))
+				self = .DeviceRemoved(.init(ref: notif.child))
 			case .Entity:
-				self = .EntityRemoved(Entity(ref: notif.child))
+				self = .EntityRemoved(.init(ref: notif.child))
 			case .Source:
-				self = .SourceRemoved(Source(ref: notif.child))
+				self = .SourceRemoved(.init(ref: notif.child))
 			case .ExternalDestination: fallthrough
 			case .ExternalDevice: fallthrough
 			case .ExternalEntity: fallthrough
 			case .ExternalSource: fallthrough
 			case .Other:
-				self = .ObjectRemoved(parent: notif.parent,
-				                      child: notif.child)
+				self = .ObjectRemoved(parent: notif.parent, child: notif.child)
 			}
 		case .MsgPropertyChanged:
 			let notif = UnsafePointer<MIDIObjectPropertyChangeNotification>(notificationPointer).memory
@@ -69,7 +67,7 @@ public enum Notification {
 			self = .SerialPortOwnerChanged
 		case .MsgIOError:
 			let notif = UnsafePointer<MIDIIOErrorNotification>(notificationPointer).memory
-			self = .DriverIOError(device: notif.driverDevice,
+			self = .DriverIOError(device: .init(ref: notif.driverDevice),
 			                      errorStatus: notif.errorCode)
 		}
 	}
