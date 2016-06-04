@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		529ED0D21D034C7600F44CF6 /* Launchpad.h in Headers */ = {isa = PBXBuildFile; fileRef = 529ED0D11D034C7600F44CF6 /* Launchpad.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		529ED0D81D034C8600F44CF6 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529ED0D71D034C8600F44CF6 /* Command.swift */; };
+		529ED0DB1D034C9B00F44CF6 /* MIDIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97841A161CE7897700F9804C /* MIDIKit.framework */; };
 		973D22191D02D41C0077ACCD /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D22181D02D41C0077ACCD /* Connection.swift */; };
 		973D221F1D02DD8F0077ACCD /* VirtualSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D221E1D02DD8F0077ACCD /* VirtualSource.swift */; };
 		973D22211D02E0920077ACCD /* VirtualDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D22201D02E0920077ACCD /* VirtualDestination.swift */; };
@@ -32,6 +35,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		529ED0D91D034C9600F44CF6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 978419E61CE75A1000F9804C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 97841A151CE7897700F9804C;
+			remoteInfo = MIDIKit;
+		};
 		97841A361CE7B06300F9804C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 978419E61CE75A1000F9804C /* Project object */;
@@ -42,6 +52,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		529ED0CF1D034C7600F44CF6 /* Launchpad.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Launchpad.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		529ED0D11D034C7600F44CF6 /* Launchpad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Launchpad.h; sourceTree = "<group>"; };
+		529ED0D31D034C7600F44CF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		529ED0D71D034C8600F44CF6 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		973D22181D02D41C0077ACCD /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		973D221E1D02DD8F0077ACCD /* VirtualSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualSource.swift; sourceTree = "<group>"; };
 		973D22201D02E0920077ACCD /* VirtualDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualDestination.swift; sourceTree = "<group>"; };
@@ -70,6 +84,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		529ED0CB1D034C7600F44CF6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				529ED0DB1D034C9B00F44CF6 /* MIDIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		97841A121CE7897700F9804C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -88,11 +110,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		529ED0D01D034C7600F44CF6 /* Launchpad */ = {
+			isa = PBXGroup;
+			children = (
+				529ED0D71D034C8600F44CF6 /* Command.swift */,
+				529ED0D11D034C7600F44CF6 /* Launchpad.h */,
+				529ED0D31D034C7600F44CF6 /* Info.plist */,
+			);
+			path = Launchpad;
+			sourceTree = "<group>";
+		};
 		978419E51CE75A1000F9804C = {
 			isa = PBXGroup;
 			children = (
 				97841A171CE7897700F9804C /* MIDIKit */,
 				97841A311CE7B06300F9804C /* MIDIKitTests */,
+				529ED0D01D034C7600F44CF6 /* Launchpad */,
 				978419EF1CE75A1000F9804C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -102,6 +135,7 @@
 			children = (
 				97841A161CE7897700F9804C /* MIDIKit.framework */,
 				97841A301CE7B06300F9804C /* MIDIKitTests.xctest */,
+				529ED0CF1D034C7600F44CF6 /* Launchpad.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -186,6 +220,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		529ED0CC1D034C7600F44CF6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				529ED0D21D034C7600F44CF6 /* Launchpad.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		97841A131CE7897700F9804C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -197,6 +239,25 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		529ED0CE1D034C7600F44CF6 /* Launchpad */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 529ED0D61D034C7600F44CF6 /* Build configuration list for PBXNativeTarget "Launchpad" */;
+			buildPhases = (
+				529ED0CA1D034C7600F44CF6 /* Sources */,
+				529ED0CB1D034C7600F44CF6 /* Frameworks */,
+				529ED0CC1D034C7600F44CF6 /* Headers */,
+				529ED0CD1D034C7600F44CF6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				529ED0DA1D034C9600F44CF6 /* PBXTargetDependency */,
+			);
+			name = Launchpad;
+			productName = Launchpad;
+			productReference = 529ED0CF1D034C7600F44CF6 /* Launchpad.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		97841A151CE7897700F9804C /* MIDIKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 97841A1B1CE7897700F9804C /* Build configuration list for PBXNativeTarget "MIDIKit" */;
@@ -244,6 +305,9 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "John Heaton";
 				TargetAttributes = {
+					529ED0CE1D034C7600F44CF6 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 					97841A151CE7897700F9804C = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
@@ -266,11 +330,19 @@
 			targets = (
 				97841A151CE7897700F9804C /* MIDIKit */,
 				97841A2F1CE7B06300F9804C /* MIDIKitTests */,
+				529ED0CE1D034C7600F44CF6 /* Launchpad */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		529ED0CD1D034C7600F44CF6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		97841A141CE7897700F9804C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -305,6 +377,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		529ED0CA1D034C7600F44CF6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				529ED0D81D034C8600F44CF6 /* Command.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		97841A111CE7897700F9804C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -342,6 +422,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		529ED0DA1D034C9600F44CF6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 97841A151CE7897700F9804C /* MIDIKit */;
+			targetProxy = 529ED0D91D034C9600F44CF6 /* PBXContainerItemProxy */;
+		};
 		97841A371CE7B06300F9804C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 97841A151CE7897700F9804C /* MIDIKit */;
@@ -350,6 +435,51 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		529ED0D41D034C7600F44CF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Launchpad/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.jheat.Launchpad;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		529ED0D51D034C7600F44CF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Launchpad/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.jheat.Launchpad;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		978419F31CE75A1000F9804C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -503,6 +633,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		529ED0D61D034C7600F44CF6 /* Build configuration list for PBXNativeTarget "Launchpad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				529ED0D41D034C7600F44CF6 /* Debug */,
+				529ED0D51D034C7600F44CF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		978419E91CE75A1000F9804C /* Build configuration list for PBXProject "MIDIKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
