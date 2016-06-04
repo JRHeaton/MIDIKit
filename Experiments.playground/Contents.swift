@@ -69,10 +69,9 @@ do {
 		connection.destinations.append(dest)
 	}
 	
-	let send = { (cmd: LaunchpadCommand) in connection.send(cmd, onChannel: 0) }
+	let send = { (cmd: LaunchpadCommand) in try connection.send(cmd, onChannel: 0) }
+	try send(.Reset)
 	
-	send(.Reset)
-
 //	CFRunLoopRun()
 	
 } catch let error {

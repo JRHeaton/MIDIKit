@@ -24,7 +24,7 @@ public struct Source: Object, Enumerable {
 	}
 	
 	public static var count: Int {
-		return MIDIGetNumberOfDevices()
+		return MIDIGetNumberOfSources()
 	}
 	
 	public init(ref: MIDIEndpointRef) {

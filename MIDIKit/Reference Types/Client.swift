@@ -13,6 +13,9 @@ public final class Client: Object {
 	
 	public internal(set) var inputPorts: [InputPort] = []
 	public internal(set) var outputPorts: [OutputPort] = []
+	
+	public internal(set) var virtualSources: [VirtualSource] = []
+	public internal(set) var virtualDestinations: [VirtualDestination] = []
 
 	public typealias NotificationClosure = (Notification) -> ()
 	
@@ -33,11 +36,19 @@ public final class Client: Object {
 	}
 	
 	public func createInputPort(name: String = "") throws -> InputPort {
-		return try InputPort(client: self, name: name)
+		return try .init(client: self, name: name)
 	}
 	
 	public func createOutputPort(name: String = "") throws -> OutputPort {
-		return try OutputPort(client: self, name: name)
+		return try .init(client: self, name: name)
+	}
+	
+	public func createVirtualSource(name: String = "") throws -> VirtualSource {
+		return try .init(client: self, name: name)
+	}
+	
+	public func createVirtualDestination(name: String = "") throws -> VirtualDestination {
+		return try .init(client: self, name: name)
 	}
 	
 	deinit {

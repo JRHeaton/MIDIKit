@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		973D22191D02D41C0077ACCD /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D22181D02D41C0077ACCD /* Connection.swift */; };
+		973D221F1D02DD8F0077ACCD /* VirtualSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D221E1D02DD8F0077ACCD /* VirtualSource.swift */; };
+		973D22211D02E0920077ACCD /* VirtualDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D22201D02E0920077ACCD /* VirtualDestination.swift */; };
 		975BD15C1D02A859009FAD65 /* Properties+MIDIPropertyNameConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975BD15B1D02A859009FAD65 /* Properties+MIDIPropertyNameConvertible.swift */; };
 		975BD15E1D02A926009FAD65 /* MIDIPropertyNameConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975BD15D1D02A926009FAD65 /* MIDIPropertyNameConvertible.swift */; };
 		97841A191CE7897700F9804C /* MIDIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 97841A181CE7897700F9804C /* MIDIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -41,6 +43,8 @@
 
 /* Begin PBXFileReference section */
 		973D22181D02D41C0077ACCD /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
+		973D221E1D02DD8F0077ACCD /* VirtualSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualSource.swift; sourceTree = "<group>"; };
+		973D22201D02E0920077ACCD /* VirtualDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualDestination.swift; sourceTree = "<group>"; };
 		975BD15B1D02A859009FAD65 /* Properties+MIDIPropertyNameConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Properties+MIDIPropertyNameConvertible.swift"; sourceTree = "<group>"; };
 		975BD15D1D02A926009FAD65 /* MIDIPropertyNameConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDIPropertyNameConvertible.swift; sourceTree = "<group>"; };
 		978419F81CE7647900F9804C /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
@@ -145,6 +149,8 @@
 				973D22181D02D41C0077ACCD /* Connection.swift */,
 				97841A001CE7712E00F9804C /* InputPort.swift */,
 				97841A081CE77F7300F9804C /* OutputPort.swift */,
+				973D221E1D02DD8F0077ACCD /* VirtualSource.swift */,
+				973D22201D02E0920077ACCD /* VirtualDestination.swift */,
 			);
 			path = "Reference Types";
 			sourceTree = "<group>";
@@ -307,7 +313,9 @@
 				97841A221CE78A4200F9804C /* Entity.swift in Sources */,
 				97841A231CE78A4200F9804C /* Device.swift in Sources */,
 				97841A241CE78A4200F9804C /* Source.swift in Sources */,
+				973D221F1D02DD8F0077ACCD /* VirtualSource.swift in Sources */,
 				97841A3E1CE7CAD500F9804C /* MIDIPacketList.swift in Sources */,
+				973D22211D02E0920077ACCD /* VirtualDestination.swift in Sources */,
 				97841A251CE78A4200F9804C /* Destination.swift in Sources */,
 				975BD15E1D02A926009FAD65 /* MIDIPropertyNameConvertible.swift in Sources */,
 				97841A261CE78A4200F9804C /* Error.swift in Sources */,
