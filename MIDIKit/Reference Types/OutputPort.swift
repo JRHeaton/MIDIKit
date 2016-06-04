@@ -5,9 +5,7 @@ public final class OutputPort: Object {
 	
 	public init(client: Client, name: String = "") throws {
 		var result: MIDIPortRef = 0
-		if let error = Error(MIDIOutputPortCreate(client.ref, name, &result)) {
-			throw error
-		}
+		try Error.throwWith(MIDIOutputPortCreate(client.ref, name, &result))
 		ref = result
 		client.outputPorts.append(self)
 	}
@@ -34,9 +32,7 @@ public final class OutputPort: Object {
 	
 	public func send(packetList: UnsafePointer<MIDIPacketList>,
 	                 toDestination destination: Destination) throws {
-		if let error = Error(MIDISend(ref, destination.ref, packetList)) {
-			throw error
-		}
+		try Error.throwWith(MIDISend(ref, destination.ref, packetList))
 	}
 	
 	deinit {

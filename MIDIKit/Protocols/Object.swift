@@ -23,17 +23,13 @@ public func == <A: Object, B: Object>(lhs: A, rhs: B) -> Bool {
 extension Object {
 	private func integerProperty(property: MIDIPropertyNameConvertible) throws -> Int {
 		var result: Int32 = 0
-		if let error = Error(MIDIObjectGetIntegerProperty(ref, property.midiPropertyName, &result)) {
-			throw error
-		}
+		try Error.throwWith(MIDIObjectGetIntegerProperty(ref, property.midiPropertyName, &result))
 		return Int(result)
 	}
 	
 	public func get(property: StringProperty) throws -> String {
 		var result: Unmanaged<CFString>?
-		if let error = Error(MIDIObjectGetStringProperty(ref, property.midiPropertyName, &result)) {
-			throw error
-		}
+		try Error.throwWith(MIDIObjectGetStringProperty(ref, property.midiPropertyName, &result))
 		let value = result?.takeUnretainedValue() as String? ?? ""
 		result?.release()
 		return value

@@ -13,9 +13,9 @@ public final class Client: Object {
 	
 	public init(name: String = "", notificationHandler: NotificationClosure? = nil) throws {
 		var _ref: MIDIClientRef = 0
-		if let error = Error(MIDIClientCreateWithBlock(name, &_ref) { notificationPointer in
+		try Error.throwWith(MIDIClientCreateWithBlock(name, &_ref) { notificationPointer in
 			notificationHandler?(Notification(notificationPointer))
-		}) { throw error }
+		})
 		ref = _ref
 	}
 	

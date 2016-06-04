@@ -56,4 +56,10 @@ public enum Error: ErrorType {
 			self = .Unknown(status)
 		}
 	}
+	
+	static func throwWith(status: OSStatus) throws {
+		if let error = Error(status) {
+			throw error
+		}
+	}
 }

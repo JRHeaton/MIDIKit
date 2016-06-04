@@ -5,11 +5,11 @@ public final class InputPort: Object {
 	
 	public init(client: Client, name: String = "") throws {
 		var _ref: MIDIPortRef = 0
-		if let error = Error(MIDIInputPortCreateWithBlock(client.ref, name, &_ref) { pktListPointer, _ in
+		try Error.throwWith(MIDIInputPortCreateWithBlock(client.ref, name, &_ref) { pktListPointer, _ in
 //			let packetList = pktListPointer.memory
 			
 			print("input")
-		}) { throw error }
+		})
 		ref = _ref
 		client.inputPorts.append(self)
 	}
