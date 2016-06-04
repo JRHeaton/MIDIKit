@@ -49,4 +49,3 @@ public enum ChannelMessage {
 		}
 	}
 }
-

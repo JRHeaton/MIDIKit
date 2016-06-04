@@ -1,0 +1,7 @@
+included:
+    - MIDIKit
+    - MIDIKitTests
+disabled_rules:
+    - trailing_whitespace
+    - cyclomatic_complexity
+    - function_body_length

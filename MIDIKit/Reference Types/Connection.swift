@@ -19,7 +19,7 @@ public final class Connection {
 		outputPort = try client.createOutputPort()
 	}
 	
-	public func send(message: ChannelMessageConvertible, onChannel channel: Int) {
-		destinations.forEach { outputPort.send(message, onChannel: channel, toDestination: $0) }
+	public func send(message: ChannelMessageConvertible, onChannel channel: Int) throws {
+		try destinations.forEach { try outputPort.send(message, onChannel: channel, toDestination: $0) }
 	}
 }

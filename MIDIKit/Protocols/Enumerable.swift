@@ -8,15 +8,15 @@
 
 public protocol Enumerable {
 	static var count: Int { get }
-	static func atIndex(index: Int) -> Self
+	init(index: Int)
 }
 
 extension Enumerable {
 	public static var all: [Self] {
-		return (0..<Self.count).map(Self.atIndex)
+		return (0..<Self.count).map(Self.init)
 	}
 	
 	public static var allLazy: AnyRandomAccessCollection<Self> {
-		return .init((0..<Self.count).lazy.map(Self.atIndex))
+		return .init((0..<Self.count).lazy.map(Self.init))
 	}
 }

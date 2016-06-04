@@ -26,8 +26,7 @@ class MIDIKitTests: XCTestCase {
 			let client2 = try Client(name: "")
 			
 			XCTAssertNotEqual(client1, client2)
-		}
-		catch {
+		} catch {
 			XCTFail()
 		}
 	}

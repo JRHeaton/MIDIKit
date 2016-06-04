@@ -11,8 +11,8 @@ import CoreMIDI
 public struct Source: Object, Enumerable {
 	public let ref: MIDIEndpointRef
 	
-	public static func atIndex(index: Int) -> Source {
-		return Source(ref: MIDIGetSource(index))
+	public init(index: Int) {
+		ref = MIDIGetSource(index)
 	}
 	
 	public var entity: Entity? {

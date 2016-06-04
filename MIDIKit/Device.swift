@@ -11,8 +11,8 @@ import CoreMIDI
 public struct Device: Object, Enumerable {
 	public let ref: MIDIDeviceRef
 	
-	public static func atIndex(index: Int) -> Device {
-		return Device(ref: MIDIGetDevice(index))
+	public init(index: Int) {
+		ref = MIDIGetDevice(index)
 	}
 	
 	public static var count: Int {
