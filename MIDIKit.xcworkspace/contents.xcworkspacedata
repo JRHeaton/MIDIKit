@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/jheaton/dev/projects/MIDIKit/Experiments.playground">
+      location = "group:Experiments.playground">
    </FileRef>
    <FileRef
       location = "container:MIDIKit.xcodeproj">

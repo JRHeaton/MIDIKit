@@ -78,15 +78,15 @@ do {
 		.filter({ $0[.Name] == "Launchpad S" })
 		.first {
 		connection.destinations.append(dest)
+		
+		let send = { (cmd: LaunchpadCommand) in try connection.send(cmd, onChannel: 0) }
+		
+		let cmds = LaunchpadCommand.fillGrid { row, column in
+			return (.Low, arc4random() % 2 == 0 ? .Off : .Medium)
+		}
+		//	try cmds.forEach { try connection.send($0, onChannel: 0) }
+		try send(.Reset)
 	}
-	
-	let send = { (cmd: LaunchpadCommand) in try connection.send(cmd, onChannel: 0) }
-	
-	let cmds = LaunchpadCommand.fillGrid { row, column in
-		return (.Low, arc4random() % 2 == 0 ? .Off : .Medium)
-	}
-//	try cmds.forEach { try connection.send($0, onChannel: 0) }
-	try send(.Reset)
 	
 //	CFRunLoopRun()
 	
