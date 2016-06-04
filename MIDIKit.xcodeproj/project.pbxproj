@@ -114,10 +114,26 @@
 			isa = PBXGroup;
 			children = (
 				529ED0D71D034C8600F44CF6 /* Command.swift */,
+				529ED0DD1D034D3D00F44CF6 /* Resources */,
+			);
+			path = Launchpad;
+			sourceTree = "<group>";
+		};
+		529ED0DC1D034D3600F44CF6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				97841A341CE7B06300F9804C /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		529ED0DD1D034D3D00F44CF6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				529ED0D11D034C7600F44CF6 /* Launchpad.h */,
 				529ED0D31D034C7600F44CF6 /* Info.plist */,
 			);
-			path = Launchpad;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		978419E51CE75A1000F9804C = {
@@ -160,8 +176,8 @@
 		97841A311CE7B06300F9804C /* MIDIKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				97841A341CE7B06300F9804C /* Info.plist */,
 				97841A321CE7B06300F9804C /* MIDIKitTests.swift */,
+				529ED0DC1D034D3600F44CF6 /* Resources */,
 			);
 			path = MIDIKitTests;
 			sourceTree = "<group>";
@@ -446,7 +462,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = Launchpad/Info.plist;
+				INFOPLIST_FILE = Launchpad/Resources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.jheat.Launchpad;
@@ -469,7 +485,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = Launchpad/Info.plist;
+				INFOPLIST_FILE = Launchpad/Resources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.jheat.Launchpad;
@@ -612,7 +628,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = MIDIKitTests/Info.plist;
+				INFOPLIST_FILE = MIDIKitTests/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.jheat.MIDIKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -623,7 +639,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = MIDIKitTests/Info.plist;
+				INFOPLIST_FILE = MIDIKitTests/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.jheat.MIDIKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -640,6 +656,7 @@
 				529ED0D51D034C7600F44CF6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		978419E91CE75A1000F9804C /* Build configuration list for PBXProject "MIDIKit" */ = {
 			isa = XCConfigurationList;
