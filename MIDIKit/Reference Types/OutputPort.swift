@@ -14,20 +14,20 @@ public final class OutputPort: Object {
 		message: ChannelMessageConvertible,
 		onChannel channel: Int,
 		toDestination destination: Destination) throws {
-		let bytes = message.channelMessage.dataOnChannel(channel & 0xF)
-		var packet = MIDIPacket()
-		packet.length = UInt16(bytes.count)
-		packet.timeStamp = 0
-		withUnsafeMutablePointer(&packet.data) { ptr in
-			let buffer = UnsafeMutableBufferPointer<UInt8>(
-				start: UnsafeMutablePointer(ptr),
-				count: Int(packet.length))
-			bytes[0..<bytes.count]
-				.enumerate()
-				.forEach { buffer[$0.index] = $0.element }
+		try send(message.channelMessage.dataOnChannel(channel & 0xF), toDestination: destination)
+	}
+	
+	public func send(packet: Packet, toDestination destination: Destination) throws {
+		try packet.withPacketPointer { pktPtr in
+			var packetList = MIDIPacketList(numPackets: 1, packet: pktPtr.memory)
+			try send(&packetList, toDestination: destination)
 		}
-		var packetList = MIDIPacketList(numPackets: 1, packet: packet)
-		try send(&packetList, toDestination: destination)
+	}
+	
+	public func send(bytes: [UInt8],
+	                 withTimeStamp timeStamp: MIDITimeStamp = 0,
+	                 toDestination destination: Destination) throws {
+		try send(Packet(timeStamp: timeStamp, data: bytes), toDestination: destination)
 	}
 	
 	public func send(packetList: UnsafePointer<MIDIPacketList>,

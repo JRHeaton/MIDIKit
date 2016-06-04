@@ -13,6 +13,9 @@
 		973D22191D02D41C0077ACCD /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D22181D02D41C0077ACCD /* Connection.swift */; };
 		973D221F1D02DD8F0077ACCD /* VirtualSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D221E1D02DD8F0077ACCD /* VirtualSource.swift */; };
 		973D22211D02E0920077ACCD /* VirtualDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D22201D02E0920077ACCD /* VirtualDestination.swift */; };
+		973D22231D035A760077ACCD /* MIDITimeStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D22221D035A760077ACCD /* MIDITimeStamp.swift */; };
+		973D22251D035A910077ACCD /* MIDIPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D22241D035A910077ACCD /* MIDIPacket.swift */; };
+		973D22271D035AED0077ACCD /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D22261D035AED0077ACCD /* Packet.swift */; };
 		975BD15C1D02A859009FAD65 /* Properties+MIDIPropertyNameConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975BD15B1D02A859009FAD65 /* Properties+MIDIPropertyNameConvertible.swift */; };
 		975BD15E1D02A926009FAD65 /* MIDIPropertyNameConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975BD15D1D02A926009FAD65 /* MIDIPropertyNameConvertible.swift */; };
 		97841A191CE7897700F9804C /* MIDIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 97841A181CE7897700F9804C /* MIDIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -59,6 +62,9 @@
 		973D22181D02D41C0077ACCD /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		973D221E1D02DD8F0077ACCD /* VirtualSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualSource.swift; sourceTree = "<group>"; };
 		973D22201D02E0920077ACCD /* VirtualDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualDestination.swift; sourceTree = "<group>"; };
+		973D22221D035A760077ACCD /* MIDITimeStamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDITimeStamp.swift; sourceTree = "<group>"; };
+		973D22241D035A910077ACCD /* MIDIPacket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDIPacket.swift; sourceTree = "<group>"; };
+		973D22261D035AED0077ACCD /* Packet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Packet.swift; sourceTree = "<group>"; };
 		975BD15B1D02A859009FAD65 /* Properties+MIDIPropertyNameConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Properties+MIDIPropertyNameConvertible.swift"; sourceTree = "<group>"; };
 		975BD15D1D02A926009FAD65 /* MIDIPropertyNameConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDIPropertyNameConvertible.swift; sourceTree = "<group>"; };
 		978419F81CE7647900F9804C /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
@@ -168,6 +174,7 @@
 				97841A0E1CE7827200F9804C /* Entity.swift */,
 				97841A041CE7752800F9804C /* Source.swift */,
 				97841A3B1CE7BCAE00F9804C /* Message.swift */,
+				973D22261D035AED0077ACCD /* Packet.swift */,
 				97841A531CE7E2A500F9804C /* Resources */,
 			);
 			path = MIDIKit;
@@ -220,6 +227,8 @@
 			children = (
 				97841A3D1CE7CAD500F9804C /* MIDIPacketList.swift */,
 				975BD15B1D02A859009FAD65 /* Properties+MIDIPropertyNameConvertible.swift */,
+				973D22221D035A760077ACCD /* MIDITimeStamp.swift */,
+				973D22241D035A910077ACCD /* MIDIPacket.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -421,9 +430,12 @@
 				973D22191D02D41C0077ACCD /* Connection.swift in Sources */,
 				975BD15C1D02A859009FAD65 /* Properties+MIDIPropertyNameConvertible.swift in Sources */,
 				97841A3C1CE7BCAE00F9804C /* Message.swift in Sources */,
+				973D22251D035A910077ACCD /* MIDIPacket.swift in Sources */,
 				97841A2A1CE78A4200F9804C /* OutputPort.swift in Sources */,
+				973D22231D035A760077ACCD /* MIDITimeStamp.swift in Sources */,
 				97841A2B1CE78A4200F9804C /* Properties.swift in Sources */,
 				97841A4E1CE7DBDA00F9804C /* Enumerable.swift in Sources */,
+				973D22271D035AED0077ACCD /* Packet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
