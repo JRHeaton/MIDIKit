@@ -19,16 +19,16 @@ public final class Client: Object {
 		ref = _ref
 	}
 	
-	public func firstInputPort(name: String = "") throws -> InputPort {
-		return try inputPorts.first ?? (createInputPort(name))
+	public func firstInputPort(name: String = "", inputClosure: InputPort.InputClosure) throws -> InputPort {
+		return try inputPorts.first ?? (createInputPort(name, inputClosure: inputClosure))
 	}
 	
 	public func firstOutputPort(name: String = "") throws -> OutputPort {
 		return try outputPorts.first ?? createOutputPort(name)
 	}
 	
-	public func createInputPort(name: String = "") throws -> InputPort {
-		return try .init(client: self, name: name)
+	public func createInputPort(name: String = "", inputClosure: InputPort.InputClosure) throws -> InputPort {
+		return try .init(client: self, name: name, inputClosure: inputClosure)
 	}
 	
 	public func createOutputPort(name: String = "") throws -> OutputPort {

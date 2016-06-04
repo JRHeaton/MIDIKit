@@ -5,14 +5,10 @@ public final class Connection {
 	
 	public var destinations: [Destination] = []
 	
-	public init(client: Client) throws {
+	public init(client: Client, inputClosure: InputPort.InputClosure) throws {
 		self.client = client
-		inputPort = try client.createInputPort()
+		inputPort = try client.createInputPort(inputClosure: inputClosure)
 		outputPort = try client.createOutputPort()
-	}
-	
-	public convenience init() throws {
-		try self.init(client: Client())
 	}
 	
 	public func send(message: ChannelMessageConvertible, onChannel channel: Int) throws {

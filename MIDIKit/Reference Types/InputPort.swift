@@ -3,12 +3,16 @@ import CoreMIDI
 public final class InputPort: Object {
 	public let ref: MIDIPortRef
 	
-	public init(client: Client, name: String = "") throws {
+	public typealias InputClosure = (MIDIPacket) -> ()
+	
+	public init(client: Client,
+	            name: String = "",
+	            inputClosure: InputClosure) throws {
 		var _ref: MIDIPortRef = 0
 		try Error.throwWith(MIDIInputPortCreateWithBlock(client.ref, name, &_ref) { pktListPointer, _ in
-//			let packetList = pktListPointer.memory
-			
-			print("input")
+			for packet in pktListPointer.memory {
+				inputClosure(packet)
+			}
 		})
 		ref = _ref
 		client.inputPorts.append(self)

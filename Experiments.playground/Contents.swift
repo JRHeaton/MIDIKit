@@ -2,7 +2,7 @@ import MIDIKit
 import Launchpad
 
 do {
-	let connection = try Connection()
+	let connection = try Connection(client: Client()) { print("\($0.data.0) \($0.data.2) \($0.data.2)") }
 	
 	if let dest = Destination.allLazy
 		.filter({ $0[.Name] == "Launchpad S" })
@@ -22,7 +22,13 @@ do {
 //		try send(.Reset)
 	}
 	
-//	CFRunLoopRun()
+	if let src = Source.allLazy
+		.filter({ $0[.Name] == "Launchpad S" })
+		.first {
+		connection.inputPort.connectSource(src)
+	}
+	
+	CFRunLoopRun()
 	
 } catch let error {
 	print(error)
