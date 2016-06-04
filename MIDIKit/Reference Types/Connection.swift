@@ -1,11 +1,3 @@
-//
-//  Connection.swift
-//  
-//
-//  Created by John Heaton on 6/4/16.
-//
-//
-
 public final class Connection {
 	public let client: Client
 	public let inputPort: InputPort

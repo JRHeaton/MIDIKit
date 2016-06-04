@@ -1,11 +1,3 @@
-//
-//  VirtualDestination.swift
-//  
-//
-//  Created by John Heaton on 6/4/16.
-//
-//
-
 import CoreMIDI
 
 public final class VirtualDestination: Object {

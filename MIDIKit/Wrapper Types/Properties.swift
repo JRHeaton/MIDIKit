@@ -1,11 +1,3 @@
-//
-//  Properties.swift
-//  hax
-//
-//  Created by John Heaton on 5/14/16.
-//  Copyright © 2016 John Heaton. All rights reserved.
-//
-
 public enum StringProperty {
 	case DisplayName
 	case DriverDeviceEditorApp
