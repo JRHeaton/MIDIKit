@@ -22,6 +22,17 @@ enum LaunchpadCommand: ChannelMessageConvertible {
 	case AutoFlashBuffers(enable: Bool)
 	case DoubleBufferControl(firstBuffer: BufferType, copyDisplayStatesToUpdateBuffer: Bool)
 	
+	static func fillGrid(closure: (row: Int, column: Int) -> (red: Brightness, green: Brightness)) -> [LaunchpadCommand] {
+		var cmds = [LaunchpadCommand]()
+		for row in 0..<8 {
+			for column in 0..<8 {
+				let (red, green) = closure(row: row, column: column)
+				cmds.append(.Grid(row: row, column: column, red: red, green: green, bufferMethod: .ClearOtherBuffer))
+			}
+		}
+		return cmds
+	}
+	
 	var channelMessage: ChannelMessage {
 		switch self {
 		case .Reset:
@@ -70,6 +81,11 @@ do {
 	}
 	
 	let send = { (cmd: LaunchpadCommand) in try connection.send(cmd, onChannel: 0) }
+	
+	let cmds = LaunchpadCommand.fillGrid { row, column in
+		return (.Low, arc4random() % 2 == 0 ? .Off : .Medium)
+	}
+//	try cmds.forEach { try connection.send($0, onChannel: 0) }
 	try send(.Reset)
 	
 //	CFRunLoopRun()
