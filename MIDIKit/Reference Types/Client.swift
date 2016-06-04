@@ -14,7 +14,9 @@ public final class Client: Object {
 	public internal(set) var inputPorts: [InputPort] = []
 	public internal(set) var outputPorts: [OutputPort] = []
 
-	public init(name: String = "", notificationHandler: (Notification -> ())? = nil) throws {
+	public typealias NotificationClosure = (Notification) -> ()
+	
+	public init(name: String = "", notificationHandler: NotificationClosure? = nil) throws {
 		var _ref: MIDIClientRef = 0
 		if let error = Error(MIDIClientCreateWithBlock(name, &_ref) { notificationPointer in
 			notificationHandler?(Notification(notificationPointer))

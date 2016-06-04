@@ -23,21 +23,15 @@ public struct Entity: Object {
 		return nil
 	}
 	
-	public var sourceCount: Int {
-		return MIDIEntityGetNumberOfSources(ref)
-	}
 	public var sources: AnyRandomAccessCollection<Source> {
-		return .init((0..<sourceCount)
+		return .init((0..<MIDIEntityGetNumberOfSources(ref))
 			.lazy
 			.map { MIDIEntityGetSource(self.ref, $0) }
 			.map(Source.init))
 	}
-	
-	public var destinationCount: Int {
-		return MIDIEntityGetNumberOfDestinations(ref)
-	}
+
 	public var destinations: AnyRandomAccessCollection<Destination> {
-		return .init((0..<destinationCount)
+		return .init((0..<MIDIEntityGetNumberOfDestinations(ref))
 			.lazy
 			.map { MIDIEntityGetDestination(self.ref, $0) }
 			.map(Destination.init))

@@ -23,11 +23,8 @@ public struct Device: Object, Enumerable {
 		self.ref = ref
 	}
 	
-	public var entityCount: Int {
-		return MIDIDeviceGetNumberOfEntities(ref)
-	}
 	public var entities: AnyRandomAccessCollection<Entity> {
-		return .init((0..<entityCount)
+		return .init((0..<MIDIDeviceGetNumberOfEntities(ref))
 			.lazy
 			.map { MIDIDeviceGetEntity(self.ref, $0) }
 			.map(Entity.init))

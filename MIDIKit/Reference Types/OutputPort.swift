@@ -32,7 +32,7 @@ public final class OutputPort: Object {
 				.forEach { buffer[$0.index] = $0.element }
 		}
 		var packetList = MIDIPacketList(numPackets: 1, packet: packet)
-		MIDISend(ref, destination.ref, &packetList)
+		self.send(&packetList, toDestination: destination)
 	}
 	
 	public func send(packetList: UnsafePointer<MIDIPacketList>, toDestination destination: Destination) {

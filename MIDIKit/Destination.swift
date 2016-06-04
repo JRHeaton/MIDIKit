@@ -21,7 +21,6 @@ public struct Destination: Object, Enumerable {
 			return Entity(ref: result)
 		}
 		return nil
-
 	}
 	
 	public static var count: Int {
