@@ -14,7 +14,7 @@ public final class OutputPort: Object {
 		message: ChannelMessageConvertible,
 		onChannel channel: Int,
 		toDestination destination: Destination) throws {
-		try send(message.channelMessage.dataOnChannel(channel & 0xF), toDestination: destination)
+		try send(message.channelMessage.on(channel: channel & 0xF), toDestination: destination)
 	}
 	
 	public func send<S: SequenceType where S.Generator.Element: ChannelMessageConvertible>(
@@ -38,7 +38,7 @@ public final class OutputPort: Object {
 	}
 	
 	public func send(bytes: [UInt8],
-	                 withTimeStamp timeStamp: MIDITimeStamp = 0,
+	                 withTimeStamp timeStamp: MIDITimeStamp = .Now,
 	                 toDestination destination: Destination) throws {
 		try send(Packet(timeStamp: timeStamp, data: bytes), toDestination: destination)
 	}

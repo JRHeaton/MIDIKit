@@ -19,7 +19,7 @@ public enum ChannelMessage {
 	case ChannelAftertouch(pressure: UInt8)
 	case PitchBend(value: UInt16)
 	
-	func dataOnChannel(channel: Int) -> [UInt8] {
+	func on(channel channel: Int) -> [UInt8] {
 		func status(statusByte: UInt8) -> UInt8 {
 			return statusByte | (UInt8(channel) & 0xF)
 		}
