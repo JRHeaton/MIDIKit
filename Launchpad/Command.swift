@@ -8,22 +8,24 @@
 
 import MIDIKit
 
-public enum Command: ChannelMessageConvertible {
-	public enum Brightness: UInt8 {
-		case Off		= 0
-		case Low		= 1
-		case Medium		= 2
-		case Full		= 3
-	}
-	public enum DoubleBufferWriteMethod {
-		case ClearOtherBuffer
-		case WriteToBoth
-	}
-	public enum BufferType {
-		case Display
-		case Update
-	}
-	
+public enum Brightness: UInt8 {
+	case Off		= 0
+	case Low		= 1
+	case Medium		= 2
+	case Full		= 3
+}
+
+public enum DoubleBufferWriteMethod {
+	case ClearOtherBuffer
+	case WriteToBoth
+}
+
+public enum BufferType {
+	case Display
+	case Update
+}
+
+public enum Command: ChannelMessageConvertible {	
 	case Reset
 	case LEDTest
 	case Grid(row: Int, column: Int, red: Brightness, green: Brightness, bufferMethod: DoubleBufferWriteMethod)

@@ -14,7 +14,7 @@ do {
 		let send = { (cmd: Launchpad.Command) in try connection.send(cmd, onChannel: 0) }
 		
 		let cmds = Command.fillGrid { row, column in
-			func rando(max: Command.Brightness = .Full) -> Command.Brightness {
+			func rando(max: Brightness = .Full) -> Brightness {
 				return arc4random() % 2 == 0 ? .Off : max
 			}
 			return (rando(), rando(.Low))
@@ -28,9 +28,9 @@ do {
 		.filter({ $0[.Name] == "Launchpad S" })
 		.first {
 		connection.inputPort.connectSource(src)
+		
+		CFRunLoopRun()
 	}
-	
-	CFRunLoopRun()
 	
 } catch let error {
 	print(error)
