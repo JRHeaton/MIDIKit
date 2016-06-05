@@ -3,4 +3,4 @@ language: objective-c
 xcode_project: MIDIKit.xcodeproj
 xcode_scheme: MIDIKit-OSX
 script:
-  - xctool -project MIDIKit.xcodeproj -scheme "MIDIKit-iOS" build
+  - xctool -project MIDIKit.xcodeproj -scheme "MIDIKit-iOS" -sdk iphonesimulator build
