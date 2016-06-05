@@ -1,9 +1,6 @@
 osx_image: xcode7.3
 language: objective-c
 xcode_project: MIDIKit.xcodeproj
-matrix:
-  include:
-    - xcode_sdk: iphonesimulator
-      xcode_scheme: MIDIKit-iOS
-    - xcode_sdk: macosx
-      xcode_scheme: MIDIKit-OSX
+xcode_scheme: MIDIKit-OSX
+script:
+  - xctool -project MIDIKit.xcodeproj -scheme "MIDIKit-iOS" build
