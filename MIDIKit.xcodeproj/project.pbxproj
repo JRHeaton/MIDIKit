@@ -10,7 +10,6 @@
 		973D221F1D02DD8F0077ACCD /* VirtualSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D221E1D02DD8F0077ACCD /* VirtualSource.swift */; };
 		973D22211D02E0920077ACCD /* VirtualDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D22201D02E0920077ACCD /* VirtualDestination.swift */; };
 		973D22231D035A760077ACCD /* MIDITimeStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D22221D035A760077ACCD /* MIDITimeStamp.swift */; };
-		973D22251D035A910077ACCD /* MIDIPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D22241D035A910077ACCD /* MIDIPacket.swift */; };
 		973D22271D035AED0077ACCD /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D22261D035AED0077ACCD /* Packet.swift */; };
 		975BD15C1D02A859009FAD65 /* Properties+MIDIPropertyNameConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975BD15B1D02A859009FAD65 /* Properties+MIDIPropertyNameConvertible.swift */; };
 		975BD15E1D02A926009FAD65 /* MIDIPropertyNameConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975BD15D1D02A926009FAD65 /* MIDIPropertyNameConvertible.swift */; };
@@ -29,12 +28,9 @@
 		97841A331CE7B06300F9804C /* MIDIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97841A321CE7B06300F9804C /* MIDIKitTests.swift */; };
 		97841A351CE7B06300F9804C /* MIDIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97841A161CE7897700F9804C /* MIDIKit.framework */; };
 		97841A3C1CE7BCAE00F9804C /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97841A3B1CE7BCAE00F9804C /* Message.swift */; };
-		97841A3E1CE7CAD500F9804C /* MIDIPacketList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97841A3D1CE7CAD500F9804C /* MIDIPacketList.swift */; };
 		97841A4E1CE7DBDA00F9804C /* Enumerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97841A4C1CE7DBCE00F9804C /* Enumerable.swift */; };
-		97B2CDF41D04933600C8DE64 /* MIDIPacketList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97841A3D1CE7CAD500F9804C /* MIDIPacketList.swift */; };
 		97B2CDF51D04933600C8DE64 /* Properties+MIDIPropertyNameConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975BD15B1D02A859009FAD65 /* Properties+MIDIPropertyNameConvertible.swift */; };
 		97B2CDF61D04933600C8DE64 /* MIDITimeStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D22221D035A760077ACCD /* MIDITimeStamp.swift */; };
-		97B2CDF71D04933600C8DE64 /* MIDIPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D22241D035A910077ACCD /* MIDIPacket.swift */; };
 		97B2CDF81D04933600C8DE64 /* Enumerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97841A4C1CE7DBCE00F9804C /* Enumerable.swift */; };
 		97B2CDF91D04933600C8DE64 /* MIDIPropertyNameConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975BD15D1D02A926009FAD65 /* MIDIPropertyNameConvertible.swift */; };
 		97B2CDFA1D04933600C8DE64 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97841A021CE7714300F9804C /* Object.swift */; };
@@ -55,6 +51,10 @@
 		97B2CE1F1D049E0B00C8DE64 /* MIDIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97B2CDEC1D0492E200C8DE64 /* MIDIKit.framework */; };
 		97B2CE251D049EFB00C8DE64 /* MIDIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 97841A181CE7897700F9804C /* MIDIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		97B2CE271D049FC000C8DE64 /* MIDIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97841A321CE7B06300F9804C /* MIDIKitTests.swift */; };
+		97B2CE2A1D04BC6000C8DE64 /* CoreMIDIExtensions.c in Sources */ = {isa = PBXBuildFile; fileRef = 97B2CE281D04BC6000C8DE64 /* CoreMIDIExtensions.c */; };
+		97B2CE2B1D04BC6000C8DE64 /* CoreMIDIExtensions.c in Sources */ = {isa = PBXBuildFile; fileRef = 97B2CE281D04BC6000C8DE64 /* CoreMIDIExtensions.c */; };
+		97B2CE2E1D04BD4700C8DE64 /* CoreMIDIExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 97B2CE291D04BC6000C8DE64 /* CoreMIDIExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		97B2CE2F1D04BD4700C8DE64 /* CoreMIDIExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 97B2CE291D04BC6000C8DE64 /* CoreMIDIExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,7 +78,6 @@
 		973D221E1D02DD8F0077ACCD /* VirtualSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualSource.swift; sourceTree = "<group>"; };
 		973D22201D02E0920077ACCD /* VirtualDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualDestination.swift; sourceTree = "<group>"; };
 		973D22221D035A760077ACCD /* MIDITimeStamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDITimeStamp.swift; sourceTree = "<group>"; };
-		973D22241D035A910077ACCD /* MIDIPacket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDIPacket.swift; sourceTree = "<group>"; };
 		973D22261D035AED0077ACCD /* Packet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Packet.swift; sourceTree = "<group>"; };
 		975BD15B1D02A859009FAD65 /* Properties+MIDIPropertyNameConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Properties+MIDIPropertyNameConvertible.swift"; sourceTree = "<group>"; };
 		975BD15D1D02A926009FAD65 /* MIDIPropertyNameConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDIPropertyNameConvertible.swift; sourceTree = "<group>"; };
@@ -100,10 +99,11 @@
 		97841A321CE7B06300F9804C /* MIDIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDIKitTests.swift; sourceTree = "<group>"; };
 		97841A341CE7B06300F9804C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97841A3B1CE7BCAE00F9804C /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		97841A3D1CE7CAD500F9804C /* MIDIPacketList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDIPacketList.swift; sourceTree = "<group>"; };
 		97841A4C1CE7DBCE00F9804C /* Enumerable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enumerable.swift; sourceTree = "<group>"; };
 		97B2CDEC1D0492E200C8DE64 /* MIDIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MIDIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		97B2CE1A1D049E0B00C8DE64 /* MIDIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MIDIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		97B2CE281D04BC6000C8DE64 /* CoreMIDIExtensions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CoreMIDIExtensions.c; sourceTree = "<group>"; };
+		97B2CE291D04BC6000C8DE64 /* CoreMIDIExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreMIDIExtensions.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +171,8 @@
 		97841A171CE7897700F9804C /* MIDIKit */ = {
 			isa = PBXGroup;
 			children = (
+				97B2CE281D04BC6000C8DE64 /* CoreMIDIExtensions.c */,
+				97B2CE291D04BC6000C8DE64 /* CoreMIDIExtensions.h */,
 				97841A521CE7E28A00F9804C /* Extensions */,
 				97841A4F1CE7E21800F9804C /* Protocols */,
 				97841A501CE7E23D00F9804C /* Reference Types */,
@@ -230,10 +232,8 @@
 		97841A521CE7E28A00F9804C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				97841A3D1CE7CAD500F9804C /* MIDIPacketList.swift */,
 				975BD15B1D02A859009FAD65 /* Properties+MIDIPropertyNameConvertible.swift */,
 				973D22221D035A760077ACCD /* MIDITimeStamp.swift */,
-				973D22241D035A910077ACCD /* MIDIPacket.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -254,6 +254,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97B2CE2E1D04BD4700C8DE64 /* CoreMIDIExtensions.h in Headers */,
 				97841A191CE7897700F9804C /* MIDIKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,6 +263,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97B2CE2F1D04BD4700C8DE64 /* CoreMIDIExtensions.h in Headers */,
 				97B2CE251D049EFB00C8DE64 /* MIDIKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -459,7 +461,6 @@
 				97841A231CE78A4200F9804C /* Device.swift in Sources */,
 				97841A241CE78A4200F9804C /* Source.swift in Sources */,
 				973D221F1D02DD8F0077ACCD /* VirtualSource.swift in Sources */,
-				97841A3E1CE7CAD500F9804C /* MIDIPacketList.swift in Sources */,
 				973D22211D02E0920077ACCD /* VirtualDestination.swift in Sources */,
 				97841A251CE78A4200F9804C /* Destination.swift in Sources */,
 				975BD15E1D02A926009FAD65 /* MIDIPropertyNameConvertible.swift in Sources */,
@@ -469,10 +470,10 @@
 				97841A291CE78A4200F9804C /* InputPort.swift in Sources */,
 				975BD15C1D02A859009FAD65 /* Properties+MIDIPropertyNameConvertible.swift in Sources */,
 				97841A3C1CE7BCAE00F9804C /* Message.swift in Sources */,
-				973D22251D035A910077ACCD /* MIDIPacket.swift in Sources */,
 				97841A2A1CE78A4200F9804C /* OutputPort.swift in Sources */,
 				973D22231D035A760077ACCD /* MIDITimeStamp.swift in Sources */,
 				97841A2B1CE78A4200F9804C /* Properties.swift in Sources */,
+				97B2CE2A1D04BC6000C8DE64 /* CoreMIDIExtensions.c in Sources */,
 				97841A4E1CE7DBDA00F9804C /* Enumerable.swift in Sources */,
 				973D22271D035AED0077ACCD /* Packet.swift in Sources */,
 			);
@@ -490,7 +491,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97B2CDF41D04933600C8DE64 /* MIDIPacketList.swift in Sources */,
 				97B2CDF61D04933600C8DE64 /* MIDITimeStamp.swift in Sources */,
 				97B2CDF91D04933600C8DE64 /* MIDIPropertyNameConvertible.swift in Sources */,
 				97B2CE041D04933600C8DE64 /* Message.swift in Sources */,
@@ -499,7 +499,6 @@
 				97B2CE081D04933A00C8DE64 /* Properties.swift in Sources */,
 				97B2CE011D04933600C8DE64 /* Device.swift in Sources */,
 				97B2CDFA1D04933600C8DE64 /* Object.swift in Sources */,
-				97B2CDF71D04933600C8DE64 /* MIDIPacket.swift in Sources */,
 				97B2CE031D04933600C8DE64 /* Source.swift in Sources */,
 				97B2CDF51D04933600C8DE64 /* Properties+MIDIPropertyNameConvertible.swift in Sources */,
 				97B2CDFC1D04933600C8DE64 /* InputPort.swift in Sources */,
@@ -509,6 +508,7 @@
 				97B2CE051D04933600C8DE64 /* Packet.swift in Sources */,
 				97B2CE071D04933A00C8DE64 /* Notification.swift in Sources */,
 				97B2CDFE1D04933600C8DE64 /* VirtualSource.swift in Sources */,
+				97B2CE2B1D04BC6000C8DE64 /* CoreMIDIExtensions.c in Sources */,
 				97B2CDF81D04933600C8DE64 /* Enumerable.swift in Sources */,
 				97B2CE061D04933A00C8DE64 /* Error.swift in Sources */,
 			);
@@ -623,6 +623,7 @@
 		97841A1C1CE7897700F9804C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -638,6 +639,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.jheat.MIDIKit;
 				PRODUCT_NAME = MIDIKit;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -646,6 +648,7 @@
 		97841A1D1CE7897700F9804C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -691,6 +694,7 @@
 		97B2CDF21D0492E300C8DE64 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphonesimulator*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
@@ -706,6 +710,7 @@
 				PRODUCT_NAME = MIDIKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -715,6 +720,7 @@
 		97B2CDF31D0492E300C8DE64 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphonesimulator*]" = "";
 				CURRENT_PROJECT_VERSION = 1;

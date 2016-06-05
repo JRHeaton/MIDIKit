@@ -25,10 +25,11 @@ public final class OutputPort: Object {
 	}
 	
 	public func send(packet: Packet, toDestination destination: Destination) throws {
-		try packet.withPacketPointer { pktPtr in
-			var packetList = MIDIPacketList(numPackets: 1, packet: pktPtr.memory)
-			try send(&packetList, toDestination: destination)
-		}
+		try Error.throwWith(MIDISendData(ref,
+			destination.ref,
+			packet.data,
+			numericCast(packet.data.count),
+			packet.timeStamp))
 	}
 	
 	public func send<S: SequenceType where S.Generator.Element == Packet>(

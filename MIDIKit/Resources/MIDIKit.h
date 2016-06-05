@@ -7,6 +7,7 @@
 //
 
 @import Foundation;
+#import "CoreMIDIExtensions.h"
 
 //! Project version number for MIDIKit.
 FOUNDATION_EXPORT double MIDIKitVersionNumber;

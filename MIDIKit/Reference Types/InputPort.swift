@@ -11,18 +11,11 @@ public final class InputPort: Object {
 		var result: MIDIPortRef = 0
 		MIDIInputPortCreateWithBlock(client.ref, name, &result) { pktListPointer, srcPtr in
 			let source = UnsafePointer<Source>(srcPtr).memory
-//			let mutablePtr = UnsafeMutablePointer<MIDIPacketList>(pktListPointer)
-//			
-//			withUnsafePointer(&mutablePtr.memory.packet) { packetPtr in
-//				var pkt = packetPtr.memory
-//				
-//			}
-			
-			for var packet in pktListPointer.memory {
-				withUnsafePointer(&packet.data) { dataPtr in
-					let bytes = Array<UInt8>(UnsafeBufferPointer(start: UnsafePointer(dataPtr), count: Int(packet.length)))
-					inputClosure(Packet(timeStamp: packet.timeStamp, data: bytes), source)
-				}
+			MIDIPacketListEnumerate(pktListPointer) { data, length, timeStamp in
+				let bytes = Array<UInt8>(UnsafeBufferPointer(
+					start: UnsafePointer(data),
+					count: Int(length)))
+				inputClosure(Packet(timeStamp: timeStamp, data: bytes), source)
 			}
 		}
 		ref = result
