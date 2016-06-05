@@ -10,7 +10,6 @@
 		529ED0D21D034C7600F44CF6 /* Launchpad.h in Headers */ = {isa = PBXBuildFile; fileRef = 529ED0D11D034C7600F44CF6 /* Launchpad.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		529ED0D81D034C8600F44CF6 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529ED0D71D034C8600F44CF6 /* Command.swift */; };
 		529ED0DB1D034C9B00F44CF6 /* MIDIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97841A161CE7897700F9804C /* MIDIKit.framework */; };
-		973D22191D02D41C0077ACCD /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D22181D02D41C0077ACCD /* Connection.swift */; };
 		973D221F1D02DD8F0077ACCD /* VirtualSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D221E1D02DD8F0077ACCD /* VirtualSource.swift */; };
 		973D22211D02E0920077ACCD /* VirtualDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D22201D02E0920077ACCD /* VirtualDestination.swift */; };
 		973D22231D035A760077ACCD /* MIDITimeStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973D22221D035A760077ACCD /* MIDITimeStamp.swift */; };
@@ -59,7 +58,6 @@
 		529ED0D11D034C7600F44CF6 /* Launchpad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Launchpad.h; sourceTree = "<group>"; };
 		529ED0D31D034C7600F44CF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		529ED0D71D034C8600F44CF6 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
-		973D22181D02D41C0077ACCD /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		973D221E1D02DD8F0077ACCD /* VirtualSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualSource.swift; sourceTree = "<group>"; };
 		973D22201D02E0920077ACCD /* VirtualDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualDestination.swift; sourceTree = "<group>"; };
 		973D22221D035A760077ACCD /* MIDITimeStamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDITimeStamp.swift; sourceTree = "<group>"; };
@@ -203,7 +201,6 @@
 			isa = PBXGroup;
 			children = (
 				978419FE1CE7711800F9804C /* Client.swift */,
-				973D22181D02D41C0077ACCD /* Connection.swift */,
 				97841A001CE7712E00F9804C /* InputPort.swift */,
 				97841A081CE77F7300F9804C /* OutputPort.swift */,
 				973D221E1D02DD8F0077ACCD /* VirtualSource.swift */,
@@ -427,7 +424,6 @@
 				97841A271CE78A4200F9804C /* Notification.swift in Sources */,
 				97841A281CE78A4200F9804C /* Client.swift in Sources */,
 				97841A291CE78A4200F9804C /* InputPort.swift in Sources */,
-				973D22191D02D41C0077ACCD /* Connection.swift in Sources */,
 				975BD15C1D02A859009FAD65 /* Properties+MIDIPropertyNameConvertible.swift in Sources */,
 				97841A3C1CE7BCAE00F9804C /* Message.swift in Sources */,
 				973D22251D035A910077ACCD /* MIDIPacket.swift in Sources */,
