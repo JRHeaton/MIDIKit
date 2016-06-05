@@ -54,6 +54,7 @@
 		97B2CE081D04933A00C8DE64 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978419FC1CE7648C00F9804C /* Properties.swift */; };
 		97B2CE1F1D049E0B00C8DE64 /* MIDIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97B2CDEC1D0492E200C8DE64 /* MIDIKit.framework */; };
 		97B2CE251D049EFB00C8DE64 /* MIDIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 97841A181CE7897700F9804C /* MIDIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		97B2CE271D049FC000C8DE64 /* MIDIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97841A321CE7B06300F9804C /* MIDIKitTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -517,6 +518,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97B2CE271D049FC000C8DE64 /* MIDIKitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
