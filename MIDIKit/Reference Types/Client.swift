@@ -12,19 +12,11 @@ public final class Client: Object {
 	public typealias NotificationClosure = (Notification) -> ()
 	
 	public init(name: String = "", notificationHandler: NotificationClosure? = nil) throws {
-		var _ref: MIDIClientRef = 0
-		try Error.throwWith(MIDIClientCreateWithBlock(name, &_ref) { notificationPointer in
+		var result: MIDIClientRef = 0
+		try Error.throwWith(MIDIClientCreateWithBlock(name, &result) { notificationPointer in
 			notificationHandler?(Notification(notificationPointer))
 		})
-		ref = _ref
-	}
-	
-	public func firstInputPort(name: String = "", inputClosure: InputPort.InputClosure) throws -> InputPort {
-		return try inputPorts.first ?? (createInputPort(name, inputClosure: inputClosure))
-	}
-	
-	public func firstOutputPort(name: String = "") throws -> OutputPort {
-		return try outputPorts.first ?? createOutputPort(name)
+		ref = result
 	}
 	
 	public func createInputPort(name: String = "", inputClosure: InputPort.InputClosure) throws -> InputPort {
