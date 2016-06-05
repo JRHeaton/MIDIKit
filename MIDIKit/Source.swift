@@ -3,8 +3,16 @@ import CoreMIDI
 public struct Source: Object, Enumerable {
 	public let ref: MIDIEndpointRef
 	
+	public static var count: Int {
+		return MIDIGetNumberOfSources()
+	}
+	
 	public init(index: Int) {
 		ref = MIDIGetSource(index)
+	}
+	
+	public init(ref: MIDIEndpointRef) {
+		self.ref = ref
 	}
 	
 	public var entity: Entity? {
@@ -15,11 +23,6 @@ public struct Source: Object, Enumerable {
 		return nil
 	}
 	
-	public static var count: Int {
-		return MIDIGetNumberOfSources()
-	}
 	
-	public init(ref: MIDIEndpointRef) {
-		self.ref = ref
-	}
+
 }

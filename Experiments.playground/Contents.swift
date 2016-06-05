@@ -1,6 +1,13 @@
 import MIDIKit
 import Launchpad
 
+import CoreMIDI
+import Foundation
+let x = mach_absolute_time()
+sleep(1)
+x.secondsAgo
+
+
 do {
 	let client = try Client()
 	let outputPort = try client.createOutputPort()

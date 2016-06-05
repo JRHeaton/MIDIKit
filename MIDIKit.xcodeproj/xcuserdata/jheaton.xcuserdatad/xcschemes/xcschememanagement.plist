@@ -4,20 +4,25 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Launchpad.xcscheme</key>
+		<key>MIDIKit-OSX.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>0</integer>
 		</dict>
-		<key>MIDIKit.xcscheme_^#shared#^_</key>
+		<key>MIDIKit-OSXTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>MIDIKit-iOS.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>MIDIKitTests.xcscheme</key>
+		<key>MIDIKit-iOSTests.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -38,6 +43,21 @@
 			<true/>
 		</dict>
 		<key>97841A2F1CE7B06300F9804C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>97B2CDEB1D0492E200C8DE64</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>97B2CE091D049DD800C8DE64</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>97B2CE191D049E0B00C8DE64</key>
 		<dict>
 			<key>primary</key>
 			<true/>

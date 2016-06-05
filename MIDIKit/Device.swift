@@ -3,12 +3,12 @@ import CoreMIDI
 public struct Device: Object, Enumerable {
 	public let ref: MIDIDeviceRef
 	
-	public init(index: Int) {
-		ref = MIDIGetDevice(index)
-	}
-	
 	public static var count: Int {
 		return MIDIGetNumberOfDevices()
+	}
+	
+	public init(index: Int) {
+		ref = MIDIGetDevice(index)
 	}
 	
 	public init(ref: MIDIDeviceRef) {

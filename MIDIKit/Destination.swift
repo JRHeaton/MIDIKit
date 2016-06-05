@@ -3,8 +3,16 @@ import CoreMIDI
 public struct Destination: Object, Enumerable {
 	public let ref: MIDIEndpointRef
 
+	public static var count: Int {
+		return MIDIGetNumberOfDestinations()
+	}
+	
 	public init(index: Int) {
 		ref = MIDIGetDestination(index)
+	}
+	
+	public init(ref: MIDIEndpointRef) {
+		self.ref = ref
 	}
 	
 	public var entity: Entity? {
@@ -13,14 +21,6 @@ public struct Destination: Object, Enumerable {
 			return Entity(ref: result)
 		}
 		return nil
-	}
-	
-	public static var count: Int {
-		return MIDIGetNumberOfDestinations()
-	}
-	
-	public init(ref: MIDIEndpointRef) {
-		self.ref = ref
 	}
 	
 	public func unschedulePreviouslySentPackets() {

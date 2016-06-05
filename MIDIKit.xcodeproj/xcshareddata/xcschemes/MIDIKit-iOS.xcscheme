@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "97841A151CE7897700F9804C"
+               BlueprintIdentifier = "97B2CDEB1D0492E200C8DE64"
                BuildableName = "MIDIKit.framework"
-               BlueprintName = "MIDIKit"
+               BlueprintName = "MIDIKit-iOS"
                ReferencedContainer = "container:MIDIKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,26 +28,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "97841A2F1CE7B06300F9804C"
-               BuildableName = "MIDIKitTests.xctest"
-               BlueprintName = "MIDIKitTests"
-               ReferencedContainer = "container:MIDIKit.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "97841A151CE7897700F9804C"
-            BuildableName = "MIDIKit.framework"
-            BlueprintName = "MIDIKit"
-            ReferencedContainer = "container:MIDIKit.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -64,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "97841A151CE7897700F9804C"
+            BlueprintIdentifier = "97B2CDEB1D0492E200C8DE64"
             BuildableName = "MIDIKit.framework"
-            BlueprintName = "MIDIKit"
+            BlueprintName = "MIDIKit-iOS"
             ReferencedContainer = "container:MIDIKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -82,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "97841A151CE7897700F9804C"
+            BlueprintIdentifier = "97B2CDEB1D0492E200C8DE64"
             BuildableName = "MIDIKit.framework"
-            BlueprintName = "MIDIKit"
+            BlueprintName = "MIDIKit-iOS"
             ReferencedContainer = "container:MIDIKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

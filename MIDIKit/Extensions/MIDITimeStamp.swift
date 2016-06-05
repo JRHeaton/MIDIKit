@@ -1,11 +1,14 @@
 import CoreMIDI
-import CoreAudio
 
 extension MIDITimeStamp {
 	public static var Now: MIDITimeStamp = 0
 	
 	public var secondsAgo: NSTimeInterval {
-		return NSTimeInterval(AudioConvertHostTimeToNanos(AudioGetCurrentHostTime() - self)) / 1_000_000_000
+		let currentTime = mach_absolute_time()
+		var timeBaseInfo = mach_timebase_info()
+		mach_timebase_info(&timeBaseInfo)
+		let nanos = currentTime * numericCast(timeBaseInfo.numer) / numericCast(timeBaseInfo.denom)
+		return NSTimeInterval(nanos - self) / 1_000_000_000
 	}
 	
 	public var date: NSDate {
