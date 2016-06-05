@@ -27,7 +27,7 @@ public enum BufferType {
 
 public enum Command: ChannelMessageConvertible {	
 	case Reset
-	case LEDTest
+	case LEDTest(Brightness)
 	case Grid(row: Int, column: Int, red: Brightness, green: Brightness, bufferMethod: DoubleBufferWriteMethod)
 	case AutoFlashBuffers(enable: Bool)
 	case DoubleBufferControl(firstBuffer: BufferType, copyDisplayStatesToUpdateBuffer: Bool)
@@ -47,8 +47,8 @@ public enum Command: ChannelMessageConvertible {
 		switch self {
 		case .Reset:
 			return .ControlChange(controller: 0, value: 0)
-		case .LEDTest:
-			return .ControlChange(controller: 0, value: 0x7F)
+		case .LEDTest(let brightness):
+			return .ControlChange(controller: 0, value: 0x7D + brightness.rawValue)
 		case let .Grid(row, column, red, green, bufferMethod):
 			var velocity: UInt8 = 0
 			switch bufferMethod {
