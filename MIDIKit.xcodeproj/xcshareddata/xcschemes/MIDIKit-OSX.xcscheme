@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "97841A2F1CE7B06300F9804C"
+               BuildableName = "MIDIKitTests.xctest"
+               BlueprintName = "MIDIKit-OSXTests"
+               ReferencedContainer = "container:MIDIKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "97841A151CE7897700F9804C"
+            BuildableName = "MIDIKit.framework"
+            BlueprintName = "MIDIKit-OSX"
+            ReferencedContainer = "container:MIDIKit.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>

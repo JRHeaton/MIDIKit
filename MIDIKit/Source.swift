@@ -22,7 +22,4 @@ public struct Source: Object, Enumerable {
 		}
 		return nil
 	}
-	
-	
-
 }
