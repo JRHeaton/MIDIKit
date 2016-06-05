@@ -3,30 +3,32 @@ import CoreMIDI
 public final class InputPort: Object {
 	public let ref: MIDIPortRef
 	
-	public typealias InputClosure = (Packet) -> ()
+	public typealias InputClosure = (Packet, Source) -> ()
 	
 	public init(client: Client,
 	            name: String = "",
 	            inputClosure: InputClosure) throws {
-		var _ref: MIDIPortRef = 0
-		try Error.throwWith(MIDIInputPortCreateWithBlock(client.ref, name, &_ref) { pktListPointer, _ in
+		var result: MIDIPortRef = 0
+		MIDIInputPortCreateWithBlock(client.ref, name, &result) { pktListPointer, srcPtr in
+			let source = UnsafePointer<Source>(srcPtr).memory
 			for var packet in pktListPointer.memory {
 				withUnsafePointer(&packet.data) { dataPtr in
 					let bytes = Array<UInt8>(UnsafeBufferPointer(start: UnsafePointer(dataPtr), count: Int(packet.length)))
-					inputClosure(Packet(timeStamp: packet.timeStamp, data: bytes))
+					inputClosure(Packet(timeStamp: packet.timeStamp, data: bytes), source)
 				}
 			}
-		})
-		ref = _ref
+		}
+		ref = result
 		client.inputPorts.append(self)
 	}
 	
-	public func connectSource(source: Source) {
-		MIDIPortConnectSource(ref, source.ref, nil)
+	public func connectSource(source: Source) throws {
+		var copy = source
+		try Error.throwWith(MIDIPortConnectSource(ref, source.ref, &copy))
 	}
 	
-	public func disconnectSource(source: Source) {
-		MIDIPortDisconnectSource(ref, source.ref)
+	public func disconnectSource(source: Source) throws {
+		try Error.throwWith(MIDIPortDisconnectSource(ref, source.ref))
 	}
 	
 	deinit {
